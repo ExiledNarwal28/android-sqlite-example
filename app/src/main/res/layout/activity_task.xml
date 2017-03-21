@@ -11,4 +11,65 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="net.info420.fabien.androidtravailpratique.TaskActivity">
 
+  <TextView
+    android:text="TextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/tv_task_name"
+    tools:text="@string/task_name"
+    android:textAppearance="@android:style/TextAppearance.Material.Title"
+    android:textSize="20sp"/>
+
+  <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:id="@+id/cb_task_completed"
+    style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
+    />
+
+  <TextView
+    android:text="@string/task_urgency_level"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/cb_task_completed"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/tv_task_urgency_level"
+    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+
+  <TextView
+    android:text="@string/task_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_below="@+id/tv_task_urgency_level"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/tv_task_description"/>
+
+  <TextView
+    android:text="@string/task_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tv_task_description"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/tv_task_date"
+    android:layout_marginTop="10dp"/>
+
+  <TextView
+    android:text="@string/task_assigned_employee"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tv_task_date"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/tv_task_assigned_employee"
+    android:layout_marginTop="10dp"/>
 </RelativeLayout>

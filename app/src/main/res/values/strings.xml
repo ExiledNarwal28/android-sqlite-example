@@ -2,7 +2,7 @@
   <string name="app_name">ROYF_Android</string>
 
   <string name="task">Tâche</string>
-  <string name="task_name">Nom</string>
+  <string name="task_name">Nom de la tâche</string>
   <string name="task_description">Description</string>
   <string name="task_date">Date d\'échéance</string>
   <string name="task_urgency_level">Niveau d\'urgence</string>
