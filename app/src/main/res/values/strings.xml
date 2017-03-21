@@ -4,8 +4,8 @@
   <string name="task">Tâche</string>
   <string name="task_name">Nom</string>
   <string name="task_description">Description</string>
-  <string name="task_date">Date d'échéance</string>
-  <string name="task_urgency_level">Niveau d'urgence</string>
+  <string name="task_date">Date d\'échéance</string>
+  <string name="task_urgency_level">Niveau d\'urgence</string>
   <string name="task_status">Statut</string>
   <string name="task_assigned_employee">Employé assigné</string>
 
@@ -29,20 +29,31 @@
   <string name="action_settings">Règlages</string>
 
   <string name="title_activity_main">Liste des tâches</string>
-  <string-array name="task_filters">
-    <item>Aucun filtre</item>
-    <item>Filtrer par date</item>
-    <item>Filtrer par employé</item>
-    <item>Filtrer par niveau d'urgence</item>
-    <item>Ne voir que les tâches complétées</item>
+  <string name="task_filter_all_employee">Tous les employés</string>
+  <string-array name="task_filters_dates">
+    <item>Toutes les dates</item>
+    <item>Aujourd\'hui</item>
+    <item>Cette semaine</item>
+    <item>Ce mois</item>
+  </string-array>
+  <string-array name="task_filters_urgencies">
+    <item>Tous les niveaux d\'urgence</item>
+    <item>Haut</item>
+    <item>Moyen</item>
+    <item>Faible</item>
+  </string-array>
+  <string-array name="task_filters_completion">
+    <item>Toutes les tâches</item>
+    <item>Tâches en cours</item>
+    <item>Tâches complétées</item>
   </string-array>
 
-  <string name="title_activity_task">Détails d'une tâche</string>
-  <string name="title_activity_edit_task">Modification d'une tâche</string>
+  <string name="title_activity_task">Détails d\'une tâche</string>
+  <string name="title_activity_edit_task">Modification d\'une tâche</string>
   <string name="title_activity_new_task">Nouvelle tâche</string>
   <string name="title_activity_employee_list">Liste des employés</string>
-  <string name="title_activity_employee">Détails d'un employé</string>
-  <string name="title_activity_edit_employee">Modification d'un employé</string>
+  <string name="title_activity_employee">Détails d\'un employé</string>
+  <string name="title_activity_edit_employee">Modification d\'un employé</string>
   <string name="title_activity_new_employee">Nouvel employé</string>
   <string name="title_activity_prefs">Préférences</string>
 </resources>
