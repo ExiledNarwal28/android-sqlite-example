@@ -47,6 +47,11 @@
     <item>Tâches en cours</item>
     <item>Tâches complétées</item>
   </string-array>
+  <string-array name="task_filters_urgencies_edit">
+    <item>Haut</item>
+    <item>Moyen</item>
+    <item>Faible</item>
+  </string-array>
 
   <string name="title_activity_task">Détails d\'une tâche</string>
   <string name="title_activity_edit_task">Modification d\'une tâche</string>
