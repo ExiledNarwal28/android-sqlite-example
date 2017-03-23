@@ -1,8 +1,10 @@
-package net.info420.fabien.androidtravailpratique;
+package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
+
+import net.info420.fabien.androidtravailpratique.R;
 
 public class PrefsActivity extends AppCompatActivity {
   private final static String TAG = PrefsActivity.class.getName();

@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique;
+package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+
+import net.info420.fabien.androidtravailpratique.R;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
   private final static String TAG = MainActivity.class.getName();

@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique;
+package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import net.info420.fabien.androidtravailpratique.R;
 
 import java.util.Calendar;
 

@@ -1,11 +1,13 @@
-package net.info420.fabien.androidtravailpratique;
+package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
-public class NewEmployeeActivity extends AppCompatActivity {
-  private final static String TAG = NewEmployeeActivity.class.getName();
+import net.info420.fabien.androidtravailpratique.R;
+
+public class EditEmployeeActivity extends AppCompatActivity {
+  private final static String TAG = EditEmployeeActivity.class.getName();
 
   private EditText etEmployeeName;
   private EditText etEmployeeJob;
@@ -15,7 +17,7 @@ public class NewEmployeeActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_new_employee);
+    setContentView(R.layout.activity_edit_employee);
 
     initUI();
   }

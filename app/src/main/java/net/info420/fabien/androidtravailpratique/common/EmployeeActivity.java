@@ -1,10 +1,12 @@
-package net.info420.fabien.androidtravailpratique;
+package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import net.info420.fabien.androidtravailpratique.R;
 
 public class EmployeeActivity extends AppCompatActivity {
   private final static String TAG = EmployeeActivity.class.getName();
