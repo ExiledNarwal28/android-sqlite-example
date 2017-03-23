@@ -22,10 +22,10 @@ public class EmployeeRepo {
     // Ouvrir la connexion pour insérer des données
     SQLiteDatabase db = dbHelper.getWritableDatabase();
     ContentValues values = new ContentValues();
-    values.put(Employee.KEY_name, employee.name);
-    values.put(Employee.KEY_job, employee.job);
-    values.put(Employee.KEY_email, employee.email);
-    values.put(Employee.KEY_phone, employee.phone);
+    values.put(Employee.KEY_name,   employee.name);
+    values.put(Employee.KEY_job,    employee.job);
+    values.put(Employee.KEY_email,  employee.email);
+    values.put(Employee.KEY_phone,  employee.phone);
 
     // Insertion
     long employee_Id = db.insert(Employee.TABLE, null, values);
@@ -75,10 +75,10 @@ public class EmployeeRepo {
 
     if (cursor.moveToFirst()) {
       do {
-        HashMap<String, String> student = new HashMap<String, String>();
-        student.put("id", cursor.getString(cursor.getColumnIndex(Employee.KEY_ID)));
-        student.put("name", cursor.getString(cursor.getColumnIndex(Employee.KEY_name)));
-        employeeList.add(student);
+        HashMap<String, String> employee = new HashMap<String, String>();
+        employee.put("id", cursor.getString(cursor.getColumnIndex(Employee.KEY_ID)));
+        employee.put("name", cursor.getString(cursor.getColumnIndex(Employee.KEY_name)));
+        employeeList.add(employee);
 
       } while (cursor.moveToNext());
     }
@@ -91,15 +91,14 @@ public class EmployeeRepo {
 
   public Employee getEmployeeById(int Id){
     SQLiteDatabase db = dbHelper.getReadableDatabase();
-    String selectQuery =  "SELECT  " +
-      Employee.KEY_ID + "," +
-      Employee.KEY_name + "," +
-      Employee.KEY_job + "," +
-      Employee.KEY_email + "," +
-      Employee.KEY_phone +
-      " FROM " + Employee.TABLE
-      + " WHERE " +
-      Employee.KEY_ID + "=?"; // Il est préférable d'utiliser le paramètre ? au lieu d'une concatenation
+    String selectQuery    =  "SELECT  "     +
+      Employee.KEY_ID     + ","             +
+      Employee.KEY_name   + ","             +
+      Employee.KEY_job    + ","             +
+      Employee.KEY_email  + ","             +
+      Employee.KEY_phone  +
+      " FROM "            + Employee.TABLE  +
+      " WHERE "           + Employee.KEY_ID + "=?"; // Il est préférable d'utiliser le paramètre ? au lieu d'une concatenation
 
     Employee employee = new Employee();
 
@@ -120,5 +119,4 @@ public class EmployeeRepo {
     db.close();
     return employee;
   }
-
 }
