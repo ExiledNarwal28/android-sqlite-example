@@ -11,4 +11,54 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="net.info420.fabien.androidtravailpratique.UpdateEmployeeFragment">
 
+  <EditText
+    android:text="@string/employee_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/et_employee_name"
+    tools:text="@string/employee_name"
+    android:textAppearance="@android:style/TextAppearance.Material.Title"
+    android:textSize="20sp"/>
+
+  <EditText
+    android:text="@string/employee_job"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_below="@+id/et_employee_name"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/et_employee_job"
+    android:textAppearance="@android:style/TextAppearance.Material.Small"
+    android:fontFamily="sans-serif"/>
+
+  <EditText
+    android:text="@string/employee_mail"
+    android:inputType="textEmailAddress"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/et_employee_job"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/et_employee_mail"
+    android:layout_marginTop="10dp"
+    android:textAppearance="@android:style/TextAppearance.Material.Small"
+    android:fontFamily="sans-serif"/>
+
+  <EditText
+    android:text="@string/employee_phone"
+    android:inputType="phone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/et_employee_mail"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/et_employee_phone"
+    android:layout_marginTop="10dp"
+    android:textAppearance="@android:style/TextAppearance.Material.Small"
+    android:fontFamily="sans-serif"/>
+
 </RelativeLayout>
