@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
+  private ListView lvTaskList;
   private Spinner spTaskFiltersDates;
   private Spinner spTaskFiltersEmployees;
   private Spinner spTaskFiltersUrgencies;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
   }
 
   protected void initUI() {
+    lvTaskList = (ListView) findViewById(R.id.lv_task_list);
     spTaskFiltersDates = (Spinner) findViewById(R.id.sp_task_filters_dates);
     spTaskFiltersEmployees = (Spinner) findViewById(R.id.sp_task_filters_employees);
     spTaskFiltersUrgencies = (Spinner) findViewById(R.id.sp_task_filters_urgencies);
