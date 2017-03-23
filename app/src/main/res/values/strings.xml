@@ -30,6 +30,50 @@
   <string name="action_call">Appeler</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
+  <string name="pref_toasts">Avertissements Toasts</string>
+  <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien avec les dates d'échéances des tâches</string>
+  <string name="pref_toasts_frequency">Fréquence</string>
+  <string name="pref_toasts_frequency_summary">Fréquence minimale pour afficher les Toasts</string>
+  <string name="pref_toasts_urgency_level">Niveau d'urgence</string>
+  <string name="pref_toasts_urgency_level_summary">Niveau d'urgence requis pour afficher les Toasts</string>
+  <string name="pref_language">Langue</string>
+  <string name="pref_language_summary">Langue générale de l'application</string>
+
+  <string-array name="pref_toasts_frequency_names">
+    <item>Une journée</item>
+    <item>Une heure</item>
+    <item>Une demi-heure</item>
+    <item>Dix minutes</item>
+    <item>Une minute</item>
+    <item>Dès que possible</item>
+    <item>Jamais</item>
+  </string-array>
+  <string-array name="pref_toasts_frequency_values">
+    <item>86400</item>
+    <item>3600</item>
+    <item>1800</item>
+    <item>600</item>
+    <item>60</item>
+    <item>1</item>
+    <item>0</item>
+  </string-array><string-array name="pref_toasts_urgency_level_names">
+    <item>Haut</item>
+    <item>Moyen</item>
+    <item>Bas</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_values">
+    <item>2</item>
+    <item>1</item>
+    <item>0</item>
+  </string-array><string-array name="pref_language_names">
+    <item>Français</item>
+    <item>Anglais</item>
+  </string-array>
+  <string-array name="pref_language_values">
+    <item>fr</item>
+    <item>en</item>
+  </string-array>
+
   <string name="title_activity_main">Liste des tâches</string>
   <string name="task_filter_all_employee">Tous les employés</string>
   <string-array name="task_filters_dates">
@@ -42,7 +86,7 @@
     <item>Tous les niveaux d\'urgence</item>
     <item>Haut</item>
     <item>Moyen</item>
-    <item>Faible</item>
+    <item>Bas</item>
   </string-array>
   <string-array name="task_filters_completion">
     <item>Toutes les tâches</item>
@@ -52,7 +96,7 @@
   <string-array name="task_filters_urgencies_edit">
     <item>Haut</item>
     <item>Moyen</item>
-    <item>Faible</item>
+    <item>Bas</item>
   </string-array>
 
   <string name="title_activity_task">Détails d\'une tâche</string>

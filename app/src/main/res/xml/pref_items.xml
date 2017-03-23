@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Il faut utiliser android:depedency pour s'assurer que les options de Toasts sont désactivées si les Toasts sont désactivés -->
+  <!-- Source : http://stackoverflow.com/questions/7751525/android-checkboxpreference-how-to-disable-and-enable-other-preferences-on-prefe#7751967 -->
+
+  <CheckBoxPreference
+    android:id="@+id/cbp_pref_toasts"
+    android:key="toasts"
+    android:defaultValue="true"
+    android:singleLine="true"
+    android:title="@string/pref_toasts"
+    android:summary="@string/pref_toasts_summary"/>
+  <ListPreference
+    android:id="@+id/lp_pref_toasts_frequency"
+    android:key="toasts_frequency"
+    android:dependency="toasts"
+    android:defaultValue="1"
+    android:singleLine="true"
+    android:title="@string/pref_toasts_frequency"
+    android:summary="@string/pref_toasts_frequency_summary"
+    android:entries="@array/pref_toasts_frequency_names"
+    android:entryValues="@array/pref_toasts_frequency_values"/>
+  <ListPreference
+    android:id="@+id/lp_pref_toasts_urgency_level"
+    android:key="toasts_urgency_level"
+    android:dependency="toasts"
+    android:defaultValue="0"
+    android:singleLine="true"
+    android:title="@string/pref_toasts_urgency_level"
+    android:summary="@string/pref_toasts_urgency_level_summary"
+    android:entries="@array/pref_toasts_urgency_level_names"
+    android:entryValues="@array/pref_toasts_urgency_level_values"/>
+  <ListPreference
+    android:id="@+id/lp_pref_language"
+    android:key="language"
+    android:defaultValue="1"
+    android:singleLine="true"
+    android:title="@string/pref_language"
+    android:summary="@string/pref_language_summary"
+    android:entries="@array/pref_language_names"
+    android:entryValues="@array/pref_language_values"/>
+</PreferenceScreen>

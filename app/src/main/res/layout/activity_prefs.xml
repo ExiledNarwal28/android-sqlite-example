@@ -11,4 +11,10 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="net.info420.fabien.androidtravailpratique.PrefsActivity">
 
+  <FrameLayout
+    android:id="@+id/fragment_container_prefs"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  </FrameLayout>
+
 </RelativeLayout>
