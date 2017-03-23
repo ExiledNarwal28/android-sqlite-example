@@ -29,8 +29,8 @@ public class TaskActivity extends AppCompatActivity {
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
     cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_task_completed);
     tvTaskUrgencyLevel      = (TextView)  findViewById(R.id.tv_task_urgency_level);
-    tvTaskDescription       = (TextView)  findViewById(R.id.tv_task_description);
-    tvTaskDate              = (TextView)  findViewById(R.id.tv_task_date);
+    tvTaskDescription       = (TextView)  findViewById(R.id.tv_employee_job);
+    tvTaskDate              = (TextView)  findViewById(R.id.tv_employee_mail);
     btnTaskAssignedEmployee = (Button)    findViewById(R.id.btn_task_assigned_employee);
 
     btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {
