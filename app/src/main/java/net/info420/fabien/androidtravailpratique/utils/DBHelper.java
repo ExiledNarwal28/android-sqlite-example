@@ -47,12 +47,15 @@ public class DBHelper  extends SQLiteOpenHelper {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    recreateDB(db);
+  }
+
+  public void recreateDB(SQLiteDatabase db) {
     // Drop de toutes les tables
     db.execSQL("DROP TABLE IF EXISTS " + Employee.TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Task.TABLE);
 
     // Recréer les tables
     onCreate(db);
-
   }
 }
