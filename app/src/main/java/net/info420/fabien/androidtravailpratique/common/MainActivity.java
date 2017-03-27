@@ -56,7 +56,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     int[]     dates           = { 1522108800,     1490745600,     1490659200 };
     int[]     urgency_levels  = { 0,              2,              1 };
 
-    for (int i = 0; i < names.length - 1; i++) {
+    for (int i = 0; i < names.length; i++) {
       ContentValues values = new ContentValues();
 
       values.put(Task.KEY_assigned_employee_ID, 1); // Pas encore d'employés
@@ -66,8 +66,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
       values.put(Task.KEY_date,                 dates[i]);
       values.put(Task.KEY_urgency_level,        urgency_levels[i]);
 
-      Log.d(TAG, String.format("Insertion de la tâche #%s dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
-        1,
+      Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
         Task.KEY_name,          names[i],
         Task.KEY_description,   descriptions[i],
         Task.KEY_completed,     completeds[i],

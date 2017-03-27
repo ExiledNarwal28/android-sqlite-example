@@ -64,14 +64,16 @@ public class TaskerContentProvider extends ContentProvider {
 
     Log.d(TAG, String.format("Obtention de la base de donnée %s, version %s", dbHelper.getDatabaseName(), dbHelper.getReadableDatabase().getVersion()));
 
-    // TODO : TU ES RENDU ICI (COLONNES NAME N'EXISTE PAS)
+    // Lecture des champs, je garde ça ici car ça peut redevenir utile.
 
-    Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Task.TABLE + ")", null);
-    if ( ti.moveToFirst() ) {
-      do {
-        Log.d(TAG, String.format("Colonne %s", ti.getString(1)));
-      } while (ti.moveToNext());
-    }
+    /*
+     * Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Task.TABLE + ")", null);
+     * if ( ti.moveToFirst() ) {
+     *   do {
+     *     Log.d(TAG, String.format("Colonne %s", ti.getString(1)));
+     *   } while (ti.moveToNext());
+     * }
+     */
 
     return false;
   }
@@ -137,8 +139,6 @@ public class TaskerContentProvider extends ContentProvider {
 
   @Override
   public Uri insert(Uri uri, ContentValues values) {
-    Log.d(TAG, "Insertion dans la base de donnée");
-
     int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     long id = 0;
@@ -241,7 +241,7 @@ public class TaskerContentProvider extends ContentProvider {
                             Task.KEY_description,
                             Task.KEY_completed,
                             Task.KEY_date,
-                            Task.KEY_urgency_level};
+                            Task.KEY_urgency_level };
 
     checkColumns(projection, available);
   }
@@ -251,7 +251,7 @@ public class TaskerContentProvider extends ContentProvider {
                             Employee.KEY_name,
                             Employee.KEY_job,
                             Employee.KEY_email,
-                            Employee.KEY_phone};
+                            Employee.KEY_phone };
 
     checkColumns(projection, available);
   }

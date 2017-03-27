@@ -34,7 +34,7 @@ public class DBHelper  extends SQLiteOpenHelper {
 
     String CREATE_TABLE_TASK          = "CREATE TABLE " + Task.TABLE + "("
       + Task.KEY_ID                   + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-      + Task.KEY_assigned_employee_ID + " INTEGER "
+      + Task.KEY_assigned_employee_ID + " INTEGER, "
       + Task.KEY_name                 + " TEXT, "
       + Task.KEY_description          + " TEXT, "
       + Task.KEY_completed            + " INTEGER, " // Dans SQLite, les booleans sont des integers 0 ou 1
