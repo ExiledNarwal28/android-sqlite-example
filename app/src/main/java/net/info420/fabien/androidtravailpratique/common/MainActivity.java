@@ -22,6 +22,7 @@ import android.widget.TextView;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
 public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = MainActivity.class.getName();
@@ -85,7 +86,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     // FIN CRÉATION DE TÄCHES
 
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    fillData();
+    fillData(taskUri);
 
     registerForContextMenu(getListView());
 
@@ -191,15 +192,15 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     startActivity(i);
   }
 
-  private void fillData() {
+  private void fillData(Uri uri) {
     // Affiche les champs de la base de données (name)
-    String[] from = new String[] { Task.KEY_name };
+    String[] from = new String[] { Task.KEY_name, Task.KEY_date };
 
     // Où on affiche les champs
-    int[] to = new int[] { R.id.tv_task_name };
+    int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
 
     getLoaderManager().initLoader(0, null, this);
-    adapter = new SimpleCursorAdapter(this, R.layout.task_row, null, from, to, 0);
+    adapter = new TaskAdapter(this, R.layout.task_row, null, from, to, 0);
 
     setListAdapter(adapter);
   }
@@ -207,7 +208,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = { Task.KEY_ID, Task.KEY_name };
+    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed };
     CursorLoader cursorLoader = new CursorLoader(this, TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 
     return cursorLoader;
