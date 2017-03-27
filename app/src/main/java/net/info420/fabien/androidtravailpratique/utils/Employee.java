@@ -11,7 +11,7 @@ public class Employee {
   public static final String TABLE = "Employee";
 
   // Noms des colonnes de la table
-  public static final String KEY_ID     = "id";
+  public static final String KEY_ID     = "_id";
   public static final String KEY_name   = "name";
   public static final String KEY_job    = "job";
   public static final String KEY_email  = "email";

@@ -1,7 +1,12 @@
 package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.ListActivity;
+import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +17,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
-public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = MainActivity.class.getName();
 
   private static final int ACTIVITY_CREATE = 0;
@@ -31,11 +37,12 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
-  private ListView lvTaskList;
+  // private ListView lvTaskList;
   private Spinner spTaskFiltersDates;
   private Spinner spTaskFiltersEmployees;
   private Spinner spTaskFiltersUrgencies;
   private Spinner spTaskFiltersCompletion;
+  private TextView tvNoTask;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
     // DÉBUT CRÉATION DE TÄCHES
 
-    // check from the saved Instance
     taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
     String[]  names           = { "Test0",        "Test1",        "Test2" };
@@ -79,7 +85,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     // FIN CRÉATION DE TÄCHES
 
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    // fillData();
+    fillData();
 
     registerForContextMenu(getListView());
 
@@ -97,6 +103,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     spTaskFiltersEmployees.setOnItemSelectedListener(this);
     spTaskFiltersUrgencies.setOnItemSelectedListener(this);
     spTaskFiltersCompletion.setOnItemSelectedListener(this);
+
+    // TODO : Afficher si il n'y a aucune tâche
+    // Par défaut, caché.
+    tvNoTask = (TextView) findViewById(R.id.tv_no_task);
+    tvNoTask.setVisibility(View.GONE);
 
     // Je mets la seule option actuelle dans le filtre des employés
     // TODO : Ajouter les employés dynamiquement
@@ -126,5 +137,90 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   @Override
   public void onNothingSelected(AdapterView<?> adapterView) {
     // Ne fait rien!
+  }
+
+  /*
+
+  // Crée un menu d'option avec du XML
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.listmenu, menu);
+    return true;
+  }
+
+  // Réaction à une sélection dans le menu
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.insert:
+        createTodo();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case DELETE_ID:
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        Uri uri = Uri.parse(MyTodoContentProvider.CONTENT_URI + "/" + info.id);
+        getContentResolver().delete(uri, null, null);
+        fillData();
+        return true;
+    }
+    return super.onContextItemSelected(item);
+  }
+
+  private void createTodo() {
+    Intent i = new Intent(this, NewTaskActivity.class);
+    startActivity(i);
+  }
+
+  */
+
+  // Ouvre les détails d'une tâche lorsqu'appuyé
+  @Override
+  protected void onListItemClick(ListView l, View v, int position, long id) {
+    super.onListItemClick(l, v, position, id);
+    Intent i = new Intent(this, TaskActivity.class);
+    Uri todoUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
+    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, todoUri);
+
+    startActivity(i);
+  }
+
+
+
+  private void fillData() {
+    // Affiche les champs de la base de données (name)
+    String[] from = new String[] { Task.KEY_name };
+    // Où on affiche les champs
+    int[] to = new int[] { R.id.task_name };
+
+    getLoaderManager().initLoader(0, null, this);
+    adapter = new SimpleCursorAdapter(this, R.layout.task_row, null, from, to, 0);
+
+    setListAdapter(adapter);
+  }
+
+  // Création d'un nouveau Loader
+  @Override
+  public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    String[] projection = { Task.KEY_ID, Task.KEY_name };
+    CursorLoader cursorLoader = new CursorLoader(this, TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
+    return cursorLoader;
+  }
+
+  @Override
+  public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    adapter.swapCursor(data);
+  }
+
+  @Override
+  public void onLoaderReset(Loader<Cursor> loader) {
+    // Les données ne sont plus valides
+    adapter.swapCursor(null);
   }
 }
