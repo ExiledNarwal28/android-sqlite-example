@@ -30,7 +30,7 @@ public class TaskerContentProvider extends ContentProvider {
   // Base de données
   private DBHelper database;
 
-  private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.utils";
+  private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.contentprovider";
 
   // Utilisé pour le UriMatcher
   private static final int TASKS        = 10;
