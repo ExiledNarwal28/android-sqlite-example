@@ -20,6 +20,6 @@ public class EmployeeListActivity extends AppCompatActivity {
   }
 
   private void initUI() {
-    lvEmployeeList = (ListView) findViewById(R.id.lv_employee_list);
+    // lvEmployeeList = (ListView) findViewById(R.id.lv_employee_list);
   }
 }

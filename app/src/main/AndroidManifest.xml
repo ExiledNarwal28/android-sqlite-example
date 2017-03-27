@@ -11,8 +11,8 @@
     android:theme="@style/AppTheme">
     
     <provider
-      android:authorities="net.info420.fabien.androidtravailpratique"
-      android:name=".utils.TaskerContentProvider" />
+      android:authorities="net.info420.fabien.androidtravailpratique.contentprovider"
+      android:name=".contentprovider.TaskerContentProvider" />
     
     <activity android:name=".common.MainActivity">
       <intent-filter>

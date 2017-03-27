@@ -1,6 +1,8 @@
 package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.ListActivity;
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 
 public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener {
   private final static String TAG = MainActivity.class.getName();
@@ -20,6 +24,9 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private static final int DELETE_ID = Menu.FIRST + 1;
   // private Cursor cursor;
   private SimpleCursorAdapter adapter;
+
+  // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
+  private Uri taskUri;
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
@@ -33,8 +40,38 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+
+    // TODO : Enlever dès que la base de données fonctionne
+
+    // DÉBUT CRÉATION DE TÄCHES
+
+    // check from the saved Instance
+    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+
+    String[]  names           = { "Test0",        "Test1",        "Test2" };
+    String[]  descriptions    = { "Description0", "Description1", "Description2" };
+    Boolean[] completeds      = { false,          false,          true };
+    int[]     dates           = { 1522108800,     1490745600,     1490659200 };
+    int[]     urgency_levels  = { 0,              2,              1 };
+
+    for (int i = 0; i < names.length - 1; i++) {
+      ContentValues values = new ContentValues();
+
+      values.put(Task.KEY_assigned_employee_ID, 1); // Pas encore d'employés
+      values.put(Task.KEY_name,                 names[i]);
+      values.put(Task.KEY_description,          descriptions[i]);
+      values.put(Task.KEY_completed,            completeds[i]);
+      values.put(Task.KEY_date,                 dates[i]);
+      values.put(Task.KEY_urgency_level,        urgency_levels[i]);
+
+      taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
+    }
+
+    // FIN CRÉATION DE TÄCHES
+
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    fillData();
+    // fillData();
 
     registerForContextMenu(getListView());
 

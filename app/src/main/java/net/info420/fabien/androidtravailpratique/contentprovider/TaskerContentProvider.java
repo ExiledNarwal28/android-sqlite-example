@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.utils;
+package net.info420.fabien.androidtravailpratique.contentprovider;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -11,10 +11,12 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import net.info420.fabien.androidtravailpratique.utils.DBHelper;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
+import net.info420.fabien.androidtravailpratique.utils.Task;
+
 import java.util.Arrays;
 import java.util.HashSet;
-
-import static android.R.attr.id;
 
 /**
  * Created by fabien on 17-03-26.
@@ -54,7 +56,6 @@ public class TaskerContentProvider extends ContentProvider {
      sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE,         EMPLOYEES);
      sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE + "/#",  EMPLOYEE_ID);
   }
-
 
   @Override
   public boolean onCreate() {
