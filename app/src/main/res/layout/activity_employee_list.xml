@@ -11,11 +11,18 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="net.info420.fabien.androidtravailpratique.common.EmployeeListActivity">
 
+  <!-- On a besoin de l'appeler 'list' (ListActivity) -->
   <ListView
-    android:id="@+id/lv_employee_list"
+    android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"/>
+
+  <TextView
+    android:id="@+id/tv_no_employees"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/no_employees" />
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.app.Application;
 public class TaskerApplication extends Application {
   private static final String TAG = TaskerApplication.class.getName();
 
+  // TODO : Enlever ceci si ça sert à rien.
   // public SQLiteDatabase  database;
   // public DBHelper        dbHelper;
 }

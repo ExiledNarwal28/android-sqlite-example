@@ -75,6 +75,7 @@
   </string-array>
 
   <string name="title_activity_main">Liste des tâches</string>
+  <string name="no_tasks">Vous n'avez pas de tâche... pour l\'instant</string>
   <string name="task_filter_all_employee">Tous les employés</string>
   <string-array name="task_filters_dates">
     <item>Toutes les dates</item>
@@ -102,7 +103,10 @@
   <string name="title_activity_task">Détails d\'une tâche</string>
   <string name="title_activity_edit_task">Modification d\'une tâche</string>
   <string name="title_activity_new_task">Nouvelle tâche</string>
+
   <string name="title_activity_employee_list">Liste des employés</string>
+  <string name="no_employees">Vous n'avez pas d'employé (sur l\'application)</string>
+
   <string name="title_activity_employee">Détails d\'un employé</string>
   <string name="title_activity_edit_employee">Modification d\'un employé</string>
   <string name="title_activity_new_employee">Nouvel employé</string>

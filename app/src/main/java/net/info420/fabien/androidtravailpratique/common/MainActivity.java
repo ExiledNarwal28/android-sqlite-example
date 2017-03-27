@@ -1,17 +1,25 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener {
   private final static String TAG = MainActivity.class.getName();
+
+  private static final int ACTIVITY_CREATE = 0;
+  private static final int ACTIVITY_EDIT = 1;
+  private static final int DELETE_ID = Menu.FIRST + 1;
+  // private Cursor cursor;
+  private SimpleCursorAdapter adapter;
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
@@ -25,15 +33,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
+    fillData();
+
+    registerForContextMenu(getListView());
 
     initUI();
   }
 
   protected void initUI() {
-    lvTaskList = (ListView) findViewById(R.id.lv_task_list);
-    spTaskFiltersDates = (Spinner) findViewById(R.id.sp_task_filters_dates);
-    spTaskFiltersEmployees = (Spinner) findViewById(R.id.sp_task_filters_employees);
-    spTaskFiltersUrgencies = (Spinner) findViewById(R.id.sp_task_filters_urgencies);
+    // lvTaskList = (ListView) findViewById(R.id.list);
+    spTaskFiltersDates      = (Spinner) findViewById(R.id.sp_task_filters_dates);
+    spTaskFiltersEmployees  = (Spinner) findViewById(R.id.sp_task_filters_employees);
+    spTaskFiltersUrgencies  = (Spinner) findViewById(R.id.sp_task_filters_urgencies);
     spTaskFiltersCompletion = (Spinner) findViewById(R.id.sp_task_filters_completion);
 
     spTaskFiltersDates.setOnItemSelectedListener(this);

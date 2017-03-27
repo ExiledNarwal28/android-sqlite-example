@@ -46,12 +46,19 @@
     android:id="@+id/sp_task_filters_completion"
     android:entries="@array/task_filters_completion"/>
 
+  <!-- On a besoin de l'appeler 'list' (ListActivity) -->
   <ListView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lv_task_list"
+    android:id="@android:id/list"
     android:layout_below="@+id/sp_task_filters_completion"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"/>
+
+  <TextView
+    android:id="@+id/tv_no_tasks"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/no_tasks" />
 
 </RelativeLayout>
