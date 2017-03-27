@@ -194,8 +194,9 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private void fillData() {
     // Affiche les champs de la base de données (name)
     String[] from = new String[] { Task.KEY_name };
+
     // Où on affiche les champs
-    int[] to = new int[] { R.id.task_name };
+    int[] to = new int[] { R.id.tv_task_name };
 
     getLoaderManager().initLoader(0, null, this);
     adapter = new SimpleCursorAdapter(this, R.layout.task_row, null, from, to, 0);
@@ -208,6 +209,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     String[] projection = { Task.KEY_ID, Task.KEY_name };
     CursorLoader cursorLoader = new CursorLoader(this, TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
+
     return cursorLoader;
   }
 
