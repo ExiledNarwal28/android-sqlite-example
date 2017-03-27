@@ -12,6 +12,10 @@ import java.util.HashMap;
  * Created by fabien on 17-03-23.
  */
 
+// Source : http://instinctcoder.com/android-studio-sqlite-database-example/
+
+// TODO : Vérifier si c'est toujours utile
+
 public class TaskRepo {
   private DBHelper dbHelper;
 
@@ -20,16 +24,6 @@ public class TaskRepo {
   }
 
   public int insert(Task task) {
-    /*
-    public int      task_ID;
-    public int      assigned_employee_ID;
-    public String   name;
-    public String   description;
-    public boolean  completed;
-    public int      date; // date est un integer "Unix Time"
-    public int      urgency_level;
-     */
-
     // Ouvrir la connexion pour insérer des données
     SQLiteDatabase db = dbHelper.getWritableDatabase();
     ContentValues values = new ContentValues();

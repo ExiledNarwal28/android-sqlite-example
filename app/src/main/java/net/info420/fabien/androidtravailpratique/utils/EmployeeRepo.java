@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 // Source : http://instinctcoder.com/android-studio-sqlite-database-example/
 
+// TODO : Vérifier si c'est toujours utile
+
 public class EmployeeRepo {
   private DBHelper dbHelper;
 

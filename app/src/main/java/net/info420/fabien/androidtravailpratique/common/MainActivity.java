@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,8 +14,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Task;
 
 public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener {
   private final static String TAG = MainActivity.class.getName();
@@ -64,6 +65,14 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
       values.put(Task.KEY_completed,            completeds[i]);
       values.put(Task.KEY_date,                 dates[i]);
       values.put(Task.KEY_urgency_level,        urgency_levels[i]);
+
+      Log.d(TAG, String.format("Insertion de la tâche #%s dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
+        1,
+        Task.KEY_name,          names[i],
+        Task.KEY_description,   descriptions[i],
+        Task.KEY_completed,     completeds[i],
+        Task.KEY_date,          dates[i],
+        Task.KEY_urgency_level, urgency_levels[i]));
 
       taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
     }

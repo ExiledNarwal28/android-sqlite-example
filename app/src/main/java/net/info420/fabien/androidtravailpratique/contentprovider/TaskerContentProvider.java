@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
@@ -28,7 +29,7 @@ public class TaskerContentProvider extends ContentProvider {
   private final static String TAG = TaskerContentProvider.class.getName();
 
   // Base de données
-  private DBHelper database;
+  private DBHelper dbHelper;
 
   private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.contentprovider";
 
@@ -38,10 +39,10 @@ public class TaskerContentProvider extends ContentProvider {
   private static final int EMPLOYEES    = 30;
   private static final int EMPLOYEE_ID  = 40;
 
-  private static final String BASE_PATH_TASK      = "tasks";
-  private static final String BASE_PATH_EMPLOYEE  = "employees";
-  public static final Uri CONTENT_URI_TASK        = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TASK);
-  public static final Uri CONTENT_URI_EMPLOYEES   = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
+  private static final String BASE_PATH_TASK          = "tasks";
+  private static final String BASE_PATH_EMPLOYEE      = "employees";
+  public  static final Uri    CONTENT_URI_TASK        = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TASK);
+  public  static final Uri    CONTENT_URI_EMPLOYEES   = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
 
   public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
   public static final String CONTENT_ITEM_TYPE_TASK     = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
@@ -59,7 +60,19 @@ public class TaskerContentProvider extends ContentProvider {
 
   @Override
   public boolean onCreate() {
-    database = new DBHelper(getContext());
+    dbHelper = new DBHelper(getContext());
+
+    Log.d(TAG, String.format("Obtention de la base de donnée %s, version %s", dbHelper.getDatabaseName(), dbHelper.getReadableDatabase().getVersion()));
+
+    // TODO : TU ES RENDU ICI (COLONNES NAME N'EXISTE PAS)
+
+    Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Task.TABLE + ")", null);
+    if ( ti.moveToFirst() ) {
+      do {
+        Log.d(TAG, String.format("Colonne %s", ti.getString(1)));
+      } while (ti.moveToNext());
+    }
+
     return false;
   }
 
@@ -67,8 +80,6 @@ public class TaskerContentProvider extends ContentProvider {
   public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
     // On utilise SQLiteQueryBuilder plutôt que query()
     SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-
-
 
     int uriType = sURIMatcher.match(uri);
     switch (uriType) {
@@ -107,10 +118,10 @@ public class TaskerContentProvider extends ContentProvider {
         queryBuilder.appendWhere(Employee.KEY_ID + "=" + uri.getLastPathSegment());
         break;
       default:
-        throw new IllegalArgumentException("Unknown URI: " + uri);
+        throw new IllegalArgumentException("URI inconnu : " + uri);
     }
 
-    SQLiteDatabase db = database.getWritableDatabase();
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
     Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
     // S'assurer que tous les Listeners soient notifiés
     cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -126,17 +137,25 @@ public class TaskerContentProvider extends ContentProvider {
 
   @Override
   public Uri insert(Uri uri, ContentValues values) {
+    Log.d(TAG, "Insertion dans la base de donnée");
+
     int uriType = sURIMatcher.match(uri);
-    SQLiteDatabase sqlDB = database.getWritableDatabase();
+    SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     long id = 0;
     switch (uriType) {
       case TASKS:
         id = sqlDB.insert(Task.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
+
+        Log.d(TAG, String.format("Insertion de la tâche #%s", id));
+
         return Uri.parse(BASE_PATH_TASK + "/" + id);
       case EMPLOYEES:
         id = sqlDB.insert(Employee.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
+
+        Log.d(TAG, String.format("Insertion de l'employé #%s", id));
+
         return Uri.parse(BASE_PATH_EMPLOYEE + "/" + id);
       default:
         throw new IllegalArgumentException("URI inconnu : " + uri);
@@ -146,7 +165,7 @@ public class TaskerContentProvider extends ContentProvider {
   @Override
   public int delete(Uri uri, String selection, String[] selectionArgs) {
     int uriType = sURIMatcher.match(uri);
-    SQLiteDatabase sqlDB = database.getWritableDatabase();
+    SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     int rowsDeleted = 0;
     String id;
     switch (uriType) {
@@ -182,7 +201,7 @@ public class TaskerContentProvider extends ContentProvider {
   @Override
   public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
     int uriType = sURIMatcher.match(uri);
-    SQLiteDatabase sqlDB = database.getWritableDatabase();
+    SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     int rowsUpdated = 0;
     String id;
     switch (uriType) {
