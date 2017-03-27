@@ -191,8 +191,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     startActivity(i);
   }
 
-
-
   private void fillData() {
     // Affiche les champs de la base de données (name)
     String[] from = new String[] { Task.KEY_name };

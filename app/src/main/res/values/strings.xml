@@ -1,6 +1,15 @@
 <resources>
   <string name="app_name">ROYF_Android</string>
 
+  <string name="error">Erreur</string>
+
+  <string name="action_add">Ajouter</string>
+  <string name="action_edit">Modifier</string>
+  <string name="action_delete">Suprimer</string>
+  <string name="action_settings">Règlages</string>
+  <string name="action_call">Appeler</string>
+  <string name="action_send_sms">Envoyer un SMS</string>
+
   <string name="task">Tâche</string>
   <string name="task_name">Nom de la tâche</string>
   <string name="task_description">Description</string>
@@ -22,13 +31,6 @@
   <string name="employee_mail">Adresse courriel</string>
   <string name="employee_phone">Numéro de téléphone</string>
   <string name="employee_job">Poste</string>
-
-  <string name="action_add">Ajouter</string>
-  <string name="action_edit">Modifier</string>
-  <string name="action_delete">Suprimer</string>
-  <string name="action_settings">Règlages</string>
-  <string name="action_call">Appeler</string>
-  <string name="action_send_sms">Envoyer un SMS</string>
 
   <string name="pref_toasts">Avertissements Toasts</string>
   <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien avec les dates d\'échéances des tâches</string>
