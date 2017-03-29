@@ -42,7 +42,7 @@ public class TaskerContentProvider extends ContentProvider {
   private static final String BASE_PATH_TASK          = "tasks";
   private static final String BASE_PATH_EMPLOYEE      = "employees";
   public  static final Uri    CONTENT_URI_TASK        = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TASK);
-  public  static final Uri    CONTENT_URI_EMPLOYEES   = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
+  public  static final Uri    CONTENT_URI_EMPLOYEE    = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
 
   public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
   public static final String CONTENT_ITEM_TYPE_TASK     = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";

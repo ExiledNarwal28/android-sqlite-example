@@ -29,6 +29,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
     public TextView tvEmployeeJob;
   }
 
+  // TODO : Vérifier si on a besoin de l'application
   public EmployeeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TaskerApplication application) {
     super(context, layout, cursor, from, to, flags);
 
@@ -40,7 +41,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
   public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
     Log.d(TAG, "newView()");
 
-    return inflater.inflate(R.layout.task_row, viewGroup, false);
+    return inflater.inflate(R.layout.employee_row, viewGroup, false);
   }
 
   @Override

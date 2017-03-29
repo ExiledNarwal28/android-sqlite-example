@@ -14,7 +14,7 @@
   <!-- On a besoin de l'appeler 'list' (ListActivity) -->
 
   <TextView
-    android:id="@+id/tv_no_employees"
+    android:id="@+id/tv_no_employee"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/no_employees"

@@ -14,8 +14,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,7 +31,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private static final int ACTIVITY_EDIT = 1;
   private static final int DELETE_ID = Menu.FIRST + 1;
   // private Cursor cursor;
-  private SimpleCursorAdapter taskAdapter;
+  private TaskAdapter taskAdapter;
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
   private Uri taskUri;
@@ -39,11 +39,12 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
   // private ListView lvTaskList;
-  private Spinner spTaskFiltersDates;
-  private Spinner spTaskFiltersEmployees;
-  private Spinner spTaskFiltersUrgencies;
-  private Spinner spTaskFiltersCompletion;
-  private TextView tvNoTask;
+  private Spinner   spTaskFiltersDates;
+  private Spinner   spTaskFiltersEmployees;
+  private Spinner   spTaskFiltersUrgencies;
+  private Spinner   spTaskFiltersCompletion;
+  private TextView  tvNoTask;
+  private Button    btnEmployeeList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,16 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
     adapterTaskFiltersEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new String[] { getString(R.string.task_filter_all_employee) });
     spTaskFiltersEmployees.setAdapter(adapterTaskFiltersEmployees);
+
+    // TODO : Enlever ceci (et le bouton) quand le Toolbar sera fait
+    btnEmployeeList = (Button) findViewById(R.id.tmp_btn_employee_list);
+    btnEmployeeList.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent i = new Intent(getApplicationContext(), EmployeeListActivity.class);
+        startActivity(i);
+      }
+    });
   }
 
   @Override

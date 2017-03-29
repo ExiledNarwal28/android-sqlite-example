@@ -63,6 +63,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
     viewHolder.tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
     viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
 
+    // Pas le choix de mettre ceci dans une variable. Sinon, la couleur s'affiche mal...
     int urgencyLevel = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level));
 
     viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(urgencyLevel));
