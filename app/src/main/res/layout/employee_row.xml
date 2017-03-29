@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
+  <!-- Source : http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter -->
+
+  <TextView
+    android:id="@+id/tv_employee_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:lines="1"
+    android:text="@string/employee_name"
+    android:textSize="24dp" />
+
+  <TextView
+    android:id="@+id/tv_employee_job"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_below="@+id/tv_employee_name"
+    android:lines="1"
+    android:text="@string/employee_job"
+    android:textSize="20dp" />
+
+</RelativeLayout>

@@ -12,17 +12,28 @@
   tools:context="net.info420.fabien.androidtravailpratique.common.EmployeeListActivity">
 
   <!-- On a besoin de l'appeler 'list' (ListActivity) -->
-  <ListView
-    android:id="@android:id/list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"/>
 
   <TextView
     android:id="@+id/tv_no_employees"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/no_employees" />
+    android:text="@string/no_employees"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"/>
+
+  <Button
+    android:text="@string/title_activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/tmp_btn_activity_list"
+    style="@android:style/Widget.Material.Light.Button"/>
+
+  <ListView
+    android:id="@android:id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/tmp_btn_activity_list"
+    android:layout_alignParentEnd="true"/>
 </RelativeLayout>
