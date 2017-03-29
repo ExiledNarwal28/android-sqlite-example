@@ -31,7 +31,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private static final int ACTIVITY_EDIT = 1;
   private static final int DELETE_ID = Menu.FIRST + 1;
   // private Cursor cursor;
-  private SimpleCursorAdapter adapter;
+  private SimpleCursorAdapter taskAdapter;
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
   private Uri taskUri;
@@ -184,10 +184,12 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   // Ouvre les détails d'une tâche lorsqu'appuyé
   @Override
   protected void onListItemClick(ListView l, View v, int position, long id) {
+    Log.d(TAG, "onListItemClick : " + id);
+
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(this, TaskActivity.class);
-    Uri todoUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
-    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, todoUri);
+    Uri taskUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
+    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
 
     startActivity(i);
   }
@@ -200,9 +202,9 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
 
     getLoaderManager().initLoader(0, null, this);
-    adapter = new TaskAdapter(this, R.layout.task_row, null, from, to, 0);
+    taskAdapter = new TaskAdapter(this, R.layout.task_row, null, from, to, 0, (TaskerApplication) getApplication());
 
-    setListAdapter(adapter);
+    setListAdapter(taskAdapter);
   }
 
   // Création d'un nouveau Loader
@@ -216,12 +218,12 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    adapter.swapCursor(data);
+    taskAdapter.swapCursor(data);
   }
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader) {
     // Les données ne sont plus valides
-    adapter.swapCursor(null);
+    taskAdapter.swapCursor(null);
   }
 }

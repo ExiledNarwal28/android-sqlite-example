@@ -1,8 +1,6 @@
 package net.info420.fabien.androidtravailpratique.common;
 
 import android.database.Cursor;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.TimeZone;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +12,6 @@ import android.widget.TextView;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Task;
-
-import java.util.Date;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
 
@@ -97,13 +93,8 @@ public class TaskActivity extends AppCompatActivity {
       tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
       btnTaskAssignedEmployee.setText(Integer.toString(cursor.getInt((cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))))); // TODO : Convertir en employé
 
-      // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
       // Conversion en date
-      // TODO : Vérifier l'année
-      Date d = new Date(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date)));
-      SimpleDateFormat f = new SimpleDateFormat("EEEE d MMMM YYYY"); // Dimanche 1 janvier 1970
-      f.setTimeZone(TimeZone.getTimeZone("GMT"));
-      tvTaskDate.setText(f.format(d));
+      tvTaskDate.setText(((TaskerApplication) getApplication()).getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
       tvTaskUrgencyLevel.setText(((TaskerApplication) getApplication()).getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));

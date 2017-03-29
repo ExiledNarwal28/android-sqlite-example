@@ -9,6 +9,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
 
 /**
  * Created by fabien on 17-03-27.
@@ -18,10 +19,12 @@ import net.info420.fabien.androidtravailpratique.R;
 
 public class TaskAdapter extends SimpleCursorAdapter {
   private LayoutInflater inflater;
+  private TaskerApplication application;
 
-  public TaskAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+  public TaskAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, TaskerApplication application) {
     super(context, layout, c, from, to, flags);
     inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    this.application = application;
   }
 
   @Override
@@ -45,5 +48,6 @@ public class TaskAdapter extends SimpleCursorAdapter {
 
     tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
     tvTaskDate.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_date)));
+    tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
   }
 }

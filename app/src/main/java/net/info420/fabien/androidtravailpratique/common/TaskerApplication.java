@@ -2,9 +2,13 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.TimeZone;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
+
+import java.util.Date;
 
 /**
  * Created by fabien on 17-03-26.
@@ -29,8 +33,8 @@ public class TaskerApplication extends Application {
   }
 
   // TODO : Vérifier si c'est utile
-  public String getUrgencyLevel(int urgency_level) {
-    switch (urgency_level) {
+  public String getUrgencyLevel(int urgencyLevel) {
+    switch (urgencyLevel) {
       case 0:
         return getString(R.string.task_urgency_level_low);
       case 1:
@@ -40,5 +44,25 @@ public class TaskerApplication extends Application {
       default:
         return getString(R.string.error);
     }
+  }
+
+  // TODO : Vérifier si c'est utile
+  // TODO : Vérifier l'année
+  // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
+  public String getDate(int unixDate) {
+    Date d = new Date(unixDate);
+    SimpleDateFormat f = new SimpleDateFormat("d MMMM YY"); // Dimanche 1 janvier 1970
+    f.setTimeZone(TimeZone.getTimeZone("GMT"));
+    return f.format(d);
+  }
+
+  // TODO : Vérifier si c'est utile
+  // TODO : Vérifier l'année
+  // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
+  public String getFullDate(int unixDate) {
+    Date d = new Date(unixDate);
+    SimpleDateFormat f = new SimpleDateFormat("EEEE d MMMM YYYY"); // Dimanche 1 janvier 1970
+    f.setTimeZone(TimeZone.getTimeZone("GMT"));
+    return f.format(d);
   }
 }
