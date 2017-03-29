@@ -47,6 +47,20 @@ public class TaskerApplication extends Application {
   }
 
   // TODO : Vérifier si c'est utile
+  public int getUrgencyLevelColor(int urgencyLevel) {
+    switch (urgencyLevel) {
+      case 0:
+        return getColor(R.color.colorUrgencyLevelLow);
+      case 1:
+        return getColor(R.color.colorUrgencyLevelMedium);
+      case 2:
+        return getColor(R.color.colorUrgencyLevelHigh);
+      default:
+        return getColor(R.color.colorPrimaryText);
+    }
+  }
+
+  // TODO : Vérifier si c'est utile
   // TODO : Vérifier l'année
   // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
   public String getDate(int unixDate) {

@@ -8,4 +8,8 @@
   <color name="colorAccent">#ffc107</color>
   <color name="colorDivider">#bdbdbd</color>
   <color name="colorTextIcons">#212121</color>
+
+  <color name="colorUrgencyLevelHigh">#ff0000</color>
+  <color name="colorUrgencyLevelMedium">#ffff00</color>
+  <color name="colorUrgencyLevelLow">#008000</color>
 </resources>

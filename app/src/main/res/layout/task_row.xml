@@ -4,6 +4,9 @@
               android:layout_height="wrap_content"
               android:descendantFocusability="blocksDescendants">
 
+  <!-- TODO : Documenter descendantFocusability (ce qui t'as aidé pour onItemClick de MainActivity) -->
+  <!-- Source : http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter -->
+
   <TextView
     android:id="@+id/tv_task_name"
     android:layout_width="wrap_content"
@@ -24,12 +27,24 @@
 
   <TextView
     android:id="@+id/tv_task_date"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:layout_below="@+id/tv_task_name"
     android:lines="1"
     android:text="@string/task_date"
+    android:textSize="20dp" />
+
+  <TextView
+    android:id="@+id/tv_task_urgency_level"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_below="@+id/tv_task_name"
+    android:lines="1"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:text="@string/task_urgency_level"
     android:textSize="20dp" />
 
 </RelativeLayout>

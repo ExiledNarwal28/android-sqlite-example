@@ -28,6 +28,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
   private final class ViewHolder {
     public TextView tvTaskName;
     public TextView tvTaskDate;
+    public TextView tvTaskUrgencyLevel;
     public CheckBox cbTaskCompleted;
   }
 
@@ -51,14 +52,19 @@ public class TaskAdapter extends SimpleCursorAdapter {
 
     TaskAdapter.ViewHolder viewHolder;
 
-    viewHolder                  = new TaskAdapter.ViewHolder();
-    viewHolder.tvTaskName       = (TextView) view.findViewById(R.id.tv_task_name);
-    viewHolder.tvTaskDate       = (TextView) view.findViewById(R.id.tv_task_date);
-    viewHolder.cbTaskCompleted  = (CheckBox) view.findViewById(R.id.cb_task_completed);
+    viewHolder                    = new TaskAdapter.ViewHolder();
+    viewHolder.tvTaskName         = (TextView) view.findViewById(R.id.tv_task_name);
+    viewHolder.tvTaskDate         = (TextView) view.findViewById(R.id.tv_task_date);
+    viewHolder.tvTaskUrgencyLevel = (TextView) view.findViewById(R.id.tv_task_urgency_level);
+    viewHolder.cbTaskCompleted    = (CheckBox) view.findViewById(R.id.cb_task_completed);
 
     // Initialisation du UI
     viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
     viewHolder.tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+    viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
+    viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+    viewHolder.tvTaskUrgencyLevel.setTextColor(application.getUrgencyLevelColor(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)));
+    Log.d(TAG, Integer.toString(application.getUrgencyLevelColor(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
 
     view.setTag(viewHolder);
 

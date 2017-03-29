@@ -210,7 +210,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed };
+    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
     CursorLoader cursorLoader = new CursorLoader(this, TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 
     return cursorLoader;
