@@ -2,9 +2,11 @@ package net.info420.fabien.androidtravailpratique.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -18,36 +20,54 @@ import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
 // Source : http://www.vogella.com/tutorials/AndroidListView/article.html
 
 public class TaskAdapter extends SimpleCursorAdapter {
-  private LayoutInflater inflater;
-  private TaskerApplication application;
+  private final String TAG = TaskAdapter.class.getName();
 
-  public TaskAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags, TaskerApplication application) {
-    super(context, layout, c, from, to, flags);
-    inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  private final LayoutInflater inflater;
+  private final TaskerApplication application;
+
+  private final class ViewHolder {
+    public TextView tvTaskName;
+    public TextView tvTaskDate;
+    public CheckBox cbTaskCompleted;
+  }
+
+  public TaskAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TaskerApplication application) {
+    super(context, layout, cursor, from, to, flags);
+
+    this.inflater = LayoutInflater.from(context);
     this.application = application;
   }
 
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+    Log.d(TAG, "newView()");
+
     return inflater.inflate(R.layout.task_row, viewGroup, false);
   }
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    /*
-    if(cursor.getPosition()%2==1) {
-      view.setBackgroundColor(context.getResources().getColor(R.color.background_odd));
-    }
-    else {
-      view.setBackgroundColor(context.getResources().getColor(R.color.background_even));
-    }
-    */
+    Log.d(TAG, "bindView()");
 
-    TextView tvTaskName = (TextView) view.findViewById(R.id.tv_task_name);
-    TextView tvTaskDate = (TextView) view.findViewById(R.id.tv_task_date);
+    TaskAdapter.ViewHolder viewHolder;
 
-    tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
-    tvTaskDate.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_date)));
-    tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+    viewHolder                  = new TaskAdapter.ViewHolder();
+    viewHolder.tvTaskName       = (TextView) view.findViewById(R.id.tv_task_name);
+    viewHolder.tvTaskDate       = (TextView) view.findViewById(R.id.tv_task_date);
+    viewHolder.cbTaskCompleted  = (CheckBox) view.findViewById(R.id.cb_task_completed);
+
+    // Initialisation du UI
+    viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
+    viewHolder.tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+
+    view.setTag(viewHolder);
+
+    // TODO : Vérifier si c'est utile
+    viewHolder.cbTaskCompleted.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        // TODO : Complete / uncomplete
+      }
+    });
   }
 }
