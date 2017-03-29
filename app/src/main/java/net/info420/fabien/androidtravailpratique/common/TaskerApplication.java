@@ -4,6 +4,7 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
+import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
@@ -34,6 +35,7 @@ public class TaskerApplication extends Application {
 
   // TODO : Vérifier si c'est utile
   public String getUrgencyLevel(int urgencyLevel) {
+    Log.d(TAG, "text : " + Integer.toString(urgencyLevel));
     switch (urgencyLevel) {
       case 0:
         return getString(R.string.task_urgency_level_low);
@@ -48,6 +50,7 @@ public class TaskerApplication extends Application {
 
   // TODO : Vérifier si c'est utile
   public int getUrgencyLevelColor(int urgencyLevel) {
+    Log.d(TAG, "color : " + Integer.toString(urgencyLevel));
     switch (urgencyLevel) {
       case 0:
         return getColor(R.color.colorUrgencyLevelLow);

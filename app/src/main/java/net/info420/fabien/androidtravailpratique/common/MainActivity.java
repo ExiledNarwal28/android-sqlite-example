@@ -50,7 +50,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-
     // TODO : Enlever dès que la base de données fonctionne
 
     // DÉBUT CRÉATION DE TÄCHES

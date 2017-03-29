@@ -62,9 +62,11 @@ public class TaskAdapter extends SimpleCursorAdapter {
     viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
     viewHolder.tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
     viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
-    viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
-    viewHolder.tvTaskUrgencyLevel.setTextColor(application.getUrgencyLevelColor(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)));
-    Log.d(TAG, Integer.toString(application.getUrgencyLevelColor(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+
+    int urgencyLevel = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level));
+
+    viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(urgencyLevel));
+    viewHolder.tvTaskUrgencyLevel.setTextColor(application.getUrgencyLevelColor(urgencyLevel));
 
     view.setTag(viewHolder);
 
