@@ -1,6 +1,6 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.content.ContentUris;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +29,8 @@ public class TaskActivity extends AppCompatActivity {
   private Button btnTaskAssignedEmployee;
 
   private Uri taskUri;
+
+  private int assignedEmployeeId; // Valeur par défaut
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,11 @@ public class TaskActivity extends AppCompatActivity {
     btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        // TODO : Amener à la page de l'employé
+        Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
+        Uri employeeUri = Uri.parse(TaskerContentProvider.CONTENT_URI_EMPLOYEE + "/" + assignedEmployeeId);
+        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE, employeeUri);
+
+        startActivity(i);
       }
     });
   }
@@ -102,25 +108,38 @@ public class TaskActivity extends AppCompatActivity {
       // Conversion en niveau d'urgence textuel
       tvTaskUrgencyLevel.setText(((TaskerApplication) getApplication()).getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
 
-
       // Et maintenant? Il faut afficher le nom de l'employé dans le bouton d'employé assigné.
-      String[] employeeProjection = { Employee.KEY_name };
 
-      Uri employeeUri = ContentUris.withAppendedId(TaskerContentProvider.CONTENT_URI_EMPLOYEE, cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
+      Log.d(TAG, Integer.toString(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
 
-      Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
+      // Pour rediriger avec le bouton
+      assignedEmployeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID));
 
-      if (employeeCursor != null) {
-        employeeCursor.moveToFirst();
+      // Vérification de la colonne
+      if (assignedEmployeeId != 0) {
+        String[] employeeProjection = { Employee.KEY_name };
 
-        btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        Uri employeeUri = Uri.parse(TaskerContentProvider.CONTENT_URI_EMPLOYEE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
 
-        // Fermeture du curseur
-        employeeCursor.close();
+        Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
+
+        if (employeeCursor != null) {
+          employeeCursor.moveToFirst();
+
+          btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+
+          // Fermeture du curseur
+          employeeCursor.close();
+        }
       }
 
       // Fermeture du curseur
       cursor.close();
+    }
+
+    // On cache le bouton si aucun employé n'est assigné.
+    if (assignedEmployeeId == 0) {
+      btnTaskAssignedEmployee.setVisibility(View.GONE);
     }
   }
 }

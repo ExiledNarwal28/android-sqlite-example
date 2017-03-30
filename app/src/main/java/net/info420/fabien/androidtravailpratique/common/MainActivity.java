@@ -59,16 +59,19 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
     taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
-    String[]  taskNames           = { "Test0",        "Test1",        "Test2" };
-    String[]  taskDescriptions    = { "Description0", "Description1", "Description2" };
-    Boolean[] taskCompleteds      = { false,          false,          true };
-    int[]     taskDates           = { 1522108800,     1490745600,     1490659200 };
-    int[]     taskUrgencyLevels   = { 0,              2,              1 };
+    String[]  taskNames           = { "Test0",        "Test1",        "Test2",        "Test3" };
+    String[]  taskDescriptions    = { "Description0", "Description1", "Description2", "Description3" };
+    Boolean[] taskCompleteds      = { false,          false,          true,           false };
+    int[]     taskDates           = { 1522108800,     1490745600,     1490659200,     1500659200 };
+    int[]     taskUrgencyLevels   = { 0,              2,              1,              0 };
 
     for (int i = 0; i < taskNames.length; i++) {
       ContentValues values = new ContentValues();
 
-      values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+      // La tâche #4 n'a pas d'employé assigné (pour des tests)
+      if (i <= 2) {
+        values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+      }
       values.put(Task.KEY_name,                 taskNames[i]);
       values.put(Task.KEY_description,          taskDescriptions[i]);
       values.put(Task.KEY_completed,            taskCompleteds[i]);
