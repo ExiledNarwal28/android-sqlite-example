@@ -70,7 +70,7 @@ public class TaskActivity extends AppCompatActivity {
     });
   }
 
-  private void fillData(Uri uri) {
+  private void fillData(Uri taskUri) {
     String[] projection = { Task.KEY_assigned_employee_ID,
                             Task.KEY_name,
                             Task.KEY_description,
@@ -78,7 +78,7 @@ public class TaskActivity extends AppCompatActivity {
                             Task.KEY_date,
                             Task.KEY_urgency_level };
 
-    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+    Cursor cursor = getContentResolver().query(taskUri, projection, null, null, null);
 
     if (cursor != null) {
       cursor.moveToFirst();

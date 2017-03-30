@@ -25,6 +25,8 @@ import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
+import java.util.ArrayList;
+
 public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = MainActivity.class.getName();
 
@@ -144,9 +146,24 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     tvNoTask.setVisibility(View.GONE);
 
     // Je mets la seule option actuelle dans le filtre des employés
-    // TODO : Ajouter les employés dynamiquement
+    ArrayList<String> employeeNames = new ArrayList<>();
+    employeeNames.add(getString(R.string.task_filter_all_employee));
+
+    // C'est l'heure d'aller chercher les noms des employés
+    String[] employeeProjection = { Employee.KEY_name };
+    Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
+
+    if (employeeCursor != null) {
+      while (employeeCursor.moveToNext()) {
+        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+      }
+
+      // Fermeture du curseur
+      employeeCursor.close();
+    }
+
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    adapterTaskFiltersEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new String[] { getString(R.string.task_filter_all_employee) });
+    adapterTaskFiltersEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeeNames);
     spTaskFiltersEmployees.setAdapter(adapterTaskFiltersEmployees);
 
     // TODO : Enlever ceci (et le bouton) quand le Toolbar sera fait
