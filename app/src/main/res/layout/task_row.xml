@@ -8,43 +8,43 @@
   <!-- Source : http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter -->
 
   <TextView
-    android:id="@+id/tv_task_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    android:lines="1"
-    android:text="@string/task_name"
-    android:textSize="24dp" />
-
-  <CheckBox
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/cb_task_completed"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"/>
-
-  <TextView
     android:id="@+id/tv_task_date"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
+    android:layout_marginStart="5dp"
     android:layout_below="@+id/tv_task_name"
+    android:layout_toEndOf="@id/tv_task_urgency_level"
     android:lines="1"
     android:text="@string/task_date"
     android:textSize="20dp" />
 
   <TextView
     android:id="@+id/tv_task_urgency_level"
+    android:layout_alignParentStart="true"
+    android:background="@color/colorUrgencyLevelLow"
+    android:layout_width="5dp"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@id/tv_task_name"
+    android:layout_alignBottom="@id/tv_task_date"/>
+
+  <TextView
+    android:id="@+id/tv_task_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    android:layout_below="@+id/tv_task_name"
     android:lines="1"
-    android:layout_alignParentEnd="true"
+    android:text="@string/task_name"
+    android:textSize="24dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignStart="@+id/tv_task_date"/>
+
+  <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/cb_task_completed"
+    android:layout_alignTop="@id/tv_task_name"
     android:layout_alignParentRight="true"
-    android:text="@string/task_urgency_level"
-    android:textSize="20dp" />
+    android:layout_alignBottom="@id/tv_task_date"
+    style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"/>
 
 </RelativeLayout>

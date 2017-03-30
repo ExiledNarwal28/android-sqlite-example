@@ -1,5 +1,7 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
 
 public class EmployeeActivity extends AppCompatActivity {
   private final static String TAG = EmployeeActivity.class.getName();
@@ -18,12 +22,24 @@ public class EmployeeActivity extends AppCompatActivity {
   private Button    btnEmployeeSendSms;
   private Button    btnEmployeeCall;
 
+  private Uri employeeUri;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_employee);
 
     initUI();
+
+    // On va chercher les informations
+    employeeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE);
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      employeeUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE);
+
+      fillData(employeeUri);
+    }
+
   }
 
   private void initUI() {
@@ -47,5 +63,27 @@ public class EmployeeActivity extends AppCompatActivity {
         // TODO : Appeler l'employé
       }
     });
+  }
+
+  private void fillData(Uri uri) {
+    String[] projection = { Employee.KEY_name,
+                            Employee.KEY_job,
+                            Employee.KEY_email,
+                            Employee.KEY_phone };
+
+    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+
+    if (cursor != null) {
+      cursor.moveToFirst();
+
+      // On mets les données dans l'UI
+      tvEmployeeName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_name)));
+      tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_job)));
+      tvEmployeeMail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_email)));
+      tvEmployeePhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_phone)));
+
+      // Fermeture du curseur
+      cursor.close();
+    }
   }
 }
