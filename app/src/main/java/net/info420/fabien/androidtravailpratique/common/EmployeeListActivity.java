@@ -2,7 +2,6 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.ListActivity;
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -30,9 +29,6 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
   // private Cursor cursor;
   private EmployeeAdapter employeeAdapter;
 
-  // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
-  private Uri employeeUri;
-
   // private ListView lvEmployeeList;
   private TextView tvNoEmployee;
 
@@ -41,38 +37,8 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_employee_list);
 
-    // TODO : Enlever dès que la base de données fonctionne
-
-    // DÉBUT CRÉATION DE TÄCHES
-
-    employeeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE);
-
-    String[] names = {"Fabien Roy", "William Leblanc", "Jean-Sébastien Giroux"};
-    String[] jobs = {"Programmeur-analyste", "PDG de BlazeIt inc.", "Icône de l'Internet"};
-    String[] emails = {"fabien@cognitio.ca", "william@blazeit.org", "giroux@twitch.com"};
-    String[] phones = {"418-409-6568", "420-420-4242", "123-456-7890"};
-
-    for (int i = 0; i < names.length; i++) {
-      ContentValues values = new ContentValues();
-
-      values.put(Employee.KEY_name, names[i]);
-      values.put(Employee.KEY_job, jobs[i]);
-      values.put(Employee.KEY_email, emails[i]);
-      values.put(Employee.KEY_phone, phones[i]);
-
-      Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s",
-        Employee.KEY_name, names[i],
-        Employee.KEY_job, jobs[i],
-        Employee.KEY_email, emails[i],
-        Employee.KEY_phone, phones[i]));
-
-      employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
-    }
-
-    // FIN CRÉATION DE TÄCHES
-
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    fillData(employeeUri);
+    fillData();
 
     registerForContextMenu(getListView());
 
@@ -101,7 +67,7 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
     startActivity(i);
   }
 
-  private void fillData(Uri uri) {
+  private void fillData() {
     // Affiche les champs de la base de données (name)
     String[] from = new String[]{Employee.KEY_name, Employee.KEY_job};
 

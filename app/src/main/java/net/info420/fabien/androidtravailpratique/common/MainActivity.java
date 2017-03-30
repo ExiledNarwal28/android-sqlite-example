@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
@@ -35,6 +36,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
   private Uri taskUri;
+  private Uri employeeUri;
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
@@ -57,36 +59,64 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
     taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
-    String[]  names           = { "Test0",        "Test1",        "Test2" };
-    String[]  descriptions    = { "Description0", "Description1", "Description2" };
-    Boolean[] completeds      = { false,          false,          true };
-    int[]     dates           = { 1522108800,     1490745600,     1490659200 };
-    int[]     urgency_levels  = { 0,              2,              1 };
+    String[]  taskNames           = { "Test0",        "Test1",        "Test2" };
+    String[]  taskDescriptions    = { "Description0", "Description1", "Description2" };
+    Boolean[] taskCompleteds      = { false,          false,          true };
+    int[]     taskDates           = { 1522108800,     1490745600,     1490659200 };
+    int[]     taskUrgencyLevels   = { 0,              2,              1 };
 
-    for (int i = 0; i < names.length; i++) {
+    for (int i = 0; i < taskNames.length; i++) {
       ContentValues values = new ContentValues();
 
-      values.put(Task.KEY_assigned_employee_ID, 1); // Pas encore d'employés
-      values.put(Task.KEY_name,                 names[i]);
-      values.put(Task.KEY_description,          descriptions[i]);
-      values.put(Task.KEY_completed,            completeds[i]);
-      values.put(Task.KEY_date,                 dates[i]);
-      values.put(Task.KEY_urgency_level,        urgency_levels[i]);
+      values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+      values.put(Task.KEY_name,                 taskNames[i]);
+      values.put(Task.KEY_description,          taskDescriptions[i]);
+      values.put(Task.KEY_completed,            taskCompleteds[i]);
+      values.put(Task.KEY_date,                 taskDates[i]);
+      values.put(Task.KEY_urgency_level,        taskUrgencyLevels[i]);
 
       Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
-        Task.KEY_name,          names[i],
-        Task.KEY_description,   descriptions[i],
-        Task.KEY_completed,     completeds[i],
-        Task.KEY_date,          dates[i],
-        Task.KEY_urgency_level, urgency_levels[i]));
+        Task.KEY_name,          taskNames[i],
+        Task.KEY_description,   taskDescriptions[i],
+        Task.KEY_completed,     taskCompleteds[i],
+        Task.KEY_date,          taskDates[i],
+        Task.KEY_urgency_level, taskUrgencyLevels[i]));
 
       taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
     }
 
     // FIN CRÉATION DE TÄCHES
 
+    // DÉBUT CRÉATION D'EMPLOYÉS
+
+    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+
+    String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
+    String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
+    String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
+    String[] employeePhones = {"418-409-6568",          "420-420-4242",         "123-456-7890"};
+
+    for (int i = 0; i < employeeNames.length; i++) {
+      ContentValues values = new ContentValues();
+
+      values.put(Employee.KEY_name,   employeeNames[i]);
+      values.put(Employee.KEY_job,    employeeJobs[i]);
+      values.put(Employee.KEY_email,  employeeEmails[i]);
+      values.put(Employee.KEY_phone,  employeePhones[i]);
+
+      Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s",
+        Employee.KEY_name,  employeeNames[i],
+        Employee.KEY_job,   employeeJobs[i],
+        Employee.KEY_email, employeeEmails[i],
+        Employee.KEY_phone, employeePhones[i]));
+
+      employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
+    }
+
+    // FIN CRÉATION D'EMPLOYÉS
+
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    fillData(taskUri);
+    fillData();
 
     registerForContextMenu(getListView());
 
@@ -204,7 +234,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     startActivity(i);
   }
 
-  private void fillData(Uri uri) {
+  private void fillData() {
     // Affiche les champs de la base de données (name)
     String[] from = new String[] { Task.KEY_name, Task.KEY_date };
 

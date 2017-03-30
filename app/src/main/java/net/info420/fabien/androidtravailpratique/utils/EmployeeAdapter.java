@@ -2,7 +2,6 @@ package net.info420.fabien.androidtravailpratique.utils;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,15 +38,11 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
 
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-    Log.d(TAG, "newView()");
-
     return inflater.inflate(R.layout.employee_row, viewGroup, false);
   }
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    Log.d(TAG, "bindView()");
-
     EmployeeAdapter.ViewHolder viewHolder;
 
     viewHolder                = new EmployeeAdapter.ViewHolder();
