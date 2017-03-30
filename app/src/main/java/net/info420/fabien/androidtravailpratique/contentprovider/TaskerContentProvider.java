@@ -51,11 +51,11 @@ public class TaskerContentProvider extends ContentProvider {
 
   private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-   static {
-     sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK,              TASKS);
-     sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK + "/#",       TASK_ID);
-     sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE,         EMPLOYEES);
-     sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE + "/#",  EMPLOYEE_ID);
+  static {
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK,              TASKS);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK + "/#",       TASK_ID);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE,         EMPLOYEES);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE + "/#",  EMPLOYEE_ID);
   }
 
   @Override
@@ -82,6 +82,8 @@ public class TaskerContentProvider extends ContentProvider {
   public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
     // On utilise SQLiteQueryBuilder plutôt que query()
     SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+
+    Log.d(TAG, String.format("Uri recu : %s", uri.getPath()));
 
     int uriType = sURIMatcher.match(uri);
     switch (uriType) {

@@ -1,9 +1,11 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
@@ -39,6 +42,7 @@ public class TaskActivity extends AppCompatActivity {
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       taskUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+      Log.d(TAG, taskUri.getPath());
 
       fillData(taskUri);
     }
@@ -91,13 +95,29 @@ public class TaskActivity extends AppCompatActivity {
       tvTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_name)));
       cbTaskComplete.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
       tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
-      btnTaskAssignedEmployee.setText(Integer.toString(cursor.getInt((cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))))); // TODO : Convertir en employé
 
       // Conversion en date
       tvTaskDate.setText(((TaskerApplication) getApplication()).getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
       tvTaskUrgencyLevel.setText(((TaskerApplication) getApplication()).getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+
+
+      // Et maintenant? Il faut afficher le nom de l'employé dans le bouton d'employé assigné.
+      String[] employeeProjection = { Employee.KEY_name };
+
+      Uri employeeUri = ContentUris.withAppendedId(TaskerContentProvider.CONTENT_URI_EMPLOYEE, cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
+
+      Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
+
+      if (employeeCursor != null) {
+        employeeCursor.moveToFirst();
+
+        btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+
+        // Fermeture du curseur
+        employeeCursor.close();
+      }
 
       // Fermeture du curseur
       cursor.close();
