@@ -187,7 +187,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
         // On ajoute un filtre d'employés
         break;
       case R.id.sp_task_filters_urgencies:
-        // On ajoute un filtre de niveau d'urgence
+        taskAdapter.getFilter().filter(Long.toString(l));
         break;
       case R.id.sp_task_filters_completion:
         // On ajoute un filtre de complétion
