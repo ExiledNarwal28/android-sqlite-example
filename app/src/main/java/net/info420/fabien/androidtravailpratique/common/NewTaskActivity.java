@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 
@@ -35,6 +36,15 @@ public class NewTaskActivity extends AppCompatActivity {
   }
 
   private void initUI() {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("");
+    setActionBar(toolbar);
+    toolbar.setTitle(R.string.title_activity_new_task);
+
+    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+
+    // TODO : Ajouter les options Annuler, Préférences
+
     etTaskName              = (EditText)  findViewById(R.id.et_task_name);
     etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
     cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);

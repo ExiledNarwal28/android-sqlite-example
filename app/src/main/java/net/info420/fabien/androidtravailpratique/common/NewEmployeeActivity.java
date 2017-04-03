@@ -3,6 +3,7 @@ package net.info420.fabien.androidtravailpratique.common;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 
@@ -23,6 +24,15 @@ public class NewEmployeeActivity extends AppCompatActivity {
   }
 
   private void initUI() {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("");
+    setActionBar(toolbar);
+    toolbar.setTitle(R.string.title_activity_new_employee);
+
+    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+
+    // TODO : Ajouter les options Annuler, Préférences
+
     etEmployeeName  = (EditText) findViewById(R.id.et_employee_name);
     etEmployeeJob   = (EditText) findViewById(R.id.et_employee_job);
     etEmployeeMail  = (EditText) findViewById(R.id.et_employee_mail);

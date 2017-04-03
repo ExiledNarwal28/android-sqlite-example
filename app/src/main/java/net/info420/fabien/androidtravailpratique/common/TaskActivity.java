@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
@@ -51,11 +52,20 @@ public class TaskActivity extends AppCompatActivity {
   }
 
   private void initUI() {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("");
+    setActionBar(toolbar);
+    toolbar.setTitle(R.string.title_activity_task);
+
+    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+
+    // TODO : Ajouter les options Modifier, Supprimer, Préférences
+
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
     cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_task_completed);
     tvTaskUrgencyLevel      = (TextView)  findViewById(R.id.tv_task_urgency_level);
-    tvTaskDescription       = (TextView)  findViewById(R.id.tv_employee_job);
-    tvTaskDate              = (TextView)  findViewById(R.id.tv_employee_mail);
+    tvTaskDescription       = (TextView)  findViewById(R.id.tv_task_description);
+    tvTaskDate              = (TextView)  findViewById(R.id.tv_task_date);
     btnTaskAssignedEmployee = (Button)    findViewById(R.id.btn_task_assigned_employee);
 
     btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {

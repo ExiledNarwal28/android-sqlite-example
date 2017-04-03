@@ -47,7 +47,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
 
     viewHolder                = new EmployeeAdapter.ViewHolder();
     viewHolder.tvEmployeeName = (TextView) view.findViewById(R.id.tv_employee_name);
-    viewHolder.tvEmployeeJob  = (TextView) view.findViewById(R.id.tv_employee_job);
+    viewHolder.tvEmployeeJob  = (TextView) view.findViewById(R.id.tv_task_description);
 
     // Initialisation du UI
     viewHolder.tvEmployeeName.setText(cursor.getString(cursor.getColumnIndex(Employee.KEY_name)));

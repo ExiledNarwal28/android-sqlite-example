@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
@@ -46,6 +47,15 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
   }
 
   private void initUI() {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("");
+    setActionBar(toolbar);
+    toolbar.setTitle(R.string.title_activity_employee_list);
+
+    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+
+    // TODO : Ajouter les options Ajouter un employé, Préférences
+
     // lvEmployeeList = (ListView) findViewById(R.id.lv_employee_list);
 
     // TODO : Afficher si il n'y a aucun employé
@@ -72,7 +82,7 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
     String[] from = new String[]{Employee.KEY_name, Employee.KEY_job};
 
     // Où on affiche les champs
-    int[] to = new int[]{R.id.tv_employee_name, R.id.tv_employee_job};
+    int[] to = new int[]{R.id.tv_employee_name, R.id.tv_task_description};
 
     getLoaderManager().initLoader(0, null, this);
     employeeAdapter = new EmployeeAdapter(this, R.layout.employee_row, null, from, to, 0, (TaskerApplication) getApplication());

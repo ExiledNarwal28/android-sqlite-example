@@ -5,14 +5,16 @@
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:paddingBottom="@dimen/activity_vertical_margin"
-  android:paddingLeft="@dimen/activity_horizontal_margin"
-  android:paddingRight="@dimen/activity_horizontal_margin"
-  android:paddingTop="@dimen/activity_vertical_margin"
   tools:context="net.info420.fabien.androidtravailpratique.common.PrefsActivity">
+
+  <include
+    layout="@layout/toolbar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"/>
 
   <FrameLayout
     android:id="@+id/fragment_container_prefs"
+    android:layout_marginTop="55dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
   </FrameLayout>

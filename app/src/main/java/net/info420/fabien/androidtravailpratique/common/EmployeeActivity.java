@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
@@ -44,9 +45,18 @@ public class EmployeeActivity extends AppCompatActivity {
   }
 
   private void initUI() {
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar.setTitle("");
+    setActionBar(toolbar);
+    toolbar.setTitle(R.string.title_activity_employee);
+
+    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+
+    // TODO : Ajouter les options Modifier, Supprimer, Préférences
+
     tvEmployeeName      = (TextView)  findViewById(R.id.tv_employee_name);
-    tvEmployeeJob       = (TextView)  findViewById(R.id.tv_employee_job);
-    tvEmployeeMail      = (TextView)  findViewById(R.id.tv_employee_mail);
+    tvEmployeeJob       = (TextView)  findViewById(R.id.tv_task_description);
+    tvEmployeeMail      = (TextView)  findViewById(R.id.tv_task_date);
     tvEmployeePhone     = (TextView)  findViewById(R.id.tv_employee_phone);
     btnEmployeeSendSms  = (Button)    findViewById(R.id.btn_employee_send_sms);
     btnEmployeeCall     = (Button)    findViewById(R.id.btn_employee_call);

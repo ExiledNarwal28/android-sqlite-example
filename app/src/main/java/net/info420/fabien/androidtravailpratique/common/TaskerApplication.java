@@ -1,10 +1,14 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.Activity;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
@@ -81,5 +85,15 @@ public class TaskerApplication extends Application {
     SimpleDateFormat f = new SimpleDateFormat("EEEE d MMMM YYYY"); // Dimanche 1 janvier 1970
     f.setTimeZone(TimeZone.getTimeZone("GMT"));
     return f.format(d);
+  }
+
+  public void setStatusBarColor(Activity activity) {
+    // Source : http://stackoverflow.com/questions/22192291/how-to-change-the-status-bar-color-in-android
+    // Changer la couleur de la status bar
+
+    Window window = activity.getWindow();
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+    window.setStatusBarColor(ContextCompat.getColor(activity, R.color.colorPrimaryDark));
   }
 }
