@@ -33,7 +33,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private static final int ACTIVITY_CREATE = 0;
   private static final int ACTIVITY_EDIT = 1;
   private static final int DELETE_ID = Menu.FIRST + 1;
-  // private Cursor cursor;
   private TaskAdapter taskAdapter;
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
@@ -42,7 +41,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
-  // private ListView lvTaskList;
   private Spinner   spTaskFiltersDates;
   private Spinner   spTaskFiltersEmployees;
   private Spinner   spTaskFiltersUrgencies;
@@ -138,7 +136,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     // TODO : Ajouter le bouton vers EmployeeListActivity
     // TODO : Ajouter les options Ajouter une tâche, Préférences
 
-    // lvTaskList = (ListView) findViewById(R.id.list);
     spTaskFiltersDates      = (Spinner) findViewById(R.id.sp_task_filters_dates);
     spTaskFiltersEmployees  = (Spinner) findViewById(R.id.sp_task_filters_employees);
     spTaskFiltersUrgencies  = (Spinner) findViewById(R.id.sp_task_filters_urgencies);
@@ -284,5 +281,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   public void onLoaderReset(Loader<Cursor> loader) {
     // Les données ne sont plus valides
     taskAdapter.swapCursor(null);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
   }
 }
