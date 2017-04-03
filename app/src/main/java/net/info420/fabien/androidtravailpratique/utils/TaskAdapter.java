@@ -2,7 +2,6 @@ package net.info420.fabien.androidtravailpratique.utils;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,22 +79,23 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
     });
   }
 
+  // TODO : Rendre le ListView filtrable
   @Override
   public Filter getFilter() {
 
     Filter filter = new Filter() {
-
       @SuppressWarnings("unchecked")
       @Override
       protected void publishResults(CharSequence constraint, FilterResults results) {
-
+        /*
         filteredData = (List<String>) results.values;
         notifyDataSetChanged();
+        */
       }
 
       @Override
       protected FilterResults performFiltering(CharSequence constraint) {
-
+        /*
         FilterResults results = new FilterResults();
         ArrayList<String> FilteredArrayNames = new ArrayList<String>();
 
@@ -115,6 +114,8 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
         Log.e("VALUES", results.values.toString());
 
         return results;
+        */
+        return null;
       }
     };
 
