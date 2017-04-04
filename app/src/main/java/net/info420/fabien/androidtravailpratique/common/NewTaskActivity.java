@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,7 @@ import net.info420.fabien.androidtravailpratique.R;
 
 import java.util.Calendar;
 
-public class NewTaskActivity extends AppCompatActivity {
+public class NewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
   private final static String TAG = NewTaskActivity.class.getName();
 
   private EditText  etTaskName;
@@ -29,6 +30,8 @@ public class NewTaskActivity extends AppCompatActivity {
   private Spinner   spTaskUrgencyLevel;
   private Button    btnTaskDate;
   private Spinner   spTaskAssignedEmployee;
+
+  public long taskDate = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +67,25 @@ public class NewTaskActivity extends AppCompatActivity {
   }
 
   public void showDatePickerDialog(View v) {
+    Log.d(TAG, String.format("showDataPickDialog start : %s", taskDate));
+
     DialogFragment newFragment = new DatePickerFragment();
     newFragment.show(getFragmentManager(), "datePicker");
+
+    Log.d(TAG, String.format("showDataPickDialog done : %s", taskDate));
+
+    if (taskDate != 0) {
+      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
+    }
   }
 
   // Source : https://developer.android.com/guide/topics/ui/controls/pickers.html
-  public static class DatePickerFragment extends DialogFragment
-    implements DatePickerDialog.OnDateSetListener {
+  public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+      Log.d(TAG, "onCreateDialog");
+
       // On utilise la date actuelle comme date par défaut
       final Calendar c = Calendar.getInstance();
       int year = c.get(Calendar.YEAR);
@@ -85,8 +97,18 @@ public class NewTaskActivity extends AppCompatActivity {
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
+      final Calendar c = Calendar.getInstance();
+      ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
 
+      Log.d(TAG, String.format("onDateSet : %s", c.getTimeInMillis()));
     }
+  }
+
+  public void onDateSet(DatePicker view, int year, int month, int day) {
+    final Calendar c  = Calendar.getInstance();
+    taskDate          = c.getTimeInMillis();
+
+    Log.d(TAG, String.format("onDateSet : %s", c.getTimeInMillis()));
   }
 
   @Override

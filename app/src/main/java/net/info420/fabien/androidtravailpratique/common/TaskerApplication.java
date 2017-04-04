@@ -72,7 +72,7 @@ public class TaskerApplication extends Application {
   // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
   public String getDate(int unixDate) {
     Date d = new Date(unixDate);
-    SimpleDateFormat f = new SimpleDateFormat("d MMMM YY"); // Dimanche 1 janvier 1970
+    SimpleDateFormat f = new SimpleDateFormat("d MMMM"); // 1 janvier
     f.setTimeZone(TimeZone.getTimeZone("GMT"));
     return f.format(d);
   }
