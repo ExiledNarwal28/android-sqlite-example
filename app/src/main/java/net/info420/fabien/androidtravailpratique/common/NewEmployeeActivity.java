@@ -2,6 +2,7 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.EditText;
 import android.widget.Toolbar;
 
@@ -37,5 +38,12 @@ public class NewEmployeeActivity extends AppCompatActivity {
     etEmployeeJob   = (EditText) findViewById(R.id.et_employee_job);
     etEmployeeMail  = (EditText) findViewById(R.id.et_employee_mail);
     etEmployeePhone = (EditText) findViewById(R.id.et_employee_phone);
+  }
+
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_update_item, menu);
+    return true;
   }
 }

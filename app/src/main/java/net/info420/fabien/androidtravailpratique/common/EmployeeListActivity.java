@@ -109,4 +109,10 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
     // Les données ne sont plus valides
     employeeAdapter.swapCursor(null);
   }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_employee_list, menu);
+    return true;
+  }
 }

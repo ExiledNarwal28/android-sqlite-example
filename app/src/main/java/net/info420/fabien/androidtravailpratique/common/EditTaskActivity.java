@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -85,5 +86,11 @@ public class EditTaskActivity extends AppCompatActivity {
     public void onDateSet(DatePicker view, int year, int month, int day) {
 
     }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_update_item, menu);
+    return true;
   }
 }
