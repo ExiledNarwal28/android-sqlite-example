@@ -6,6 +6,7 @@
   <string name="action_add">Ajouter</string>
   <string name="action_edit">Modifier</string>
   <string name="action_delete">Suprimer</string>
+  <string name="action_cancel">Annuler</string>
   <string name="action_settings">Règlages</string>
   <string name="action_call">Appeler</string>
   <string name="action_send_sms">Envoyer un SMS</string>
