@@ -75,7 +75,6 @@ public class NewTaskActivity extends AppCompatActivity {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
       // On utilise la date actuelle comme date par défaut
-      // TODO : Seulement s'il n'y a pas d'autres données
       final Calendar c = Calendar.getInstance();
       int year = c.get(Calendar.YEAR);
       int month = c.get(Calendar.MONTH);

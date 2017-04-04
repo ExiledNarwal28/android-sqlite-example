@@ -2,6 +2,7 @@
 <resources>
   <attr name="colorDivider" format="reference" />
   <attr name="colorPrimaryText" format="reference" />
+  <attr name="colorPrimaryTextLight" format="reference" />
   <attr name="colorPrimaryLight" format="reference" />
   <attr name="colorSecondaryText" format="reference" />
   <attr name="colorTextIcons" format="reference" />

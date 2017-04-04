@@ -9,6 +9,7 @@
   <string name="action_cancel">Annuler</string>
   <string name="action_settings">Règlages</string>
   <string name="action_call">Appeler</string>
+  <string name="action_validate">Valider</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
   <string name="task">Tâche</string>

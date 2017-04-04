@@ -61,4 +61,17 @@
     android:textAppearance="@android:style/TextAppearance.Material.Small"
     android:fontFamily="sans-serif"/>
 
+  <Button
+    android:text="Button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/btn_validate"
+    style="@android:style/Widget.Material.Light.Button"
+    tools:text="@string/action_validate"
+    android:background="@color/colorAccent"
+    android:textAppearance="@android:style/TextAppearance.Material.Button"
+    android:textColor="@color/colorPrimaryTextLight"/>
+
 </RelativeLayout>
