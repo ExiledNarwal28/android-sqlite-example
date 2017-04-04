@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -113,6 +114,27 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_employee_list, menu);
+    return true;
+  }
+
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_task_list:
+        // TODO : Vérifier si c'est la dernière activité?
+        // Je termine l'activité, car en se fiant à l'aborescence de l'application, on a pas le choix de venir de MainActivity
+        finish();
+        break;
+      case R.id.menu_add:
+        startActivity(new Intent(this, NewEmployeeActivity.class));
+        break;
+      case R.id.menu_prefs:
+        startActivity(new Intent(this, PrefsActivity.class));
+        break;
+      default:
+        break;
+    }
     return true;
   }
 }

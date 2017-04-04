@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -132,9 +133,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     toolbar.setTitle(R.string.title_activity_main);
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
-
-    // TODO : Ajouter le bouton vers EmployeeListActivity
-    // TODO : Ajouter les options Ajouter une tâche, Préférences
 
     spTaskFiltersDates      = (Spinner) findViewById(R.id.sp_task_filters_dates);
     spTaskFiltersEmployees  = (Spinner) findViewById(R.id.sp_task_filters_employees);
@@ -286,6 +284,24 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_employee_list:
+        startActivity(new Intent(this, EmployeeListActivity.class));
+        break;
+      case R.id.menu_add:
+        startActivity(new Intent(this, NewTaskActivity.class));
+        break;
+      case R.id.menu_prefs:
+        startActivity(new Intent(this, PrefsActivity.class));
+        break;
+      default:
+        break;
+    }
     return true;
   }
 }

@@ -1,11 +1,13 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -102,6 +104,25 @@ public class EmployeeActivity extends AppCompatActivity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_item, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_edit:
+        // TODO : Envoyer le URI
+        startActivity(new Intent(this, EditEmployeeActivity.class));
+        break;
+      case R.id.menu_delete:
+        // TODO : Supprimer l'employé
+        break;
+      case R.id.menu_prefs:
+        startActivity(new Intent(this, PrefsActivity.class));
+        break;
+      default:
+        break;
+    }
     return true;
   }
 }

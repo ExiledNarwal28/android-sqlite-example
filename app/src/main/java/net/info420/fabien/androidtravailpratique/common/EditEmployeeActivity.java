@@ -1,8 +1,10 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toolbar;
 
@@ -44,6 +46,21 @@ public class EditEmployeeActivity extends AppCompatActivity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_update_item, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_cancel:
+        // TODO : Annuler
+        break;
+      case R.id.menu_prefs:
+        startActivity(new Intent(this, PrefsActivity.class));
+        break;
+      default:
+        break;
+    }
     return true;
   }
 }
