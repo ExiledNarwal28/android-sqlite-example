@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
-import android.icu.util.TimeZone;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Window;
@@ -71,20 +70,22 @@ public class TaskerApplication extends Application {
   // TODO : Vérifier l'année
   // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
   public String getDate(int unixDate) {
-    Date d = new Date(unixDate);
-    SimpleDateFormat f = new SimpleDateFormat("d MMMM"); // 1 janvier
-    f.setTimeZone(TimeZone.getTimeZone("GMT"));
-    return f.format(d);
+    // Date d = new Date(unixDate / 1000);
+    // SimpleDateFormat f = new SimpleDateFormat("d MMMM"); // 1 janvier
+    // f.setTimeZone(TimeZone.getTimeZone("GMT"));
+    // return f.format(d);
+    return new SimpleDateFormat("EEEE d MMM").format(new Date(unixDate * 1000L));
   }
 
   // TODO : Vérifier si c'est utile
   // TODO : Vérifier l'année
   // Source : http://stackoverflow.com/questions/13005116/android-convert-unix-time-to-gmt-time#13005144
   public String getFullDate(int unixDate) {
-    Date d = new Date(unixDate);
-    SimpleDateFormat f = new SimpleDateFormat("EEEE d MMMM YYYY"); // Dimanche 1 janvier 1970
-    f.setTimeZone(TimeZone.getTimeZone("GMT"));
-    return f.format(d);
+    // Date d = new Date(unixDate / 1000);
+    // SimpleDateFormat f = new SimpleDateFormat("EEEE d MMMM YYYY"); // Dimanche 1 janvier 1970
+    // f.setTimeZone(TimeZone.getTimeZone("GMT"));
+    // return f.format(d);
+    return new SimpleDateFormat("EEEE d MMMM YYYY").format(new Date(unixDate * 1000L));
   }
 
   public void setStatusBarColor(Activity activity) {

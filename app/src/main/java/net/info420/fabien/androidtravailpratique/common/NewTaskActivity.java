@@ -21,7 +21,7 @@ import net.info420.fabien.androidtravailpratique.R;
 
 import java.util.Calendar;
 
-public class NewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class NewTaskActivity extends AppCompatActivity {
   private final static String TAG = NewTaskActivity.class.getName();
 
   private EditText  etTaskName;
@@ -100,15 +100,16 @@ public class NewTaskActivity extends AppCompatActivity implements DatePickerDial
       final Calendar c = Calendar.getInstance();
       ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
 
-      Log.d(TAG, String.format("onDateSet : %s", c.getTimeInMillis()));
+      ((NewTaskActivity) getActivity()).refreshDate();
     }
   }
 
-  public void onDateSet(DatePicker view, int year, int month, int day) {
-    final Calendar c  = Calendar.getInstance();
-    taskDate          = c.getTimeInMillis();
+  public void refreshDate() {
+    Log.d(TAG, String.format("%s -> %s", taskDate, ((TaskerApplication) getApplication()).getFullDate((int) taskDate)));
 
-    Log.d(TAG, String.format("onDateSet : %s", c.getTimeInMillis()));
+    if (taskDate != 0) {
+      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
+    }
   }
 
   @Override
