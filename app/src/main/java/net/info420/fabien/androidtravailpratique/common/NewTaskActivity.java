@@ -3,8 +3,10 @@ package net.info420.fabien.androidtravailpratique.common;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,11 +19,13 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
+import net.info420.fabien.androidtravailpratique.utils.Task;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +44,8 @@ public class NewTaskActivity extends AppCompatActivity {
   private Spinner   spTaskAssignedEmployee;
 
   public long taskDate = 0;
+
+  private Uri taskUri;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -153,9 +159,35 @@ public class NewTaskActivity extends AppCompatActivity {
   }
 
   public void createTask() {
-    long assinedEmployee = spTaskAssignedEmployee.getSelectedItemId();
+    int assinedEmployee = (int) spTaskAssignedEmployee.getSelectedItemId();
+    String name         = etTaskName.getText().toString();
+    String description  = etTaskDescription.getText().toString();
+    int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
+    int date            = (int) taskDate;
+    int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId();
 
-    Log.d(TAG, String.format("%s", assinedEmployee));
+    // Toutes les informations obligatoires doivent êtes présentes
+    if (name.length() == 0 || description.length() == 0 || taskDate == 0) {
+      alert();
+      return;
+    }
+
+    ContentValues values = new ContentValues();
+    values.put(Task.KEY_assigned_employee_ID, assinedEmployee);
+    values.put(Task.KEY_name,                 name);
+    values.put(Task.KEY_description,          description);
+    values.put(Task.KEY_completed,            completed);
+    values.put(Task.KEY_date,                 date);
+    values.put(Task.KEY_urgency_level,        urgencyLevel);
+
+    // Nouvelle tâche
+    taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
+
+    finish();
+  }
+
+  private void alert() {
+    Toast.makeText(getApplicationContext(), getString(R.string.warning_missing_required_fields), Toast.LENGTH_LONG).show();
   }
 
   @Override

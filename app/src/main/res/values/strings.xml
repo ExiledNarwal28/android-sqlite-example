@@ -12,6 +12,8 @@
   <string name="action_validate">Valider</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
+  <string name="warning_missing_required_fields">Des champs obligatoires sont vides</string>
+
   <string name="task">Tâche</string>
   <string name="task_name">Nom de la tâche</string>
   <string name="task_description">Description</string>
@@ -61,14 +63,14 @@
     <item>1</item>
     <item>0</item>
   </string-array><string-array name="pref_toasts_urgency_level_names">
-    <item>Haut</item>
-    <item>Moyen</item>
     <item>Bas</item>
+    <item>Moyen</item>
+    <item>Haut</item>
   </string-array>
   <string-array name="pref_toasts_urgency_level_values">
-    <item>2</item>
-    <item>1</item>
     <item>0</item>
+    <item>1</item>
+    <item>2</item>
   </string-array><string-array name="pref_language_names">
     <item>Français</item>
     <item>Anglais</item>
@@ -89,9 +91,9 @@
   </string-array>
   <string-array name="task_filters_urgencies">
     <item>Tous les niveaux d\'urgence</item>
-    <item>Haut</item>
-    <item>Moyen</item>
     <item>Bas</item>
+    <item>Moyen</item>
+    <item>Haut</item>
   </string-array>
   <string-array name="task_filters_completion">
     <item>Toutes les tâches</item>
@@ -99,9 +101,9 @@
     <item>Tâches complétées</item>
   </string-array>
   <string-array name="task_filters_urgencies_edit">
-    <item>Haut</item>
-    <item>Moyen</item>
     <item>Bas</item>
+    <item>Moyen</item>
+    <item>Haut</item>
   </string-array>
 
   <string name="title_activity_task">Détails d\'une tâche</string>
