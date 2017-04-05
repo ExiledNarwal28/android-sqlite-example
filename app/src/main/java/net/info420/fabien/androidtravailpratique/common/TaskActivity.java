@@ -95,20 +95,6 @@ public class TaskActivity extends AppCompatActivity {
     if (cursor != null) {
       cursor.moveToFirst();
 
-      // Pour un Spinner
-      // TODO : Enlever ceci si ça ne sert à rien
-      /*
-        String category = cursor.getString(cursor.getColumnIndexOrThrow(TodoTable.COLUMN_CATEGORY));
-        // Pour un spinner
-        for (int i = 0; i < mCategory.getCount(); i++) {
-
-          String s = (String) mCategory.getItemAtPosition(i);
-          if (s.equalsIgnoreCase(category)) {
-            mCategory.setSelection(i);
-          }
-        }
-      */
-
       // On mets les données dans l'UI
       tvTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_name)));
       cbTaskComplete.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean

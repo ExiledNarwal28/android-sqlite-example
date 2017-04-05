@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -45,8 +44,6 @@ public class NewTaskActivity extends AppCompatActivity {
 
   public long taskDate = 0;
 
-  private Uri taskUri;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -84,9 +81,6 @@ public class NewTaskActivity extends AppCompatActivity {
     if (employeeCursor != null) {
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
-        Log.d(TAG, String.format("%s : %s",
-          employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)),
-          employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID))));
       }
 
       // Fermeture du curseur
@@ -181,7 +175,7 @@ public class NewTaskActivity extends AppCompatActivity {
     values.put(Task.KEY_urgency_level,        urgencyLevel);
 
     // Nouvelle tâche
-    taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
+    getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
 
     finish();
   }
