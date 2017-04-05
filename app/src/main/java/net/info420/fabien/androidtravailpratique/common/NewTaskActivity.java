@@ -36,6 +36,7 @@ public class NewTaskActivity extends AppCompatActivity {
   private CheckBox  cbTaskCompleted;
   private Spinner   spTaskUrgencyLevel;
   private Button    btnTaskDate;
+  private Button    btnValidate;
   private Spinner   spTaskAssignedEmployee;
 
   public long taskDate = 0;
@@ -63,19 +64,23 @@ public class NewTaskActivity extends AppCompatActivity {
     cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);
     spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_task_urgency_level);
     btnTaskDate             = (Button)    findViewById(R.id.btn_task_date);
+    btnValidate             = (Button)    findViewById(R.id.btn_validate);
     spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_task_assigned_employee);
 
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();
-    employeeNames.add(getString(R.string.task_no_employee));
+    employeeNames.add(getString(R.string.task_no_employee)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
-    String[] employeeProjection = { Employee.KEY_name };
+    String[] employeeProjection = { Employee.KEY_name, Employee.KEY_ID };
     Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        Log.d(TAG, String.format("%s : %s",
+          employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)),
+          employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID))));
       }
 
       // Fermeture du curseur
@@ -90,6 +95,13 @@ public class NewTaskActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showDatePickerDialog(view);
+      }
+    });
+
+    btnValidate.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        createTask();
       }
     });
   }
@@ -138,6 +150,12 @@ public class NewTaskActivity extends AppCompatActivity {
     if (taskDate != 0) {
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
     }
+  }
+
+  public void createTask() {
+    long assinedEmployee = spTaskAssignedEmployee.getSelectedItemId();
+
+    Log.d(TAG, String.format("%s", assinedEmployee));
   }
 
   @Override
