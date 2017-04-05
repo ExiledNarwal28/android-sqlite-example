@@ -53,7 +53,6 @@ public class TaskerApplication extends Application {
 
   // TODO : Vérifier si c'est utile
   public int getUrgencyLevelColor(int urgencyLevel) {
-    Log.d(TAG, "color : " + Integer.toString(urgencyLevel));
     switch (urgencyLevel) {
       case 0:
         return getColor(R.color.colorUrgencyLevelLow);

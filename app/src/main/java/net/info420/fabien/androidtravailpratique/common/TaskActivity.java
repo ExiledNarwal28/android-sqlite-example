@@ -1,10 +1,10 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +21,7 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
 
-public class TaskActivity extends AppCompatActivity {
+public class TaskActivity extends Activity {
   private final static String TAG = TaskActivity.class.getName();
 
   private TextView tvTaskName;
@@ -144,6 +144,7 @@ public class TaskActivity extends AppCompatActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
+    Log.d(TAG, "We got it");
     getMenuInflater().inflate(R.menu.menu_item, menu);
     return true;
   }

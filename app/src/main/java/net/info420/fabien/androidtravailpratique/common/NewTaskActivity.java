@@ -1,5 +1,6 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,7 +8,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +29,7 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class NewTaskActivity extends AppCompatActivity {
+public class NewTaskActivity extends Activity {
   private final static String TAG = NewTaskActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;

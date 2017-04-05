@@ -1,13 +1,13 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 
-public class PrefsActivity extends AppCompatActivity {
+public class PrefsActivity extends Activity {
   private final static String TAG = PrefsActivity.class.getName();
 
   @Override
