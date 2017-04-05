@@ -86,7 +86,7 @@
     android:id="@+id/sp_task_assigned_employee"/>
 
   <Button
-    android:text="Button"
+    android:text="@string/action_validate"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"

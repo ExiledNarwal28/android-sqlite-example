@@ -4,12 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -18,11 +20,16 @@ import android.widget.Spinner;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class NewTaskActivity extends AppCompatActivity {
   private final static String TAG = NewTaskActivity.class.getName();
+
+  private ArrayAdapter<String> adapterTaskAssignedEmployees;
 
   private EditText  etTaskName;
   private EditText  etTaskDescription;
@@ -57,6 +64,27 @@ public class NewTaskActivity extends AppCompatActivity {
     spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_task_urgency_level);
     btnTaskDate             = (Button)    findViewById(R.id.btn_task_date);
     spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_task_assigned_employee);
+
+    // Je mets la seule option actuelle dans le filtre des employés
+    ArrayList<String> employeeNames = new ArrayList<>();
+    employeeNames.add(getString(R.string.task_no_employee));
+
+    // C'est l'heure d'aller chercher les noms des employés
+    String[] employeeProjection = { Employee.KEY_name };
+    Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
+
+    if (employeeCursor != null) {
+      while (employeeCursor.moveToNext()) {
+        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+      }
+
+      // Fermeture du curseur
+      employeeCursor.close();
+    }
+
+    // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
+    adapterTaskAssignedEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeeNames);
+    spTaskAssignedEmployee.setAdapter(adapterTaskAssignedEmployees);
 
     btnTaskDate.setOnClickListener(new View.OnClickListener() {
       @Override
