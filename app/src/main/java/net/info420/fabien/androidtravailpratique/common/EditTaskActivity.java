@@ -30,6 +30,8 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
+
 public class EditTaskActivity extends FragmentActivity {
   private final static String TAG = EditTaskActivity.class.getName();
 

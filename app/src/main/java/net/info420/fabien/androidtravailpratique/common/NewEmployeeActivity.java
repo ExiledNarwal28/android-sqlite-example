@@ -18,6 +18,8 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 
+// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
+
 public class NewEmployeeActivity extends FragmentActivity {
   private final static String TAG = NewEmployeeActivity.class.getName();
 

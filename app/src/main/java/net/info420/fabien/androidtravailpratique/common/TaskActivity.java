@@ -163,7 +163,8 @@ public class TaskActivity extends Activity {
         startActivity(i);
         break;
       case R.id.menu_delete:
-        // TODO : Supprimer la tâche
+        getContentResolver().delete(taskUri, null, null);
+        finish();
         break;
       case R.id.menu_prefs:
         startActivity(new Intent(this, PrefsActivity.class));

@@ -121,7 +121,8 @@ public class EmployeeActivity extends Activity {
         startActivity(i);
         break;
       case R.id.menu_delete:
-        // TODO : Supprimer l'employé
+        getContentResolver().delete(employeeUri, null, null);
+        finish();
         break;
       case R.id.menu_prefs:
         startActivity(new Intent(this, PrefsActivity.class));
