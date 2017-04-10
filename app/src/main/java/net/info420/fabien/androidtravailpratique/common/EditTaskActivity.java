@@ -174,7 +174,7 @@ public class EditTaskActivity extends FragmentActivity {
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
     int date            = (int) taskDate;
-    int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId();
+    int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId(); // TODO : Vérifier si ça marche vraiment
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0 || taskDate == 0) {

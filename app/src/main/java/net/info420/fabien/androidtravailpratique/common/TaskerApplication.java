@@ -2,6 +2,7 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Activity;
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.utils.DBHelper;
 
 import java.util.Date;
 
@@ -20,8 +22,8 @@ public class TaskerApplication extends Application {
   private static final String TAG = TaskerApplication.class.getName();
 
   // TODO : Enlever ceci si ça sert à rien.
-  // public SQLiteDatabase database;
-  // public DBHelper dbHelper;
+  public SQLiteDatabase database;
+  public DBHelper dbHelper;
 
   @Override
   public void onCreate() {
@@ -30,8 +32,8 @@ public class TaskerApplication extends Application {
     // TODO : Enlever dès que la base de données fonctionne
 
     // Recréation de la bd
-    // dbHelper = new DBHelper(this);
-    // dbHelper.recreateDB(dbHelper.getWritableDatabase());
+    dbHelper = new DBHelper(this);
+    dbHelper.recreateDB(dbHelper.getWritableDatabase());
   }
 
   // TODO : Vérifier si c'est utile

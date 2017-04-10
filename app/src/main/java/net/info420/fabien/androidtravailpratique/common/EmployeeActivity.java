@@ -1,6 +1,7 @@
 package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.Toolbar;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
+import net.info420.fabien.androidtravailpratique.utils.Task;
 
 public class EmployeeActivity extends Activity {
   private final static String TAG = EmployeeActivity.class.getName();
@@ -28,6 +30,8 @@ public class EmployeeActivity extends Activity {
   private Button    btnEmployeeCall;
 
   private Uri employeeUri;
+
+  private int employeeId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +82,8 @@ public class EmployeeActivity extends Activity {
   }
 
   private void fillData(Uri uri) {
-    String[] projection = { Employee.KEY_name,
+    String[] projection = { Employee.KEY_ID,
+                            Employee.KEY_name,
                             Employee.KEY_job,
                             Employee.KEY_email,
                             Employee.KEY_phone };
@@ -93,6 +98,8 @@ public class EmployeeActivity extends Activity {
       tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_job)));
       tvEmployeeMail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_email)));
       tvEmployeePhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_phone)));
+
+      employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employee.KEY_ID));
 
       // Fermeture du curseur
       cursor.close();
@@ -122,6 +129,23 @@ public class EmployeeActivity extends Activity {
         break;
       case R.id.menu_delete:
         getContentResolver().delete(employeeUri, null, null);
+
+        // Il faut aussi enlever cet employé de toutes les tâches
+        // Source : http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval
+        ContentValues values = new ContentValues();
+        values.putNull(Task.KEY_assigned_employee_ID);
+
+        // On n'a besoin que des tâches qui ont cet employé
+        // Source : https://developer.android.com/guide/topics/providers/content-provider-basics.html
+        String selection = Task.KEY_assigned_employee_ID + " = ?";
+        String[] selectionArgs = { Integer.toString(employeeId) };
+
+        // Modification des tâches
+        getContentResolver().update(TaskerContentProvider.CONTENT_URI_TASK,
+                                    values,
+                                    selection,
+                                    selectionArgs);
+
         finish();
         break;
       case R.id.menu_prefs:
