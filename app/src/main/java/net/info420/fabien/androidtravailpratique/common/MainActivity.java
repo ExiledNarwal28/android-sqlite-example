@@ -2,7 +2,6 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.ListActivity;
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -31,14 +30,15 @@ import java.util.ArrayList;
 public class MainActivity extends ListActivity implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = MainActivity.class.getName();
 
+  // TODO : Est-ce nécéssaire?
   private static final int ACTIVITY_CREATE = 0;
   private static final int ACTIVITY_EDIT = 1;
   private static final int DELETE_ID = Menu.FIRST + 1;
   private TaskAdapter taskAdapter;
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
-  private Uri taskUri;
-  private Uri employeeUri;
+  // private Uri taskUri;
+  // private Uri employeeUri;
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
@@ -56,7 +56,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     // TODO : Enlever dès que la base de données fonctionne
 
     // DÉBUT CRÉATION DE TÄCHES
-
+    /*
     taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
     String[]  taskNames           = { "Test0",        "Test1",        "Test2",        "Test3" };
@@ -115,7 +115,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
 
       employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
     }
-
+    */
     // FIN CRÉATION D'EMPLOYÉS
 
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci

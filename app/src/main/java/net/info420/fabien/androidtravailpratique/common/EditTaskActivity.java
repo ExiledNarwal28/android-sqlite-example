@@ -191,7 +191,6 @@ public class EditTaskActivity extends FragmentActivity {
     values.put(Task.KEY_date,                 date);
     values.put(Task.KEY_urgency_level,        urgencyLevel);
 
-    // TODO : IMPORTANT : En éditant une tâche, le ListView de MainActivity n'affiche que cette tâche...
     // Modification tâche
     getContentResolver().update(taskUri, values, null, null);
 
