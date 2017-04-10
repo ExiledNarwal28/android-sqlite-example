@@ -193,48 +193,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   public void onNothingSelected(AdapterView<?> adapterView) {
     // Ne fait rien!
   }
-
-  /*
-
-  // Crée un menu d'option avec du XML
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.listmenu, menu);
-    return true;
-  }
-
-  // Réaction à une sélection dans le menu
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.insert:
-        createTodo();
-        return true;
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
-  @Override
-  public boolean onContextItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case DELETE_ID:
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        Uri uri = Uri.parse(MyTodoContentProvider.CONTENT_URI + "/" + info.id);
-        getContentResolver().delete(uri, null, null);
-        fillData();
-        return true;
-    }
-    return super.onContextItemSelected(item);
-  }
-
-  private void createTodo() {
-    Intent i = new Intent(this, NewTaskActivity.class);
-    startActivity(i);
-  }
-
-  */
-
+  
   // Ouvre les détails d'une tâche lorsqu'appuyé
   @Override
   protected void onListItemClick(ListView l, View v, int position, long id) {

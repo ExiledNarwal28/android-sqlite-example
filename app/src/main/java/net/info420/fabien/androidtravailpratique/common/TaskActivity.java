@@ -141,7 +141,10 @@ public class TaskActivity extends Activity {
     }
   }
 
-  public void refresh() {
+  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'EditTaskActivity)
+  @Override
+  public void onResume() {
+    super.onResume();
     fillData(taskUri);
   }
 
