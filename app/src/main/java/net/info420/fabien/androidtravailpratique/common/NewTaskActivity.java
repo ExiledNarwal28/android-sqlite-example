@@ -1,6 +1,5 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +29,7 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class NewTaskActivity extends Activity {
+public class NewTaskActivity extends FragmentActivity {
   private final static String TAG = NewTaskActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
@@ -194,7 +194,7 @@ public class NewTaskActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_cancel:
-        // TODO : Annuler
+        finish();
         break;
       case R.id.menu_prefs:
         startActivity(new Intent(this, PrefsActivity.class));

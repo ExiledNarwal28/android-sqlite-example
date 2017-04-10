@@ -1,6 +1,5 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +30,7 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class EditTaskActivity extends Activity {
+public class EditTaskActivity extends FragmentActivity {
   private final static String TAG = EditTaskActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
@@ -124,7 +124,7 @@ public class EditTaskActivity extends Activity {
   public void showDatePickerDialog(View v) {
     Log.d(TAG, String.format("showDataPickDialog start : %s", taskDate));
 
-    DialogFragment newFragment = new NewTaskActivity.DatePickerFragment();
+    DialogFragment newFragment = new EditTaskActivity.DatePickerFragment();
     newFragment.show(getFragmentManager(), "datePicker");
 
     Log.d(TAG, String.format("showDataPickDialog done : %s", taskDate));
@@ -142,10 +142,10 @@ public class EditTaskActivity extends Activity {
       Log.d(TAG, "onCreateDialog");
 
       // On utilise la date actuelle comme date par défaut
-      final Calendar c = Calendar.getInstance();
-      int year = c.get(Calendar.YEAR);
-      int month = c.get(Calendar.MONTH);
-      int day = c.get(Calendar.DAY_OF_MONTH);
+      final Calendar c  = Calendar.getInstance();
+      int   year        = c.get(Calendar.YEAR);
+      int   month       = c.get(Calendar.MONTH);
+      int   day         = c.get(Calendar.DAY_OF_MONTH);
 
       // On retourne une nouvelle instance
       return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -153,9 +153,9 @@ public class EditTaskActivity extends Activity {
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
       final Calendar c = Calendar.getInstance();
-      ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
+      ((EditTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
 
-      ((NewTaskActivity) getActivity()).refreshDate();
+      ((EditTaskActivity) getActivity()).refreshDate();
     }
   }
 
@@ -177,6 +177,7 @@ public class EditTaskActivity extends Activity {
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0 || description.length() == 0 || taskDate == 0) {
+      Log.d(TAG, String.format("Name : %s Description : %s TaskDate : %s", name.length(), description.length(), taskDate));
       alert();
       return;
     }
@@ -196,6 +197,8 @@ public class EditTaskActivity extends Activity {
   }
 
   private void fillData(Uri taskUri) {
+    Log.d(TAG, "fillData");
+
     String[] projection = { Task.KEY_assigned_employee_ID,
                             Task.KEY_name,
                             Task.KEY_description,
@@ -206,6 +209,7 @@ public class EditTaskActivity extends Activity {
     Cursor cursor = getContentResolver().query(taskUri, projection, null, null, null);
 
     if (cursor != null) {
+      Log.d(TAG, "cursor is not null!");
       cursor.moveToFirst();
 
       // On mets les données dans l'UI
@@ -215,6 +219,8 @@ public class EditTaskActivity extends Activity {
 
       // Conversion en date
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+
+      taskDate = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date));
 
       // Conversion en niveau d'urgence et de l'employé en sélection du Spinner
       spTaskUrgencyLevel.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)));
@@ -239,7 +245,7 @@ public class EditTaskActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_cancel:
-        // TODO : Annuler
+        finish();
         break;
       case R.id.menu_prefs:
         startActivity(new Intent(this, PrefsActivity.class));

@@ -1,8 +1,8 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -10,7 +10,7 @@ import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 
-public class EditEmployeeActivity extends Activity {
+public class EditEmployeeActivity extends FragmentActivity {
   private final static String TAG = EditEmployeeActivity.class.getName();
 
   private EditText etEmployeeName;
@@ -53,7 +53,7 @@ public class EditEmployeeActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_cancel:
-        // TODO : Annuler
+        finish();
         break;
       case R.id.menu_prefs:
         startActivity(new Intent(this, PrefsActivity.class));

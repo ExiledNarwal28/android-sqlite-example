@@ -141,6 +141,9 @@ public class TaskActivity extends Activity {
     }
   }
 
+  public void refresh() {
+    fillData(taskUri);
+  }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,8 +156,9 @@ public class TaskActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_edit:
-        // TODO : Envoyer le URI
-        startActivity(new Intent(this, EditTaskActivity.class));
+        Intent i = new Intent(this, EditTaskActivity.class);
+        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+        startActivity(i);
         break;
       case R.id.menu_delete:
         // TODO : Supprimer la tâche
