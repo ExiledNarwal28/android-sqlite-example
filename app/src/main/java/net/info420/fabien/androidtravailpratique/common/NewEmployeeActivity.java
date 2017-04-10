@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.PhoneNumberUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,14 +62,6 @@ public class NewEmployeeActivity extends FragmentActivity {
     String job    = etEmployeeJob.getText().toString();
     String mail   = etEmployeeMail.getText().toString();
     String phone  = etEmployeePhone.getText().toString();
-
-    Log.d(TAG, String.format("Validation name   : length  : %s", name.length() == 0));
-    Log.d(TAG, String.format("Validation phone  : length  : %s", phone.length() != 0));
-    Log.d(TAG, String.format("Validation phone  : format  : %s", !PhoneNumberUtils.isGlobalPhoneNumber(phone)));
-    Log.d(TAG, String.format("Validation phone  : double  : %s", (phone.length() != 0 && !PhoneNumberUtils.isGlobalPhoneNumber(phone))));
-    Log.d(TAG, String.format("Validation mail   : length  : %s", mail.length() != 0 ));
-    Log.d(TAG, String.format("Validation mail   : format  : %s", !Patterns.EMAIL_ADDRESS.matcher(mail).matches()));
-    Log.d(TAG, String.format("Validation mail   : double  : %s", (mail.length() != 0 && !Patterns.EMAIL_ADDRESS.matcher(mail).matches())));
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0) {

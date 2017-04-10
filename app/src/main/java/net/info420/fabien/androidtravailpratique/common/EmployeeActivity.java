@@ -109,8 +109,9 @@ public class EmployeeActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_edit:
-        // TODO : Envoyer le URI
-        startActivity(new Intent(this, EditEmployeeActivity.class));
+        Intent i = new Intent(this, EditEmployeeActivity.class);
+        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE, employeeUri);
+        startActivity(i);
         break;
       case R.id.menu_delete:
         // TODO : Supprimer l'employé
