@@ -123,6 +123,7 @@ public class TaskActivity extends Activity {
         if (employeeCursor != null) {
           employeeCursor.moveToFirst();
 
+          // TODO : IMPORTANT : Ceci plante quand on a supprimé un employé
           btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
 
           // Fermeture du curseur

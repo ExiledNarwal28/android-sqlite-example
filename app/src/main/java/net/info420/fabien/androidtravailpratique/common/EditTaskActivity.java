@@ -193,7 +193,7 @@ public class EditTaskActivity extends FragmentActivity {
 
     // TODO : IMPORTANT : En éditant une tâche, le ListView de MainActivity n'affiche que cette tâche...
     // Modification tâche
-    getContentResolver().update(TaskerContentProvider.CONTENT_URI_TASK, values, null, null);
+    getContentResolver().update(taskUri, values, null, null);
 
     finish();
   }

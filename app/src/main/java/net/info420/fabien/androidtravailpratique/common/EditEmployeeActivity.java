@@ -109,7 +109,7 @@ public class EditEmployeeActivity extends FragmentActivity {
 
     // TODO : IMPORTANT : En éditant une employé, le ListView de EmployeeListActivity n'affiche que cet employé...
     // Modification employé
-    getContentResolver().update(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values, null, null);
+    getContentResolver().update(employeeUri, values, null, null);
 
     finish();
   }
