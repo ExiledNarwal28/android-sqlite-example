@@ -56,10 +56,10 @@ public class EditTaskActivity extends FragmentActivity {
 
     Bundle extras = getIntent().getExtras();
 
-    // check from the saved Instance
+    // Depuis l'instance sauvegarder
     taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
-    // Or passed from the other activity
+    // Ou passée depuis une autre activité
     if (extras != null) {
       taskUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
@@ -197,8 +197,6 @@ public class EditTaskActivity extends FragmentActivity {
   }
 
   private void fillData(Uri taskUri) {
-    Log.d(TAG, "fillData");
-
     String[] projection = { Task.KEY_assigned_employee_ID,
                             Task.KEY_name,
                             Task.KEY_description,
@@ -209,7 +207,6 @@ public class EditTaskActivity extends FragmentActivity {
     Cursor cursor = getContentResolver().query(taskUri, projection, null, null, null);
 
     if (cursor != null) {
-      Log.d(TAG, "cursor is not null!");
       cursor.moveToFirst();
 
       // On mets les données dans l'UI

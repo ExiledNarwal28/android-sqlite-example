@@ -99,6 +99,13 @@ public class EmployeeActivity extends Activity {
     }
   }
 
+  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'EditEmployeeActivity)
+  @Override
+  public void onResume() {
+    super.onResume();
+    fillData(employeeUri);
+  }
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_item, menu);
