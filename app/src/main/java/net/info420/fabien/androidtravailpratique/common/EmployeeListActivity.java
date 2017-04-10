@@ -56,11 +56,6 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
     // lvEmployeeList = (ListView) findViewById(R.id.lv_employee_list);
-
-    // TODO : Afficher si il n'y a aucun employé
-    // Par défaut, caché.
-    tvNoEmployee = (TextView) findViewById(R.id.tv_no_employee);
-    tvNoEmployee.setVisibility(View.GONE);
   }
 
   // Ouvre les détails d'une tâche lorsqu'appuyé

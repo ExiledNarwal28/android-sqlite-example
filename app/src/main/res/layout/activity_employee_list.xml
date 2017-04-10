@@ -7,15 +7,15 @@
   android:layout_height="match_parent"
   tools:context="net.info420.fabien.androidtravailpratique.common.EmployeeListActivity">
 
-  <!-- On a besoin de l'appeler 'list' (ListActivity) -->
-
   <include
     layout="@layout/toolbar"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"/>
 
+  <!-- S'affiche lorsque la liste est vide -->
+  <!-- Source : http://stackoverflow.com/questions/3771568/showing-empty-view-when-listview-is-empty -->
   <TextView
-    android:id="@+id/tv_no_employee"
+    android:id="@android:id/empty"
     android:layout_marginTop="65dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"/>
 
+  <!-- On a besoin de l'appeler 'list' (ListActivity) -->
   <ListView
     android:id="@android:id/list"
     android:layout_marginTop="65dp"

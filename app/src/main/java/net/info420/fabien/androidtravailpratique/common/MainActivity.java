@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
@@ -46,7 +45,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
   private Spinner   spTaskFiltersEmployees;
   private Spinner   spTaskFiltersUrgencies;
   private Spinner   spTaskFiltersCompletion;
-  private TextView  tvNoTask;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -143,11 +141,6 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemSele
     spTaskFiltersEmployees.setOnItemSelectedListener(this);
     spTaskFiltersUrgencies.setOnItemSelectedListener(this);
     spTaskFiltersCompletion.setOnItemSelectedListener(this);
-
-    // TODO : Afficher si il n'y a aucune tâche
-    // Par défaut, caché.
-    tvNoTask = (TextView) findViewById(R.id.tv_no_task);
-    tvNoTask.setVisibility(View.GONE);
 
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();

@@ -106,7 +106,7 @@ public class EditEmployeeActivity extends FragmentActivity {
     values.put(Employee.KEY_job,    job);
     values.put(Employee.KEY_phone,  phone);
     values.put(Employee.KEY_email,  mail);
-    
+
     // Modification employé
     getContentResolver().update(employeeUri, values, null, null);
 

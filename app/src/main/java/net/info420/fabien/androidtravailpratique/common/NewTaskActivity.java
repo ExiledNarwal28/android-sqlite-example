@@ -161,7 +161,7 @@ public class NewTaskActivity extends FragmentActivity {
     int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId();
 
     // Toutes les informations obligatoires doivent êtes présentes
-    if (name.length() == 0 || description.length() == 0 || taskDate == 0) {
+    if (name.length() == 0 || taskDate == 0) {
       alert();
       return;
     }
