@@ -34,8 +34,6 @@ public class NewEmployeeActivity extends FragmentActivity {
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Annuler, Préférences
-
     etEmployeeName  = (EditText) findViewById(R.id.et_employee_name);
     etEmployeeJob   = (EditText) findViewById(R.id.et_employee_job);
     etEmployeeMail  = (EditText) findViewById(R.id.et_employee_mail);

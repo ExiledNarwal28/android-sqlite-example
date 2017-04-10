@@ -75,7 +75,6 @@ public class EditTaskActivity extends FragmentActivity {
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Annuler, Préférences
 
     etTaskName              = (EditText)  findViewById(R.id.et_task_name);
     etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
@@ -190,6 +189,7 @@ public class EditTaskActivity extends FragmentActivity {
     values.put(Task.KEY_date,                 date);
     values.put(Task.KEY_urgency_level,        urgencyLevel);
 
+    // TODO : IMPORTANT : En éditant une tâche, le ListView de MainActivity n'affiche que cette tâche...
     // Modification tâche
     getContentResolver().update(TaskerContentProvider.CONTENT_URI_TASK, values, null, null);
 

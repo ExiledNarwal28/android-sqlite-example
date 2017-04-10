@@ -60,8 +60,6 @@ public class NewTaskActivity extends FragmentActivity {
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Annuler, Préférences
-
     etTaskName              = (EditText)  findViewById(R.id.et_task_name);
     etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
     cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);

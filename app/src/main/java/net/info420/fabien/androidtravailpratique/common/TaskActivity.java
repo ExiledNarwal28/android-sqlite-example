@@ -61,7 +61,6 @@ public class TaskActivity extends Activity {
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Modifier, Supprimer, Préférences
 
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
     cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_task_completed);

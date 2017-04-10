@@ -55,8 +55,6 @@ public class EmployeeListActivity extends ListActivity implements LoaderManager.
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Ajouter un employé, Préférences
-
     // lvEmployeeList = (ListView) findViewById(R.id.lv_employee_list);
 
     // TODO : Afficher si il n'y a aucun employé

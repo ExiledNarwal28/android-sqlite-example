@@ -55,8 +55,6 @@ public class EmployeeActivity extends Activity {
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
-    // TODO : Ajouter les options Modifier, Supprimer, Préférences
-
     tvEmployeeName      = (TextView)  findViewById(R.id.tv_employee_name);
     tvEmployeeJob       = (TextView)  findViewById(R.id.tv_task_description);
     tvEmployeeMail      = (TextView)  findViewById(R.id.tv_task_date);
