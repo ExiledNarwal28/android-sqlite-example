@@ -10,7 +10,6 @@
   <!-- Source : http://stackoverflow.com/questions/3771568/showing-empty-view-when-listview-is-empty -->
   <TextView
     android:id="@android:id/empty"
-    android:layout_marginTop="65dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/no_employees"
@@ -20,7 +19,6 @@
   <!-- On a besoin de l'appeler 'list' (ListActivity) -->
   <ListView
     android:id="@android:id/list"
-    android:layout_marginTop="65dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentEnd="true"/>

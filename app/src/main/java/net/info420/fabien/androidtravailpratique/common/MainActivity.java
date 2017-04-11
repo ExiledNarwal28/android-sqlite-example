@@ -2,6 +2,7 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
@@ -20,13 +21,9 @@ public class MainActivity extends FragmentActivity {
   // private Uri taskUri;
   // private Uri employeeUri;
 
-  TaskListFragment taskListFragment;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    taskListFragment = new TaskListFragment();
 
     // TODO : Enlever dès que la base de données fonctionne
 
@@ -97,9 +94,9 @@ public class MainActivity extends FragmentActivity {
   }
 
   protected void initUI() {
-    // TODO : Mettre le fragment des tâches
     setContentView(R.layout.activity_main);
 
+    TaskListFragment taskListFragment = new TaskListFragment();
     taskListFragment.setArguments(getIntent().getExtras());
 
     getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, taskListFragment).commit();
@@ -121,18 +118,25 @@ public class MainActivity extends FragmentActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     // TODO : REDESIGN : Changer la toolbar en fonction du fragment
-    // TODO : REDESIGN : Changer de fragment avec la toolbar
+    // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
+
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
     switch (item.getItemId()) {
       case R.id.menu_task_list:
-        // startActivity(new Intent(this, EmployeeListFragment.class));
+        TaskListFragment taskListFragment = new TaskListFragment();
+        transaction.replace(R.id.fragment_container, taskListFragment);
         break;
       case R.id.menu_employee_list:
-        // startActivity(new Intent(this, EmployeeListFragment.class));
+        EmployeeListFragment employeeListFragment = new EmployeeListFragment();
+        transaction.replace(R.id.fragment_container, employeeListFragment);
         break;
       default:
         break;
     }
+    transaction.commit();
+    transaction.addToBackStack(null);
+
     return true;
   }
 }
