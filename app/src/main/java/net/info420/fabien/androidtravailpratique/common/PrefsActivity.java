@@ -13,7 +13,7 @@ public class PrefsActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_prefs);
+    setContentView(R.layout.fragment_prefs);
     getFragmentManager().beginTransaction().add(R.id.fragment_container_prefs, new MyPreferencesFragment()).commit();
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

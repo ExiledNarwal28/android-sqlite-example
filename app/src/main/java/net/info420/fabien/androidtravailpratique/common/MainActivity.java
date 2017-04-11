@@ -21,6 +21,8 @@ public class MainActivity extends FragmentActivity {
   // private Uri taskUri;
   // private Uri employeeUri;
 
+  private Menu menu;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -111,27 +113,33 @@ public class MainActivity extends FragmentActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_main, menu);
+    getMenuInflater().inflate(R.menu.menu_task_list, menu);
+
+    this.menu = menu;
+
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // TODO : REDESIGN : Changer la toolbar en fonction du fragment
+    // TODO : REDESIGN : Changer la toolbar en fonction du fragment (titre)
     // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
 
+    menu.clear();
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
     switch (item.getItemId()) {
-      case R.id.menu_task_list:
-        TaskListFragment taskListFragment = new TaskListFragment();
-        transaction.replace(R.id.fragment_container, taskListFragment);
+      case R.id.icon_task_list:
+        getMenuInflater().inflate(R.menu.menu_task_list, menu);
+        transaction.replace(R.id.fragment_container, new TaskListFragment());
         break;
-      case R.id.menu_employee_list:
-        EmployeeListFragment employeeListFragment = new EmployeeListFragment();
-        transaction.replace(R.id.fragment_container, employeeListFragment);
+      case R.id.icon_employee_list:
+        getMenuInflater().inflate(R.menu.menu_employee_list, menu);
+        transaction.replace(R.id.fragment_container, new EmployeeListFragment());
         break;
       default:
+        getMenuInflater().inflate(R.menu.menu_prefs, menu);
+        transaction.replace(R.id.fragment_container, new PrefsFragment());
         break;
     }
     transaction.commit();

@@ -6,17 +6,24 @@
   <!-- Si je me sers de 'app:showAsAction', il n'apparait pas... -->
 
   <item
-    android:id="@+id/menu_task_list"
+    android:id="@+id/icon_task_list"
     android:title="@string/title_activity_main"
     android:showAsAction="always"
-    android:icon="@drawable/ic_task_list">
+    android:icon="@drawable/ic_task_enabled">
   </item>
 
   <item
-    android:id="@+id/menu_employee_list"
+    android:id="@+id/icon_employee_list"
     android:title="@string/title_activity_employee_list"
     android:showAsAction="always"
-    android:icon="@drawable/ic_employee_list">
+    android:icon="@drawable/ic_employee_disabled">
+  </item>
+
+  <item
+    android:id="@+id/icon_prefs"
+    android:title="@string/title_activity_employee_list"
+    android:showAsAction="always"
+    android:icon="@drawable/ic_prefs_disabled">
   </item>
 
 </menu>

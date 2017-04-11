@@ -9,21 +9,21 @@
     android:id="@+id/icon_task_list"
     android:title="@string/title_activity_main"
     android:showAsAction="always"
-    android:icon="@drawable/ic_task_disabled">
+    android:icon="@drawable/ic_task_enabled">
   </item>
 
   <item
     android:id="@+id/icon_employee_list"
     android:title="@string/title_activity_employee_list"
     android:showAsAction="always"
-    android:icon="@drawable/ic_employee_enabled">
+    android:icon="@drawable/ic_employee_disabled">
   </item>
 
   <item
     android:id="@+id/icon_prefs"
     android:title="@string/title_activity_employee_list"
     android:showAsAction="always"
-    android:icon="@drawable/ic_prefs_disabled">
+    android:icon="@drawable/ic_prefs_enabled">
   </item>
 
 </menu>
