@@ -1,15 +1,15 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends Activity {
   private final static String TAG = MainActivity.class.getName();
 
   // TODO : Est-ce nécéssaire?
@@ -101,12 +101,12 @@ public class MainActivity extends FragmentActivity {
     TaskListFragment taskListFragment = new TaskListFragment();
     taskListFragment.setArguments(getIntent().getExtras());
 
-    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, taskListFragment).commit();
+    getFragmentManager().beginTransaction().add(R.id.fragment_container, taskListFragment).commit();
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_main);
+    toolbar.setTitle(R.string.title_task_list);
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
   }
@@ -122,28 +122,34 @@ public class MainActivity extends FragmentActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // TODO : REDESIGN : Changer la toolbar en fonction du fragment (titre)
     // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
 
     menu.clear();
-    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
     switch (item.getItemId()) {
       case R.id.icon_task_list:
         getMenuInflater().inflate(R.menu.menu_task_list, menu);
+        toolbar.setTitle(R.string.title_task_list);
         transaction.replace(R.id.fragment_container, new TaskListFragment());
+        transaction.commit();
         break;
       case R.id.icon_employee_list:
         getMenuInflater().inflate(R.menu.menu_employee_list, menu);
+        toolbar.setTitle(R.string.title_employee_list);
         transaction.replace(R.id.fragment_container, new EmployeeListFragment());
+        transaction.commit();
+        break;
+      case R.id.icon_prefs:
+        getMenuInflater().inflate(R.menu.menu_prefs, menu);
+        toolbar.setTitle(R.string.title_prefs);
+        transaction.replace(R.id.fragment_container, new PrefsFragment());
+        transaction.commit();
         break;
       default:
-        getMenuInflater().inflate(R.menu.menu_prefs, menu);
-        transaction.replace(R.id.fragment_container, new PrefsFragment());
         break;
     }
-    transaction.commit();
-    transaction.addToBackStack(null);
 
     return true;
   }

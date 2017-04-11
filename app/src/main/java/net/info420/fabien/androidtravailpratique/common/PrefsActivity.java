@@ -19,7 +19,7 @@ public class PrefsActivity extends Activity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_prefs);
+    toolbar.setTitle(R.string.title_prefs);
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
   }

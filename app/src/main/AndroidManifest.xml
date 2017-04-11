@@ -43,13 +43,13 @@
     
     <activity
       android:name=".common.PrefsActivity"
-      android:label="@string/title_activity_prefs"
+      android:label="@string/title_prefs"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
     
     <activity
       android:name=".common.EmployeeListFragment"
-      android:label="@string/title_activity_employee_list"
+      android:label="@string/title_employee_list"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
     
