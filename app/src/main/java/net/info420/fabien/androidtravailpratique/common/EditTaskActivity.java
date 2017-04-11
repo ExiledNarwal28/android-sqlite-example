@@ -29,6 +29,8 @@ import net.info420.fabien.androidtravailpratique.utils.Task;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
@@ -44,6 +46,8 @@ public class EditTaskActivity extends FragmentActivity {
   private Button    btnTaskDate;
   private Button    btnValidate;
   private Spinner   spTaskAssignedEmployee;
+
+  private Map<String, Integer> spTaskAssignedEmployeeMap;
 
   public long taskDate = 0;
 
@@ -91,16 +95,21 @@ public class EditTaskActivity extends FragmentActivity {
     employeeNames.add(getString(R.string.task_no_employee)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
+    spTaskAssignedEmployeeMap = new HashMap<String, Integer>();
+
     String[] employeeProjection = { Employee.KEY_name, Employee.KEY_ID };
     Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        spTaskAssignedEmployeeMap.put(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)),
+                                                               employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID)));
       }
 
       // Fermeture du curseur
       employeeCursor.close();
+
     }
 
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
@@ -169,7 +178,7 @@ public class EditTaskActivity extends FragmentActivity {
   }
 
   public void updateTask() {
-    int assinedEmployee = (int) spTaskAssignedEmployee.getSelectedItemId();
+    int assinedEmployee = spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem());
     String name         = etTaskName.getText().toString();
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;

@@ -33,7 +33,7 @@ public class TaskerApplication extends Application {
 
     // Recréation de la bd
     dbHelper = new DBHelper(this);
-    dbHelper.recreateDB(dbHelper.getWritableDatabase());
+    // dbHelper.recreateDB(dbHelper.getWritableDatabase());
   }
 
   // TODO : Vérifier si c'est utile

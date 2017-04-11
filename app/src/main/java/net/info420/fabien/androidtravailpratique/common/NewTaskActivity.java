@@ -115,12 +115,8 @@ public class NewTaskActivity extends FragmentActivity {
   }
 
   public void showDatePickerDialog(View v) {
-    Log.d(TAG, String.format("showDataPickDialog start : %s", taskDate));
-
     DialogFragment newFragment = new DatePickerFragment();
     newFragment.show(getFragmentManager(), "datePicker");
-
-    Log.d(TAG, String.format("showDataPickDialog done : %s", taskDate));
 
     if (taskDate != 0) {
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
@@ -147,21 +143,23 @@ public class NewTaskActivity extends FragmentActivity {
     public void onDateSet(DatePicker view, int year, int month, int day) {
       final Calendar c = Calendar.getInstance();
       ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
-
-      ((NewTaskActivity) getActivity()).refreshDate();
     }
   }
 
-  public void refreshDate() {
-    Log.d(TAG, String.format("%s -> %s", taskDate, ((TaskerApplication) getApplication()).getFullDate((int) taskDate)));
+  @Override
+  public void onResume() {
+    super.onResume();
+    refreshDate();
+  }
 
+  public void refreshDate() {
     if (taskDate != 0) {
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
     }
   }
 
   public void createTask() {
-    int assinedEmployee = (int) spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem());
+    int assinedEmployee = spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem());
     String name         = etTaskName.getText().toString();
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
