@@ -1,6 +1,6 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.app.Fragment;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,16 @@ import net.info420.fabien.androidtravailpratique.R;
  * Created by fabien on 17-04-11.
  */
 
-public class TaskFragment extends Fragment {
+public class TaskFragment extends DialogFragment {
+
+  public static TaskFragment newInstance(int title) {
+    TaskFragment frag = new TaskFragment();
+    Bundle args = new Bundle();
+    args.putInt("title", title);
+    frag.setArguments(args);
+    return frag;
+  }
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_task_list, container, false);

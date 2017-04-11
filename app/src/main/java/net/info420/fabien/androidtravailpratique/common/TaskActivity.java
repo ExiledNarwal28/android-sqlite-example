@@ -57,7 +57,7 @@ public class TaskActivity extends Activity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_task);
+    toolbar.setTitle(R.string.title_task);
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
 
