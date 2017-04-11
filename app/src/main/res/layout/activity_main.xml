@@ -14,58 +14,10 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"/>
 
-  <Spinner
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="65dp"
-    android:layout_marginBottom="10dp"
-    android:id="@+id/sp_task_filters_dates"
-    android:entries="@array/task_filters_dates"
-    android:spinnerMode="dropdown"/>
-
-  <Spinner
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_dates"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_employees"/>
-
-  <Spinner
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_employees"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_urgencies"
-    android:entries="@array/task_filters_urgencies"/>
-
-  <Spinner
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_urgencies"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_completion"
-    android:entries="@array/task_filters_completion"/>
-
-  <!-- S'affiche lorsque la liste est vide -->
-  <!-- Source : http://stackoverflow.com/questions/3771568/showing-empty-view-when-listview-is-empty -->
-  <TextView
-    android:id="@android:id/empty"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/no_tasks"
-    android:layout_below="@id/sp_task_filters_completion"
-    android:layout_centerHorizontal="true"/>
-
-  <!-- On a besoin de l'appeler 'list' (ListActivity) -->
-  <ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@android:id/list"
-    android:layout_below="@+id/sp_task_filters_completion"
-    android:layout_alignParentStart="true"/>
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+               android:id="@+id/fragment_container"
+               android:layout_marginTop="65dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
 
 </RelativeLayout>
