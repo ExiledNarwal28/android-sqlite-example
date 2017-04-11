@@ -48,7 +48,7 @@
     </activity>
     
     <activity
-      android:name=".common.EmployeeListActivity"
+      android:name=".common.EmployeeListFragment"
       android:label="@string/title_activity_employee_list"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>

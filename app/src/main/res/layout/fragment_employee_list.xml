@@ -2,15 +2,9 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/activity_main"
+  android:id="@+id/fragment_employee_list"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context="net.info420.fabien.androidtravailpratique.common.EmployeeListActivity">
-
-  <include
-    layout="@layout/toolbar"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"/>
+  android:layout_height="match_parent">
 
   <!-- S'affiche lorsque la liste est vide -->
   <!-- Source : http://stackoverflow.com/questions/3771568/showing-empty-view-when-listview-is-empty -->

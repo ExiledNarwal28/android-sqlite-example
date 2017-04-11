@@ -125,10 +125,10 @@ public class MainActivity extends FragmentActivity {
 
     switch (item.getItemId()) {
       case R.id.menu_task_list:
-        // startActivity(new Intent(this, EmployeeListActivity.class));
+        // startActivity(new Intent(this, EmployeeListFragment.class));
         break;
       case R.id.menu_employee_list:
-        // startActivity(new Intent(this, EmployeeListActivity.class));
+        // startActivity(new Intent(this, EmployeeListFragment.class));
         break;
       default:
         break;
