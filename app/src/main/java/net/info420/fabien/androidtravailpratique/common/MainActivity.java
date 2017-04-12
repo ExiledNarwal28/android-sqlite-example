@@ -101,6 +101,7 @@ public class MainActivity extends Activity {
     TaskListFragment taskListFragment = new TaskListFragment();
     taskListFragment.setArguments(getIntent().getExtras());
 
+    // Ceci permet de mettre le fragment d'une liste (ou n'importe quel autre fragment) dans un conteneur à cet effet.
     getFragmentManager().beginTransaction().add(R.id.fragment_container, taskListFragment).commit();
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

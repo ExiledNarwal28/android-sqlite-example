@@ -135,7 +135,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // taskFragment = TaskFragment.newInstance(R.string.title_task);
 
-    // TODO : Passer des données à un Fragment
+    // TODO : REDESIGN : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
     Bundle bundle = new Bundle();
     bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
@@ -151,11 +151,19 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     // Source : http://stackoverflow.com/questions/6063667/show-a-popupwindow-centralized#7440187
     // new PopupWindow(popupView,
     //                 ViewGroup.LayoutParams.WRAP_CONTENT,
-    //                ViewGroup.LayoutParams.WRAP_CONTENT).showAtLocation(getView(), Gravity.CENTER, 0, 0);
+    //                 ViewGroup.LayoutParams.WRAP_CONTENT).showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
-    // TODO : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
+    // getFragmentManager().beginTransaction().add(R.id.fragment_container, taskFragment).commit();
+    Log.d(TAG, "getChildManager fait une transaction");
+    getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
+    Log.d(TAG, "getChildManager exécute les transactions en attente");
+    getChildFragmentManager().executePendingTransactions();
+
+    // TODO : REDESIGN : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
     //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_task_list.xml).
-    taskFragment.show(getFragmentManager(), "dialog");
+    Log.d(TAG, "On fait un popup avec getChildManager");
+    taskFragment.show(getChildFragmentManager(), "dialog");
+    Log.d(TAG, "C'est affiché");
   }
 
   private void fillData() {
