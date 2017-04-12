@@ -5,6 +5,7 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -130,14 +131,16 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // startActivity(i);
 
-    // taskFragment  = new TaskFragment();
+    taskFragment  = new TaskFragment();
+
+    // taskFragment = TaskFragment.newInstance(R.string.title_task);
 
     // TODO : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
-    // Bundle bundle = new Bundle();
-    // bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
-    //                       Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id));
-    // taskFragment.setArguments(bundle);
+    Bundle bundle = new Bundle();
+    bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
+                          Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id));
+    taskFragment.setArguments(bundle);
 
     // Fragment en PopupWindow
     // Source : http://stackoverflow.com/questions/11754309/android-popupwindow-from-a-fragment#11754352
@@ -150,7 +153,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     //                 ViewGroup.LayoutParams.WRAP_CONTENT,
     //                ViewGroup.LayoutParams.WRAP_CONTENT).showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
-    taskFragment = TaskFragment.newInstance(R.string.title_task);
+    // TODO : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
+    //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_task_list.xml).
     taskFragment.show(getFragmentManager(), "dialog");
   }
 

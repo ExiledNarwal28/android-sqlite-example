@@ -14,12 +14,8 @@ import net.info420.fabien.androidtravailpratique.R;
 
 public class TaskFragment extends DialogFragment {
 
-  public static TaskFragment newInstance(int title) {
-    TaskFragment frag = new TaskFragment();
-    Bundle args = new Bundle();
-    args.putInt("title", title);
-    frag.setArguments(args);
-    return frag;
+  public TaskFragment() {
+
   }
 
   @Override
