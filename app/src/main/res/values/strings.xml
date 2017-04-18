@@ -85,6 +85,13 @@
   <string name="title_task_list">Liste des tâches</string>
   <string name="no_tasks">Vous n\'avez pas de tâche... pour l\'instant</string>
   <string name="task_filter_all_employee">Tous les employés</string>
+  <string-array name="task_filters_filters">
+    <item>Aucun filtre</item>
+    <item>Date</item>
+    <item>Employé</item>
+    <item>Urgence</item>
+    <item>Complétion</item>
+  </string-array>
   <string-array name="task_filters_dates">
     <item>Toutes les dates</item>
     <item>Aujourd\'hui</item>

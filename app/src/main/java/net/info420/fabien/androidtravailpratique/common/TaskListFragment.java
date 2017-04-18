@@ -36,6 +36,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
+  private Spinner   spTaskFiltersFilters;
   private Spinner   spTaskFiltersDates;
   private Spinner   spTaskFiltersEmployees;
   private Spinner   spTaskFiltersUrgencies;
@@ -60,15 +61,22 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   private void initUI (View view) {
     // TODO : REDESIGN : Remove spinners
 
+    spTaskFiltersFilters    = (Spinner) view.findViewById(R.id.sp_task_filters_filters);
     spTaskFiltersDates      = (Spinner) view.findViewById(R.id.sp_task_filters_dates);
     spTaskFiltersEmployees  = (Spinner) view.findViewById(R.id.sp_task_filters_employees);
     spTaskFiltersUrgencies  = (Spinner) view.findViewById(R.id.sp_task_filters_urgencies);
     spTaskFiltersCompletion = (Spinner) view.findViewById(R.id.sp_task_filters_completion);
 
+    spTaskFiltersFilters.setOnItemSelectedListener(this);
     spTaskFiltersDates.setOnItemSelectedListener(this);
     spTaskFiltersEmployees.setOnItemSelectedListener(this);
     spTaskFiltersUrgencies.setOnItemSelectedListener(this);
     spTaskFiltersCompletion.setOnItemSelectedListener(this);
+
+    spTaskFiltersDates.setVisibility(View.VISIBLE);
+    spTaskFiltersEmployees.setVisibility(View.INVISIBLE);
+    spTaskFiltersUrgencies.setVisibility(View.INVISIBLE);
+    spTaskFiltersCompletion.setVisibility(View.INVISIBLE);
   }
 
   @Override
@@ -105,6 +113,10 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
     switch (view.getId()) {
+      case R.id.sp_task_filters_filters:
+        // On change le filtre
+        setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
+        break;
       case R.id.sp_task_filters_dates:
         // On ajoute un filtre de date
         break;
@@ -116,6 +128,21 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
         break;
       case R.id.sp_task_filters_completion:
         // On ajoute un filtre de complétion
+        break;
+    }
+  }
+
+  private void setCurrentFilter(long filterId) {
+    Log.d(TAG, String.format("setCurrentFilter(%s)", filterId));
+
+    switch ((int) filterId) {
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
         break;
     }
   }
