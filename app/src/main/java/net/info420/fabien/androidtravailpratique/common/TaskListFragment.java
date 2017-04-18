@@ -3,6 +3,7 @@ package net.info420.fabien.androidtravailpratique.common;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -40,7 +41,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   private Spinner   spTaskFiltersUrgencies;
   private Spinner   spTaskFiltersCompletion;
 
-  private TaskFragment taskFragment;
+  // private TaskFragment taskFragment;
+
+  // public TaskListFragment() {
+  //   getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
+  //   getChildFragmentManager().executePendingTransactions();
+  // }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,22 +131,22 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     Log.d(TAG, "onListItemClick : " + id);
 
     super.onListItemClick(l, v, position, id);
-    // Intent i = new Intent(getContext(), TaskActivity.class);
-    // Uri taskUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
-    // i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+    Intent i = new Intent(getContext(), TaskActivity.class);
+    Uri taskUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
+    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
 
-    // startActivity(i);
+    startActivity(i);
 
-    taskFragment  = new TaskFragment();
+    // taskFragment  = new TaskFragment();
 
     // taskFragment = TaskFragment.newInstance(R.string.title_task);
 
     // TODO : REDESIGN : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
-    Bundle bundle = new Bundle();
-    bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
-                          Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id));
-    taskFragment.setArguments(bundle);
+    // Bundle bundle = new Bundle();
+    // bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
+    //                       Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id));
+    // taskFragment.setArguments(bundle);
 
     // Fragment en PopupWindow
     // Source : http://stackoverflow.com/questions/11754309/android-popupwindow-from-a-fragment#11754352
@@ -154,16 +160,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     //                 ViewGroup.LayoutParams.WRAP_CONTENT).showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
     // getFragmentManager().beginTransaction().add(R.id.fragment_container, taskFragment).commit();
-    Log.d(TAG, "getChildManager fait une transaction");
-    getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
-    Log.d(TAG, "getChildManager exécute les transactions en attente");
-    getChildFragmentManager().executePendingTransactions();
+    // getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
+    // getChildFragmentManager().executePendingTransactions();
 
     // TODO : REDESIGN : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
     //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_task_list.xml).
-    Log.d(TAG, "On fait un popup avec getChildManager");
-    taskFragment.show(getChildFragmentManager(), "dialog");
-    Log.d(TAG, "C'est affiché");
+    // taskFragment.show(getFragmentManager(), "dialog");
   }
 
   private void fillData() {

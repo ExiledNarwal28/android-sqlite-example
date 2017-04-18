@@ -2,12 +2,17 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.Employee;
 
 public class MainActivity extends Activity {
   private final static String TAG = MainActivity.class.getName();
@@ -18,8 +23,8 @@ public class MainActivity extends Activity {
   private static final int DELETE_ID = Menu.FIRST + 1;
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
-  // private Uri taskUri;
-  // private Uri employeeUri;
+  private Uri taskUri;
+  private Uri employeeUri;
 
   private Menu menu;
 
@@ -61,7 +66,7 @@ public class MainActivity extends Activity {
 
       taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
     }
-
+    */
     // FIN CRÉATION DE TÄCHES
 
     // DÉBUT CRÉATION D'EMPLOYÉS
@@ -89,7 +94,7 @@ public class MainActivity extends Activity {
 
       employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
     }
-    */
+
     // FIN CRÉATION D'EMPLOYÉS
 
     initUI();

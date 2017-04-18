@@ -13,6 +13,7 @@ import net.info420.fabien.androidtravailpratique.R;
  */
 
 public class TaskFragment extends DialogFragment {
+  public static final String TAG = TaskFragment.class.getName();
 
   public TaskFragment() {
 
@@ -20,7 +21,7 @@ public class TaskFragment extends DialogFragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    final View view = inflater.inflate(R.layout.fragment_task_list, container, false);
+    final View view = inflater.inflate(R.layout.fragment_task, container, false);
 
     initUI(view);
 
