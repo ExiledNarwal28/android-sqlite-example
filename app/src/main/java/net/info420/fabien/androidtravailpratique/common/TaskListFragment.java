@@ -72,11 +72,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     spTaskFiltersEmployees.setOnItemSelectedListener(this);
     spTaskFiltersUrgencies.setOnItemSelectedListener(this);
     spTaskFiltersCompletion.setOnItemSelectedListener(this);
-
-    spTaskFiltersDates.setVisibility(View.VISIBLE);
-    spTaskFiltersEmployees.setVisibility(View.INVISIBLE);
-    spTaskFiltersUrgencies.setVisibility(View.INVISIBLE);
-    spTaskFiltersCompletion.setVisibility(View.INVISIBLE);
   }
 
   @Override
@@ -112,9 +107,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    switch (view.getId()) {
+    Log.d(TAG, String.format("onItemSelected(%s), plutôt que %s pour avoir %s", adapterView.getId(), view.getId(), R.id.sp_task_filters_filters));
+
+    switch (adapterView.getId()) {
       case R.id.sp_task_filters_filters:
         // On change le filtre
+        Log.d(TAG, String.format("setCurrentFilter(%s)", spTaskFiltersFilters.getSelectedItem()));
         setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
         break;
       case R.id.sp_task_filters_dates:
@@ -135,14 +133,23 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   private void setCurrentFilter(long filterId) {
     Log.d(TAG, String.format("setCurrentFilter(%s)", filterId));
 
+    spTaskFiltersDates.setVisibility(View.INVISIBLE);
+    spTaskFiltersEmployees.setVisibility(View.INVISIBLE);
+    spTaskFiltersUrgencies.setVisibility(View.INVISIBLE);
+    spTaskFiltersCompletion.setVisibility(View.INVISIBLE);
+
     switch ((int) filterId) {
       case 1:
+        spTaskFiltersDates.setVisibility(View.VISIBLE);
         break;
       case 2:
+        spTaskFiltersEmployees.setVisibility(View.VISIBLE);
         break;
       case 3:
+        spTaskFiltersUrgencies.setVisibility(View.VISIBLE);
         break;
       case 4:
+        spTaskFiltersCompletion.setVisibility(View.VISIBLE);
         break;
     }
   }
