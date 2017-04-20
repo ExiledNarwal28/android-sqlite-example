@@ -25,6 +25,8 @@ import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
 import java.util.ArrayList;
 
+import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_date;
+
 /**
  * Created by fabien on 17-04-11.
  */
@@ -107,26 +109,40 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    Log.d(TAG, String.format("onItemSelected(%s), plutôt que %s pour avoir %s", adapterView.getId(), view.getId(), R.id.sp_task_filters_filters));
+    Log.d(TAG, String.format("onItemSelected adapterView.getId() : %s, selected item : %s, %s", adapterView.getId(),
+                                                                                                ((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItemId(),
+                                                                                                ((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItem()));
 
-    switch (adapterView.getId()) {
-      case R.id.sp_task_filters_filters:
-        // On change le filtre
-        Log.d(TAG, String.format("setCurrentFilter(%s)", spTaskFiltersFilters.getSelectedItem()));
-        setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
-        break;
-      case R.id.sp_task_filters_dates:
-        // On ajoute un filtre de date
-        break;
-      case R.id.sp_task_filters_employees:
-        // On ajoute un filtre d'employés
-        break;
-      case R.id.sp_task_filters_urgencies:
-        taskAdapter.getFilter().filter(Long.toString(l));
-        break;
-      case R.id.sp_task_filters_completion:
-        // On ajoute un filtre de complétion
-        break;
+    setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
+
+    if (((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItemId() == 0) {
+      fillData();
+    } else {
+      switch (adapterView.getId()) {
+        case R.id.sp_task_filters_dates:
+          // On ajoute un filtre de date
+          fillData();
+          break;
+        case R.id.sp_task_filters_employees:
+          // On ajoute un filtre d'employés
+          fillData();
+          break;
+        case R.id.sp_task_filters_urgencies:
+          // On ajoute un filtre d'urgence
+
+          // Si c'est "Tous les niveaux d'urgences
+          if (spTaskFiltersUrgencies.getSelectedItemId() == 0) {
+            fillData();
+          } else { // Si l'utilisateur a sélectionné un niveau d'urgence
+            String [] selectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
+            fillData(Task.KEY_urgency_level + "=?", selectionArgs);
+          }
+
+          break;
+        case R.id.sp_task_filters_completion:
+          // On ajoute un filtre de complétion
+          break;
+      }
     }
   }
 
@@ -202,15 +218,40 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     // taskFragment.show(getFragmentManager(), "dialog");
   }
 
+  // Remplir l'adapteur avec les bonnes données
   private void fillData() {
     // Affiche les champs de la base de données (name)
-    String[] from = new String[] { Task.KEY_name, Task.KEY_date };
+    String[] from = new String[] { Task.KEY_name, KEY_date };
 
     // Où on affiche les champs
     int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
 
+    // Enlever le filtrage
+    String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
+    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, null, null, null);
+
     getLoaderManager().initLoader(0, null, this);
-    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, null, from, to, 0, (TaskerApplication) getActivity().getApplication());
+    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
+
+    setListAdapter(taskAdapter);
+  }
+
+  // Remplir l'adapteur avec les bonnes données FILTRÉES
+  private void fillData(String selection, String[] selectionArgs) {
+    Log.d(TAG, String.format("fillData(%s, %s)", selection, selectionArgs[0]));
+
+    // Affiche les champs de la base de données (name)
+    String[] from = new String[] { Task.KEY_name, KEY_date };
+
+    // Où on affiche les champs
+    int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
+
+    // Filtrage
+    String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
+    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, selection, selectionArgs, null);
+
+    getLoaderManager().initLoader(0, null, this);
+    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
 
     setListAdapter(taskAdapter);
   }
@@ -218,7 +259,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
+    String[] projection = { Task.KEY_ID, Task.KEY_name, KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
+
     CursorLoader cursorLoader = new CursorLoader(getContext(), TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 
     return cursorLoader;
