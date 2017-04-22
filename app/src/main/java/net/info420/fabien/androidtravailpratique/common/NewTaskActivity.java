@@ -129,6 +129,7 @@ public class NewTaskActivity extends FragmentActivity {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
       Log.d(TAG, "onCreateDialog");
+      // TODO : LA DATE MARCHE PAS ENCORE
 
       // On utilise la date actuelle comme date par défaut
       final Calendar c = Calendar.getInstance();

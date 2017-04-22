@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -24,10 +23,6 @@ import net.info420.fabien.androidtravailpratique.utils.EmployeeAdapter;
 
 public class EmployeeListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = EmployeeListFragment.class.getName();
-
-  private static final int ACTIVITY_CREATE = 0;
-  private static final int ACTIVITY_EDIT = 1;
-  private static final int DELETE_ID = Menu.FIRST + 1;
 
   private FloatingActionButton fabAddEmployee;
 

@@ -137,24 +137,36 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
       switch (adapterView.getId()) {
         case R.id.sp_task_filters_dates:
           // On ajoute un filtre de date
+          String selection                = new String();
+          ArrayList<String> selectionArgs = new ArrayList<String>();
+
+          // TODO : Tester les filtres de dates
 
           switch((int) spTaskFiltersDates.getSelectedItemId()) {
+
             case 1:
               // Aujourd'hui
+              selection = Task.KEY_date + " =?";
+              selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
               break;
             case 2:
               // Cette semaine
-              String dateSelection        = Task.KEY_date + " BETWEEN ? AND ?";
-              String dateSelectionArgs[]  = { Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000),
-                                              Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000)};
-              Log.d(TAG, String.format("%s - %s", dateSelectionArgs[0], dateSelectionArgs[1]));
-
-              fillData(dateSelection, dateSelectionArgs);
+              selection = Task.KEY_date + " BETWEEN ? AND ?";
+              selectionArgs.add(Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
+              selectionArgs.add(Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
               break;
             case 3:
               // Ce mois
+              selection = Task.KEY_date + " BETWEEN ? AND ?";
+              selectionArgs.add(Long.toString(new LocalDate().dayOfMonth().withMinimumValue().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
+              selectionArgs.add(Long.toString(new LocalDate().dayOfMonth().withMaximumValue().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
               break;
           }
+
+          // Conversion d'un ArrayList<String> en String[]
+          // Source : http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/
+          fillData(selection, selectionArgs.toArray(new String[selectionArgs.size()]));
+
           break;
         case R.id.sp_task_filters_employees:
           // On ajoute un filtre d'employés
@@ -163,13 +175,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
         case R.id.sp_task_filters_urgencies:
           // On ajoute un filtre d'urgence
 
-          // Si c'est "Tous les niveaux d'urgences
-          if (spTaskFiltersUrgencies.getSelectedItemId() == 0) {
-            fillData();
-          } else { // Si l'utilisateur a sélectionné un niveau d'urgence
-            String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
-            fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
-          }
+          String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
+          fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
 
           break;
         case R.id.sp_task_filters_completion:

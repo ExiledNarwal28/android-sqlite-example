@@ -13,11 +13,6 @@ import net.info420.fabien.androidtravailpratique.R;
 public class MainActivity extends Activity {
   private final static String TAG = MainActivity.class.getName();
 
-  // TODO : Est-ce nécéssaire?
-  private static final int ACTIVITY_CREATE = 0;
-  private static final int ACTIVITY_EDIT = 1;
-  private static final int DELETE_ID = Menu.FIRST + 1;
-
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
   private Uri taskUri;
   private Uri employeeUri;
