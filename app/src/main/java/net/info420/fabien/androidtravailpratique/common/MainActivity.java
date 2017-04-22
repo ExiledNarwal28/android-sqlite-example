@@ -2,17 +2,13 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
 
 public class MainActivity extends Activity {
   private final static String TAG = MainActivity.class.getName();
@@ -66,7 +62,7 @@ public class MainActivity extends Activity {
 
       taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
     }
-    */
+
     // FIN CRÉATION DE TÄCHES
 
     // DÉBUT CRÉATION D'EMPLOYÉS
@@ -94,6 +90,7 @@ public class MainActivity extends Activity {
 
       employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
     }
+    */
 
     // FIN CRÉATION D'EMPLOYÉS
 

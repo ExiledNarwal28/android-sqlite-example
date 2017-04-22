@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:id="@+id/fragment_task_list"
               android:orientation="vertical"
               android:layout_width="match_parent"
@@ -67,7 +68,7 @@
   <!-- S'affiche lorsque la liste est vide -->
   <!-- Source : http://stackoverflow.com/questions/3771568/showing-empty-view-when-listview-is-empty -->
   <TextView
-    android:id="@android:id/empty"
+    android:id="@+id/textView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/no_tasks"
@@ -81,5 +82,17 @@
     android:id="@android:id/list"
     android:layout_below="@+id/sp_task_filters_completion"
     android:layout_alignParentStart="true"/>
+
+  <android.support.design.widget.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    app:fabSize="normal"
+    app:srcCompat="@drawable/ic_plus"
+    android:id="@+id/fab_add_task"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,11 +44,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
-  private Spinner   spTaskFiltersFilters;
-  private Spinner   spTaskFiltersDates;
-  private Spinner   spTaskFiltersEmployees;
-  private Spinner   spTaskFiltersUrgencies;
-  private Spinner   spTaskFiltersCompletion;
+  private Spinner              spTaskFiltersFilters;
+  private Spinner              spTaskFiltersDates;
+  private Spinner              spTaskFiltersEmployees;
+  private Spinner              spTaskFiltersUrgencies;
+  private Spinner              spTaskFiltersCompletion;
+  private FloatingActionButton fabAddTask;
 
   // private TaskFragment taskFragment;
 
@@ -68,17 +70,26 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   private void initUI (View view) {
     // TODO : REDESIGN : Remove spinners
 
-    spTaskFiltersFilters    = (Spinner) view.findViewById(R.id.sp_task_filters_filters);
-    spTaskFiltersDates      = (Spinner) view.findViewById(R.id.sp_task_filters_dates);
-    spTaskFiltersEmployees  = (Spinner) view.findViewById(R.id.sp_task_filters_employees);
-    spTaskFiltersUrgencies  = (Spinner) view.findViewById(R.id.sp_task_filters_urgencies);
-    spTaskFiltersCompletion = (Spinner) view.findViewById(R.id.sp_task_filters_completion);
+    spTaskFiltersFilters    = (Spinner)               view.findViewById(R.id.sp_task_filters_filters);
+    spTaskFiltersDates      = (Spinner)               view.findViewById(R.id.sp_task_filters_dates);
+    spTaskFiltersEmployees  = (Spinner)               view.findViewById(R.id.sp_task_filters_employees);
+    spTaskFiltersUrgencies  = (Spinner)               view.findViewById(R.id.sp_task_filters_urgencies);
+    spTaskFiltersCompletion = (Spinner)               view.findViewById(R.id.sp_task_filters_completion);
+    fabAddTask              = (FloatingActionButton)  view.findViewById(R.id.fab_add_task);
 
     spTaskFiltersFilters.setOnItemSelectedListener(this);
     spTaskFiltersDates.setOnItemSelectedListener(this);
     spTaskFiltersEmployees.setOnItemSelectedListener(this);
     spTaskFiltersUrgencies.setOnItemSelectedListener(this);
     spTaskFiltersCompletion.setOnItemSelectedListener(this);
+
+    fabAddTask.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // Nouvelle tâche
+        startActivity(new Intent(getContext(), NewTaskActivity.class));
+      }
+    });
   }
 
   @Override

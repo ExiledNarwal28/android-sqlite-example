@@ -1,9 +1,14 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.app.ListFragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,11 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import android.app.ListFragment;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
-import android.content.Loader;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
@@ -29,6 +29,8 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
   private static final int ACTIVITY_EDIT = 1;
   private static final int DELETE_ID = Menu.FIRST + 1;
 
+  private FloatingActionButton fabAddEmployee;
+
   // private Cursor cursor;
   private EmployeeAdapter employeeAdapter;
 
@@ -37,7 +39,23 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_employee_list, container, false);
+    final View view = inflater.inflate(R.layout.fragment_employee_list, container, false);
+
+    initUI(view);
+
+    return view;
+  }
+
+  private void initUI (View view) {
+    fabAddEmployee = (FloatingActionButton)  view.findViewById(R.id.fab_add_employee);
+
+    fabAddEmployee.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        // Nouvelle tâche
+        startActivity(new Intent(getContext(), NewEmployeeActivity.class));
+      }
+    });
   }
 
   @Override
