@@ -23,6 +23,11 @@ import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import java.util.ArrayList;
 
 import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_date;
@@ -121,7 +126,24 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
       switch (adapterView.getId()) {
         case R.id.sp_task_filters_dates:
           // On ajoute un filtre de date
-          fillData();
+
+          switch((int) spTaskFiltersDates.getSelectedItemId()) {
+            case 1:
+              // Aujourd'hui
+              break;
+            case 2:
+              // Cette semaine
+              String dateSelection        = Task.KEY_date + " BETWEEN ? AND ?";
+              String dateSelectionArgs[]  = { Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000),
+                                              Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000)};
+              Log.d(TAG, String.format("%s - %s", dateSelectionArgs[0], dateSelectionArgs[1]));
+
+              fillData(dateSelection, dateSelectionArgs);
+              break;
+            case 3:
+              // Ce mois
+              break;
+          }
           break;
         case R.id.sp_task_filters_employees:
           // On ajoute un filtre d'employés
@@ -134,8 +156,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           if (spTaskFiltersUrgencies.getSelectedItemId() == 0) {
             fillData();
           } else { // Si l'utilisateur a sélectionné un niveau d'urgence
-            String [] selectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
-            fillData(Task.KEY_urgency_level + "=?", selectionArgs);
+            String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
+            fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
           }
 
           break;
