@@ -139,7 +139,6 @@ public class NewTaskActivity extends FragmentActivity {
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-      // ((NewTaskActivity) getActivity()).taskDate = (int) new DateTime().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day).getMillis();
       ((NewTaskActivity) getActivity()).taskDate = (int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000);
       ((NewTaskActivity) getActivity()).refreshDate();
     }
@@ -160,7 +159,8 @@ public class NewTaskActivity extends FragmentActivity {
   }
 
   public void createTask() {
-    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem()) : 0;
+    // TODO : WHAT
+    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployee.get(spTaskAssignedEmployee.getSelectedItem()) : 0;
     String name         = etTaskName.getText().toString();
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;

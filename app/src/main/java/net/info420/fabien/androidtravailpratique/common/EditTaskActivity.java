@@ -27,6 +27,8 @@ import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentPr
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -151,6 +153,7 @@ public class EditTaskActivity extends FragmentActivity {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
       Log.d(TAG, "onCreateDialog");
 
+      // TODO : Utiliser la date de la tâche comme date par défaut...
       // On utilise la date actuelle comme date par défaut
       final Calendar c  = Calendar.getInstance();
       int   year        = c.get(Calendar.YEAR);
@@ -162,17 +165,15 @@ public class EditTaskActivity extends FragmentActivity {
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-      final Calendar c = Calendar.getInstance();
-      ((EditTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
-
+      ((EditTaskActivity) getActivity()).taskDate = (int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000);
       ((EditTaskActivity) getActivity()).refreshDate();
     }
   }
 
   public void refreshDate() {
-    Log.d(TAG, String.format("%s -> %s", taskDate, ((TaskerApplication) getApplication()).getFullDate((int) taskDate)));
-
     if (taskDate != 0) {
+      Log.d(TAG, String.format("New date : %s", taskDate));
+
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
     }
   }
