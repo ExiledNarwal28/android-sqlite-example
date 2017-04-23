@@ -1,8 +1,5 @@
 package net.info420.fabien.androidtravailpratique.common;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,7 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,19 +20,18 @@ import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.utils.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
+import net.info420.fabien.androidtravailpratique.utils.OnTaskDateChangeListener;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
-public class EditTaskActivity extends FragmentActivity {
+public class EditTaskActivity extends FragmentActivity implements OnTaskDateChangeListener {
   private final static String TAG = EditTaskActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
@@ -137,44 +132,20 @@ public class EditTaskActivity extends FragmentActivity {
     });
   }
 
+  @Override
+  public void setTaskDate(int taskDate) { this.taskDate = taskDate; }
+
   public void showDatePickerDialog(View v) {
-    Log.d(TAG, String.format("showDataPickDialog start : %s", taskDate));
-
-    DialogFragment newFragment = new EditTaskActivity.DatePickerFragment();
-    newFragment.show(getFragmentManager(), "datePicker");
-
-    Log.d(TAG, String.format("showDataPickDialog done : %s", taskDate));
-
+    // Afin de mettre la date comme date par défaut dans le calendrier
     if (taskDate != 0) {
-      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
+      DatePickerFragment.newInstance((int) taskDate).show(getFragmentManager(), "datePicker");
+    } else {
+      DatePickerFragment.newInstance().show(getFragmentManager(), "datePicker");
     }
   }
 
-  // Source : https://developer.android.com/guide/topics/ui/controls/pickers.html
-  public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-      Log.d(TAG, "onCreateDialog");
-
-      // TODO : Utiliser la date de la tâche comme date par défaut...
-      // On utilise la date actuelle comme date par défaut
-      final Calendar c  = Calendar.getInstance();
-      int   year        = c.get(Calendar.YEAR);
-      int   month       = c.get(Calendar.MONTH);
-      int   day         = c.get(Calendar.DAY_OF_MONTH);
-
-      // On retourne une nouvelle instance
-      return new DatePickerDialog(getActivity(), this, year, month, day);
-    }
-
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-      ((EditTaskActivity) getActivity()).taskDate = (int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000);
-      ((EditTaskActivity) getActivity()).refreshDate();
-    }
-  }
-
-  public void refreshDate() {
+  @Override
+  public void onTaskDateChange() {
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
