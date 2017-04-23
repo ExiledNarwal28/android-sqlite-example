@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.info420.fabien.androidtravailpratique.common.TaskerApplication.getFullDate;
+
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
 public class EditTaskActivity extends FragmentActivity implements OnTaskDateChangeListener {
@@ -133,7 +135,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
   }
 
   @Override
-  public void setTaskDate(int taskDate) { this.taskDate = taskDate; }
+  public void setTaskDate(int taskDate) { this.taskDate = taskDate; onTaskDateChange(); }
 
   public void showDatePickerDialog(View v) {
     // Afin de mettre la date comme date par défaut dans le calendrier
@@ -149,7 +151,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
-      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
+      btnTaskDate.setText(TaskerApplication.getFullDate((int) taskDate));
     }
   }
 
@@ -203,7 +205,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
       etTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
 
       // Conversion en date
-      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+      btnTaskDate.setText(getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       taskDate = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date));
 

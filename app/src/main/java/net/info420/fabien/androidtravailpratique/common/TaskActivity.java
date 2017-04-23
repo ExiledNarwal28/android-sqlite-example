@@ -100,7 +100,7 @@ public class TaskActivity extends Activity {
       tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
 
       // Conversion en date
-      tvTaskDate.setText(((TaskerApplication) getApplication()).getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+      tvTaskDate.setText(TaskerApplication.getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
       tvTaskUrgencyLevel.setText(((TaskerApplication) getApplication()).getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));

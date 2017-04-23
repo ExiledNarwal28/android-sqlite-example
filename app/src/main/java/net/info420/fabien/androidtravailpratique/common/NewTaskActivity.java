@@ -118,7 +118,7 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
   }
 
   @Override
-  public void setTaskDate(int taskDate) { this.taskDate = taskDate; }
+  public void setTaskDate(int taskDate) { this.taskDate = taskDate; onTaskDateChange(); }
 
   public void showDatePickerDialog(View v) {
     // Afin de mettre la date comme date par défaut dans le calendrier
@@ -139,7 +139,7 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
-      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
+      btnTaskDate.setText(TaskerApplication.getFullDate((int) taskDate));
     }
   }
 

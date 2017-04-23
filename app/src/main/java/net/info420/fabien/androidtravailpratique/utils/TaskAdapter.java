@@ -62,7 +62,7 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
 
     // Initialisation du UI
     viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
-    viewHolder.tvTaskDate.setText(application.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+    viewHolder.tvTaskDate.setText(TaskerApplication.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
     viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
 
     // viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(urgencyLevel));

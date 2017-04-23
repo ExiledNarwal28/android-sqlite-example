@@ -44,6 +44,7 @@ public class TaskerApplication extends Application {
   }
 
   // TODO : Vérifier si c'est utile
+  // TODO : Comment rendre ça statique?
   public String getUrgencyLevel(int urgencyLevel) {
     Log.d(TAG, "text : " + Integer.toString(urgencyLevel));
     switch (urgencyLevel) {
@@ -59,6 +60,7 @@ public class TaskerApplication extends Application {
   }
 
   // TODO : Vérifier si c'est utile
+  // TODO : Comment rendre ça statique?
   public int getUrgencyLevelColor(int urgencyLevel) {
     switch (urgencyLevel) {
       case 0:
@@ -72,11 +74,11 @@ public class TaskerApplication extends Application {
     }
   }
 
-  public String getDate(int unixDate) {
+  public static String getDate(int unixDate) {
     return DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L));
   }
 
-  public String getFullDate(int unixDate) {
+  public static String getFullDate(int unixDate) {
     return DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L));
   }
 
