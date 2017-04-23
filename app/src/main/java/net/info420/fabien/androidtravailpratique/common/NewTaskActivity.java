@@ -48,7 +48,7 @@ public class NewTaskActivity extends FragmentActivity {
   private Button    btnValidate;
   private Spinner   spTaskAssignedEmployee;
 
-  private Map<String, Integer> spTaskAssignedEmployeeMap;
+  private Map<Integer, Integer> spTaskAssignedEmployeeMap;
 
   public long taskDate = 0;
 
@@ -81,16 +81,22 @@ public class NewTaskActivity extends FragmentActivity {
     employeeNames.add(getString(R.string.task_no_employee)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
-    spTaskAssignedEmployeeMap = new HashMap<String, Integer>();
+    // Ceci sert à associé correctement un nom d'employé et son id
+    spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
 
     String[] employeeProjection = { Employee.KEY_name, Employee.KEY_ID };
     Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
+      // Position dans le spinner
+      Integer position = 1;
+
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
-        spTaskAssignedEmployeeMap.put(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)),
+        spTaskAssignedEmployeeMap.put(position,
                                       employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID)));
+
+        position++;
       }
 
       // Fermeture du curseur
@@ -159,13 +165,14 @@ public class NewTaskActivity extends FragmentActivity {
   }
 
   public void createTask() {
-    // TODO : WHAT
-    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployee.get(spTaskAssignedEmployee.getSelectedItem()) : 0;
     String name         = etTaskName.getText().toString();
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
     int date            = (int) taskDate;
     int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId(); // TODO : Vérifier si ça marche vraiment
+
+    // Pour l'employé assigné, je vérifie d'abord si quelque chose a été choisi dans le Spinner. Dans ce cas, j'ajoute le bon Id d'employé. Sinon, null.
+    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployeeMap.get((int) spTaskAssignedEmployee.getSelectedItemId()) : 0;
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0 || taskDate == 0) {
