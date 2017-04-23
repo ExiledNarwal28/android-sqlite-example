@@ -24,10 +24,14 @@ import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
@@ -125,10 +129,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    Log.d(TAG, String.format("onItemSelected adapterView.getId() : %s, selected item : %s, %s", adapterView.getId(),
-                                                                                                ((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItemId(),
-                                                                                                ((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItem()));
-
     setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
 
     if (((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItemId() == 0) {
@@ -140,26 +140,48 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           String selection                = new String();
           ArrayList<String> selectionArgs = new ArrayList<String>();
 
-          // TODO : Tester les filtres de dates
+          DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE d MMMM yyyy");
 
           switch((int) spTaskFiltersDates.getSelectedItemId()) {
 
             case 1:
               // Aujourd'hui
               selection = Task.KEY_date + " =?";
-              selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
+              selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
+
+              Log.d(TAG, String.format("Filtré par date = %s (%s)", selectionArgs.get(0), new DateTime(selectionArgs.get(0)).toDateTime(DateTimeZone.getDefault())));
+
               break;
             case 2:
               // Cette semaine
               selection = Task.KEY_date + " BETWEEN ? AND ?";
-              selectionArgs.add(Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
-              selectionArgs.add(Long.toString(new LocalDate().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
+
+              LocalDateTime monday = new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY);
+              LocalDateTime sunday = new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY);
+
+              selectionArgs.add(Long.toString(monday.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+              selectionArgs.add(Long.toString(sunday.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+
+              Log.d(TAG, String.format("Filtré par date entre %s (%s) et %s (%s)",  selectionArgs.get(0),
+                                                                                    fmt.print(monday),
+                                                                                    selectionArgs.get(1),
+                                                                                    fmt.print(sunday)));
               break;
             case 3:
               // Ce mois
               selection = Task.KEY_date + " BETWEEN ? AND ?";
-              selectionArgs.add(Long.toString(new LocalDate().dayOfMonth().withMinimumValue().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
-              selectionArgs.add(Long.toString(new LocalDate().dayOfMonth().withMaximumValue().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).toDateTime(DateTimeZone.UTC).getMillis() / 1000));
+
+              LocalDateTime firstDay = new LocalDateTime().dayOfMonth().withMinimumValue();
+              LocalDateTime lastDay  = new LocalDateTime().dayOfMonth().withMaximumValue();
+
+              selectionArgs.add(Long.toString(firstDay.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+              selectionArgs.add(Long.toString(lastDay.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+
+              Log.d(TAG, String.format("Filtré par date entre %s (%s) et %s (%s)",  selectionArgs.get(0),
+                                                                                    fmt.print(firstDay),
+                                                                                    selectionArgs.get(1),
+                                                                                    fmt.print(lastDay)));
+
               break;
           }
 
@@ -175,20 +197,27 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
         case R.id.sp_task_filters_urgencies:
           // On ajoute un filtre d'urgence
 
-          String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) };
+          String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) }; // Bas, moyen, haut
           fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
+
+          Log.d(TAG, String.format("Filtré par urgence = %s", urgencyLevelSelectionArgs[0]));
 
           break;
         case R.id.sp_task_filters_completion:
           // On ajoute un filtre de complétion
+
+          String [] completionSelectionArgs = { Long.toString(spTaskFiltersCompletion.getSelectedItemId() - 1) }; // En cours, complétée
+          fillData(Task.KEY_completed + "=?", completionSelectionArgs);
+
+          Log.d(TAG, String.format("Filtré par complétion = %s", completionSelectionArgs[0]));
+
           break;
       }
     }
   }
 
+  // Changer le filtre qui est actuellement utilisé
   private void setCurrentFilter(long filterId) {
-    Log.d(TAG, String.format("setCurrentFilter(%s)", filterId));
-
     spTaskFiltersDates.setVisibility(View.INVISIBLE);
     spTaskFiltersEmployees.setVisibility(View.INVISIBLE);
     spTaskFiltersUrgencies.setVisibility(View.INVISIBLE);
@@ -218,8 +247,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   // Ouvre les détails d'une tâche lorsqu'appuyé
   @Override
   public void onListItemClick(ListView l, View v, int position, long id) {
-    Log.d(TAG, "onListItemClick : " + id);
-
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(getContext(), TaskActivity.class);
     Uri taskUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
@@ -278,7 +305,11 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   // Remplir l'adapteur avec les bonnes données FILTRÉES
   private void fillData(String selection, String[] selectionArgs) {
-    Log.d(TAG, String.format("fillData(%s, %s)", selection, selectionArgs[0]));
+    Log.d(TAG, String.format("fillData %s, args : ", selection));
+
+    for (String arg : selectionArgs) {
+      Log.d(TAG, String.format("  %s", arg));
+    }
 
     // Affiche les champs de la base de données (name)
     String[] from = new String[] { Task.KEY_name, KEY_date };
