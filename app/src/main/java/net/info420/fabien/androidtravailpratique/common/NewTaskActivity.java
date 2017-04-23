@@ -26,6 +26,9 @@ import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentPr
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -117,10 +120,6 @@ public class NewTaskActivity extends FragmentActivity {
   public void showDatePickerDialog(View v) {
     DialogFragment newFragment = new DatePickerFragment();
     newFragment.show(getFragmentManager(), "datePicker");
-
-    if (taskDate != 0) {
-      btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
-    }
   }
 
   // Source : https://developer.android.com/guide/topics/ui/controls/pickers.html
@@ -129,7 +128,6 @@ public class NewTaskActivity extends FragmentActivity {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
       Log.d(TAG, "onCreateDialog");
-      // TODO : LA DATE MARCHE PAS ENCORE
 
       // On utilise la date actuelle comme date par défaut
       final Calendar c = Calendar.getInstance();
@@ -143,7 +141,8 @@ public class NewTaskActivity extends FragmentActivity {
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
       final Calendar c = Calendar.getInstance();
-      ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis();
+      ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis() / 10000;
+      ((NewTaskActivity) getActivity()).refreshDate();
     }
   }
 
@@ -155,12 +154,21 @@ public class NewTaskActivity extends FragmentActivity {
 
   public void refreshDate() {
     if (taskDate != 0) {
+      Log.d(TAG, String.format("New date : %s", taskDate));
+
+      DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE d MMMM yyyy");
+
+      // LocalDateTime day = new LocalDateTime().withMillisOfSecond((int) taskDate);
+
+      // Log.d(TAG, String.format("New date : %s (%s)", day,
+      //                                                fmt.print(day)));
+
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
     }
   }
 
   public void createTask() {
-    int assinedEmployee = spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem());
+    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployeeMap.get(spTaskAssignedEmployee.getSelectedItem()) : 0;
     String name         = etTaskName.getText().toString();
     String description  = etTaskDescription.getText().toString();
     int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
