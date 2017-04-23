@@ -25,6 +25,10 @@ public class TaskerApplication extends Application {
   public SQLiteDatabase database;
   public DBHelper dbHelper;
 
+  public boolean recreateDB         = true;
+  public boolean writeTestTasks     = true;
+  public boolean writeTestEmployees = true;
+
   @Override
   public void onCreate() {
     super.onCreate();
@@ -33,7 +37,10 @@ public class TaskerApplication extends Application {
 
     // Recréation de la bd
     dbHelper = new DBHelper(this);
-    // dbHelper.recreateDB(dbHelper.getWritableDatabase());
+
+    if (recreateDB) {
+      dbHelper.recreateDB(dbHelper.getWritableDatabase());
+    }
   }
 
   // TODO : Vérifier si c'est utile
