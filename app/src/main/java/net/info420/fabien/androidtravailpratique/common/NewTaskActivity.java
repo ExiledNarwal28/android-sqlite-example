@@ -26,8 +26,7 @@ import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentPr
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -140,8 +139,8 @@ public class NewTaskActivity extends FragmentActivity {
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-      final Calendar c = Calendar.getInstance();
-      ((NewTaskActivity) getActivity()).taskDate = c.getTimeInMillis() / 10000;
+      // ((NewTaskActivity) getActivity()).taskDate = (int) new DateTime().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day).getMillis();
+      ((NewTaskActivity) getActivity()).taskDate = (int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000);
       ((NewTaskActivity) getActivity()).refreshDate();
     }
   }
@@ -155,13 +154,6 @@ public class NewTaskActivity extends FragmentActivity {
   public void refreshDate() {
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
-
-      DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE d MMMM yyyy");
-
-      // LocalDateTime day = new LocalDateTime().withMillisOfSecond((int) taskDate);
-
-      // Log.d(TAG, String.format("New date : %s (%s)", day,
-      //                                                fmt.print(day)));
 
       btnTaskDate.setText(((TaskerApplication) getApplication()).getFullDate((int) taskDate));
     }
