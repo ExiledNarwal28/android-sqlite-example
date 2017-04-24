@@ -47,7 +47,10 @@ public class MainActivity extends Activity {
         // La tâche #4 n'a pas d'employé assigné (pour des tests)
         if (i <= 2) {
           values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+        } else {
+          values.put(Task.KEY_assigned_employee_ID, (String) null);
         }
+
         values.put(Task.KEY_name,                 taskNames[i]);
         values.put(Task.KEY_description,          taskDescriptions[i]);
         values.put(Task.KEY_completed,            taskCompleteds[i]);

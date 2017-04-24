@@ -24,7 +24,6 @@ import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -34,6 +33,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_date;
 
@@ -54,6 +55,8 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   private Spinner              spTaskFiltersUrgencies;
   private Spinner              spTaskFiltersCompletion;
   private FloatingActionButton fabAddTask;
+
+  private Map<Integer, Integer> spTaskAssignedEmployeeMap;
 
   // private TaskFragment taskFragment;
 
@@ -108,14 +111,24 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();
     employeeNames.add(getString(R.string.task_filter_all_employee));
+    employeeNames.add(getString(R.string.task_no_employee));
 
     // C'est l'heure d'aller chercher les noms des employés
-    String[] employeeProjection = { Employee.KEY_name };
+    // Ceci sert à associé correctement un nom d'employé et son id
+    spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
+
+    String[] employeeProjection = { Employee.KEY_ID, Employee.KEY_name };
     Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
+      Integer position = 2;
+
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        spTaskAssignedEmployeeMap.put(position,
+                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID)));
+
+        position++;
       }
 
       // Fermeture du curseur
@@ -149,38 +162,21 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
               selection = Task.KEY_date + " =?";
               selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
-              Log.d(TAG, String.format("Filtré par date = %s (%s)", selectionArgs.get(0), new DateTime(selectionArgs.get(0)).toDateTime(DateTimeZone.getDefault())));
-
               break;
             case 2:
               // Cette semaine
               selection = Task.KEY_date + " BETWEEN ? AND ?";
 
-              LocalDateTime monday = new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY);
-              LocalDateTime sunday = new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY);
+              selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+              selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-              selectionArgs.add(Long.toString(monday.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-              selectionArgs.add(Long.toString(sunday.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-
-              Log.d(TAG, String.format("Filtré par date entre %s (%s) et %s (%s)",  selectionArgs.get(0),
-                                                                                    fmt.print(monday),
-                                                                                    selectionArgs.get(1),
-                                                                                    fmt.print(sunday)));
               break;
             case 3:
               // Ce mois
               selection = Task.KEY_date + " BETWEEN ? AND ?";
 
-              LocalDateTime firstDay = new LocalDateTime().dayOfMonth().withMinimumValue();
-              LocalDateTime lastDay  = new LocalDateTime().dayOfMonth().withMaximumValue();
-
-              selectionArgs.add(Long.toString(firstDay.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-              selectionArgs.add(Long.toString(lastDay.toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-
-              Log.d(TAG, String.format("Filtré par date entre %s (%s) et %s (%s)",  selectionArgs.get(0),
-                                                                                    fmt.print(firstDay),
-                                                                                    selectionArgs.get(1),
-                                                                                    fmt.print(lastDay)));
+              selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+              selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
               break;
           }
@@ -192,7 +188,22 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           break;
         case R.id.sp_task_filters_employees:
           // On ajoute un filtre d'employés
-          fillData();
+
+          ArrayList<String> employeesSelectionArgs = new ArrayList<String>();
+
+          if(spTaskFiltersEmployees.getSelectedItemId() == 1) {
+            // Dans ce cas, c'est l'option 'Aucun employé'
+
+            // TODO : Trouver les tâches qui n'ont pas d'employé assigné
+            employeesSelectionArgs.add("null");
+          } else {
+            // Dans ce cas, il a choisit un employé
+
+            employeesSelectionArgs.add(Long.toString(spTaskAssignedEmployeeMap.get((int) spTaskFiltersEmployees.getSelectedItemId())));
+          }
+
+          fillData(Task.KEY_assigned_employee_ID + "=?", employeesSelectionArgs.toArray(new String[employeesSelectionArgs.size()]));
+
           break;
         case R.id.sp_task_filters_urgencies:
           // On ajoute un filtre d'urgence
@@ -200,16 +211,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) }; // Bas, moyen, haut
           fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
 
-          Log.d(TAG, String.format("Filtré par urgence = %s", urgencyLevelSelectionArgs[0]));
-
           break;
         case R.id.sp_task_filters_completion:
           // On ajoute un filtre de complétion
 
           String [] completionSelectionArgs = { Long.toString(spTaskFiltersCompletion.getSelectedItemId() - 1) }; // En cours, complétée
           fillData(Task.KEY_completed + "=?", completionSelectionArgs);
-
-          Log.d(TAG, String.format("Filtré par complétion = %s", completionSelectionArgs[0]));
 
           break;
       }

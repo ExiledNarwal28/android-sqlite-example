@@ -118,7 +118,7 @@
   <string name="title_task">Détails d\'une tâche</string>
   <string name="title_activity_edit_task">Modification d\'une tâche</string>
   <string name="title_activity_new_task">Nouvelle tâche</string>
-  <string name="task_no_employee">Personne</string>
+  <string name="task_no_employee">Aucun employé assigné</string>
 
   <string name="title_employee_list">Liste des employés</string>
   <string name="no_employees">Vous n\'avez pas d\'employé (sur l\'application)</string>
