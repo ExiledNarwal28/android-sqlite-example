@@ -4,17 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.DatePicker;
-
-import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-
-import java.util.Calendar;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by fabien on 17-04-23.
@@ -54,19 +47,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
       dateTime = new DateTime(DateTimeZone.UTC);
     }
 
-    year  = dateTime.getYear();
-    month = dateTime.getMonthOfYear();
-    day   = dateTime.getDayOfYear();
-
-    // TODO : Ostie ça marche pas
-    Log.d(TAG, String.format("Date : %s %s %s (%s)", year, month, day, TaskerApplication.getFullDate((int) dateTime.getMillis() / 10000)));
-
-    final Calendar c = Calendar.getInstance();
-
-    Log.d(TAG, String.format("Etad : %s %s %s", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_YEAR)));
-
     // On retourne une nouvelle instance
-    return new DatePickerDialog(getActivity(), this, year, month - 1, day); // Oui, les mois commencent à zéro. Oui, c'est con.
+    return new DatePickerDialog(getActivity(), this, dateTime.getYear(), dateTime.getMonthOfYear() - 1, dateTime.getDayOfMonth()); // Oui, les mois commencent à zéro. Oui, c'est con.
   }
 
   public void onDateSet(DatePicker view, int year, int month, int day) {
