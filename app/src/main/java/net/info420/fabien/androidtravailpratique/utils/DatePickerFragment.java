@@ -34,9 +34,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     super.onCreateDialog(savedInstanceState);
 
     DateTime dateTime;
-    int year;
-    int month;
-    int day;
 
     // Vérification de sûreté.
     if (getArguments() != null) {

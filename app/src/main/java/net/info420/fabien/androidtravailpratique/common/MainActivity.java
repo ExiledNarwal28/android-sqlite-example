@@ -15,6 +15,8 @@ import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentPr
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 
+import org.joda.time.DateTime;
+
 public class MainActivity extends Activity {
   private final static String TAG = MainActivity.class.getName();
 
@@ -33,11 +35,11 @@ public class MainActivity extends Activity {
     if (((TaskerApplication) getApplication()).writeTestTasks) {
       taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
-      String[]  taskNames           = { "Test0",        "Test1",        "Test2",        "Test3" };
-      String[]  taskDescriptions    = { "Description0", "Description1", "Description2", "Description3" };
-      Boolean[] taskCompleteds      = { false,          false,          true,           false };
-      int[]     taskDates           = { 1522108800,     1490745600,     1490659200,     1500659200 };
-      int[]     taskUrgencyLevels   = { 0,              2,              1,              0 };
+      String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
+      String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
+      Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
+      int[]     taskDates           = { (int) (new DateTime().getMillis() / 10000), (int) (new DateTime(2017, 4, 20, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 22, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 28, 0, 0).getMillis() / 10000) };
+      int[]     taskUrgencyLevels   = { 0,                                          2,                                                            1,                                                            0 };
 
       for (int i = 0; i < taskNames.length; i++) {
         ContentValues values = new ContentValues();
@@ -66,10 +68,10 @@ public class MainActivity extends Activity {
     if (((TaskerApplication) getApplication()).writeTestEmployees) {
       taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
 
-      String[] employeeNames = {"Fabien Roy", "William Leblanc", "Jean-Sébastien Giroux"};
-      String[] employeeJobs = {"Programmeur-analyste", "PDG de BlazeIt inc.", "Icône de l'Internet"};
-      String[] employeeEmails = {"fabien@cognitio.ca", "william@blazeit.org", "giroux@twitch.com"};
-      String[] employeePhones = {"418-409-6568", "420-420-4242", "123-456-7890"};
+      String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
+      String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
+      String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
+      String[] employeePhones = {"418-409-6568",          "420-420-4242",         "123-456-7890"};
 
       for (int i = 0; i < employeeNames.length; i++) {
         ContentValues values = new ContentValues();
