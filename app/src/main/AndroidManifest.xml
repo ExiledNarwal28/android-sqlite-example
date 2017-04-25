@@ -13,7 +13,9 @@
     <provider
       android:authorities="net.info420.fabien.androidtravailpratique.contentprovider"
       android:name=".contentprovider.TaskerContentProvider" />
-    
+
+    <service android:name=".utils.TimeService"/>
+
     <activity android:name=".common.MainActivity"
               android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
