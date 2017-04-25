@@ -115,8 +115,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     spTaskAssignedEmployeeMap = new HashMap<>();
 
     // TODO : Je fais ceci souvent, je devrais le mettre dans une fonction
-    String[] employeeProjection = { Employee.KEY_ID, Employee.KEY_name };
-    Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
+    Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, new String[] { Employee.KEY_ID, Employee.KEY_name }, null, null, null);
 
     if (employeeCursor != null) {
       Integer position = 1;

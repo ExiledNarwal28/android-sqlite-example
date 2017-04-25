@@ -6,15 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
-
-import java.util.List;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 
 /**
  * Created by fabien on 17-03-27.
@@ -22,21 +19,18 @@ import java.util.List;
 
 // Source : http://www.vogella.com/tutorials/AndroidListView/article.html
 
-public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
+public class TaskAdapter extends SimpleCursorAdapter {
   private final String TAG = TaskAdapter.class.getName();
 
   private final LayoutInflater inflater;
   private final TaskerApplication application;
 
-  private List<String>originalData = null;
-  private List<String>filteredData = null;
-
   private final class ViewHolder {
-    public TextView tvTaskName;
-    public TextView tvTaskDate;
-    public TextView tvTaskEmployee;
-    public TextView tvTaskUrgencyLevel;
-    public CheckBox cbTaskCompleted;
+    TextView tvTaskName;
+    TextView tvTaskDate;
+    TextView tvTaskEmployee;
+    TextView tvTaskUrgencyLevel;
+    CheckBox cbTaskCompleted;
   }
 
   public TaskAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TaskerApplication application) {
@@ -72,6 +66,21 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
 
     if (!cursor.isNull(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) {
       // On doit aller chercher le nom de l'employé
+
+      Cursor employeeCursor = context.getContentResolver().query( TaskerContentProvider.CONTENT_URI_EMPLOYEE,
+                                                                  new String[] { Employee.KEY_ID, Employee.KEY_name },
+                                                                  Employee.KEY_ID + " =?",
+                                                                  new String[] { Integer.toString(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) },
+                                                                  null);
+
+      if (employeeCursor != null) {
+        employeeCursor.moveToFirst();
+
+        viewHolder.tvTaskEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+
+        // Fermeture du curseur
+        employeeCursor.close();
+      }
     } else {
       viewHolder.tvTaskEmployee.setText(context.getString(R.string.task_no_employee));
     }
@@ -85,48 +94,5 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
         // TODO : Complete / uncomplete
       }
     });
-  }
-
-  // TODO : Rendre le ListView filtrable
-  @Override
-  public Filter getFilter() {
-
-    Filter filter = new Filter() {
-      @SuppressWarnings("unchecked")
-      @Override
-      protected void publishResults(CharSequence constraint, FilterResults results) {
-        /*
-        filteredData = (List<String>) results.values;
-        notifyDataSetChanged();
-        */
-      }
-
-      @Override
-      protected FilterResults performFiltering(CharSequence constraint) {
-        /*
-        FilterResults results = new FilterResults();
-        ArrayList<String> FilteredArrayNames = new ArrayList<String>();
-
-        // perform your search here using the searchConstraint String.
-
-        constraint = constraint.toString().toLowerCase();
-        for (int i = 0; i < mDatabaseOfNames.size(); i++) {
-          String dataNames = mDatabaseOfNames.get(i);
-          if (dataNames.toLowerCase().startsWith(constraint.toString()))  {
-            FilteredArrayNames.add(dataNames);
-          }
-        }
-
-        results.count = FilteredArrayNames.size();
-        results.values = FilteredArrayNames;
-        Log.e("VALUES", results.values.toString());
-
-        return results;
-        */
-        return null;
-      }
-    };
-
-    return filter;
   }
 }
