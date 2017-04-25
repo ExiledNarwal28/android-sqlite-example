@@ -28,7 +28,7 @@ public class TimeService extends Service {
     Log.d(TAG, NOTIFICATION);
 
     Intent timeIntent = new Intent(NOTIFICATION);
-    timeIntent.putExtra(TASKS_COUNT, 2);
+    timeIntent.putExtra(TASKS_COUNT, getTasksCount());
     timeIntent.putExtra(TO_DO_THIS_X, getString(R.string.info_to_do_this_week));
     sendBroadcast(timeIntent);
 
@@ -38,6 +38,11 @@ public class TimeService extends Service {
   @Override
   public IBinder onBind(Intent intent) {
     return null;
+  }
+
+  public int getTasksCount() {
+
+    return 0;
   }
 
 }

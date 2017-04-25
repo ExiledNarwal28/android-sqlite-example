@@ -20,13 +20,22 @@ public class TimeReceiver extends BroadcastReceiver {
     if(intent.getExtras() != null) {
       // TODO : Changer ca
 
-      Toast.makeText( context,
-                      String.format("%s %s %s %s.",
-                                    context.getString(R.string.info_you_have),
-                                    intent.getExtras().getInt(TimeService.TASKS_COUNT),
-                                    ((intent.getExtras().getInt(TimeService.TASKS_COUNT) > 1) ? context.getString(R.string.tasks) : context.getString(R.string.task)).toLowerCase(),
-                                    intent.getExtras().getString(TimeService.TO_DO_THIS_X)),
-                      Toast.LENGTH_SHORT).show();
+      if (intent.getExtras().getInt(TimeService.TASKS_COUNT) == 0) {
+        Toast.makeText( context,
+                        String.format("%s %s %s.",
+                                      context.getString(R.string.info_you_have_no),
+                                      context.getString(R.string.task).toLowerCase(),
+                                      intent.getExtras().getString(TimeService.TO_DO_THIS_X)),
+                        Toast.LENGTH_SHORT).show();
+      } else {
+        Toast.makeText( context,
+                        String.format("%s %s %s %s.",
+                                      context.getString(R.string.info_you_have),
+                                      intent.getExtras().getInt(TimeService.TASKS_COUNT),
+                                      ((intent.getExtras().getInt(TimeService.TASKS_COUNT) > 1) ? context.getString(R.string.tasks) : context.getString(R.string.task)).toLowerCase(),
+                                      intent.getExtras().getString(TimeService.TO_DO_THIS_X)),
+                        Toast.LENGTH_SHORT).show();
+      }
     }
   }
 }
