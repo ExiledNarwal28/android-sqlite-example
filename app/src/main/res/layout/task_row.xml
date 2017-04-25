@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:descendantFocusability="blocksDescendants">
 
   <!-- TODO : Documenter descendantFocusability (ce qui t'as aidé pour onItemClick de MainActivity) -->
   <!-- Source : http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter -->
+
+  <TextView
+    android:id="@+id/tv_task_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:lines="1"
+    android:text="@string/task_name"
+    android:textSize="24sp"
+    android:layout_alignParentTop="true"
+    android:layout_alignStart="@+id/tv_task_date"/>
 
   <TextView
     android:id="@+id/tv_task_date"
@@ -17,7 +28,19 @@
     android:layout_toEndOf="@id/tv_task_urgency_level"
     android:lines="1"
     android:text="@string/task_date"
-    android:textSize="20dp" />
+    android:textSize="16sp" />
+
+  <TextView
+    android:id="@+id/tv_task_employee"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginStart="5dp"
+    android:layout_below="@+id/tv_task_date"
+    android:layout_toEndOf="@id/tv_task_urgency_level"
+    android:lines="1"
+    android:text="@string/task_assigned_employee"
+    android:textSize="16sp" />
 
   <TextView
     android:id="@+id/tv_task_urgency_level"
@@ -26,17 +49,7 @@
     android:layout_width="5dp"
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/tv_task_name"
-    android:layout_alignBottom="@id/tv_task_date"/>
-
-  <TextView
-    android:id="@+id/tv_task_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:lines="1"
-    android:text="@string/task_name"
-    android:textSize="24dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignStart="@+id/tv_task_date"/>
+    android:layout_alignBottom="@id/tv_task_employee"/>
 
   <CheckBox
     android:layout_width="wrap_content"
@@ -44,7 +57,8 @@
     android:id="@+id/cb_task_completed"
     android:layout_alignTop="@id/tv_task_name"
     android:layout_alignParentRight="true"
-    android:layout_alignBottom="@id/tv_task_date"
-    style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"/>
+    android:layout_alignBottom="@id/tv_task_employee"
+    style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
+    tools:ignore="RtlHardcoded"/>
 
 </RelativeLayout>

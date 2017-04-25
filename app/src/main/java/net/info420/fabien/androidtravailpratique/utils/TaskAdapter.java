@@ -34,6 +34,7 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
   private final class ViewHolder {
     public TextView tvTaskName;
     public TextView tvTaskDate;
+    public TextView tvTaskEmployee;
     public TextView tvTaskUrgencyLevel;
     public CheckBox cbTaskCompleted;
   }
@@ -57,6 +58,7 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
     viewHolder                    = new TaskAdapter.ViewHolder();
     viewHolder.tvTaskName         = (TextView) view.findViewById(R.id.tv_task_name);
     viewHolder.tvTaskDate         = (TextView) view.findViewById(R.id.tv_task_date);
+    viewHolder.tvTaskEmployee     = (TextView) view.findViewById(R.id.tv_task_employee);
     viewHolder.tvTaskUrgencyLevel = (TextView) view.findViewById(R.id.tv_task_urgency_level);
     viewHolder.cbTaskCompleted    = (CheckBox) view.findViewById(R.id.cb_task_completed);
 
@@ -67,6 +69,12 @@ public class TaskAdapter extends SimpleCursorAdapter implements Filterable {
 
     // viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(urgencyLevel));
     viewHolder.tvTaskUrgencyLevel.setBackgroundColor(application.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+
+    if (!cursor.isNull(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) {
+      // On doit aller chercher le nom de l'employé
+    } else {
+      viewHolder.tvTaskEmployee.setText(context.getString(R.string.task_no_employee));
+    }
 
     view.setTag(viewHolder);
 

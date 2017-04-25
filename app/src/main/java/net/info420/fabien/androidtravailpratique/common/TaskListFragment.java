@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_date;
+import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_urgency_level;
 
 /**
  * Created by fabien on 17-04-11.
@@ -102,7 +102,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     super.onActivityCreated(savedInstanceState);
 
     this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
-    fillData();
+    setFillData();
 
     registerForContextMenu(getListView());
 
@@ -112,8 +112,9 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // C'est l'heure d'aller chercher les noms des employés
     // Ceci sert à associé correctement un nom d'employé et son id
-    spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
+    spTaskAssignedEmployeeMap = new HashMap<>();
 
+    // TODO : Je fais ceci souvent, je devrais le mettre dans une fonction
     String[] employeeProjection = { Employee.KEY_ID, Employee.KEY_name };
     Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
@@ -133,7 +134,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     }
 
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    adapterTaskFiltersEmployees = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, employeeNames);
+    adapterTaskFiltersEmployees = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, employeeNames);
     spTaskFiltersEmployees.setAdapter(adapterTaskFiltersEmployees);
   }
 
@@ -144,7 +145,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // Valeurs par défaut
     String selection                = null;
-    ArrayList<String> selectionArgs = new ArrayList<String>();
+    ArrayList<String> selectionArgs = new ArrayList<>();
     String sortOrder                = Task.KEY_date + " ASC";
 
     // Quel spinner a été cliqué?
@@ -156,7 +157,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
             break;
           case 3:
-            sortOrder = Task.KEY_urgency_level + " ASC";
+            sortOrder = KEY_urgency_level + " ASC";
 
             break;
           case 4:
@@ -212,7 +213,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
       case R.id.sp_task_filters_urgencies:
         // On ajoute un filtre d'urgence
 
-        sortOrder = Task.KEY_urgency_level + " DESC";
+        sortOrder = KEY_urgency_level + " DESC";
 
         switch((int) spTaskFiltersUrgencies.getSelectedItemId()) {
           case 0:
@@ -220,7 +221,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
             break;
           default:
             // Dans ce cas, il a choisit un niveau d'urgence
-            selection = Task.KEY_urgency_level + "=?";
+            selection = KEY_urgency_level + "=?";
             selectionArgs.add(Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1)); // Bas, moyen, haut
 
             break;
@@ -257,7 +258,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // Conversion d'un ArrayList<String> en String[]
     // Source : http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/
-    fillData(selection, (!selectionArgs.isEmpty()) ? selectionArgs.toArray(new String[selectionArgs.size()]) : null, sortOrder);
+    setFillData(selection, (!selectionArgs.isEmpty()) ? selectionArgs.toArray(new String[selectionArgs.size()]) : null, sortOrder);
   }
 
   // Changer le filtre qui est actuellement utilisé
@@ -330,34 +331,25 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   }
 
   // Remplir l'adapteur avec les bonnes données
-  private void fillData() {
-    // Affiche les champs de la base de données (name)
-    String[] from = new String[] { Task.KEY_name, KEY_date };
-
-    // Où on affiche les champs
-    int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
-
-    // Enlever le filtrage
-    String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
-    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, null, null, Task.KEY_date + " ASC"); // Par défaut, on met en ordre de date
-
-    getLoaderManager().initLoader(0, null, this);
-    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
-
-    setListAdapter(taskAdapter);
+  private void setFillData() {
+    fillData(null, null, Task.KEY_date + " ASC");
   }
 
   // Remplir l'adapteur avec les bonnes données FILTRÉES
+  private void setFillData(String selection, String[] selectionArgs, String sortOrder) {
+    fillData(selection, selectionArgs, sortOrder);
+  }
+
   private void fillData(String selection, String[] selectionArgs, String sortOrder) {
     // Affiche les champs de la base de données (name)
-    String[] from = new String[] { Task.KEY_name, KEY_date };
+    String[] from = new String[] { Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID };
 
     // Où on affiche les champs
-    int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date };
+    int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date, R.id.tv_task_employee };
 
-    // Filtrage
-    String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
-    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, selection, selectionArgs, sortOrder);
+    // Enlever le filtrage
+    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, KEY_urgency_level };
+    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
     taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
@@ -368,7 +360,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = { Task.KEY_ID, Task.KEY_name, KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
+    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, Task.KEY_urgency_level };
 
     CursorLoader cursorLoader = new CursorLoader(getContext(), TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 
