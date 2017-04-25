@@ -29,8 +29,6 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,87 +138,137 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     spTaskFiltersEmployees.setAdapter(adapterTaskFiltersEmployees);
   }
 
+  // Ceci filtre les données avec ce qui a été choisis dans les spinners
   @Override
-  public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+  public void onItemSelected(AdapterView<?> adapterView, View view, int intId, long longId) {
     setCurrentFilter(spTaskFiltersFilters.getSelectedItemId());
 
-    if (((Spinner)getActivity().findViewById(adapterView.getId())).getSelectedItemId() == 0) {
-      fillData();
-    } else {
-      switch (adapterView.getId()) {
-        case R.id.sp_task_filters_dates:
-          // On ajoute un filtre de date
-          String selection                = new String();
-          ArrayList<String> selectionArgs = new ArrayList<String>();
+    // Valeurs par défaut
+    String selection                = null;
+    ArrayList<String> selectionArgs = new ArrayList<String>();
+    String sortOrder                = Task.KEY_date + " ASC";
 
-          DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE d MMMM yyyy");
+    // Quel spinner a été cliqué?
+    switch (adapterView.getId()) {
+      case R.id.sp_task_filters_filters:
+        switch((int) spTaskFiltersFilters.getSelectedItemId()) {
+          case 2:
+            sortOrder = Task.KEY_assigned_employee_ID + " ASC";
 
-          switch((int) spTaskFiltersDates.getSelectedItemId()) {
+            break;
+          case 3:
+            sortOrder = Task.KEY_urgency_level + " ASC";
 
-            case 1:
-              // Aujourd'hui
-              selection = Task.KEY_date + " =?";
-              selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
+            break;
+          case 4:
+            sortOrder = Task.KEY_completed + " ASC";
 
-              break;
-            case 2:
-              // Cette semaine
-              selection = Task.KEY_date + " BETWEEN ? AND ?";
+            break;
+        }
+      case R.id.sp_task_filters_dates:
+        // On ajoute un filtre de date
 
-              selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-              selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+        switch((int) spTaskFiltersDates.getSelectedItemId()) {
+          case 1:
+            // Aujourd'hui
+            selection = Task.KEY_date + " =?";
 
-              break;
-            case 3:
-              // Ce mois
-              selection = Task.KEY_date + " BETWEEN ? AND ?";
+            selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
-              selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-              selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+            break;
+          case 2:
+            // Cette semaine
+            selection = Task.KEY_date + " BETWEEN ? AND ?";
 
-              break;
-          }
+            selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+            selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-          // Conversion d'un ArrayList<String> en String[]
-          // Source : http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/
-          fillData(selection, selectionArgs.toArray(new String[selectionArgs.size()]));
+            break;
+          case 3:
+            // Ce mois
+            selection = Task.KEY_date + " BETWEEN ? AND ?";
 
-          break;
-        case R.id.sp_task_filters_employees:
-          // On ajoute un filtre d'employés
+            selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+            selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-          ArrayList<String> employeesSelectionArgs = new ArrayList<String>();
+            break;
+        }
 
-          if(spTaskFiltersEmployees.getSelectedItemId() == 1) {
+        break;
+      case R.id.sp_task_filters_employees:
+        // On ajoute un filtre d'employés
+
+        sortOrder = Task.KEY_assigned_employee_ID + " ASC";
+
+        switch((int) spTaskFiltersEmployees.getSelectedItemId()) {
+          case 0:
+            // Tous les employés
+            break;
+          case 1:
             // Dans ce cas, c'est l'option 'Aucun employé'
-
             // TODO : Trouver les tâches qui n'ont pas d'employé assigné
-            employeesSelectionArgs.add("null");
-          } else {
+            selection = Task.KEY_assigned_employee_ID + "=?";
+            selectionArgs.add("null");
+
+            break;
+          default:
             // Dans ce cas, il a choisit un employé
+            selection = Task.KEY_assigned_employee_ID + "=?";
+            selectionArgs.add(Long.toString(spTaskAssignedEmployeeMap.get((int) spTaskFiltersEmployees.getSelectedItemId())));
 
-            employeesSelectionArgs.add(Long.toString(spTaskAssignedEmployeeMap.get((int) spTaskFiltersEmployees.getSelectedItemId())));
-          }
+            break;
+        }
 
-          fillData(Task.KEY_assigned_employee_ID + "=?", employeesSelectionArgs.toArray(new String[employeesSelectionArgs.size()]));
+        break;
+      case R.id.sp_task_filters_urgencies:
+        // On ajoute un filtre d'urgence
 
-          break;
-        case R.id.sp_task_filters_urgencies:
-          // On ajoute un filtre d'urgence
+        sortOrder = Task.KEY_urgency_level + " DESC";
 
-          String [] urgencyLevelSelectionArgs = { Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1) }; // Bas, moyen, haut
-          fillData(Task.KEY_urgency_level + "=?", urgencyLevelSelectionArgs);
+        switch((int) spTaskFiltersUrgencies.getSelectedItemId()) {
+          case 0:
+            // Tous les niveaux d'urgence
+            break;
+          default:
+            // Dans ce cas, il a choisit un niveau d'urgence
+            selection = Task.KEY_urgency_level + "=?";
+            selectionArgs.add(Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1)); // Bas, moyen, haut
 
-          break;
-        case R.id.sp_task_filters_completion:
-          // On ajoute un filtre de complétion
+            break;
+        }
 
-          String [] completionSelectionArgs = { Long.toString(spTaskFiltersCompletion.getSelectedItemId() - 1) }; // En cours, complétée
-          fillData(Task.KEY_completed + "=?", completionSelectionArgs);
+        break;
+      case R.id.sp_task_filters_completion:
+        // On ajoute un filtre de complétion
 
-          break;
+        sortOrder = Task.KEY_completed + " ASC";
+
+        switch((int) spTaskFiltersCompletion.getSelectedItemId()) {
+          case 0:
+            // Tous les niveaux de complétion
+            break;
+          default:
+            // Dans ce cas, il a choisit un niveau de complétion
+            selection = Task.KEY_completed + "=?";
+            selectionArgs.add(Long.toString(spTaskFiltersCompletion.getSelectedItemId() - 1)); // Bas, moyen, haut
+
+            break;
+        }
+
+        break;
+    }
+
+    Log.d(TAG, String.format("Filtré par : %s en ordre de %s", selection, sortOrder));
+
+    if (!selectionArgs.isEmpty()) {
+      for (int i = 0; i < selectionArgs.size(); i++) {
+        Log.d(TAG, String.format("    %s", selectionArgs.get(i)));
       }
     }
+
+    // Conversion d'un ArrayList<String> en String[]
+    // Source : http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/
+    fillData(selection, (!selectionArgs.isEmpty()) ? selectionArgs.toArray(new String[selectionArgs.size()]) : null, sortOrder);
   }
 
   // Changer le filtre qui est actuellement utilisé
@@ -302,7 +350,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // Enlever le filtrage
     String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
-    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, null, null, null);
+    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, null, null, Task.KEY_date + " ASC"); // Par défaut, on met en ordre de date
 
     getLoaderManager().initLoader(0, null, this);
     taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
@@ -311,13 +359,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
   }
 
   // Remplir l'adapteur avec les bonnes données FILTRÉES
-  private void fillData(String selection, String[] selectionArgs) {
-    Log.d(TAG, String.format("fillData %s, args : ", selection));
-
-    for (String arg : selectionArgs) {
-      Log.d(TAG, String.format("  %s", arg));
-    }
-
+  private void fillData(String selection, String[] selectionArgs, String sortOrder) {
     // Affiche les champs de la base de données (name)
     String[] from = new String[] { Task.KEY_name, KEY_date };
 
@@ -326,7 +368,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
     // Filtrage
     String[] taskProjection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_completed, Task.KEY_urgency_level };
-    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, selection, selectionArgs, null);
+    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, taskProjection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
     taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
