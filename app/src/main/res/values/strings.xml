@@ -18,8 +18,9 @@
 
   <string name="info_you_have">Vous avez</string>
   <string name="info_you_have_no">Vous n\'avez aucune</string>
+  <string name="info_to_do_this_day">à faire aujourd\'hui</string>
   <string name="info_to_do_this_week">à faire cette semaine</string>
-  <string name="info_to_do_this_month">à faire aujourd\'hui</string>
+  <string name="info_to_do_this_month">à faire ce mois</string>
 
   <string name="task">Tâche</string>
   <string name="tasks">Tâches</string>

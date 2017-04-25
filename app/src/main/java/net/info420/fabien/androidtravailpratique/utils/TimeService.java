@@ -2,10 +2,20 @@ package net.info420.fabien.androidtravailpratique.utils;
 
 import android.app.Service;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.IBinder;
 import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+
+import java.util.ArrayList;
 
 /**
  * Created by fabien on 17-04-24.
@@ -19,17 +29,20 @@ public class TimeService extends Service {
   public static final String TASKS_COUNT  = "tasksCount";
   public static final String TO_DO_THIS_X = "toDoThisX";
 
+  private String selection        = null;
+  ArrayList<String> selectionArgs = new ArrayList<>();
+  private String toDoThisX        = null;
+
   // TODO : Trouver un moyen pour faire starté le service a toutes les X secondes
-  // TODO : Vérifier quand la date est proche
-  // TODO : Marcher avec des prefs
-  // TODO : Caller le Broadcast Receiver
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
     Log.d(TAG, NOTIFICATION);
 
+    getInfoFromPrefs();
+
     Intent timeIntent = new Intent(NOTIFICATION);
     timeIntent.putExtra(TASKS_COUNT, getTasksCount());
-    timeIntent.putExtra(TO_DO_THIS_X, getString(R.string.info_to_do_this_week));
+    timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);
     sendBroadcast(timeIntent);
 
     return Service.START_NOT_STICKY; // Ceci permet de ne pas redémarrer le service s'il est terminé
@@ -40,9 +53,58 @@ public class TimeService extends Service {
     return null;
   }
 
-  public int getTasksCount() {
+  private void getInfoFromPrefs() {
+    // TODO : Aller chercher les infos du toasts avec les préférences
 
-    return 0;
+    // Infos à aller chercher : Laps de temps (aujourd'hui, semaine, mois)
+    //                          Niveau d'urgence minimum
+
+    // On vide les arguments de sélection
+    selectionArgs.removeAll(selectionArgs);
+
+    switch (0) {
+      case 0:
+        // Aujourd'hui
+
+        selection = "(" + Task.KEY_date + " =?) AND (" + Task.KEY_urgency_level + " >=?)";
+
+        selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
+
+        toDoThisX = getString(R.string.info_to_do_this_day);
+        break;
+      case 1:
+        // Semaine
+
+        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?)";
+
+        selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+        selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+
+        toDoThisX = getString(R.string.info_to_do_this_week);
+        break;
+      case 2:
+        // Mois
+
+        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?)";
+
+        selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+        selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+
+        toDoThisX = getString(R.string.info_to_do_this_month);
+        break;
+    }
+
+    selectionArgs.add(Integer.toString(0));
+
   }
 
+  public int getTasksCount() {
+    Cursor cursor = getContentResolver().query( TaskerContentProvider.CONTENT_URI_TASK,
+                                                new String[] { Task.KEY_ID },
+                                                selection,
+                                                selectionArgs.toArray(new String[selectionArgs.size()]),
+                                                null);
+
+    return (cursor != null) ? cursor.getCount() : 0;
+  }
 }
