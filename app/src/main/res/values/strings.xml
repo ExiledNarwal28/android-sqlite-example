@@ -16,7 +16,12 @@
   <string name="warning_wrong_phone_format">Format de numéro de téléphone invalide</string>
   <string name="warning_wrong_mail_format">Format d\'adresse courriel invalide</string>
 
+  <string name="info_you_have">Vous avez</string>
+  <string name="info_to_do_this_week">à faire cette semaine</string>
+  <string name="info_to_do_this_month">à faire aujourd\'hui</string>
+
   <string name="task">Tâche</string>
+  <string name="tasks">Tâches</string>
   <string name="task_name">Nom de la tâche</string>
   <string name="task_description">Description</string>
   <string name="task_date">Date d\'échéance</string>
@@ -42,6 +47,8 @@
   <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien avec les dates d\'échéances des tâches</string>
   <string name="pref_toasts_frequency">Fréquence</string>
   <string name="pref_toasts_frequency_summary">Fréquence minimale pour afficher les Toasts</string>
+  <string name="pref_toasts_timespan">Laps de temps</string>
+  <string name="pref_toasts_timespan_summary">Laps de temps dans lequel on vérifie le nombre de tâches à faire</string>
   <string name="pref_toasts_urgency_level">Niveau d\'urgence</string>
   <string name="pref_toasts_urgency_level_summary">Niveau d\'urgence requis pour afficher les Toasts</string>
   <string name="pref_language">Langue</string>
@@ -53,7 +60,7 @@
     <item>Une demi-heure</item>
     <item>Dix minutes</item>
     <item>Une minute</item>
-    <item>Dès que possible</item>
+    <item>Trente secondes</item>
     <item>Jamais</item>
   </string-array>
   <string-array name="pref_toasts_frequency_values">
@@ -62,9 +69,20 @@
     <item>1800</item>
     <item>600</item>
     <item>60</item>
-    <item>1</item>
+    <item>30</item>
     <item>0</item>
-  </string-array><string-array name="pref_toasts_urgency_level_names">
+  </string-array>
+  <string-array name="pref_toasts_timespan_names">
+    <item>Aujourd\'hui</item>
+    <item>Cette semaine</item>
+    <item>Ce mois</item>
+  </string-array>
+  <string-array name="pref_toasts_timespan_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_names">
     <item>Bas</item>
     <item>Moyen</item>
     <item>Haut</item>
@@ -73,7 +91,8 @@
     <item>0</item>
     <item>1</item>
     <item>2</item>
-  </string-array><string-array name="pref_language_names">
+  </string-array>
+  <string-array name="pref_language_names">
     <item>Français</item>
     <item>Anglais</item>
   </string-array>

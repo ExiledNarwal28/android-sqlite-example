@@ -3,7 +3,9 @@ package net.info420.fabien.androidtravailpratique.utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.widget.Toast;
+
+import net.info420.fabien.androidtravailpratique.R;
 
 /**
  * Created by fabien on 17-04-24.
@@ -15,11 +17,16 @@ public class TimeReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
-    Log.d(TAG, "WHAT");
-
-    if(intent.getAction().equals("time")){
+    if(intent.getExtras() != null) {
       // TODO : Changer ca
-      String state = intent.getExtras().getString("extra");
+
+      Toast.makeText( context,
+                      String.format("%s %s %s %s.",
+                                    context.getString(R.string.info_you_have),
+                                    intent.getExtras().getInt(TimeService.TASKS_COUNT),
+                                    ((intent.getExtras().getInt(TimeService.TASKS_COUNT) > 1) ? context.getString(R.string.tasks) : context.getString(R.string.task)).toLowerCase(),
+                                    intent.getExtras().getString(TimeService.TO_DO_THIS_X)),
+                      Toast.LENGTH_SHORT).show();
     }
   }
 }

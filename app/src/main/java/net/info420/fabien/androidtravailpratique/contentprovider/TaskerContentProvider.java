@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
@@ -62,7 +61,7 @@ public class TaskerContentProvider extends ContentProvider {
   public boolean onCreate() {
     dbHelper = new DBHelper(getContext());
 
-    Log.d(TAG, String.format("Obtention de la base de donnée %s, version %s", dbHelper.getDatabaseName(), dbHelper.getReadableDatabase().getVersion()));
+    // Log.d(TAG, String.format("Obtention de la base de donnée %s, version %s", dbHelper.getDatabaseName(), dbHelper.getReadableDatabase().getVersion()));
 
     // Lecture des champs, je garde ça ici car ça peut redevenir utile.
 
@@ -83,7 +82,7 @@ public class TaskerContentProvider extends ContentProvider {
     // On utilise SQLiteQueryBuilder plutôt que query()
     SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
-    Log.d(TAG, String.format("Uri recu : %s", uri.getPath()));
+    // Log.d(TAG, String.format("Uri recu : %s", uri.getPath()));
 
     int uriType = sURIMatcher.match(uri);
     switch (uriType) {
@@ -149,14 +148,14 @@ public class TaskerContentProvider extends ContentProvider {
         id = sqlDB.insert(Task.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
-        Log.d(TAG, String.format("Insertion de la tâche #%s", id));
+        // Log.d(TAG, String.format("Insertion de la tâche #%s", id));
 
         return Uri.parse(BASE_PATH_TASK + "/" + id);
       case EMPLOYEES:
         id = sqlDB.insert(Employee.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
-        Log.d(TAG, String.format("Insertion de l'employé #%s", id));
+        // Log.d(TAG, String.format("Insertion de l'employé #%s", id));
 
         return Uri.parse(BASE_PATH_EMPLOYEE + "/" + id);
       default:

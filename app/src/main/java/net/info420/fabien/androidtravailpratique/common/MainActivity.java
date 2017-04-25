@@ -3,9 +3,10 @@ package net.info420.fabien.androidtravailpratique.common;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
@@ -14,6 +15,8 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.utils.TimeReceiver;
+import net.info420.fabien.androidtravailpratique.utils.TimeService;
 
 import org.joda.time.DateTime;
 
@@ -23,6 +26,8 @@ public class MainActivity extends Activity {
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
   private Uri taskUri;
   private Uri employeeUri;
+
+  private TimeReceiver timeReceiver = new TimeReceiver();
 
   private Menu menu;
 
@@ -57,12 +62,14 @@ public class MainActivity extends Activity {
         values.put(Task.KEY_date,                 taskDates[i]);
         values.put(Task.KEY_urgency_level,        taskUrgencyLevels[i]);
 
+        /*
         Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
           Task.KEY_name,          taskNames[i],
           Task.KEY_description,   taskDescriptions[i],
           Task.KEY_completed,     taskCompleteds[i],
           Task.KEY_date,          taskDates[i],
           Task.KEY_urgency_level, taskUrgencyLevels[i]));
+        */
 
         taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
       }
@@ -84,15 +91,19 @@ public class MainActivity extends Activity {
         values.put(Employee.KEY_email, employeeEmails[i]);
         values.put(Employee.KEY_phone, employeePhones[i]);
 
+        /*
         Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s",
           Employee.KEY_name, employeeNames[i],
           Employee.KEY_job, employeeJobs[i],
           Employee.KEY_email, employeeEmails[i],
           Employee.KEY_phone, employeePhones[i]));
+        */
 
         employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
       }
     }
+
+    startService(new Intent(this, TimeService.class));
 
     initUI();
   }
@@ -112,6 +123,17 @@ public class MainActivity extends Activity {
     toolbar.setTitle(R.string.title_task_list);
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
+  }
+  @Override
+  protected void onResume() {
+    super.onResume();
+    registerReceiver(timeReceiver, new IntentFilter(TimeService.NOTIFICATION));
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    unregisterReceiver(timeReceiver);
   }
 
   @Override
