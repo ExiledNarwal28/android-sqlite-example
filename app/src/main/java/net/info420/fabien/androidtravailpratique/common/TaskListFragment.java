@@ -109,7 +109,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();
     employeeNames.add(getString(R.string.task_filter_all_employee));
-    employeeNames.add(getString(R.string.task_no_employee));
 
     // C'est l'heure d'aller chercher les noms des employés
     // Ceci sert à associé correctement un nom d'employé et son id
@@ -119,7 +118,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
-      Integer position = 2;
+      Integer position = 1;
 
       while (employeeCursor.moveToNext()) {
         employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
@@ -172,14 +171,12 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           case 1:
             // Aujourd'hui
             selection = Task.KEY_date + " =?";
-
             selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
             break;
           case 2:
             // Cette semaine
             selection = Task.KEY_date + " BETWEEN ? AND ?";
-
             selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
             selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
@@ -187,7 +184,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
           case 3:
             // Ce mois
             selection = Task.KEY_date + " BETWEEN ? AND ?";
-
             selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
             selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
@@ -203,13 +199,6 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
         switch((int) spTaskFiltersEmployees.getSelectedItemId()) {
           case 0:
             // Tous les employés
-            break;
-          case 1:
-            // Dans ce cas, c'est l'option 'Aucun employé'
-            // TODO : Trouver les tâches qui n'ont pas d'employé assigné
-            selection = Task.KEY_assigned_employee_ID + "=?";
-            selectionArgs.add("null");
-
             break;
           default:
             // Dans ce cas, il a choisit un employé

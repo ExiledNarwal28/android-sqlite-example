@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
         if (i <= 2) {
           values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
         } else {
-          values.put(Task.KEY_assigned_employee_ID, (String) null);
+          values.putNull(Task.KEY_assigned_employee_ID);
         }
 
         values.put(Task.KEY_name,                 taskNames[i]);
