@@ -100,10 +100,12 @@
   <string-array name="pref_language_names">
     <item>French</item>
     <item>English</item>
+    <item>Creole</item>
   </string-array>
   <string-array name="pref_language_values">
     <item>fr</item>
     <item>en</item>
+    <item>crp</item>
   </string-array>
 
   <string name="title_task_list">Tasks list</string>

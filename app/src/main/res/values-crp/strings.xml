@@ -1,0 +1,156 @@
+<resources>
+  <string name="app_name">ROYF_Android</string>
+
+  <string name="error">Erè</string>
+
+  <string name="action_add">Ajoute</string>
+  <string name="action_edit">Chanjman</string>
+  <string name="action_delete">Retire</string>
+  <string name="action_cancel">Anile</string>
+  <string name="action_settings">Opsyon</string>
+  <string name="action_call">Rele</string>
+  <string name="action_confirm">Valide</string>
+  <string name="action_send_sms">Voye SMS</string>
+
+  <string name="warning_missing_required_fields">Jaden Obligatwa yo vid</string>
+  <string name="warning_wrong_phone_format">Envalid telefòn fòma nimewo</string>
+  <string name="warning_wrong_mail_format">Valab imel adrès fòma</string>
+
+  <string name="info_you_have">Ou gen</string>
+  <string name="info_you_have_no">Ou pa gen</string>
+  <string name="info_to_do_this_day">fè jodi a</string>
+  <string name="info_to_do_this_week">fè semèn sa a</string>
+  <string name="info_to_do_this_month">fè mwa sa a</string>
+  <string name="info_urgency_low_and_plus">enpòtans ki ba</string>
+  <string name="info_urgency_medium_and_plus">enpòtans ki mwayen</string>
+  <string name="info_urgency_high">empòtans segondè</string>
+
+  <string name="task">Travay</string>
+  <string name="tasks">Travay</string>
+  <string name="task_name">Non</string>
+  <string name="task_description">Deskripsyon</string>
+  <string name="task_date">Dat fen</string>
+  <string name="task_urgency_level">Enpòtans</string>
+  <string name="task_status">Fini</string>
+  <string name="task_assigned_employee">Anplwaye asiyen</string>
+
+  <string name="task_completed_task">Travay ranpli</string>
+  <string name="task_completed_tasks">Travay ranpli</string>
+  <string name="task_current_task">Travay nan pwogrè</string>
+  <string name="task_current_tasks">Travay nan pwogrè</string>
+  <string name="task_urgency_level_low">Ba</string>
+  <string name="task_urgency_level_medium">Mwayen</string>
+  <string name="task_urgency_level_high">Segondè</string>
+
+  <string name="employee">Anplwaye</string>
+  <string name="employee_name">Non</string>
+  <string name="employee_mail">Imel</string>
+  <string name="employee_phone">Nimewo telefòn</string>
+  <string name="employee_job">Pòs</string>
+
+  <string name="pref_toasts">Avètisman Toasts</string>
+  <string name="pref_toasts_summary">Pèmèt oswa ou pa popup ki gen rapò nimewo a nan travay yo fè</string>
+  <string name="pref_toasts_frequency">Frekans</string>
+  <string name="pref_toasts_frequency_summary">Frekans ant popup</string>
+  <string name="pref_toasts_timespan">Tan</string>
+  <string name="pref_toasts_timespan_summary">Tan nan ki chèk nimewo a nan travay yo fè</string>
+  <string name="pref_toasts_urgency_level">Enpòtans</string>
+  <string name="pref_toasts_urgency_level_summary">Enpòtans obligatwa pou travay konte</string>
+  <string name="pref_language">Lang</string>
+  <string name="pref_language_summary">Jeneral ak lang aplikasyon</string>
+
+  <string-array name="pref_toasts_frequency_names">
+    <item>Yon jou</item>
+    <item>Yon sèl è</item>
+    <item>Mwatye yon èdtan</item>
+    <item>Dis minit</item>
+    <item>Yon minut</item>
+    <item>Trant segonn</item>
+    <item>Tout tan tout tan</item>
+  </string-array>
+  <string-array name="pref_toasts_frequency_values">
+    <item>86400</item>
+    <item>3600</item>
+    <item>1800</item>
+    <item>600</item>
+    <item>60</item>
+    <item>30</item>
+    <item>0</item>
+  </string-array>
+  <string-array name="pref_toasts_timespan_names">
+    <item>Jodi a</item>
+    <item>Semèn sa a</item>
+    <item>Mwa sa a</item>
+  </string-array>
+  <string-array name="pref_toasts_timespan_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_names">
+    <item>Ba</item>
+    <item>Mwayen</item>
+    <item>Segondè</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="pref_language_names">
+    <item>Franse</item>
+    <item>Angle</item>
+    <item>Kreyòl</item>
+  </string-array>
+  <string-array name="pref_language_values">
+    <item>fr</item>
+    <item>en</item>
+    <item>crp</item>
+  </string-array>
+
+  <string name="title_task_list">Lis travay</string>
+  <string name="no_tasks">Ou pa oblije travay ... pou kounye a.</string>
+  <string name="task_filter_all_employee">Tout anplwaye</string>
+  <string-array name="task_filters_filters">
+    <item>Pa gen okenn filtè</item>
+    <item>Dat</item>
+    <item>Anplwaye</item>
+    <item>Enpòtans</item>
+    <item>Fini</item>
+  </string-array>
+  <string-array name="task_filters_dates">
+    <item>Tout dat</item>
+    <item>Jodi a</item>
+    <item>Semèn sa a</item>
+    <item>Mwa sa a</item>
+  </string-array>
+  <string-array name="task_filters_urgencies">
+    <item>Tout enpòtans</item>
+    <item>Ba</item>
+    <item>Mwayen</item>
+    <item>Segondè</item>
+  </string-array>
+  <string-array name="task_filters_completion">
+    <item>Tout travay</item>
+    <item>Travay ranpli</item>
+    <item>Travay nan pwogrè</item>
+  </string-array>
+  <string-array name="task_filters_urgencies_edit">
+    <item>Ba</item>
+    <item>Mwayen</item>
+    <item>Segondè</item>
+  </string-array>
+
+  <string name="title_task">Ti detay nan yon travay</string>
+  <string name="title_activity_edit_task">Koreksyon yon travay</string>
+  <string name="title_activity_new_task">Nouvo travay</string>
+  <string name="task_no_employee">Se pa anplwaye asiyen</string>
+
+  <string name="title_employee_list">Lis anplwaye</string>
+  <string name="no_employees">Ou pa gen yon anplwaye (sou aplikasyon an)</string>
+
+  <string name="title_activity_employee">Detay yo de yon anplwaye</string>
+  <string name="title_activity_edit_employee">Koreksyon yon anplwaye</string>
+  <string name="title_activity_new_employee">Nouvo anplwaye</string>
+  <string name="title_prefs">Preferans</string>
+</resources>
