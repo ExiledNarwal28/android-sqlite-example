@@ -29,9 +29,9 @@ public class TimeService extends Service {
   public static final String TASKS_COUNT  = "tasksCount";
   public static final String TO_DO_THIS_X = "toDoThisX";
 
-  private String selection        = null;
-  ArrayList<String> selectionArgs = new ArrayList<>();
-  private String toDoThisX        = null;
+  private String            selection     = null;
+  private ArrayList<String> selectionArgs = new ArrayList<>();
+  private String            toDoThisX     = null;
 
   // TODO : Trouver un moyen pour faire starté le service a toutes les X secondes
   @Override
@@ -41,8 +41,8 @@ public class TimeService extends Service {
     getInfoFromPrefs();
 
     Intent timeIntent = new Intent(NOTIFICATION);
-    timeIntent.putExtra(TASKS_COUNT, getTasksCount());
-    timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);
+    timeIntent.putExtra(TASKS_COUNT, getTasksCount()); // Nombre de tâche
+    timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);      // Texte en lien avec la période de temps
     sendBroadcast(timeIntent);
 
     return Service.START_NOT_STICKY; // Ceci permet de ne pas redémarrer le service s'il est terminé
@@ -62,20 +62,23 @@ public class TimeService extends Service {
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
 
-    switch (0) {
+    // Laps de temps
+    // switch (getPrefs("timespan") {
+    switch (2) {
       case 0:
         // Aujourd'hui
 
-        selection = "(" + Task.KEY_date + " =?) AND (" + Task.KEY_urgency_level + " >=?)";
+        selection = "(" + Task.KEY_date + " =?) AND (" + Task.KEY_urgency_level + " >=?) AND (" + Task.KEY_completed + " =?)";
 
         selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
+        // toDoThisX = getPrefs("timespan") en texte
         toDoThisX = getString(R.string.info_to_do_this_day);
         break;
       case 1:
         // Semaine
 
-        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?)";
+        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?) AND (" + Task.KEY_completed + " =?)";
 
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
@@ -85,7 +88,7 @@ public class TimeService extends Service {
       case 2:
         // Mois
 
-        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?)";
+        selection = "(" + Task.KEY_date + " BETWEEN ? AND ?) AND (" + Task.KEY_urgency_level + " >=?) AND (" + Task.KEY_completed + " =?)";
 
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
@@ -94,10 +97,12 @@ public class TimeService extends Service {
         break;
     }
 
-    selectionArgs.add(Integer.toString(0));
-
+    // selectionArgs.add(getPrefs("urgencyLevel");
+    selectionArgs.add(Integer.toString(0)); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
+    selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
   }
 
+  // Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
   public int getTasksCount() {
     Cursor cursor = getContentResolver().query( TaskerContentProvider.CONTENT_URI_TASK,
                                                 new String[] { Task.KEY_ID },
