@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.IBinder;
+import android.preference.Preference;
 import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
@@ -16,13 +17,15 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by fabien on 17-04-24.
  */
 
 // Source : http://www.vogella.com/tutorials/AndroidServices/article.html
-public class TimeService extends Service {
+public class TimeService extends Service implements Preference.OnPreferenceChangeListener {
   public static final String TAG = TimeService.class.getName();
 
   public static final String NOTIFICATION = TimeReceiver.class.getCanonicalName();
@@ -40,17 +43,27 @@ public class TimeService extends Service {
 
     getInfoFromPrefs();
 
-    Intent timeIntent = new Intent(NOTIFICATION);
-    timeIntent.putExtra(TASKS_COUNT, getTasksCount()); // Nombre de tâche
-    timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);      // Texte en lien avec la période de temps
-    sendBroadcast(timeIntent);
+    Timer timer         = new Timer();
+    TimerTask timeTask  = new TimeTask();
 
-    return Service.START_NOT_STICKY; // Ceci permet de ne pas redémarrer le service s'il est terminé
+    timer.scheduleAtFixedRate(timeTask, 0, 3000); // Ceci s'exécute, puis attend X secondes avant de continuer le programme
+
+    return Service.START_STICKY; // Ceci permet de redémarrer le service s'il est terminé
   }
 
   @Override
   public IBinder onBind(Intent intent) {
     return null;
+  }
+
+  // TODO : Restarter le service lorsque les préférences changes -> Dans MainActivity, plutôt?
+  @Override
+  public boolean onPreferenceChange(Preference preference, Object o) {
+    return false;
+  }
+
+  // Les opérations du service executés à chaque fréquence
+  private void executeService() {
   }
 
   private void getInfoFromPrefs() {
@@ -111,5 +124,14 @@ public class TimeService extends Service {
                                                 null);
 
     return (cursor != null) ? cursor.getCount() : 0;
+  }
+
+  class TimeTask extends TimerTask {
+    public void run() {
+      Intent timeIntent = new Intent(NOTIFICATION);
+      timeIntent.putExtra(TASKS_COUNT, getTasksCount()); // Nombre de tâche
+      timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);      // Texte en lien avec la période de temps
+      sendBroadcast(timeIntent);
+    }
   }
 }
