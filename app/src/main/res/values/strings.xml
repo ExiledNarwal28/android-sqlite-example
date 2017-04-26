@@ -21,6 +21,9 @@
   <string name="info_to_do_this_day">à faire aujourd\'hui</string>
   <string name="info_to_do_this_week">à faire cette semaine</string>
   <string name="info_to_do_this_month">à faire ce mois</string>
+  <string name="info_urgency_low_and_plus">à urgence basse et +</string>
+  <string name="info_urgency_medium_and_plus">à urgence moyenne et +</string>
+  <string name="info_urgency_high">à urgence haute</string>
 
   <string name="task">Tâche</string>
   <string name="tasks">Tâches</string>

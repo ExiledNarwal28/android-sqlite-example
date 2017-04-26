@@ -24,7 +24,7 @@
     android:id="@+id/lp_pref_toasts_timespan"
     android:key="toasts_timespan"
     android:dependency="toasts"
-    android:defaultValue="1"
+    android:defaultValue="600"
     android:singleLine="true"
     android:title="@string/pref_toasts_timespan"
     android:summary="@string/pref_toasts_timespan_summary"
@@ -43,7 +43,7 @@
   <ListPreference
     android:id="@+id/lp_pref_language"
     android:key="language"
-    android:defaultValue="1"
+    android:defaultValue="fr"
     android:singleLine="true"
     android:title="@string/pref_language"
     android:summary="@string/pref_language_summary"

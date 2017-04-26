@@ -7,10 +7,4 @@
     android:id="@+id/menu_cancel"
     android:title="@string/action_cancel"
     app:showAsAction="never"/>
-
-  <item
-    android:id="@+id/menu_prefs"
-    android:title="@string/action_settings"
-    app:showAsAction="never"/>
-
 </menu>

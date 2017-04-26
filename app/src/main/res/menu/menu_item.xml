@@ -13,9 +13,4 @@
     android:title="@string/action_delete"
     app:showAsAction="never"/>
 
-  <item
-    android:id="@+id/menu_prefs"
-    android:title="@string/action_settings"
-    app:showAsAction="never"/>
-
 </menu>

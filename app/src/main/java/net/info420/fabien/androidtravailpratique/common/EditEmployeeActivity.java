@@ -1,7 +1,6 @@
 package net.info420.fabien.androidtravailpratique.common;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -146,9 +145,6 @@ public class EditEmployeeActivity extends FragmentActivity {
     switch (item.getItemId()) {
       case R.id.menu_cancel:
         finish();
-        break;
-      case R.id.menu_prefs:
-        startActivity(new Intent(this, PrefsActivity.class));
         break;
       default:
         break;

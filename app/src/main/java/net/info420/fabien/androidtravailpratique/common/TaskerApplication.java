@@ -21,6 +21,12 @@ import org.joda.time.format.DateTimeFormat;
 public class TaskerApplication extends Application {
   private static final String TAG = TaskerApplication.class.getName();
 
+  public static final String PREFS_TOASTS               = "toasts";
+  public static final String PREFS_TOASTS_FREQUENCY     = "toasts_frequency";
+  public static final String PREFS_TOASTS_TIMESPAN      = "toasts_timespan";
+  public static final String PREFS_TOASTS_URGENCY_LEVEL = "toasts_urgency_level";
+  public static final String PREFS_LANGUAGE             = "language";
+
   // TODO : Enlever ceci si ça sert à rien.
   public SQLiteDatabase database;
   public DBHelper dbHelper;

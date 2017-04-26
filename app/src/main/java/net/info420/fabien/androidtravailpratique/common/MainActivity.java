@@ -5,8 +5,11 @@ import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
@@ -20,7 +23,7 @@ import net.info420.fabien.androidtravailpratique.utils.TimeService;
 
 import org.joda.time.DateTime;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
   private final static String TAG = MainActivity.class.getName();
 
   // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
@@ -30,6 +33,8 @@ public class MainActivity extends Activity {
   private TimeReceiver timeReceiver = new TimeReceiver();
 
   private Menu menu;
+
+  private Intent timeServiceIntent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +108,8 @@ public class MainActivity extends Activity {
       }
     }
 
-    startService(new Intent(this, TimeService.class));
+    timeServiceIntent = new Intent(this, TimeService.class);
+    startService(timeServiceIntent);
 
     initUI();
   }
@@ -127,12 +133,14 @@ public class MainActivity extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
+    PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
     registerReceiver(timeReceiver, new IntentFilter(TimeService.NOTIFICATION));
   }
 
   @Override
   protected void onPause() {
     super.onPause();
+    PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
     unregisterReceiver(timeReceiver);
   }
 
@@ -177,5 +185,24 @@ public class MainActivity extends Activity {
     }
 
     return true;
+  }
+
+  // Lorsqu'une préférence de toast est modifiée, on recommence le TimeService
+  @Override
+  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+    Log.d(TAG, String.format("PREFS : Update! -> %s", key));
+
+    // Si la préférence concerne les toasts...
+    if (key.equals(TaskerApplication.PREFS_TOASTS)           ||
+        key.equals(TaskerApplication.PREFS_TOASTS_FREQUENCY) ||
+        key.equals(TaskerApplication.PREFS_TOASTS_TIMESPAN)  ||
+        key.equals(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL)) {
+
+      Log.d(TAG, "PREFS : Update is toast!");
+      // On recommence le service!
+      stopService(timeServiceIntent);
+      startService(timeServiceIntent);
+    }
   }
 }

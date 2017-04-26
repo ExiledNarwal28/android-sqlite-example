@@ -148,9 +148,6 @@ public class EmployeeActivity extends Activity {
 
         finish();
         break;
-      case R.id.menu_prefs:
-        startActivity(new Intent(this, PrefsActivity.class));
-        break;
       default:
         break;
     }

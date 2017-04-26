@@ -166,9 +166,6 @@ public class TaskActivity extends Activity {
         getContentResolver().delete(taskUri, null, null);
         finish();
         break;
-      case R.id.menu_prefs:
-        startActivity(new Intent(this, PrefsActivity.class));
-        break;
       default:
         break;
     }

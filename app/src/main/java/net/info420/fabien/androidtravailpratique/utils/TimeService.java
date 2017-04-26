@@ -2,12 +2,14 @@ package net.info420.fabien.androidtravailpratique.utils;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.IBinder;
-import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 
 import org.joda.time.DateTimeConstants;
@@ -25,17 +27,20 @@ import java.util.TimerTask;
  */
 
 // Source : http://www.vogella.com/tutorials/AndroidServices/article.html
-public class TimeService extends Service implements Preference.OnPreferenceChangeListener {
+public class TimeService extends Service {
   public static final String TAG = TimeService.class.getName();
 
-  public static final String NOTIFICATION = TimeReceiver.class.getCanonicalName();
-  public static final String TASKS_COUNT  = "tasksCount";
-  public static final String TO_DO_THIS_X = "toDoThisX";
+  public static final String NOTIFICATION  = TimeReceiver.class.getCanonicalName();
+  public static final String TASKS_COUNT   = "tasksCount";
+  public static final String TIMESPAN      = "timespan";
+  public static final String URGENCY_LEVEL = "urgencyLevel";
 
-  private String            selection     = null;
-  private ArrayList<String> selectionArgs = new ArrayList<>();
-  private String            toDoThisX     = null;
-  private int               frequency     = 0;
+  private boolean           toastsEnabled    = true;
+  private String            selection        = null;
+  private ArrayList<String> selectionArgs    = new ArrayList<>();
+  private int               frequency        = 0;
+  private String            timespanText     = null;
+  private String            urgencyLevelText = null;
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
@@ -43,10 +48,17 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
 
     getInfoFromPrefs();
 
-    Timer timer         = new Timer();
-    TimerTask timeTask  = new TimeTask();
+    // Si la fréquence est "jamais", on ne veut pas starter de Timer
+    if (frequency == 0) {
+      return Service.START_STICKY; // Ceci permet de redémarrer le service s'il est terminé
+    }
 
-    timer.scheduleAtFixedRate(timeTask, 0, frequency * 1000); // Ceci s'exécute, puis attend X secondes avant de continuer le programme
+    if (toastsEnabled) {
+      Timer timer         = new Timer();
+      TimerTask timeTask  = new TimeTask();
+
+      timer.scheduleAtFixedRate(timeTask, 0, frequency * 1000); // Ceci s'exécute, puis attend X secondes avant de continuer le programme
+    }
 
     return Service.START_STICKY; // Ceci permet de redémarrer le service s'il est terminé
   }
@@ -56,33 +68,28 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
     return null;
   }
 
-  // TODO : Restarter le service lorsque les préférences changes -> Dans MainActivity, plutôt?
-  @Override
-  public boolean onPreferenceChange(Preference preference, Object o) {
-    return false;
-  }
-
-  // Les opérations du service executés à chaque fréquence
-  private void executeService() {
-  }
-
+  // Aller chercher les informations depuis les préférences
+  // Source : http://stackoverflow.com/questions/21820031/getting-value-from-edittext-preference-in-preference-screen
   private void getInfoFromPrefs() {
-    // TODO : Aller chercher les infos du toasts avec les préférences
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-    // Infos à aller chercher : Laps de temps (aujourd'hui, semaine, mois)
+    // Infos à aller chercher : Booléen pour l'activation des toasts
+    //                          Laps de temps (aujourd'hui, semaine, mois)
     //                          Niveau d'urgence minimum
     //                          Fréquence des notifications
 
+    // On va chercher le booléen d'activation des toasts
+    toastsEnabled = prefs.getBoolean(TaskerApplication.PREFS_TOASTS, true);
+
     // On va chercher la fréquence
-    frequency = 5;
-    // frequence = getPrefs("");
+    frequency = Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_FREQUENCY, "600"));
 
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
 
     // Laps de temps
-    // switch (getPrefs("timespan") {
-    switch (2) {
+    // switch (getPrefs("timespanText") {
+    switch (Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_TIMESPAN, "1"))) {
       case 0:
         // Aujourd'hui
 
@@ -90,8 +97,8 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
 
         selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
-        // toDoThisX = getPrefs("timespan") en texte
-        toDoThisX = getString(R.string.info_to_do_this_day);
+        // timespanText = getPrefs("timespanText") en texte
+        timespanText = getString(R.string.info_to_do_this_day);
         break;
       case 1:
         // Semaine
@@ -101,7 +108,7 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-        toDoThisX = getString(R.string.info_to_do_this_week);
+        timespanText = getString(R.string.info_to_do_this_week);
         break;
       case 2:
         // Mois
@@ -111,13 +118,27 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-        toDoThisX = getString(R.string.info_to_do_this_month);
+        timespanText = getString(R.string.info_to_do_this_month);
+        break;
+    }
+
+    switch (Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL, Integer.toString(0)))) {
+      case 0:
+        urgencyLevelText = getString(R.string.info_urgency_low_and_plus);
+        break;
+      case 1:
+        urgencyLevelText = getString(R.string.info_urgency_medium_and_plus);
+        break;
+      case 2:
+        urgencyLevelText = getString(R.string.info_urgency_high);
         break;
     }
 
     // selectionArgs.add(getPrefs("urgencyLevel");
-    selectionArgs.add(Integer.toString(0)); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
+    selectionArgs.add(prefs.getString(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL, Integer.toString(0))); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
     selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
+
+    // Pour afficher un petit descriptif du genre : (bas et +)
   }
 
   // Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
@@ -135,8 +156,11 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
   class TimeTask extends TimerTask {
     public void run() {
       Intent timeIntent = new Intent(NOTIFICATION);
-      timeIntent.putExtra(TASKS_COUNT, getTasksCount()); // Nombre de tâche
-      timeIntent.putExtra(TO_DO_THIS_X, toDoThisX);      // Texte en lien avec la période de temps
+
+      timeIntent.putExtra(TASKS_COUNT,    getTasksCount()); // Nombre de tâche
+      timeIntent.putExtra(TIMESPAN,       timespanText);      // Texte en lien avec la période de temps
+      timeIntent.putExtra(URGENCY_LEVEL,  urgencyLevelText);      // Texte en lien avec le niveau d'urgence
+
       sendBroadcast(timeIntent);
     }
   }
