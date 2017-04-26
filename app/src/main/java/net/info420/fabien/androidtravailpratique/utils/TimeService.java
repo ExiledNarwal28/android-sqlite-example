@@ -35,8 +35,8 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
   private String            selection     = null;
   private ArrayList<String> selectionArgs = new ArrayList<>();
   private String            toDoThisX     = null;
+  private int               frequency     = 0;
 
-  // TODO : Trouver un moyen pour faire starté le service a toutes les X secondes
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
     Log.d(TAG, NOTIFICATION);
@@ -46,7 +46,7 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
     Timer timer         = new Timer();
     TimerTask timeTask  = new TimeTask();
 
-    timer.scheduleAtFixedRate(timeTask, 0, 3000); // Ceci s'exécute, puis attend X secondes avant de continuer le programme
+    timer.scheduleAtFixedRate(timeTask, 0, frequency * 1000); // Ceci s'exécute, puis attend X secondes avant de continuer le programme
 
     return Service.START_STICKY; // Ceci permet de redémarrer le service s'il est terminé
   }
@@ -71,6 +71,11 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
 
     // Infos à aller chercher : Laps de temps (aujourd'hui, semaine, mois)
     //                          Niveau d'urgence minimum
+    //                          Fréquence des notifications
+
+    // On va chercher la fréquence
+    frequency = 5;
+    // frequence = getPrefs("");
 
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
@@ -126,6 +131,7 @@ public class TimeService extends Service implements Preference.OnPreferenceChang
     return (cursor != null) ? cursor.getCount() : 0;
   }
 
+  // Ce qui sera exécuté chaque X seconde
   class TimeTask extends TimerTask {
     public void run() {
       Intent timeIntent = new Intent(NOTIFICATION);
