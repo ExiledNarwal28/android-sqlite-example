@@ -9,7 +9,7 @@
   <string name="action_cancel">Annuler</string>
   <string name="action_settings">Règlages</string>
   <string name="action_call">Appeler</string>
-  <string name="action_validate">Valider</string>
+  <string name="action_confirm">Valider</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
   <string name="warning_missing_required_fields">Des champs obligatoires sont vides</string>
@@ -27,7 +27,7 @@
 
   <string name="task">Tâche</string>
   <string name="tasks">Tâches</string>
-  <string name="task_name">Nom de la tâche</string>
+  <string name="task_name">Nom</string>
   <string name="task_description">Description</string>
   <string name="task_date">Date d\'échéance</string>
   <string name="task_urgency_level">Niveau d\'urgence</string>
@@ -43,19 +43,19 @@
   <string name="task_urgency_level_high">Haut</string>
 
   <string name="employee">Employé</string>
-  <string name="employee_name">Nom de l\'employé</string>
+  <string name="employee_name">Nom</string>
   <string name="employee_mail">Adresse courriel</string>
   <string name="employee_phone">Numéro de téléphone</string>
   <string name="employee_job">Poste</string>
 
   <string name="pref_toasts">Avertissements Toasts</string>
-  <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien avec les dates d\'échéances des tâches</string>
+  <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>
   <string name="pref_toasts_frequency">Fréquence</string>
-  <string name="pref_toasts_frequency_summary">Fréquence minimale pour afficher les Toasts</string>
+  <string name="pref_toasts_frequency_summary">Fréquence entre les Toasts</string>
   <string name="pref_toasts_timespan">Laps de temps</string>
   <string name="pref_toasts_timespan_summary">Laps de temps dans lequel on vérifie le nombre de tâches à faire</string>
   <string name="pref_toasts_urgency_level">Niveau d\'urgence</string>
-  <string name="pref_toasts_urgency_level_summary">Niveau d\'urgence requis pour afficher les Toasts</string>
+  <string name="pref_toasts_urgency_level_summary">Niveau d\'urgence requis pour compter les tâches</string>
   <string name="pref_language">Langue</string>
   <string name="pref_language_summary">Langue générale de l\'application</string>
 
@@ -107,13 +107,13 @@
   </string-array>
 
   <string name="title_task_list">Liste des tâches</string>
-  <string name="no_tasks">Vous n\'avez pas de tâche... pour l\'instant</string>
+  <string name="no_tasks">Vous n\'avez pas de tâche... pour l\'instant.</string>
   <string name="task_filter_all_employee">Tous les employés</string>
   <string-array name="task_filters_filters">
     <item>Aucun filtre</item>
     <item>Date</item>
     <item>Employé</item>
-    <item>Urgence</item>
+    <item>Niveau d\'urgence</item>
     <item>Complétion</item>
   </string-array>
   <string-array name="task_filters_dates">

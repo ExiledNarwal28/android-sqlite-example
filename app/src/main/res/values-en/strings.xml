@@ -1,10 +1,35 @@
 <resources>
   <string name="app_name">ROYF_Android</string>
 
+  <string name="error">Error</string>
+
+  <string name="action_add">Add</string>
+  <string name="action_edit">Edit</string>
+  <string name="action_delete">Delete</string>
+  <string name="action_cancel">Cancel</string>
+  <string name="action_settings">Settings</string>
+  <string name="action_call">Call</string>
+  <string name="action_confirm">Confirm</string>
+  <string name="action_send_sms">Send a SMS</string>
+
+  <string name="warning_missing_required_fields">Some required fields are missing</string>
+  <string name="warning_wrong_phone_format">Wrong phone number format</string>
+  <string name="warning_wrong_mail_format">Wrong e-mail format</string>
+
+  <string name="info_you_have">You have</string>
+  <string name="info_you_have_no">You have no</string>
+  <string name="info_to_do_this_day">to do today</string>
+  <string name="info_to_do_this_week">to do this week</string>
+  <string name="info_to_do_this_month">to do this month</string>
+  <string name="info_urgency_low_and_plus">low urgency and +</string>
+  <string name="info_urgency_medium_and_plus">medium urgency and +</string>
+  <string name="info_urgency_high">high urgency</string>
+
   <string name="task">Task</string>
+  <string name="tasks">Tasks</string>
   <string name="task_name">Name</string>
   <string name="task_description">Description</string>
-  <string name="task_date">Finish date</string>
+  <string name="task_date">Due date</string>
   <string name="task_urgency_level">Urgency level</string>
   <string name="task_status">Status</string>
   <string name="task_assigned_employee">Assigned employee</string>
@@ -18,22 +43,111 @@
   <string name="task_urgency_level_high">High</string>
 
   <string name="employee">Employee</string>
-  <string name="employee_family_name">Family name</string>
   <string name="employee_name">Name</string>
-  <string name="employee_mail">E-mail address</string>
+  <string name="employee_mail">E-mail</string>
   <string name="employee_phone">Phone number</string>
+  <string name="employee_job">Job</string>
 
-  <string name="action_add">Add</string>
-  <string name="action_edit">Edit</string>
-  <string name="action_delete">Delete</string>
-  <string name="action_settings">Settings</string>
+  <string name="pref_toasts">Toast notifications</string>
+  <string name="pref_toasts_summary">Activate or deactivate Toast notifications concerning the amount of tasks to do</string>
+  <string name="pref_toasts_frequency">Frequency</string>
+  <string name="pref_toasts_frequency_summary">Frequency between Toast notifications</string>
+  <string name="pref_toasts_timespan">Timespan</string>
+  <string name="pref_toasts_timespan_summary">Timespan in which we check the amount of tasks to do</string>
+  <string name="pref_toasts_urgency_level">Urgency level</string>
+  <string name="pref_toasts_urgency_level_summary">Urgency level required to count tasks</string>
+  <string name="pref_language">Language</string>
+  <string name="pref_language_summary">Application language</string>
+
+  <string-array name="pref_toasts_frequency_names">
+    <item>A day</item>
+    <item>An hour</item>
+    <item>Half an hour</item>
+    <item>Ten minutes</item>
+    <item>One minute</item>
+    <item>Thirty seconds</item>
+    <item>Never</item>
+  </string-array>
+  <string-array name="pref_toasts_frequency_values">
+    <item>86400</item>
+    <item>3600</item>
+    <item>1800</item>
+    <item>600</item>
+    <item>60</item>
+    <item>30</item>
+    <item>0</item>
+  </string-array>
+  <string-array name="pref_toasts_timespan_names">
+    <item>Today</item>
+    <item>This week</item>
+    <item>This month</item>
+  </string-array>
+  <string-array name="pref_toasts_timespan_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_names">
+    <item>Low</item>
+    <item>Medium</item>
+    <item>High</item>
+  </string-array>
+  <string-array name="pref_toasts_urgency_level_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+  <string-array name="pref_language_names">
+    <item>French</item>
+    <item>English</item>
+  </string-array>
+  <string-array name="pref_language_values">
+    <item>fr</item>
+    <item>en</item>
+  </string-array>
 
   <string name="title_task_list">Tasks list</string>
-  <string name="title_task">Task details</string>
+  <string name="no_tasks">You have no task... for now.</string>
+  <string name="task_filter_all_employee">All employees</string>
+  <string-array name="task_filters_filters">
+    <item>No filter</item>
+    <item>Date</item>
+    <item>Employee</item>
+    <item>Urgency level</item>
+    <item>Completion</item>
+  </string-array>
+  <string-array name="task_filters_dates">
+    <item>All dates</item>
+    <item>Today</item>
+    <item>This week</item>
+    <item>This month</item>
+  </string-array>
+  <string-array name="task_filters_urgencies">
+    <item>All urgency levels</item>
+    <item>Low</item>
+    <item>Medium</item>
+    <item>High</item>
+  </string-array>
+  <string-array name="task_filters_completion">
+    <item>All tasks</item>
+    <item>Non-completed tasks</item>
+    <item>Completed tasks</item>
+  </string-array>
+  <string-array name="task_filters_urgencies_edit">
+    <item>Low</item>
+    <item>Medium</item>
+    <item>High</item>
+  </string-array>
+
+  <string name="title_task">Task detail</string>
   <string name="title_activity_edit_task">Edit task</string>
   <string name="title_activity_new_task">New task</string>
+  <string name="task_no_employee">No assigned employee</string>
+
   <string name="title_employee_list">Employees list</string>
-  <string name="title_activity_employee">Employee details</string>
+  <string name="no_employees">You have no employee (in this application)</string>
+
+  <string name="title_activity_employee">Employee detail</string>
   <string name="title_activity_edit_employee">Edit employee</string>
   <string name="title_activity_new_employee">New employee</string>
   <string name="title_prefs">Preferences</string>
