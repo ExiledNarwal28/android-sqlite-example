@@ -2,9 +2,7 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Window;
@@ -12,12 +10,9 @@ import android.view.WindowManager;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.utils.DBHelper;
-import net.info420.fabien.androidtravailpratique.utils.LocaleUtils;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-
-import java.util.Locale;
 
 /**
  * Created by fabien on 17-03-26.
@@ -31,9 +26,6 @@ public class TaskerApplication extends Application {
   public static final String PREFS_TOASTS_TIMESPAN      = "toasts_timespan";
   public static final String PREFS_TOASTS_URGENCY_LEVEL = "toasts_urgency_level";
   public static final String PREFS_LANGUAGE             = "language";
-
-  public static final String LOCALE_FRENCH  = "fr";
-  public static final String LOCALE_ENGLISH = "en";
 
   // TODO : Enlever ceci si ça sert à rien.
   public SQLiteDatabase database;
@@ -55,38 +47,6 @@ public class TaskerApplication extends Application {
     if (recreateDB) {
       dbHelper.recreateDB(dbHelper.getWritableDatabase());
     }
-
-  }
-
-  // Changement de locale (français-anglais)
-  // Source : http://stackoverflow.com/questions/4985805/set-locale-programmatically
-  protected void setupLocale() {
-    /*
-    String locale = PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr");
-
-    Log.d(TAG, locale);
-
-    Configuration configuration = new Configuration();
-
-    // TODO : Y'a pas un meilleur moyen d'aller chercher la locale?
-    if (locale.equals(LOCALE_FRENCH)) {
-      configuration.setLocale(Locale.FRENCH);
-    } else if (locale.equals(LOCALE_ENGLISH)) {
-      configuration.setLocale(Locale.ENGLISH);
-    }
-
-    getApplicationContext().createConfigurationContext(configuration);
-    */
-    String locale = PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr");
-
-    LocaleUtils.setLocale(new Locale(locale));
-    LocaleUtils.updateConfig(this, getBaseContext().getResources().getConfiguration());
-  }
-
-  @Override
-  public void onConfigurationChanged(Configuration newConfig) {
-    super.onConfigurationChanged(newConfig);
-    LocaleUtils.updateConfig(this, newConfig);
   }
 
   // TODO : Vérifier si c'est utile

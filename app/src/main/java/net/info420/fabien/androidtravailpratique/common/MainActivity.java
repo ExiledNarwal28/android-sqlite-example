@@ -111,8 +111,9 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     timeServiceIntent = new Intent(this, TimeService.class);
     startService(timeServiceIntent);
 
+    LocaleUtils.initialize(this);
+
     initUI();
-    LocaleUtils.updateConfig(this);
   }
 
   protected void initUI() {
@@ -206,8 +207,10 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
     // Si la préférence concerne la langue...
     if (key.equals(TaskerApplication.PREFS_LANGUAGE)) {
-      ((TaskerApplication) getApplication()).setupLocale();
+      // ((TaskerApplication) getApplication()).updateLanguage(this);
       // recreate(); // On restart l'activité, afin de modifier la langue
+
+      LocaleUtils.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
     }
   }
 }

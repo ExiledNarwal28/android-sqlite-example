@@ -22,7 +22,7 @@
 
     <activity android:name=".common.MainActivity"
               android:theme="@style/AppTheme.NoActionBar"
-              android:configChanges="locale|layoutDirection">
+              android:configChanges="locale|layoutDirection|orientation|keyboardHidden|screenSize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
