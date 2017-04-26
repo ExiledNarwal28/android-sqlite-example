@@ -4,8 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context="net.info420.fabien.androidtravailpratique.common.PrefsActivity">
+  android:layout_height="match_parent">
 
   <include
     layout="@layout/toolbar"

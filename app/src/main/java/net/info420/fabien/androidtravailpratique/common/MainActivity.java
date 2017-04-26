@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
@@ -17,6 +16,7 @@ import android.widget.Toolbar;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
+import net.info420.fabien.androidtravailpratique.utils.LocaleUtils;
 import net.info420.fabien.androidtravailpratique.utils.Task;
 import net.info420.fabien.androidtravailpratique.utils.TimeReceiver;
 import net.info420.fabien.androidtravailpratique.utils.TimeService;
@@ -112,6 +112,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     startService(timeServiceIntent);
 
     initUI();
+    LocaleUtils.updateConfig(this);
   }
 
   protected void initUI() {
@@ -130,6 +131,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
   }
+
   @Override
   protected void onResume() {
     super.onResume();
@@ -191,18 +193,21 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
   @Override
   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-    Log.d(TAG, String.format("PREFS : Update! -> %s", key));
-
     // Si la préférence concerne les toasts...
     if (key.equals(TaskerApplication.PREFS_TOASTS)           ||
         key.equals(TaskerApplication.PREFS_TOASTS_FREQUENCY) ||
         key.equals(TaskerApplication.PREFS_TOASTS_TIMESPAN)  ||
         key.equals(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL)) {
 
-      Log.d(TAG, "PREFS : Update is toast!");
       // On recommence le service!
       stopService(timeServiceIntent);
       startService(timeServiceIntent);
+    }
+
+    // Si la préférence concerne la langue...
+    if (key.equals(TaskerApplication.PREFS_LANGUAGE)) {
+      ((TaskerApplication) getApplication()).setupLocale();
+      // recreate(); // On restart l'activité, afin de modifier la langue
     }
   }
 }

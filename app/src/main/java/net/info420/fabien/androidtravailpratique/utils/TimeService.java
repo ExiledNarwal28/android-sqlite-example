@@ -122,6 +122,7 @@ public class TimeService extends Service {
         break;
     }
 
+    // On va ensuite chercher le texte qui décrit le niveau d'urgence
     switch (Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL, Integer.toString(0)))) {
       case 0:
         urgencyLevelText = getString(R.string.info_urgency_low_and_plus);
