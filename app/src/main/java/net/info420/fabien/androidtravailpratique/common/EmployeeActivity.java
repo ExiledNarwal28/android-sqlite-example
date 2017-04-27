@@ -2,7 +2,9 @@ package net.info420.fabien.androidtravailpratique.common;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -14,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -74,7 +78,7 @@ public class EmployeeActivity extends Activity {
     btnEmployeeSendSms.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        // TODO : Envoie un SMS à l'employé
+        sendSMS();
       }
     });
 
@@ -160,12 +164,49 @@ public class EmployeeActivity extends Activity {
     return true;
   }
 
+  private void sendSMS() {
+    // On vérifie qu'il y a bien un numéro de téléphone
+    // On vérifie aussi qu'on a bien la permission d'envoyer un SMS
+    if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
+      // TODO : Faire une classe séparée qui renvoie un dialogue
+      // Source : http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271
+      AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+      alertDialog.setTitle("Envoie d'un SMS");
+      alertDialog.setMessage("Veuillez entrer votre message");
+
+      final EditText input = new EditText(this);
+      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.MATCH_PARENT);
+      input.setLayoutParams(lp);
+      alertDialog.setView(input);
+      // alertDialog.setIcon(R.drawable.key);
+
+      alertDialog.setPositiveButton("Envoyer",
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            String message = input.getText().toString();
+            if (message.compareTo("") == 0) {
+              // TODO : Envoyer le SMS
+            }
+          }
+        });
+
+      alertDialog.setNegativeButton("Annuler",
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+
+      alertDialog.show();
+    }
+  }
+
   private void callEmployee() {
     // On vérifie qu'il y a bien un numéro de téléphone
     // On vérifie aussi qu'on a bien la permission d'appeler le contact
-    Log.d(TAG, "ok" + employeePhone);
     if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)) {
-      Log.d(TAG, "super ok");
       Intent callIntent = new Intent(Intent.ACTION_CALL);
       callIntent.setData(Uri.parse("tel:" + employeePhone));
       startActivity(callIntent);
