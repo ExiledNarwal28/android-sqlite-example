@@ -18,13 +18,13 @@
       android:authorities="net.info420.fabien.androidtravailpratique.data"
       android:name=".data.TaskerContentProvider" />
 
-    <service android:name=".utils.TimeService"/>
+    <service android:name=".utils.TempsService"/>
 
     <!-- Afin de modifier la locale (langue) dans l'application, je dois ajouter android:configChanges="locale|layoutDirection" -->
     <!-- locale est assez clair. Pas besoin d'explication, j'imagine. -->
     <!-- Pour ce qui est de layoutDirection, voici pourquoi il faut l'ajouter : http://stackoverflow.com/questions/13856229/onconfigurationchanged-is-not-called-over-jellybean4-2-1 -->
 
-    <activity android:name=".activities.MainActivity"
+    <activity android:name=".activities.PrincipaleActivity"
               android:theme="@style/AppTheme.NoActionBar"
               android:configChanges="locale|layoutDirection|orientation|keyboardHidden|screenSize">
       <intent-filter>

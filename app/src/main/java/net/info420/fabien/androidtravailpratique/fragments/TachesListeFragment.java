@@ -43,8 +43,8 @@ import static net.info420.fabien.androidtravailpratique.models.Task.KEY_urgency_
  * Created by fabien on 17-04-11.
  */
 
-public class TaskListFragment extends ListFragment implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
-  private final static String TAG = TaskListFragment.class.getName();
+public class TachesListeFragment extends ListFragment implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
+  private final static String TAG = TachesListeFragment.class.getName();
 
   private TaskAdapter taskAdapter;
 
@@ -61,7 +61,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
 
   // private TaskFragment taskFragment;
 
-  // public TaskListFragment() {
+  // public TachesListeFragment() {
   //   getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
   //   getChildFragmentManager().executePendingTransactions();
   // }

@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
               android:descendantFocusability="blocksDescendants">
 
-  <!-- TODO : Documenter descendantFocusability (ce qui t'as aidé pour onItemClick de MainActivity) -->
+  <!-- TODO : Documenter descendantFocusability (ce qui t'as aidé pour onItemClick de PrincipaleActivity) -->
   <!-- Source : http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter -->
 
   <TextView

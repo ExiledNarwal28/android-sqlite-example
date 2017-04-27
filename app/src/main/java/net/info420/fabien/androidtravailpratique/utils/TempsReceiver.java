@@ -12,28 +12,28 @@ import net.info420.fabien.androidtravailpratique.R;
  */
 
 // Source : http://www.vogella.com/tutorials/AndroidServices/article.html
-public class TimeReceiver extends BroadcastReceiver {
-  private final static String TAG = TimeReceiver.class.getName();
+public class TempsReceiver extends BroadcastReceiver {
+  private final static String TAG = TempsReceiver.class.getName();
 
   @Override
   public void onReceive(Context context, Intent intent) {
     if(intent.getExtras() != null) {
-      if (intent.getExtras().getInt(TimeService.TASKS_COUNT) == 0) {
+      if (intent.getExtras().getInt(TempsService.TASKS_COUNT) == 0) {
         Toast.makeText( context,
                         String.format("%s %s %s %s.",
                                       context.getString(R.string.info_you_have_no),
                                       context.getString(R.string.task).toLowerCase(),
-                                      intent.getExtras().getString(TimeService.URGENCY_LEVEL),
-                                      intent.getExtras().getString(TimeService.TIMESPAN)),
+                                      intent.getExtras().getString(TempsService.URGENCY_LEVEL),
+                                      intent.getExtras().getString(TempsService.TIMESPAN)),
                         Toast.LENGTH_SHORT).show();
       } else {
         Toast.makeText( context,
                         String.format("%s %s %s %s %s.",
                                       context.getString(R.string.info_you_have),
-                                      intent.getExtras().getInt(TimeService.TASKS_COUNT),
-                                      ((intent.getExtras().getInt(TimeService.TASKS_COUNT) > 1) ? context.getString(R.string.tasks) : context.getString(R.string.task)).toLowerCase(),
-                                      intent.getExtras().getString(TimeService.URGENCY_LEVEL),
-                                      intent.getExtras().getString(TimeService.TIMESPAN)),
+                                      intent.getExtras().getInt(TempsService.TASKS_COUNT),
+                                      ((intent.getExtras().getInt(TempsService.TASKS_COUNT) > 1) ? context.getString(R.string.tasks) : context.getString(R.string.task)).toLowerCase(),
+                                      intent.getExtras().getString(TempsService.URGENCY_LEVEL),
+                                      intent.getExtras().getString(TempsService.TIMESPAN)),
                         Toast.LENGTH_SHORT).show();
       }
     }

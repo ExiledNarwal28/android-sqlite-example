@@ -28,10 +28,10 @@ import java.util.TimerTask;
  */
 
 // Source : http://www.vogella.com/tutorials/AndroidServices/article.html
-public class TimeService extends Service {
-  public static final String TAG = TimeService.class.getName();
+public class TempsService extends Service {
+  public static final String TAG = TempsService.class.getName();
 
-  public static final String NOTIFICATION  = TimeReceiver.class.getCanonicalName();
+  public static final String NOTIFICATION  = TempsReceiver.class.getCanonicalName();
   public static final String TASKS_COUNT   = "tasksCount";
   public static final String TIMESPAN      = "timespan";
   public static final String URGENCY_LEVEL = "urgencyLevel";

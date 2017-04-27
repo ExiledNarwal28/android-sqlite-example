@@ -1,20 +1,24 @@
 package net.info420.fabien.androidtravailpratique.application;
 
 import android.app.Application;
+import android.content.ContentValues;
 
 import net.info420.fabien.androidtravailpratique.data.DBHelper;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Task;
+
+import org.joda.time.DateTime;
 
 // TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure/
-// TODO : Exporter les méthodes vers un helper
 
 /**
  * L'application de base
  * Cette classe est le point d'entrée dans l'application Android.
  * Elle contient des variables utilisées partout dans l'application.
  *
- * @author Fabien Roy
+ * @author  Fabien Roy
  * @version 1.0
- * @since 17-03-26
+ * @since   17-03-26
  */
 public class TodoApplication extends Application {
   private static final String TAG = TodoApplication.class.getName();
@@ -28,7 +32,6 @@ public class TodoApplication extends Application {
 
   // TODO : Prod : Enlever ceci
   // Variables de développement
-  public DBHelper dbHelper;
   public boolean  recreationDb         = false;
   public boolean  creationTestTaches   = false;
   public boolean  creationTestEmployes = false;
@@ -40,14 +43,61 @@ public class TodoApplication extends Application {
   public void onCreate() {
     super.onCreate();
 
-    // TODO : Enlever dès que la base de données fonctionne
-
-    // Recréation de la base de données
-    dbHelper = new DBHelper(this);
-
     // Pour le développement, recréation de la base de données
-    if (recreationDb) {
-      dbHelper.recreateDB(dbHelper.getWritableDatabase());
+    if (recreationDb)
+      recreerDb();
+
+    if (creationTestTaches)
+      creerTestTaches();
+
+    if (creationTestEmployes)
+      creerTestEmployes();
+  }
+
+  // TODO : Enlever les méthodes de développement que la base de données fonctionne
+  private void recreerDb() {
+    DBHelper dbHelper = new DBHelper(this);
+    dbHelper.recreateDB(dbHelper.getWritableDatabase());
+  }
+
+  private void creerTestTaches() {
+    String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
+    String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
+    Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
+    int[]     taskDates           = { (int) (new DateTime().getMillis() / 10000), (int) (new DateTime(2017, 4, 20, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 22, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 28, 0, 0).getMillis() / 10000) };
+    int[]     taskUrgencyLevels   = { 0,                                          2,                                                            1,                                                            0 };
+
+    for (int i = 0; i < taskNames.length; i++) {
+      ContentValues values = new ContentValues();
+
+      // La tâche #4 n'a pas d'employé assigné (pour des tests)
+      if (i <= 2) {
+        values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+      } else {
+        values.putNull(Task.KEY_assigned_employee_ID);
+      }
+
+      values.put(Task.KEY_name,                 taskNames[i]);
+      values.put(Task.KEY_description,          taskDescriptions[i]);
+      values.put(Task.KEY_completed,            taskCompleteds[i]);
+      values.put(Task.KEY_date,                 taskDates[i]);
+      values.put(Task.KEY_urgency_level,        taskUrgencyLevels[i]);
+    }
+  }
+
+  private void creerTestEmployes() {
+    String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
+    String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
+    String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
+    String[] employeePhones = {"418-409-6568",          "420-420-4242",         "123-456-7890"};
+
+    for (int i = 0; i < employeeNames.length; i++) {
+      ContentValues values = new ContentValues();
+
+      values.put(Employee.KEY_name, employeeNames[i]);
+      values.put(Employee.KEY_job, employeeJobs[i]);
+      values.put(Employee.KEY_email, employeeEmails[i]);
+      values.put(Employee.KEY_phone, employeePhones[i]);
     }
   }
 }
