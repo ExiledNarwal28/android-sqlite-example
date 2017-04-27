@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.activities.NewTaskActivity;
 import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
@@ -354,7 +354,7 @@ public class TaskListFragment extends ListFragment implements AdapterView.OnItem
     Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
-    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TaskerApplication) getActivity().getApplication());
+    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
 
     setListAdapter(taskAdapter);
   }

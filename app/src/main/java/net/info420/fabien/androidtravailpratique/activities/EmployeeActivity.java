@@ -24,8 +24,8 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -69,7 +69,7 @@ public class EmployeeActivity extends Activity {
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_activity_employee);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
 
     tvEmployeeName = (TextView) findViewById(R.id.tv_employee_name);
     tvEmployeeJob = (TextView) findViewById(R.id.tv_task_description);

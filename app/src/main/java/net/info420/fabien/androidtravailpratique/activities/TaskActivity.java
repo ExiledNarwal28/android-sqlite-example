@@ -15,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
+import net.info420.fabien.androidtravailpratique.helpers.StringHelper;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -60,7 +62,7 @@ public class TaskActivity extends Activity {
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_task);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
 
 
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
@@ -101,10 +103,10 @@ public class TaskActivity extends Activity {
       tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
 
       // Conversion en date
-      tvTaskDate.setText(TaskerApplication.getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+      tvTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
-      tvTaskUrgencyLevel.setText(((TaskerApplication) getApplication()).getUrgencyLevel(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+      tvTaskUrgencyLevel.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)), this));
 
       // Et maintenant? Il faut afficher le nom de l'employé dans le bouton d'employé assigné.
 

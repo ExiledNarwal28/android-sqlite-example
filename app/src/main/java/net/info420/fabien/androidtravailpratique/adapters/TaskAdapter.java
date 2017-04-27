@@ -10,8 +10,10 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -25,7 +27,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
   private final String TAG = TaskAdapter.class.getName();
 
   private final LayoutInflater inflater;
-  private final TaskerApplication application;
+  private final TodoApplication application;
 
   private final class ViewHolder {
     TextView tvTaskName;
@@ -35,7 +37,8 @@ public class TaskAdapter extends SimpleCursorAdapter {
     CheckBox cbTaskCompleted;
   }
 
-  public TaskAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TaskerApplication application) {
+  // TODO : Passe un contexte plutôt qu'une Application
+  public TaskAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
     super(context, layout, cursor, from, to, flags);
 
     this.inflater = LayoutInflater.from(context);
@@ -60,11 +63,11 @@ public class TaskAdapter extends SimpleCursorAdapter {
 
     // Initialisation du UI
     viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
-    viewHolder.tvTaskDate.setText(TaskerApplication.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+    viewHolder.tvTaskDate.setText(DateHelper.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
     viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
 
-    // viewHolder.tvTaskUrgencyLevel.setText(application.getUrgencyLevel(urgencyLevel));
-    viewHolder.tvTaskUrgencyLevel.setBackgroundColor(application.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level))));
+    // viewHolder.tvTaskUrgencyLevel.setText(application.getUrgence(urgencyLevel));
+    viewHolder.tvTaskUrgencyLevel.setBackgroundColor(ColorHelper.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)), application));
 
     if (!cursor.isNull(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) {
       // On doit aller chercher le nom de l'employé

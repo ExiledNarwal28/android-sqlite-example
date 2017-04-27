@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 
 import java.util.Locale;
 
@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class LocaleHelper {
   public static void initialize(Context context) {
-    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TaskerApplication.PREFS_LANGUAGE, Locale.getDefault().getLanguage()));
+    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
   }
 
   public static boolean setLocale(Context context, String language) {

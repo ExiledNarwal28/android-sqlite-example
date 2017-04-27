@@ -18,18 +18,17 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.info420.fabien.androidtravailpratique.application.TaskerApplication.getFullDate;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
@@ -78,7 +77,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_activity_edit_task);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
 
 
     etTaskName              = (EditText)  findViewById(R.id.et_task_name);
@@ -151,7 +150,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
-      btnTaskDate.setText(TaskerApplication.getFullDate((int) taskDate));
+      btnTaskDate.setText(DateHelper.getLongueDate((int) taskDate));
     }
   }
 
@@ -210,7 +209,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
       etTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
 
       // Conversion en date
-      btnTaskDate.setText(getFullDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+      btnTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
       taskDate = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date));
 

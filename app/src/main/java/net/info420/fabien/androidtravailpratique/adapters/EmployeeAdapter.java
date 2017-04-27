@@ -9,7 +9,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 
 /**
@@ -22,7 +22,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
   private final String TAG = EmployeeAdapter.class.getName();
 
   private final LayoutInflater inflater;
-  private final TaskerApplication application;
+  private final TodoApplication application;
 
   private final class ViewHolder {
     public TextView tvEmployeeName;
@@ -30,7 +30,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
   }
 
   // TODO : Vérifier si on a besoin de l'application
-  public EmployeeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TaskerApplication application) {
+  public EmployeeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
     super(context, layout, cursor, from, to, flags);
 
     this.inflater = LayoutInflater.from(context);

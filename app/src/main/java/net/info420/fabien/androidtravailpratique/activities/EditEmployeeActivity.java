@@ -16,8 +16,8 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
@@ -59,7 +59,7 @@ public class EditEmployeeActivity extends FragmentActivity {
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_activity_edit_employee);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
 
     etEmployeeName  = (EditText) findViewById(R.id.et_employee_name);
     etEmployeeJob   = (EditText) findViewById(R.id.et_employee_job);

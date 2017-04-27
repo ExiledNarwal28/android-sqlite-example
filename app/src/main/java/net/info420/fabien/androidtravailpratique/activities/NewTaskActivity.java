@@ -17,11 +17,12 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_activity_new_task);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
 
     etTaskName              = (EditText)  findViewById(R.id.et_task_name);
     etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
@@ -139,7 +140,7 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
-      btnTaskDate.setText(TaskerApplication.getFullDate((int) taskDate));
+      btnTaskDate.setText(DateHelper.getLongueDate((int) taskDate));
     }
   }
 

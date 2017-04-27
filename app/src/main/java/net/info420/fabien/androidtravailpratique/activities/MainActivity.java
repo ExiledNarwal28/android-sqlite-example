@@ -19,7 +19,8 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.fragments.EmployeeListFragment;
 import net.info420.fabien.androidtravailpratique.fragments.PrefsFragment;
 import net.info420.fabien.androidtravailpratique.fragments.TaskListFragment;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
+import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.helpers.LocaleHelper;
 import net.info420.fabien.androidtravailpratique.models.Task;
@@ -54,7 +55,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
     // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
 
-    if (((TaskerApplication) getApplication()).writeTestTasks) {
+    if (((TodoApplication) getApplication()).creationTestTaches) {
       String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
       String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
       Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
       }
     }
 
-    if (((TaskerApplication) getApplication()).writeTestEmployees) {
+    if (((TodoApplication) getApplication()).creationTestEmployes) {
       String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
       String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
       String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
@@ -117,7 +118,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     setActionBar(toolbar);
     toolbar.setTitle(R.string.title_task_list);
 
-    ((TaskerApplication) getApplication()).setStatusBarColor(this);
+    ColorHelper.setStatusBarColor(this);
   }
 
   private void setFragment(int fragmentId) {
@@ -193,10 +194,10 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
     // Si la préférence concerne les toasts...
-    if (key.equals(TaskerApplication.PREFS_TOASTS)           ||
-        key.equals(TaskerApplication.PREFS_TOASTS_FREQUENCY) ||
-        key.equals(TaskerApplication.PREFS_TOASTS_TIMESPAN)  ||
-        key.equals(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL)) {
+    if (key.equals(TodoApplication.PREFS_TOASTS)           ||
+        key.equals(TodoApplication.PREFS_TOASTS_FREQUENCE) ||
+        key.equals(TodoApplication.PREFS_TOASTS_LAPS_TEMPS)  ||
+        key.equals(TodoApplication.PREFS_TOASTS_URGENCE)) {
 
       // On recommence le service!
       stopService(timeServiceIntent);
@@ -204,8 +205,8 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     }
 
     // Si la préférence concerne la langue...
-    if (key.equals(TaskerApplication.PREFS_LANGUAGE)) {
-      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
+    if (key.equals(TodoApplication.PREFS_LANGUE)) {
+      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TodoApplication.PREFS_LANGUE, "fr"));
 
       setFragment(FRAGMENT_PREFS);
     }

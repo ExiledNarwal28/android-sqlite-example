@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -80,17 +80,17 @@ public class TimeService extends Service {
     //                          Fréquence des notifications
 
     // On va chercher le booléen d'activation des toasts
-    toastsEnabled = prefs.getBoolean(TaskerApplication.PREFS_TOASTS, true);
+    toastsEnabled = prefs.getBoolean(TodoApplication.PREFS_TOASTS, true);
 
     // On va chercher la fréquence
-    frequency = Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_FREQUENCY, "600"));
+    frequency = Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_FREQUENCE, "600"));
 
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
 
     // Laps de temps
     // switch (getPrefs("timespanText") {
-    switch (Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_TIMESPAN, "1"))) {
+    switch (Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_LAPS_TEMPS, "1"))) {
       case 0:
         // Aujourd'hui
 
@@ -124,7 +124,7 @@ public class TimeService extends Service {
     }
 
     // On va ensuite chercher le texte qui décrit le niveau d'urgence
-    switch (Integer.parseInt(prefs.getString(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL, Integer.toString(0)))) {
+    switch (Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0)))) {
       case 0:
         urgencyLevelText = getString(R.string.info_urgency_low_and_plus);
         break;
@@ -137,7 +137,7 @@ public class TimeService extends Service {
     }
 
     // selectionArgs.add(getPrefs("urgencyLevel");
-    selectionArgs.add(prefs.getString(TaskerApplication.PREFS_TOASTS_URGENCY_LEVEL, Integer.toString(0))); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
+    selectionArgs.add(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0))); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
     selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
 
     // Pour afficher un petit descriptif du genre : (bas et +)

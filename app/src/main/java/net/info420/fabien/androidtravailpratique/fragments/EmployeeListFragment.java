@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.activities.EmployeeActivity;
 import net.info420.fabien.androidtravailpratique.activities.NewEmployeeActivity;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
@@ -87,7 +87,7 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
     int[] to = new int[]{R.id.tv_employee_name, R.id.tv_task_description};
 
     getLoaderManager().initLoader(0, null, this);
-    employeeAdapter = new EmployeeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TaskerApplication) getActivity().getApplication());
+    employeeAdapter = new EmployeeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TodoApplication) getActivity().getApplication());
 
     setListAdapter(employeeAdapter);
   }
