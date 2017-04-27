@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.utils;
+package net.info420.fabien.androidtravailpratique.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,8 +10,10 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Task;
 
 /**
  * Created by fabien on 17-03-27.

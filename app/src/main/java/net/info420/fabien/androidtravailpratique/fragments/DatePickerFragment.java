@@ -1,10 +1,12 @@
-package net.info420.fabien.androidtravailpratique.utils;
+package net.info420.fabien.androidtravailpratique.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
+
+import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

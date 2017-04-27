@@ -1,11 +1,11 @@
-package net.info420.fabien.androidtravailpratique.utils;
+package net.info420.fabien.androidtravailpratique.helpers;
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
-import net.info420.fabien.androidtravailpratique.common.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
 
 import java.util.Locale;
 
@@ -13,7 +13,7 @@ import java.util.Locale;
  * Created by fabien on 17-04-26.
  */
 
-public class LocaleUtils {
+public class LocaleHelper {
   public static void initialize(Context context) {
     setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TaskerApplication.PREFS_LANGUAGE, Locale.getDefault().getLanguage()));
   }

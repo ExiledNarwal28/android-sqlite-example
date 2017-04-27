@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

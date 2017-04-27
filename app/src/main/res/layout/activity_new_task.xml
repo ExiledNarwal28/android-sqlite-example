@@ -5,7 +5,7 @@
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="net.info420.fabien.androidtravailpratique.common.NewTaskActivity">
+  tools:context=".activities.NewTaskActivity">
 
   <include
     layout="@layout/toolbar"
@@ -16,7 +16,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/fragment"
-            android:name="net.info420.fabien.androidtravailpratique.common.UpdateTaskFragment"
+            android:name="net.info420.fabien.androidtravailpratique.fragments.UpdateTaskFragment"
             android:layout_marginTop="55dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

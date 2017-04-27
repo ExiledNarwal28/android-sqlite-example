@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.fragments;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
@@ -17,9 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.EmployeeAdapter;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.activities.EmployeeActivity;
+import net.info420.fabien.androidtravailpratique.activities.NewEmployeeActivity;
+import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.adapters.EmployeeAdapter;
 
 public class EmployeeListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = EmployeeListFragment.class.getName();

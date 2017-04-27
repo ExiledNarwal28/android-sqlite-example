@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -16,9 +16,13 @@ import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.LocaleUtils;
-import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.fragments.EmployeeListFragment;
+import net.info420.fabien.androidtravailpratique.fragments.PrefsFragment;
+import net.info420.fabien.androidtravailpratique.fragments.TaskListFragment;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.helpers.LocaleHelper;
+import net.info420.fabien.androidtravailpratique.models.Task;
 import net.info420.fabien.androidtravailpratique.utils.TimeReceiver;
 import net.info420.fabien.androidtravailpratique.utils.TimeService;
 
@@ -94,7 +98,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     timeServiceIntent = new Intent(this, TimeService.class);
     startService(timeServiceIntent);
 
-    LocaleUtils.initialize(this);
+    LocaleHelper.initialize(this);
 
     initUI();
   }
@@ -201,7 +205,7 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
     // Si la préférence concerne la langue...
     if (key.equals(TaskerApplication.PREFS_LANGUAGE)) {
-      LocaleUtils.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
+      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
 
       setFragment(FRAGMENT_PREFS);
     }

@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.activities;
 
 import android.Manifest;
 import android.app.Activity;
@@ -24,9 +24,10 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Task;
 
 public class EmployeeActivity extends Activity {
   private final static String TAG = EmployeeActivity.class.getName();

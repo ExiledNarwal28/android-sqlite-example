@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.fragments;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
@@ -19,10 +19,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.Task;
-import net.info420.fabien.androidtravailpratique.utils.TaskAdapter;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.activities.NewTaskActivity;
+import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
+import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.adapters.TaskAdapter;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.info420.fabien.androidtravailpratique.utils.Task.KEY_urgency_level;
+import static net.info420.fabien.androidtravailpratique.models.Task.KEY_urgency_level;
 
 /**
  * Created by fabien on 17-04-11.

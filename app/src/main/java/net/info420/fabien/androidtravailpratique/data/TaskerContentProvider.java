@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.contentprovider;
+package net.info420.fabien.androidtravailpratique.data;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -11,9 +11,8 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import net.info420.fabien.androidtravailpratique.utils.DBHelper;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.Arrays;
 import java.util.HashSet;

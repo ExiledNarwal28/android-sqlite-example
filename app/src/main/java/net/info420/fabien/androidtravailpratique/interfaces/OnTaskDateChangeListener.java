@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.utils;
+package net.info420.fabien.androidtravailpratique.interfaces;
 
 /**
  * Created by fabien on 17-04-23.

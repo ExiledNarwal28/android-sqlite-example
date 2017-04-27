@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.activities;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -17,11 +17,12 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.DatePickerFragment;
-import net.info420.fabien.androidtravailpratique.utils.Employee;
-import net.info420.fabien.androidtravailpratique.utils.OnTaskDateChangeListener;
-import net.info420.fabien.androidtravailpratique.utils.Task;
+import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

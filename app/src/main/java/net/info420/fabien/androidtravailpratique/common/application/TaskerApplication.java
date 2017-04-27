@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common;
+package net.info420.fabien.androidtravailpratique.common.application;
 
 import android.app.Activity;
 import android.app.Application;
@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.utils.DBHelper;
+import net.info420.fabien.androidtravailpratique.data.DBHelper;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -17,6 +17,8 @@ import org.joda.time.format.DateTimeFormat;
 /**
  * Created by fabien on 17-03-26.
  */
+
+// TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure/
 
 public class TaskerApplication extends Application {
   private static final String TAG = TaskerApplication.class.getName();
