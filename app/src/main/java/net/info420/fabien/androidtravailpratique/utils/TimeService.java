@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Task;
 

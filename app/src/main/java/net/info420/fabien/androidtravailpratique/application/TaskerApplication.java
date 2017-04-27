@@ -1,4 +1,4 @@
-package net.info420.fabien.androidtravailpratique.common.application;
+package net.info420.fabien.androidtravailpratique.application;
 
 import android.app.Activity;
 import android.app.Application;

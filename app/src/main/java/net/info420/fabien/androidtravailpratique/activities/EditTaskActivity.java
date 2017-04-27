@@ -18,9 +18,9 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.utils.DatePickerFragment;
+import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
 import net.info420.fabien.androidtravailpratique.models.Task;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.info420.fabien.androidtravailpratique.common.application.TaskerApplication.getFullDate;
+import static net.info420.fabien.androidtravailpratique.application.TaskerApplication.getFullDate;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 

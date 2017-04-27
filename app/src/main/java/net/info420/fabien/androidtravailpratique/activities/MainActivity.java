@@ -19,7 +19,7 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.fragments.EmployeeListFragment;
 import net.info420.fabien.androidtravailpratique.fragments.PrefsFragment;
 import net.info420.fabien.androidtravailpratique.fragments.TaskListFragment;
-import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.models.Employee;
 import net.info420.fabien.androidtravailpratique.helpers.LocaleHelper;
 import net.info420.fabien.androidtravailpratique.models.Task;

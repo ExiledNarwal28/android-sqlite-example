@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 import net.info420.fabien.androidtravailpratique.activities.NewTaskActivity;
 import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
 import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;

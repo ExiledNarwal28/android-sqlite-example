@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
-import net.info420.fabien.androidtravailpratique.common.application.TaskerApplication;
+import net.info420.fabien.androidtravailpratique.application.TaskerApplication;
 
 import java.util.Locale;
 
