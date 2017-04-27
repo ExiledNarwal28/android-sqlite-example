@@ -1,13 +1,16 @@
 package net.info420.fabien.androidtravailpratique.common;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
@@ -38,6 +41,12 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    // On demande les permissions
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      ActivityCompat.requestPermissions(this,
+                                        new String[] { Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS },
+                                        1);
+    }
 
     // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
 
