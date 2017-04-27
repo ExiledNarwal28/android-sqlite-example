@@ -3,11 +3,9 @@
 
   <string name="error">Erè</string>
 
-  <string name="action_add">Ajoute</string>
   <string name="action_edit">Chanjman</string>
   <string name="action_delete">Retire</string>
   <string name="action_cancel">Anile</string>
-  <string name="action_settings">Opsyon</string>
   <string name="action_call">Rele</string>
   <string name="action_confirm">Valide</string>
   <string name="action_send_sms">Voye SMS</string>
@@ -31,18 +29,12 @@
   <string name="task_description">Deskripsyon</string>
   <string name="task_date">Dat fen</string>
   <string name="task_urgency_level">Enpòtans</string>
-  <string name="task_status">Fini</string>
   <string name="task_assigned_employee">Anplwaye asiyen</string>
 
-  <string name="task_completed_task">Travay ranpli</string>
-  <string name="task_completed_tasks">Travay ranpli</string>
-  <string name="task_current_task">Travay nan pwogrè</string>
-  <string name="task_current_tasks">Travay nan pwogrè</string>
   <string name="task_urgency_level_low">Ba</string>
   <string name="task_urgency_level_medium">Mwayen</string>
   <string name="task_urgency_level_high">Segondè</string>
 
-  <string name="employee">Anplwaye</string>
   <string name="employee_name">Non</string>
   <string name="employee_mail">Imel</string>
   <string name="employee_phone">Nimewo telefòn</string>

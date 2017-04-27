@@ -159,12 +159,17 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
     }
 
     ContentValues values = new ContentValues();
-    values.put(Task.KEY_assigned_employee_ID, assinedEmployee);
     values.put(Task.KEY_name,                 name);
     values.put(Task.KEY_description,          description);
     values.put(Task.KEY_completed,            completed);
     values.put(Task.KEY_date,                 date);
     values.put(Task.KEY_urgency_level,        urgencyLevel);
+
+    if (assinedEmployee != 0) {
+      values.put(Task.KEY_assigned_employee_ID, assinedEmployee);
+    } else {
+      values.putNull(Task.KEY_assigned_employee_ID);
+    }
 
     // Nouvelle tâche
     getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);

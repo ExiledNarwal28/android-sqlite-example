@@ -3,11 +3,9 @@
 
   <string name="error">Erreur</string>
 
-  <string name="action_add">Ajouter</string>
   <string name="action_edit">Modifier</string>
   <string name="action_delete">Suprimer</string>
   <string name="action_cancel">Annuler</string>
-  <string name="action_settings">Règlages</string>
   <string name="action_call">Appeler</string>
   <string name="action_confirm">Valider</string>
   <string name="action_send_sms">Envoyer un SMS</string>
@@ -31,18 +29,12 @@
   <string name="task_description">Description</string>
   <string name="task_date">Date d\'échéance</string>
   <string name="task_urgency_level">Niveau d\'urgence</string>
-  <string name="task_status">Statut</string>
   <string name="task_assigned_employee">Employé assigné</string>
 
-  <string name="task_completed_task">Tâche complétée</string>
-  <string name="task_completed_tasks">Tâches complétées</string>
-  <string name="task_current_task">Tâche en cours</string>
-  <string name="task_current_tasks">Tâches en cours</string>
   <string name="task_urgency_level_low">Faible</string>
   <string name="task_urgency_level_medium">Normal</string>
   <string name="task_urgency_level_high">Haut</string>
 
-  <string name="employee">Employé</string>
   <string name="employee_name">Nom</string>
   <string name="employee_mail">Adresse courriel</string>
   <string name="employee_phone">Numéro de téléphone</string>

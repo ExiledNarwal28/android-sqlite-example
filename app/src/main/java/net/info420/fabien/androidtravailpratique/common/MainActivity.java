@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.contentprovider.TaskerContentProvider;
 import net.info420.fabien.androidtravailpratique.utils.Employee;
 import net.info420.fabien.androidtravailpratique.utils.LocaleUtils;
 import net.info420.fabien.androidtravailpratique.utils.Task;
@@ -26,25 +24,24 @@ import org.joda.time.DateTime;
 public class MainActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
   private final static String TAG = MainActivity.class.getName();
 
-  // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
-  private Uri taskUri;
-  private Uri employeeUri;
-
   private TimeReceiver timeReceiver = new TimeReceiver();
 
   private Menu menu;
 
   private Intent timeServiceIntent;
 
+  private final static int FRAGMENT_TASK_LIST      = 0;
+  private final static int FRAGMENT_EMPLOYEE_LIST  = 1;
+  private final static int FRAGMENT_PREFS          = 2;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // TODO : Enlever dès que la base de données fonctionne
+
+    // TODO : Enlever ceci si ça ne sert plus quand la base de données sera fonctionnelle
 
     if (((TaskerApplication) getApplication()).writeTestTasks) {
-      taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
-
       String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
       String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
       Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
@@ -66,23 +63,10 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
         values.put(Task.KEY_completed,            taskCompleteds[i]);
         values.put(Task.KEY_date,                 taskDates[i]);
         values.put(Task.KEY_urgency_level,        taskUrgencyLevels[i]);
-
-        /*
-        Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s %s:%s",
-          Task.KEY_name,          taskNames[i],
-          Task.KEY_description,   taskDescriptions[i],
-          Task.KEY_completed,     taskCompleteds[i],
-          Task.KEY_date,          taskDates[i],
-          Task.KEY_urgency_level, taskUrgencyLevels[i]));
-        */
-
-        taskUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_TASK, values);
       }
     }
 
     if (((TaskerApplication) getApplication()).writeTestEmployees) {
-      taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
-
       String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
       String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
       String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
@@ -95,16 +79,6 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
         values.put(Employee.KEY_job, employeeJobs[i]);
         values.put(Employee.KEY_email, employeeEmails[i]);
         values.put(Employee.KEY_phone, employeePhones[i]);
-
-        /*
-        Log.d(TAG, String.format("Insertion de tâche dans la base de données avec %s:%s %s:%s %s:%s %s:%s",
-          Employee.KEY_name, employeeNames[i],
-          Employee.KEY_job, employeeJobs[i],
-          Employee.KEY_email, employeeEmails[i],
-          Employee.KEY_phone, employeePhones[i]));
-        */
-
-        employeeUri = getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
       }
     }
 
@@ -133,6 +107,33 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
     ((TaskerApplication) getApplication()).setStatusBarColor(this);
   }
 
+  private void setFragment(int fragmentId) {
+    // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
+
+    menu.clear();
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+    switch(fragmentId) {
+      case FRAGMENT_TASK_LIST:
+        getMenuInflater().inflate(R.menu.menu_task_list, menu);
+        toolbar.setTitle(R.string.title_task_list);
+        transaction.replace(R.id.fragment_container, new TaskListFragment());
+        break;
+      case FRAGMENT_EMPLOYEE_LIST:
+        getMenuInflater().inflate(R.menu.menu_employee_list, menu);
+        toolbar.setTitle(R.string.title_employee_list);
+        transaction.replace(R.id.fragment_container, new EmployeeListFragment());
+        break;
+      case FRAGMENT_PREFS:
+        getMenuInflater().inflate(R.menu.menu_prefs, menu);
+        toolbar.setTitle(R.string.title_prefs);
+        transaction.replace(R.id.fragment_container, new PrefsFragment());
+        break;
+    }
+    transaction.commit();
+  }
+
   @Override
   protected void onResume() {
     super.onResume();
@@ -158,32 +159,16 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
-
-    menu.clear();
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
     switch (item.getItemId()) {
       case R.id.icon_task_list:
-        getMenuInflater().inflate(R.menu.menu_task_list, menu);
-        toolbar.setTitle(R.string.title_task_list);
-        transaction.replace(R.id.fragment_container, new TaskListFragment());
-        transaction.commit();
+        setFragment(FRAGMENT_TASK_LIST);
         break;
       case R.id.icon_employee_list:
-        getMenuInflater().inflate(R.menu.menu_employee_list, menu);
-        toolbar.setTitle(R.string.title_employee_list);
-        transaction.replace(R.id.fragment_container, new EmployeeListFragment());
-        transaction.commit();
+        setFragment(FRAGMENT_EMPLOYEE_LIST);
         break;
       case R.id.icon_prefs:
-        getMenuInflater().inflate(R.menu.menu_prefs, menu);
-        toolbar.setTitle(R.string.title_prefs);
-        transaction.replace(R.id.fragment_container, new PrefsFragment());
-        transaction.commit();
-        break;
-      default:
+        setFragment(FRAGMENT_PREFS);
         break;
     }
 
@@ -207,10 +192,9 @@ public class MainActivity extends Activity implements SharedPreferences.OnShared
 
     // Si la préférence concerne la langue...
     if (key.equals(TaskerApplication.PREFS_LANGUAGE)) {
-      // ((TaskerApplication) getApplication()).updateLanguage(this);
-      // recreate(); // On restart l'activité, afin de modifier la langue
-
       LocaleUtils.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
+
+      setFragment(FRAGMENT_PREFS);
     }
   }
 }

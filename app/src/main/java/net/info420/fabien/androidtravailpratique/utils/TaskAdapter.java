@@ -76,7 +76,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
       if (employeeCursor != null) {
         employeeCursor.moveToFirst();
 
-        viewHolder.tvTaskEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        // viewHolder.tvTaskEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
 
         // Fermeture du curseur
         employeeCursor.close();

@@ -15,11 +15,7 @@ import java.util.Locale;
 
 public class LocaleUtils {
   public static void initialize(Context context) {
-    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TaskerApplication.PREFS_LANGUAGE, "fr"));
-  }
-
-  public static void initialize(Context context, String defaultLanguage) {
-    setLocale(context, defaultLanguage);
+    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TaskerApplication.PREFS_LANGUAGE, Locale.getDefault().getLanguage()));
   }
 
   public static boolean setLocale(Context context, String language) {
@@ -33,9 +29,11 @@ public class LocaleUtils {
     Resources resources = context.getResources();
 
     Configuration configuration = resources.getConfiguration();
-    configuration.locale = locale;
+    configuration.setLocale(locale);
 
+    // TODO : Ceci n'est plus supporté. Pourtant, createConfigurationContent ne semble pas fonctionner!
     resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+    // context.getApplicationContext().createConfigurationContext(configuration);
 
     return true;
   }
