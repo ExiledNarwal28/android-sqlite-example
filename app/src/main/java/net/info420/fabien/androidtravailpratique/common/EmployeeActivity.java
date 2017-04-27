@@ -171,27 +171,20 @@ public class EmployeeActivity extends Activity {
     // On vérifie aussi qu'on a bien la permission d'envoyer un SMS
     if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
       // TODO : Faire une classe séparée qui renvoie un dialogue
-      // TODO : getString()
       // Source : http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271
       AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-      alertDialog.setTitle("Envoie d'un SMS");
-      alertDialog.setMessage("Veuillez entrer votre message");
+      alertDialog.setTitle(getString(R.string.info_sending_a_sms));
+      alertDialog.setMessage(getString(R.string.info_enter_your_message));
 
       final EditText input = new EditText(this);
-      LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.MATCH_PARENT);
-      input.setLayoutParams(lp);
+      input.setLayoutParams(new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
       alertDialog.setView(input);
 
-      Log.d(TAG, "1");
-      alertDialog.setPositiveButton("Envoyer",
+      alertDialog.setPositiveButton(getString(R.string.action_send),
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
-            Log.d(TAG, "2");
             String message = input.getText().toString();
             if (!message.isEmpty()) {
-              Log.d(TAG, "3");
               // Source : http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working
               SmsManager.getDefault().sendTextMessage(employeePhone,
                                                       null,
@@ -202,7 +195,7 @@ public class EmployeeActivity extends Activity {
           }
         });
 
-      alertDialog.setNegativeButton("Annuler",
+      alertDialog.setNegativeButton(getString(R.string.action_cancel),
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
