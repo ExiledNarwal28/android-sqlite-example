@@ -3,6 +3,7 @@ package net.info420.fabien.androidtravailpratique.common;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -169,6 +171,7 @@ public class EmployeeActivity extends Activity {
     // On vérifie aussi qu'on a bien la permission d'envoyer un SMS
     if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
       // TODO : Faire une classe séparée qui renvoie un dialogue
+      // TODO : getString()
       // Source : http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271
       AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
       alertDialog.setTitle("Envoie d'un SMS");
@@ -180,14 +183,21 @@ public class EmployeeActivity extends Activity {
         LinearLayout.LayoutParams.MATCH_PARENT);
       input.setLayoutParams(lp);
       alertDialog.setView(input);
-      // alertDialog.setIcon(R.drawable.key);
 
+      Log.d(TAG, "1");
       alertDialog.setPositiveButton("Envoyer",
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
+            Log.d(TAG, "2");
             String message = input.getText().toString();
-            if (message.compareTo("") == 0) {
-              // TODO : Envoyer le SMS
+            if (!message.isEmpty()) {
+              Log.d(TAG, "3");
+              // Source : http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working
+              SmsManager.getDefault().sendTextMessage(employeePhone,
+                                                      null,
+                                                      message,
+                                                      PendingIntent.getBroadcast(getBaseContext(), 0, new Intent("SMS_SENT"), 0),
+                                                      null);
             }
           }
         });
