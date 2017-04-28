@@ -23,8 +23,8 @@ import org.joda.time.DateTime;
 //          [X]--EmployeActivity----------(Fait    )--<==<<
 //          [X]--AjouterEmployeActivity---(Fait    )--<==<<
 //          [X]--AjouterTacheActivity-----(Fait    )--<==<<
-//          [ ]--PrincipaleActivity
-//          [ ]--TacheActivity------------(En cours)--<==<<
+//          [ ]--PrincipaleActivity-------(En cours)--<==<<
+//          [X]--TacheActivity------------(Fait    )--<==<<
 //
 //        ADAPTERS
 //          [ ]--EmployeAdapter

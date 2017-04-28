@@ -347,7 +347,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     String[] from = new String[] { Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID};
 
     // Où on affiche les champs
-    int[] to = new int[] { R.id.tv_task_name, R.id.tv_employe_email, R.id.tv_task_employee };
+    int[] to = new int[] { R.id.tv_tache_nom, R.id.tv_employe_email, R.id.tv_task_employee };
 
     // Enlever le filtrage
     String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, KEY_urgence};

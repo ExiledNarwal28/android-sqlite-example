@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,41 +21,72 @@ import net.info420.fabien.androidtravailpratique.helpers.StringHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
-
+/**
+ * {@link android.app.Activity} pour voir les détails d'une entrée de tâche dans la base de donnée
+ *
+ * @see Tache
+ * @see TodoContentProvider
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   ?
+ */
 public class TacheActivity extends Activity {
   private final static String TAG = TacheActivity.class.getName();
 
-  private TextView tvTaskName;
-  private CheckBox cbTaskComplete;
-  private TextView tvTaskUrgencyLevel;
-  private TextView tvTaskDescription;
-  private TextView tvTaskDate;
-  private Button btnTaskAssignedEmployee;
+  // Views pour stocker les données des employés et bouton
+  private TextView tvTacheNom;
+  private CheckBox cbTacheFait;
+  private TextView tvTacheUrgence;
+  private TextView tvTacheDescription;
+  private TextView tvTacheDate;
+  private Button btnTacheEmployeAssigne;
 
-  private Uri taskUri;
+  private Uri tacheUri;
 
-  private int assignedEmployeeId; // Valeur par défaut
+  // Données de l'employé assigné
+  private int employeAssigneId;
 
+  /**
+   * Exécuté à la création de l'activité
+   *
+   * Instancie l'interface
+   * Va chercher les données de la tâche
+   *
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_task);
 
     initUI();
 
-    // On va chercher les informations
-    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
+    // On va chercher les données...
+    // Depuis l'instance sauvegarder
+    tacheUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
     Bundle extras = getIntent().getExtras();
-    if (extras != null) {
-      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
-      Log.d(TAG, taskUri.getPath());
 
-      fillData(taskUri);
+    // Ou passée depuis une autre activité
+    if (extras != null) {
+      tacheUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
+
+      rempliData(tacheUri);
     }
   }
 
+  /**
+   * Initialisation de l'interface
+   *
+   * Ajoute le bon layout
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
+   * Instancie les Views
+   * Ajoute les Listeners
+   */
   private void initUI() {
+    setContentView(R.layout.activity_tache);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
@@ -64,19 +94,19 @@ public class TacheActivity extends Activity {
 
     ColorHelper.setStatusBarColor(this);
 
+    tvTacheNom              = (TextView)  findViewById(R.id.tv_tache_nom);
+    cbTacheFait             = (CheckBox)  findViewById(R.id.cb_tache_fait);
+    tvTacheUrgence          = (TextView)  findViewById(R.id.tv_tache_urgence);
+    tvTacheDescription      = (TextView)  findViewById(R.id.tv_employe_poste);
+    tvTacheDate             = (TextView)  findViewById(R.id.tv_employe_email);
+    btnTacheEmployeAssigne  = (Button)    findViewById(R.id.btn_tache_employe_assigne);
 
-    tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
-    cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_tache_fait);
-    tvTaskUrgencyLevel      = (TextView)  findViewById(R.id.tv_task_urgency_level);
-    tvTaskDescription       = (TextView)  findViewById(R.id.tv_employe_poste);
-    tvTaskDate              = (TextView)  findViewById(R.id.tv_employe_email);
-    btnTaskAssignedEmployee = (Button)    findViewById(R.id.btn_task_assigned_employee);
-
-    btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {
+    btnTacheEmployeAssigne.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        // Va voir l'activité d'employé
         Intent i = new Intent(getApplicationContext(), EmployeActivity.class);
-        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + assignedEmployeeId);
+        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + employeAssigneId);
         i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
 
         startActivity(i);
@@ -84,7 +114,34 @@ public class TacheActivity extends Activity {
     });
   }
 
-  private void fillData(Uri taskUri) {
+  /**
+   *  Envoie les données pour supprimer l'Employé
+   *
+   * Supprimer la tâche de la base de données
+   * Termine l'activité
+   *
+   * @See TodoContentProvider
+   */
+  private void supprimerTache() {
+    getContentResolver().delete(tacheUri, null, null);
+
+    finish();
+  }
+
+  /**
+   * Rempli les Views des données
+   *
+   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
+   * Construit le {@link Cursor}
+   * Remplit les Views (voir le nom de l'employé, on a besoin d'un deuxième {@link Cursor})
+   *
+   * @param tacheUri l'Uri vers l'employé à modifier
+   *
+   * @See Employe
+   * @See DateHelper
+   * @See StringHelper
+   */
+  private void rempliData(Uri tacheUri) {
     String[] projection = { Tache.KEY_employe_assigne_ID,
                             Tache.KEY_nom,
                             Tache.KEY_description,
@@ -92,41 +149,37 @@ public class TacheActivity extends Activity {
                             Tache.KEY_date,
                             Tache.KEY_urgence};
 
-    Cursor cursor = getContentResolver().query(taskUri, projection, null, null, null);
+    Cursor cursor = getContentResolver().query(tacheUri, projection, null, null, null);
 
     if (cursor != null) {
       cursor.moveToFirst();
 
+      // Données de l'employé
+      employeAssigneId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
+
       // On mets les données dans l'UI
-      tvTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_nom)));
-      cbTaskComplete.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
-      tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
+      tvTacheNom.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_nom)));
+      cbTacheFait.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
+      tvTacheDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
 
       // Conversion en date
-      tvTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
+      tvTacheDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
-      tvTaskUrgencyLevel.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));
-
-      // Et maintenant? Il faut afficher le nom de l'employé dans le bouton d'employé assigné.
-
-      Log.d(TAG, Integer.toString(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID)));
-
-      // Pour rediriger avec le bouton
-      assignedEmployeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
+      tvTacheUrgence.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));
 
       // Vérification de la colonne
-      if (assignedEmployeeId != 0) {
+      if (employeAssigneId != 0) {
+        // Projection, Uri et curseur
         String[] employeeProjection = { Employe.KEY_nom};
-
         Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID)));
-
         Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
 
         if (employeeCursor != null) {
           employeeCursor.moveToFirst();
 
-          btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+          // On met le nom de l'employé sur le bouton
+          btnTacheEmployeAssigne.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
 
           // Fermeture du curseur
           employeeCursor.close();
@@ -138,36 +191,49 @@ public class TacheActivity extends Activity {
     }
 
     // On cache le bouton si aucun employé n'est assigné.
-    if (assignedEmployeeId == 0) {
-      btnTaskAssignedEmployee.setVisibility(View.GONE);
+    if (employeAssigneId == 0) {
+      btnTacheEmployeAssigne.setVisibility(View.GONE);
     }
   }
 
-  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierTacheActivity)
+  /**
+   * Rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierEmployeActivity)
+   */
   @Override
   public void onResume() {
     super.onResume();
-    fillData(taskUri);
+    rempliData(tacheUri);
   }
 
+  /**
+   * Ajout des options de menus appropriées
+   *
+   * @param menu  Le {@link Menu}
+   * @return      Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    Log.d(TAG, "We got it");
     getMenuInflater().inflate(R.menu.menu_item, menu);
     return true;
   }
 
+  /**
+   * Fait les actions appropriées lorsqu'on clique dans le menu
+   *
+   * @param item Le {@link MenuItem} sélectionné
+   * @return     Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_edit:
+      case R.id.menu_modifier:
+        // Démarre l'activité de modification
         Intent i = new Intent(this, ModifierTacheActivity.class);
-        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, tacheUri);
         startActivity(i);
         break;
-      case R.id.menu_delete:
-        getContentResolver().delete(taskUri, null, null);
-        finish();
+      case R.id.menu_supprimer:
+        supprimerTache();
         break;
       default:
         break;

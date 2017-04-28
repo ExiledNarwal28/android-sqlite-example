@@ -93,7 +93,7 @@ public class EmployeActivity extends Activity {
    * Ajoute les Listeners
    */
   private void initUI() {
-    setContentView(R.layout.activity_employee);
+    setContentView(R.layout.activity_employe);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
@@ -127,7 +127,7 @@ public class EmployeActivity extends Activity {
   /**
    *  Envoie les données pour supprimer l'Employé
    *
-   * Ajoute l'Id dans une liste de valeurs
+   * Supprimer l'employé de la base de données
    * Enlève l'employé des tâches qui lui sont assignées
    * Termine l'activité
    *
@@ -278,7 +278,6 @@ public class EmployeActivity extends Activity {
     }
   }
 
-
   /**
    * Rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierEmployeActivity)
    */
@@ -300,22 +299,22 @@ public class EmployeActivity extends Activity {
     return true;
   }
 
-  @Override
   /**
    * Fait les actions appropriées lorsqu'on clique dans le menu
    *
    * @param item Le {@link MenuItem} sélectionné
    * @return     Booléen signifiant la réussite de l'opération
    */
+  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_edit:
+      case R.id.menu_modifier:
         // Démarre l'activité de modification
         Intent i = new Intent(this, ModifierEmployeActivity.class);
         i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeUri);
         startActivity(i);
         break;
-      case R.id.menu_delete:
+      case R.id.menu_supprimer:
         supprimerEmploye();
         break;
       default:
