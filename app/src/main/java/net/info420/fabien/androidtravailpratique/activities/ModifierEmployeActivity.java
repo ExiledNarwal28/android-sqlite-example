@@ -78,7 +78,6 @@ public class ModifierEmployeActivity extends FragmentActivity {
    * Initialisation de l'interface
    *
    * Ajoute le bon layout
-   * Place le fragment initiale (liste des tâches)
    * Met le bon texte dans la {@link Toolbar}
    * Instancie les Views
    * Ajoute les Listeners
@@ -114,7 +113,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
    * Vérifie si tous les champs obligatoires sont là
    * Ajoute les valeurs dans une liste de valeurs
    * Met à jour l'employé
-   * Termine l'application
+   * Termine l'activité
    *
    * @See TodoContentProvider
    *
@@ -129,7 +128,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
 
     if (nom.length() == 0) {
       // Notification Toast
-      Toast.makeText(getApplicationContext(), getString(R.string.warning_missing_required_fields), Toast.LENGTH_LONG).show();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
@@ -162,19 +161,19 @@ public class ModifierEmployeActivity extends FragmentActivity {
   /**
    * Rempli les EditTexts des données
    *
-   * Construit un tableau de String, c'est le SELECT du curseur
-   * Construit le curseur
+   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
+   * Construit le {@link Cursor}
    * Remplit les EditTexts
    *
-   * @param employeeUri
+   * @param employeUri l'Uri vers l'employé à modifier
    */
-  private void rempliData(Uri employeeUri) {
+  private void rempliData(Uri employeUri) {
     String[] projection = { Employe.KEY_nom,
                             Employe.KEY_poste,
                             Employe.KEY_email,
                             Employe.KEY_telephone};
 
-    Cursor cursor = getContentResolver().query(employeeUri, projection, null, null, null);
+    Cursor cursor = getContentResolver().query(employeUri, projection, null, null, null);
 
     // Si le curseur a une réponse
     if (cursor != null) {

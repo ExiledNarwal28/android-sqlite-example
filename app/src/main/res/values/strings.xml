@@ -11,7 +11,7 @@
   <string name="action_send">Envoyer</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
-  <string name="warning_missing_required_fields">Des champs obligatoires sont vides</string>
+  <string name="attention_champs_vides">Des champs obligatoires sont vides</string>
   <string name="warning_wrong_phone_format">Format de numéro de téléphone invalide</string>
   <string name="warning_wrong_mail_format">Format d\'adresse courriel invalide</string>
 
@@ -139,7 +139,7 @@
   <string name="title_task">Détails d\'une tâche</string>
   <string name="title_activity_edit_task">Modification d\'une tâche</string>
   <string name="title_activity_new_task">Nouvelle tâche</string>
-  <string name="task_no_employee">Aucun employé assigné</string>
+  <string name="tache_aucun_employe">Aucun employé assigné</string>
 
   <string name="title_employee_list">Liste des employés</string>
   <string name="no_employees">Vous n\'avez pas d\'employé (sur l\'application)</string>

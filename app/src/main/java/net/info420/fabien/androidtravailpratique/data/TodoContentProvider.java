@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,7 +40,7 @@ public class TodoContentProvider extends ContentProvider {
   private static final String BASE_PATH_TASK          = "tasks";
   private static final String BASE_PATH_EMPLOYEE      = "employees";
   public  static final Uri    CONTENT_URI_TASK        = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TASK);
-  public  static final Uri    CONTENT_URI_EMPLOYEE    = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
+  public  static final Uri CONTENT_URI_EMPLOYE = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
 
   public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
   public static final String CONTENT_ITEM_TYPE_TACHE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
@@ -65,7 +65,7 @@ public class TodoContentProvider extends ContentProvider {
     // Lecture des champs, je garde ça ici car ça peut redevenir utile.
 
     /*
-     * Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Task.TABLE + ")", null);
+     * Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Tache.TABLE + ")", null);
      * if ( ti.moveToFirst() ) {
      *   do {
      *     Log.d(TAG, String.format("Colonne %s", ti.getString(1)));
@@ -90,17 +90,17 @@ public class TodoContentProvider extends ContentProvider {
         checkColumnsTask(projection);
 
         // On prépare la table
-        queryBuilder.setTables(Task.TABLE);
+        queryBuilder.setTables(Tache.TABLE);
         break;
       case TASK_ID:
         // On vérifie si la colonne existe (sécurité)
         checkColumnsTask(projection);
 
         // On prépare la table
-        queryBuilder.setTables(Task.TABLE);
+        queryBuilder.setTables(Tache.TABLE);
 
         // On ajoute le ID au query
-        queryBuilder.appendWhere(Task.KEY_ID + "=" + uri.getLastPathSegment());
+        queryBuilder.appendWhere(Tache.KEY_ID + "=" + uri.getLastPathSegment());
         break;
       case EMPLOYEES:
         // On vérifie si la colonne existe (sécurité)
@@ -144,7 +144,7 @@ public class TodoContentProvider extends ContentProvider {
     long id = 0;
     switch (uriType) {
       case TASKS:
-        id = sqlDB.insert(Task.TABLE, null, values);
+        id = sqlDB.insert(Tache.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Log.d(TAG, String.format("Insertion de la tâche #%s", id));
@@ -170,14 +170,14 @@ public class TodoContentProvider extends ContentProvider {
     String id;
     switch (uriType) {
       case TASKS:
-        rowsDeleted = sqlDB.delete(Task.TABLE, selection, selectionArgs);
+        rowsDeleted = sqlDB.delete(Tache.TABLE, selection, selectionArgs);
         break;
       case TASK_ID:
         id = uri.getLastPathSegment();
         if (TextUtils.isEmpty(selection)) {
-          rowsDeleted = sqlDB.delete(Task.TABLE, Task.KEY_ID + "=" + id, null);
+          rowsDeleted = sqlDB.delete(Tache.TABLE, Tache.KEY_ID + "=" + id, null);
         } else {
-          rowsDeleted = sqlDB.delete(Task.TABLE, Task.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rowsDeleted = sqlDB.delete(Tache.TABLE, Tache.KEY_ID + "=" + id + " and " + selection, selectionArgs);
         }
         break;
       case EMPLOYEES:
@@ -206,14 +206,14 @@ public class TodoContentProvider extends ContentProvider {
     String id;
     switch (uriType) {
       case TASKS:
-        rowsUpdated = sqlDB.update(Task.TABLE, values, selection, selectionArgs);
+        rowsUpdated = sqlDB.update(Tache.TABLE, values, selection, selectionArgs);
         break;
       case TASK_ID:
         id = uri.getLastPathSegment();
         if (TextUtils.isEmpty(selection)) {
-          rowsUpdated = sqlDB.update(Task.TABLE, values, Task.KEY_ID + "=" + id, null);
+          rowsUpdated = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + id, null);
         } else {
-          rowsUpdated = sqlDB.update(Task.TABLE, values, Task.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rowsUpdated = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + id + " and " + selection, selectionArgs);
         }
         break;
       case EMPLOYEES:
@@ -235,13 +235,13 @@ public class TodoContentProvider extends ContentProvider {
   }
 
   private void checkColumnsTask(String[] projection) {
-    String[] available = {  Task.KEY_ID,
-                            Task.KEY_assigned_employee_ID,
-                            Task.KEY_name,
-                            Task.KEY_description,
-                            Task.KEY_completed,
-                            Task.KEY_date,
-                            Task.KEY_urgency_level };
+    String[] available = {  Tache.KEY_ID,
+                            Tache.KEY_employe_assigne_ID,
+                            Tache.KEY_nom,
+                            Tache.KEY_description,
+                            Tache.KEY_fait,
+                            Tache.KEY_date,
+                            Tache.KEY_urgence};
 
     checkColumns(projection, available);
   }

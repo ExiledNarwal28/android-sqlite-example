@@ -5,7 +5,7 @@ import android.content.ContentValues;
 
 import net.info420.fabien.androidtravailpratique.data.DBHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import org.joda.time.DateTime;
 
@@ -19,16 +19,16 @@ import org.joda.time.DateTime;
 //
 //        ACTIVITIES
 //          [X]--ModifierEmployeActivity--(Fait    )--<==<<X
-//          [ ]--ModifierTacheActivity----(En cours)--<==<<O
+//          [X]--ModifierTacheActivity----(Fait    )--<==<<X
 //          [ ]--EmployeActivity
-//          [ ]--NewEmployeeActivity
-//          [ ]--NewTacheActivity
+//          [ ]--AjouterEmployeActivity---(En cours)--<==<<O
+//          [ ]--AjouterTacheActivity
 //          [ ]--PrincipaleActivity
-//          [ ]--TaskActivity
+//          [ ]--TacheActivity
 //
 //        ADAPTERS
-//          [ ]--EmployeeAdapter
-//          [ ]--TaskAdapter
+//          [ ]--EmployeAdapter
+//          [ ]--TacheAdapter
 //
 //        APPLICATION
 //          [ ]--TodoApplication
@@ -42,9 +42,9 @@ import org.joda.time.DateTime;
 //          [ ]--EmployeeListFragment
 //          [ ]--PrefsFragment
 //          [ ]--TachesListeFragment
-//          [ ]--TaskFragment
-//          [ ]--UpdateEmployeeFragment
-//          [ ]--UpdateTaskFragment
+//          [ ]--TacheFragment
+//          [ ]--MettreAJourEmployeFragment
+//          [ ]--MettreAJourTacheFragment
 //
 //        HELPERS
 //          [ ]--ColorHelper
@@ -57,7 +57,7 @@ import org.joda.time.DateTime;
 //
 //        MODELS
 //          [ ]--Employe
-//          [ ]--Task
+//          [ ]--Tache
 //
 //        UTILS
 //          [ ]--TempsReceiver
@@ -169,16 +169,16 @@ public class TodoApplication extends Application {
 
       // La tâche #4 n'a pas d'employé assigné (pour des tests)
       if (i <= 2) {
-        values.put(Task.KEY_assigned_employee_ID, i + 1); // Employés auto-généré (en bas)
+        values.put(Tache.KEY_employe_assigne_ID, i + 1); // Employés auto-généré (en bas)
       } else {
-        values.putNull(Task.KEY_assigned_employee_ID);
+        values.putNull(Tache.KEY_employe_assigne_ID);
       }
 
-      values.put(Task.KEY_name,                 taskNames[i]);
-      values.put(Task.KEY_description,          taskDescriptions[i]);
-      values.put(Task.KEY_completed,            taskCompleteds[i]);
-      values.put(Task.KEY_date,                 taskDates[i]);
-      values.put(Task.KEY_urgency_level,        taskUrgencyLevels[i]);
+      values.put(Tache.KEY_nom,                 taskNames[i]);
+      values.put(Tache.KEY_description,          taskDescriptions[i]);
+      values.put(Tache.KEY_fait,            taskCompleteds[i]);
+      values.put(Tache.KEY_date,                 taskDates[i]);
+      values.put(Tache.KEY_urgence,        taskUrgencyLevels[i]);
     }
   }
 

@@ -20,12 +20,12 @@ import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.activities.NewTacheActivity;
-import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
+import net.info420.fabien.androidtravailpratique.activities.AjouterTacheActivity;
+import net.info420.fabien.androidtravailpratique.activities.TacheActivity;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
-import net.info420.fabien.androidtravailpratique.adapters.TaskAdapter;
+import net.info420.fabien.androidtravailpratique.models.Tache;
+import net.info420.fabien.androidtravailpratique.adapters.TacheAdapter;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.info420.fabien.androidtravailpratique.models.Task.KEY_urgency_level;
+import static net.info420.fabien.androidtravailpratique.models.Tache.KEY_urgence;
 
 /**
  * Created by fabien on 17-04-11.
@@ -46,7 +46,7 @@ import static net.info420.fabien.androidtravailpratique.models.Task.KEY_urgency_
 public class TachesListeFragment extends ListFragment implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = TachesListeFragment.class.getName();
 
-  private TaskAdapter taskAdapter;
+  private TacheAdapter taskAdapter;
 
   private ArrayAdapter<String> adapterTaskFiltersEmployees;
 
@@ -59,7 +59,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
   private Map<Integer, Integer> spTaskAssignedEmployeeMap;
 
-  // private TaskFragment taskFragment;
+  // private TacheFragment taskFragment;
 
   // public TachesListeFragment() {
   //   getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
@@ -95,7 +95,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
       @Override
       public void onClick(View view) {
         // Nouvelle tâche
-        startActivity(new Intent(getContext(), NewTacheActivity.class));
+        startActivity(new Intent(getContext(), AjouterTacheActivity.class));
       }
     });
   }
@@ -118,7 +118,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     spTaskAssignedEmployeeMap = new HashMap<>();
 
     // TODO : Je fais ceci souvent, je devrais le mettre dans une fonction
-    Cursor employeeCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYEE, new String[] { Employe.KEY_ID, Employe.KEY_nom}, null, null, null);
+    Cursor employeeCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, new String[] { Employe.KEY_ID, Employe.KEY_nom}, null, null, null);
 
     if (employeeCursor != null) {
       Integer position = 1;
@@ -148,22 +148,22 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // Valeurs par défaut
     String selection                = null;
     ArrayList<String> selectionArgs = new ArrayList<>();
-    String sortOrder                = Task.KEY_date + " ASC";
+    String sortOrder                = Tache.KEY_date + " ASC";
 
     // Quel spinner a été cliqué?
     switch (adapterView.getId()) {
       case R.id.sp_task_filters_filters:
         switch((int) spTaskFiltersFilters.getSelectedItemId()) {
           case 2:
-            sortOrder = Task.KEY_assigned_employee_ID + " ASC";
+            sortOrder = Tache.KEY_employe_assigne_ID + " ASC";
 
             break;
           case 3:
-            sortOrder = KEY_urgency_level + " ASC";
+            sortOrder = KEY_urgence + " ASC";
 
             break;
           case 4:
-            sortOrder = Task.KEY_completed + " ASC";
+            sortOrder = Tache.KEY_fait + " ASC";
 
             break;
         }
@@ -173,20 +173,20 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
         switch((int) spTaskFiltersDates.getSelectedItemId()) {
           case 1:
             // Aujourd'hui
-            selection = Task.KEY_date + " =?";
+            selection = Tache.KEY_date + " =?";
             selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
             break;
           case 2:
             // Cette semaine
-            selection = Task.KEY_date + " BETWEEN ? AND ?";
+            selection = Tache.KEY_date + " BETWEEN ? AND ?";
             selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
             selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
             break;
           case 3:
             // Ce mois
-            selection = Task.KEY_date + " BETWEEN ? AND ?";
+            selection = Tache.KEY_date + " BETWEEN ? AND ?";
             selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
             selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
@@ -197,7 +197,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
       case R.id.sp_task_filters_employees:
         // On ajoute un filtre d'employés
 
-        sortOrder = Task.KEY_assigned_employee_ID + " ASC";
+        sortOrder = Tache.KEY_employe_assigne_ID + " ASC";
 
         switch((int) spTaskFiltersEmployees.getSelectedItemId()) {
           case 0:
@@ -205,7 +205,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
             break;
           default:
             // Dans ce cas, il a choisit un employé
-            selection = Task.KEY_assigned_employee_ID + "=?";
+            selection = Tache.KEY_employe_assigne_ID + "=?";
             selectionArgs.add(Long.toString(spTaskAssignedEmployeeMap.get((int) spTaskFiltersEmployees.getSelectedItemId())));
 
             break;
@@ -215,7 +215,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
       case R.id.sp_task_filters_urgencies:
         // On ajoute un filtre d'urgence
 
-        sortOrder = KEY_urgency_level + " DESC";
+        sortOrder = KEY_urgence + " DESC";
 
         switch((int) spTaskFiltersUrgencies.getSelectedItemId()) {
           case 0:
@@ -223,7 +223,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
             break;
           default:
             // Dans ce cas, il a choisit un niveau d'urgence
-            selection = KEY_urgency_level + "=?";
+            selection = KEY_urgence + "=?";
             selectionArgs.add(Long.toString(spTaskFiltersUrgencies.getSelectedItemId() - 1)); // Bas, moyen, haut
 
             break;
@@ -233,7 +233,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
       case R.id.sp_task_filters_completion:
         // On ajoute un filtre de complétion
 
-        sortOrder = Task.KEY_completed + " ASC";
+        sortOrder = Tache.KEY_fait + " ASC";
 
         switch((int) spTaskFiltersCompletion.getSelectedItemId()) {
           case 0:
@@ -241,7 +241,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
             break;
           default:
             // Dans ce cas, il a choisit un niveau de complétion
-            selection = Task.KEY_completed + "=?";
+            selection = Tache.KEY_fait + "=?";
             selectionArgs.add(Long.toString(spTaskFiltersCompletion.getSelectedItemId() - 1)); // Bas, moyen, haut
 
             break;
@@ -295,15 +295,15 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   @Override
   public void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
-    Intent i = new Intent(getContext(), TaskActivity.class);
+    Intent i = new Intent(getContext(), TacheActivity.class);
     Uri taskUri = Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id);
     i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
 
     startActivity(i);
 
-    // taskFragment  = new TaskFragment();
+    // taskFragment  = new TacheFragment();
 
-    // taskFragment = TaskFragment.newInstance(R.string.title_task);
+    // taskFragment = TacheFragment.newInstance(R.string.title_task);
 
     // TODO : REDESIGN : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
@@ -334,7 +334,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
   // Remplir l'adapteur avec les bonnes données
   private void setFillData() {
-    fillData(null, null, Task.KEY_date + " ASC");
+    fillData(null, null, Tache.KEY_date + " ASC");
   }
 
   // Remplir l'adapteur avec les bonnes données FILTRÉES
@@ -344,17 +344,17 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
   private void fillData(String selection, String[] selectionArgs, String sortOrder) {
     // Affiche les champs de la base de données (name)
-    String[] from = new String[] { Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID };
+    String[] from = new String[] { Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID};
 
     // Où on affiche les champs
     int[] to = new int[] { R.id.tv_task_name, R.id.tv_task_date, R.id.tv_task_employee };
 
     // Enlever le filtrage
-    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, KEY_urgency_level };
+    String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, KEY_urgence};
     Cursor taskCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
-    taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
+    taskAdapter = new TacheAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
 
     setListAdapter(taskAdapter);
   }
@@ -362,7 +362,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, Task.KEY_urgency_level };
+    String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, Tache.KEY_urgence};
 
     CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 

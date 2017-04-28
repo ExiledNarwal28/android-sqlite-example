@@ -18,8 +18,8 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
 
 // Source : http://www.vogella.com/tutorials/AndroidListView/article.html
 
-public class EmployeeAdapter extends SimpleCursorAdapter {
-  private final String TAG = EmployeeAdapter.class.getName();
+public class EmployeAdapter extends SimpleCursorAdapter {
+  private final String TAG = EmployeAdapter.class.getName();
 
   private final LayoutInflater inflater;
   private final TodoApplication application;
@@ -30,7 +30,7 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
   }
 
   // TODO : Vérifier si on a besoin de l'application
-  public EmployeeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
+  public EmployeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
     super(context, layout, cursor, from, to, flags);
 
     this.inflater = LayoutInflater.from(context);
@@ -44,9 +44,9 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    EmployeeAdapter.ViewHolder viewHolder;
+    EmployeAdapter.ViewHolder viewHolder;
 
-    viewHolder                = new EmployeeAdapter.ViewHolder();
+    viewHolder                = new EmployeAdapter.ViewHolder();
     viewHolder.tvEmployeeName = (TextView) view.findViewById(R.id.tv_employee_name);
     viewHolder.tvEmployeeJob  = (TextView) view.findViewById(R.id.tv_task_description);
 

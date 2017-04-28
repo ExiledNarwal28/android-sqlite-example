@@ -12,10 +12,10 @@ import net.info420.fabien.androidtravailpratique.R;
  * Created by fabien on 17-04-11.
  */
 
-public class TaskFragment extends DialogFragment {
-  public static final String TAG = TaskFragment.class.getName();
+public class TacheFragment extends DialogFragment {
+  public static final String TAG = TacheFragment.class.getName();
 
-  public TaskFragment() {
+  public TacheFragment() {
 
   }
 

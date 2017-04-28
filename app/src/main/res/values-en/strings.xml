@@ -11,7 +11,7 @@
   <string name="action_send">Send</string>
   <string name="action_send_sms">Send a SMS</string>
 
-  <string name="warning_missing_required_fields">Some required fields are missing</string>
+  <string name="attention_champs_vides">Some required fields are missing</string>
   <string name="warning_wrong_phone_format">Wrong phone number format</string>
   <string name="warning_wrong_mail_format">Wrong e-mail format</string>
 
@@ -139,7 +139,7 @@
   <string name="title_task">Task detail</string>
   <string name="title_activity_edit_task">Edit task</string>
   <string name="title_activity_new_task">New task</string>
-  <string name="task_no_employee">No assigned employee</string>
+  <string name="tache_aucun_employe">No assigned employee</string>
 
   <string name="title_employee_list">Employees list</string>
   <string name="no_employees">You have no employee (in this application)</string>

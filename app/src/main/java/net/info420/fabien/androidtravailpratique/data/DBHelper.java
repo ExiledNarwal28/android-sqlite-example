@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 /**
  * Created by fabien on 17-03-23.
@@ -35,14 +35,14 @@ public class DBHelper  extends SQLiteOpenHelper {
       + Employe.KEY_email            + " TEXT, "
       + Employe.KEY_telephone + " TEXT )";
 
-    String CREATE_TABLE_TASK          = "CREATE TABLE " + Task.TABLE + "("
-      + Task.KEY_ID                   + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-      + Task.KEY_assigned_employee_ID + " INTEGER, "
-      + Task.KEY_name                 + " TEXT, "
-      + Task.KEY_description          + " TEXT, "
-      + Task.KEY_completed            + " INTEGER, " // Dans SQLite, les booleans sont des integers 0 ou 1
-      + Task.KEY_date                 + " INTEGER, "
-      + Task.KEY_urgency_level        + " INTEGER )";
+    String CREATE_TABLE_TASK          = "CREATE TABLE " + Tache.TABLE + "("
+      + Tache.KEY_ID                   + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+      + Tache.KEY_employe_assigne_ID + " INTEGER, "
+      + Tache.KEY_nom + " TEXT, "
+      + Tache.KEY_description          + " TEXT, "
+      + Tache.KEY_fait + " INTEGER, " // Dans SQLite, les booleans sont des integers 0 ou 1
+      + Tache.KEY_date                 + " INTEGER, "
+      + Tache.KEY_urgence + " INTEGER )";
 
     db.execSQL(CREATE_TABLE_EMPLOYEE);
     db.execSQL(CREATE_TABLE_TASK);
@@ -56,7 +56,7 @@ public class DBHelper  extends SQLiteOpenHelper {
   public void recreateDB(SQLiteDatabase db) {
     // Drop de toutes les tables
     db.execSQL("DROP TABLE IF EXISTS " + Employe.TABLE);
-    db.execSQL("DROP TABLE IF EXISTS " + Task.TABLE);
+    db.execSQL("DROP TABLE IF EXISTS " + Tache.TABLE);
 
     // Recréer les tables
     onCreate(db);

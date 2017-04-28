@@ -35,7 +35,7 @@
     </activity>
     
     <activity
-      android:name=".activities.TaskActivity"
+      android:name=".activities.TacheActivity"
       android:label="@string/title_task"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">
@@ -49,7 +49,7 @@
     </activity>
     
     <activity
-      android:name=".activities.NewTacheActivity"
+      android:name=".activities.AjouterTacheActivity"
       android:label="@string/title_activity_new_task"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">
@@ -71,7 +71,7 @@
     </activity>
     
     <activity
-      android:name=".activities.NewEmployeeActivity"
+      android:name=".activities.AjouterEmployeActivity"
       android:label="@string/title_activity_new_employee"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">

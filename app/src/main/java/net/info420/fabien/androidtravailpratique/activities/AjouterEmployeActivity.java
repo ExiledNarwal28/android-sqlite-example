@@ -20,8 +20,8 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
-public class NewEmployeeActivity extends FragmentActivity {
-  private final static String TAG = NewEmployeeActivity.class.getName();
+public class AjouterEmployeActivity extends FragmentActivity {
+  private final static String TAG = AjouterEmployeActivity.class.getName();
 
   private EditText  etEmployeeName;
   private EditText  etEmployeeJob;
@@ -67,7 +67,7 @@ public class NewEmployeeActivity extends FragmentActivity {
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0) {
-      Toast.makeText(getApplicationContext(), getString(R.string.warning_missing_required_fields), Toast.LENGTH_LONG).show();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
@@ -92,7 +92,7 @@ public class NewEmployeeActivity extends FragmentActivity {
     values.put(Employe.KEY_email,  mail);
 
     // Nouvelle tâche
-    getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYEE, values);
+    getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYE, values);
 
     finish();
   }

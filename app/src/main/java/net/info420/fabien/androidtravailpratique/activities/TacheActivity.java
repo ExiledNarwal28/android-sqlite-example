@@ -20,12 +20,12 @@ import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.helpers.StringHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
 
-public class TaskActivity extends Activity {
-  private final static String TAG = TaskActivity.class.getName();
+public class TacheActivity extends Activity {
+  private final static String TAG = TacheActivity.class.getName();
 
   private TextView tvTaskName;
   private CheckBox cbTaskComplete;
@@ -66,7 +66,7 @@ public class TaskActivity extends Activity {
 
 
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
-    cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_task_completed);
+    cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_tache_fait);
     tvTaskUrgencyLevel      = (TextView)  findViewById(R.id.tv_task_urgency_level);
     tvTaskDescription       = (TextView)  findViewById(R.id.tv_task_description);
     tvTaskDate              = (TextView)  findViewById(R.id.tv_task_date);
@@ -76,7 +76,7 @@ public class TaskActivity extends Activity {
       @Override
       public void onClick(View view) {
         Intent i = new Intent(getApplicationContext(), EmployeActivity.class);
-        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + assignedEmployeeId);
+        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + assignedEmployeeId);
         i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
 
         startActivity(i);
@@ -85,12 +85,12 @@ public class TaskActivity extends Activity {
   }
 
   private void fillData(Uri taskUri) {
-    String[] projection = { Task.KEY_assigned_employee_ID,
-                            Task.KEY_name,
-                            Task.KEY_description,
-                            Task.KEY_completed,
-                            Task.KEY_date,
-                            Task.KEY_urgency_level };
+    String[] projection = { Tache.KEY_employe_assigne_ID,
+                            Tache.KEY_nom,
+                            Tache.KEY_description,
+                            Tache.KEY_fait,
+                            Tache.KEY_date,
+                            Tache.KEY_urgence};
 
     Cursor cursor = getContentResolver().query(taskUri, projection, null, null, null);
 
@@ -98,28 +98,28 @@ public class TaskActivity extends Activity {
       cursor.moveToFirst();
 
       // On mets les données dans l'UI
-      tvTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_name)));
-      cbTaskComplete.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
-      tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
+      tvTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_nom)));
+      cbTaskComplete.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
+      tvTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
 
       // Conversion en date
-      tvTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
+      tvTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
-      tvTaskUrgencyLevel.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)), this));
+      tvTaskUrgencyLevel.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));
 
       // Et maintenant? Il faut afficher le nom de l'employé dans le bouton d'employé assigné.
 
-      Log.d(TAG, Integer.toString(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
+      Log.d(TAG, Integer.toString(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID)));
 
       // Pour rediriger avec le bouton
-      assignedEmployeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID));
+      assignedEmployeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
 
       // Vérification de la colonne
       if (assignedEmployeeId != 0) {
         String[] employeeProjection = { Employe.KEY_nom};
 
-        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
+        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID)));
 
         Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
 

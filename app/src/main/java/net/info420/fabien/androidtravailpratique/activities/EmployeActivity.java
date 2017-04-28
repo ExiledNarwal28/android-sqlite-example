@@ -27,7 +27,7 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 public class EmployeActivity extends Activity {
   private final static String TAG = EmployeActivity.class.getName();
@@ -146,11 +146,11 @@ public class EmployeActivity extends Activity {
         // Il faut aussi enlever cet employé de toutes les tâches
         // Source : http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval
         ContentValues values = new ContentValues();
-        values.putNull(Task.KEY_assigned_employee_ID);
+        values.putNull(Tache.KEY_employe_assigne_ID);
 
         // On n'a besoin que des tâches qui ont cet employé
         // Source : https://developer.android.com/guide/topics/providers/content-provider-basics.html
-        String selection = Task.KEY_assigned_employee_ID + " = ?";
+        String selection = Tache.KEY_employe_assigne_ID + " = ?";
         String[] selectionArgs = {Integer.toString(employeeId)};
 
         // Modification des tâches

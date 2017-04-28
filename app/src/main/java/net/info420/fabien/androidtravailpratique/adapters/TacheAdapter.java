@@ -15,7 +15,7 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 /**
  * Created by fabien on 17-03-27.
@@ -23,8 +23,8 @@ import net.info420.fabien.androidtravailpratique.models.Task;
 
 // Source : http://www.vogella.com/tutorials/AndroidListView/article.html
 
-public class TaskAdapter extends SimpleCursorAdapter {
-  private final String TAG = TaskAdapter.class.getName();
+public class TacheAdapter extends SimpleCursorAdapter {
+  private final String TAG = TacheAdapter.class.getName();
 
   private final LayoutInflater inflater;
   private final TodoApplication application;
@@ -38,7 +38,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
   }
 
   // TODO : Passe un contexte plutôt qu'une Application
-  public TaskAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
+  public TacheAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
     super(context, layout, cursor, from, to, flags);
 
     this.inflater = LayoutInflater.from(context);
@@ -52,30 +52,30 @@ public class TaskAdapter extends SimpleCursorAdapter {
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    TaskAdapter.ViewHolder viewHolder;
+    TacheAdapter.ViewHolder viewHolder;
 
-    viewHolder                    = new TaskAdapter.ViewHolder();
+    viewHolder                    = new TacheAdapter.ViewHolder();
     viewHolder.tvTaskName         = (TextView) view.findViewById(R.id.tv_task_name);
     viewHolder.tvTaskDate         = (TextView) view.findViewById(R.id.tv_task_date);
     viewHolder.tvTaskEmployee     = (TextView) view.findViewById(R.id.tv_task_employee);
     viewHolder.tvTaskUrgencyLevel = (TextView) view.findViewById(R.id.tv_task_urgency_level);
-    viewHolder.cbTaskCompleted    = (CheckBox) view.findViewById(R.id.cb_task_completed);
+    viewHolder.cbTaskCompleted    = (CheckBox) view.findViewById(R.id.cb_tache_fait);
 
     // Initialisation du UI
-    viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Task.KEY_name)));
-    viewHolder.tvTaskDate.setText(DateHelper.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
-    viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
+    viewHolder.tvTaskName.setText(cursor.getString(cursor.getColumnIndex(Tache.KEY_nom)));
+    viewHolder.tvTaskDate.setText(DateHelper.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
+    viewHolder.cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
 
     // viewHolder.tvTaskUrgencyLevel.setText(application.getUrgence(urgencyLevel));
-    viewHolder.tvTaskUrgencyLevel.setBackgroundColor(ColorHelper.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)), application));
+    viewHolder.tvTaskUrgencyLevel.setBackgroundColor(ColorHelper.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), application));
 
-    if (!cursor.isNull(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) {
+    if (!cursor.isNull(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) {
       // On doit aller chercher le nom de l'employé
 
-      Cursor employeeCursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYEE,
+      Cursor employeeCursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYE,
                                                                   new String[] { Employe.KEY_ID, Employe.KEY_nom},
                                                                   Employe.KEY_ID + " =?",
-                                                                  new String[] { Integer.toString(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) },
+                                                                  new String[] { Integer.toString(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) },
                                                                   null);
 
       if (employeeCursor != null) {
@@ -87,7 +87,7 @@ public class TaskAdapter extends SimpleCursorAdapter {
         employeeCursor.close();
       }
     } else {
-      viewHolder.tvTaskEmployee.setText(context.getString(R.string.task_no_employee));
+      viewHolder.tvTaskEmployee.setText(context.getString(R.string.tache_aucun_employe));
     }
 
     view.setTag(viewHolder);

@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 
 import net.info420.fabien.androidtravailpratique.R;
 
-public class UpdateTaskFragment extends Fragment {
-  private final static String TAG = UpdateTaskFragment.class.getName();
+public class MettreAJourTacheFragment extends Fragment {
+  private final static String TAG = MettreAJourTacheFragment.class.getName();
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -23,7 +23,7 @@ import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Task;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +31,8 @@ import java.util.Map;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
-public class NewTacheActivity extends FragmentActivity implements OnTacheDateChangeListener {
-  private final static String TAG = NewTacheActivity.class.getName();
+public class AjouterTacheActivity extends FragmentActivity implements OnTacheDateChangeListener {
+  private final static String TAG = AjouterTacheActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
 
@@ -64,24 +64,24 @@ public class NewTacheActivity extends FragmentActivity implements OnTacheDateCha
 
     ColorHelper.setStatusBarColor(this);
 
-    etTaskName              = (EditText)  findViewById(R.id.et_task_name);
-    etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
-    cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);
-    spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_task_urgency_level);
-    btnTaskDate             = (Button)    findViewById(R.id.btn_task_date);
+    etTaskName              = (EditText)  findViewById(R.id.et_tache_nom);
+    etTaskDescription       = (EditText)  findViewById(R.id.et_tache_description);
+    cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_tache_fait);
+    spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_tache_urgence);
+    btnTaskDate             = (Button)    findViewById(R.id.btn_tache_date);
     btnValidate             = (Button)    findViewById(R.id.btn_valider);
-    spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_task_assigned_employee);
+    spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_tache_employe_assigne);
 
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();
-    employeeNames.add(getString(R.string.task_no_employee)); // Ceci aura le id 0.
+    employeeNames.add(getString(R.string.tache_aucun_employe)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
     // Ceci sert à associé correctement un nom d'employé et son id
     spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
 
     String[] employeeProjection = { Employe.KEY_nom, Employe.KEY_ID };
-    Cursor employeeCursor = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
+    Cursor employeeCursor = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
       // Position dans le spinner
@@ -118,7 +118,7 @@ public class NewTacheActivity extends FragmentActivity implements OnTacheDateCha
     });
   }
 
-  public void setTacheDate(int tacheDate) { this.taskDate = tacheDate; onTaskDateChange(); }
+  public void setTacheDate(int tacheDate) { this.taskDate = tacheDate; onTacheDateChange(); }
 
   public void showDatePickerDialog(View v) {
     // Afin de mettre la date comme date par défaut dans le calendrier
@@ -132,10 +132,10 @@ public class NewTacheActivity extends FragmentActivity implements OnTacheDateCha
   @Override
   public void onResume() {
     super.onResume();
-    onTaskDateChange();
+    onTacheDateChange();
   }
 
-  public void onTaskDateChange() {
+  public void onTacheDateChange() {
     if (taskDate != 0) {
       Log.d(TAG, String.format("New date : %s", taskDate));
 
@@ -160,16 +160,16 @@ public class NewTacheActivity extends FragmentActivity implements OnTacheDateCha
     }
 
     ContentValues values = new ContentValues();
-    values.put(Task.KEY_name,                 name);
-    values.put(Task.KEY_description,          description);
-    values.put(Task.KEY_completed,            completed);
-    values.put(Task.KEY_date,                 date);
-    values.put(Task.KEY_urgency_level,        urgencyLevel);
+    values.put(Tache.KEY_nom,                 name);
+    values.put(Tache.KEY_description,          description);
+    values.put(Tache.KEY_fait,            completed);
+    values.put(Tache.KEY_date,                 date);
+    values.put(Tache.KEY_urgence,        urgencyLevel);
 
     if (assinedEmployee != 0) {
-      values.put(Task.KEY_assigned_employee_ID, assinedEmployee);
+      values.put(Tache.KEY_employe_assigne_ID, assinedEmployee);
     } else {
-      values.putNull(Task.KEY_assigned_employee_ID);
+      values.putNull(Tache.KEY_employe_assigne_ID);
     }
 
     // Nouvelle tâche
@@ -179,7 +179,7 @@ public class NewTacheActivity extends FragmentActivity implements OnTacheDateCha
   }
 
   private void alert() {
-    Toast.makeText(getApplicationContext(), getString(R.string.warning_missing_required_fields), Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
   }
 
   @Override

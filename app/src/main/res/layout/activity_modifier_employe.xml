@@ -17,7 +17,7 @@
     xmlns:tools="http://schemas.android.com/tools"
             android:layout_marginTop="55dp"
     android:id="@+id/fragment"
-    android:name="net.info420.fabien.androidtravailpratique.fragments.UpdateEmployeeFragment"
+    android:name="net.info420.fabien.androidtravailpratique.fragments.MettreAJourEmployeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"

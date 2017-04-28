@@ -54,7 +54,7 @@
   <CheckBox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/cb_task_completed"
+    android:id="@+id/cb_tache_fait"
     android:layout_alignTop="@id/tv_task_name"
     android:layout_alignParentRight="true"
     android:layout_alignBottom="@id/tv_task_employee"

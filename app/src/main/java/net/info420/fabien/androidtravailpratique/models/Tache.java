@@ -6,18 +6,18 @@ package net.info420.fabien.androidtravailpratique.models;
 
 // Source : http://instinctcoder.com/android-studio-sqlite-database-example/
 
-public class Task {
+public class Tache {
   // Nom de la table
-  public static final String TABLE = "Task";
+  public static final String TABLE = "Tache";
 
   // Noms des colonnes de la table
   public static final String KEY_ID                     = "_id";
-  public static final String KEY_assigned_employee_ID   = "assigned_employee_id_fk";
-  public static final String KEY_name                   = "name";
+  public static final String KEY_employe_assigne_ID = "assigned_employee_id_fk";
+  public static final String KEY_nom = "name";
   public static final String KEY_description            = "description";
-  public static final String KEY_completed              = "completed";
+  public static final String KEY_fait = "completed";
   public static final String KEY_date                   = "date";
-  public static final String KEY_urgency_level          = "urgency_level";
+  public static final String KEY_urgence = "urgency_level";
 
   // Nom des propriétés
   public int      task_ID;

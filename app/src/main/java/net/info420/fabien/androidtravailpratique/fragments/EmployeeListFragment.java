@@ -17,12 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.activities.AjouterEmployeActivity;
+import net.info420.fabien.androidtravailpratique.adapters.EmployeAdapter;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.activities.EmployeActivity;
-import net.info420.fabien.androidtravailpratique.activities.NewEmployeeActivity;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.adapters.EmployeeAdapter;
 
 public class EmployeeListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = EmployeeListFragment.class.getName();
@@ -30,7 +30,7 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
   private FloatingActionButton fabAddEmployee;
 
   // private Cursor cursor;
-  private EmployeeAdapter employeeAdapter;
+  private EmployeAdapter employeAdapter;
 
   // private ListView lvEmployeeList;
   private TextView tvNoEmployee;
@@ -51,7 +51,7 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
       @Override
       public void onClick(View view) {
         // Nouvelle tâche
-        startActivity(new Intent(getContext(), NewEmployeeActivity.class));
+        startActivity(new Intent(getContext(), AjouterEmployeActivity.class));
       }
     });
   }
@@ -73,7 +73,7 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
 
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(getContext(), EmployeActivity.class);
-    Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + id);
+    Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + id);
     i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
 
     startActivity(i);
@@ -87,28 +87,28 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
     int[] to = new int[]{R.id.tv_employee_name, R.id.tv_task_description};
 
     getLoaderManager().initLoader(0, null, this);
-    employeeAdapter = new EmployeeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TodoApplication) getActivity().getApplication());
+    employeAdapter = new EmployeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TodoApplication) getActivity().getApplication());
 
-    setListAdapter(employeeAdapter);
+    setListAdapter(employeAdapter);
   }
 
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     String[] projection = {Employe.KEY_ID, Employe.KEY_nom, Employe.KEY_poste};
-    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_EMPLOYEE, projection, null, null, null);
+    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_EMPLOYE, projection, null, null, null);
 
     return cursorLoader;
   }
 
   @Override
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-    employeeAdapter.swapCursor(data);
+    employeAdapter.swapCursor(data);
   }
 
   @Override
   public void onLoaderReset(Loader<Cursor> loader) {
     // Les données ne sont plus valides
-    employeeAdapter.swapCursor(null);
+    employeAdapter.swapCursor(null);
   }
 }

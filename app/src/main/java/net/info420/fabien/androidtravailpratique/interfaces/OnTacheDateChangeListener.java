@@ -9,5 +9,5 @@ public interface OnTacheDateChangeListener {
 
   public void setTacheDate(int tacheDate);
 
-  public void onTaskDateChange();
+  public void onTacheDateChange();
 }
