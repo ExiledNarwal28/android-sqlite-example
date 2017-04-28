@@ -21,8 +21,8 @@ import org.joda.time.DateTime;
 //          [X]--ModifierEmployeActivity--(Fait    )--<==<<X
 //          [X]--ModifierTacheActivity----(Fait    )--<==<<X
 //          [ ]--EmployeActivity
-//          [ ]--AjouterEmployeActivity---(En cours)--<==<<O
-//          [ ]--AjouterTacheActivity
+//          [X]--AjouterEmployeActivity---(Fait    )--<==<<X
+//          [ ]--AjouterTacheActivity-----(En cours)--<==<<O
 //          [ ]--PrincipaleActivity
 //          [ ]--TacheActivity
 //

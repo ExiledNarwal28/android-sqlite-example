@@ -145,7 +145,7 @@ public class TempsService extends Service {
 
   // Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
   public int getTasksCount() {
-    Cursor cursor = getContentResolver().query( TodoContentProvider.CONTENT_URI_TASK,
+    Cursor cursor = getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
                                                 new String[] { Tache.KEY_ID },
                                                 selection,
                                                 selectionArgs.toArray(new String[selectionArgs.size()]),

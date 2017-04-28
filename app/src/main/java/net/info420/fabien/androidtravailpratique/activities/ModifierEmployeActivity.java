@@ -78,7 +78,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
    * Initialisation de l'interface
    *
    * Ajoute le bon layout
-   * Met le bon texte dans la {@link Toolbar}
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
    * Instancie les Views
    * Ajoute les Listeners
    */

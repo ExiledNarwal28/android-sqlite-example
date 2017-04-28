@@ -18,26 +18,55 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
-
+/**
+ * {@link android.app.Activity} pour ajouter une entrée d'employé dans la base de donnée
+ *
+ * @see Employe
+ * @see EmployeActivity
+ * @see FragmentActivity
+ * @see TodoContentProvider
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   ?
+ */
 public class AjouterEmployeActivity extends FragmentActivity {
   private final static String TAG = AjouterEmployeActivity.class.getName();
 
-  private EditText  etEmployeeName;
-  private EditText  etEmployeeJob;
-  private EditText  etEmployeeMail;
-  private EditText  etEmployeePhone;
-  private Button    btnValidate;
+  // Views pour stocker les données des employés et bouton
+  private EditText  etEmployeeNom;
+  private EditText  etEmployeePoste;
+  private EditText  etEmployeeEmail;
+  private EditText  etEmployeeTelephone;
+  private Button    btnValider;
 
+  /**
+   * Exécuté à la création de l'activité
+   *
+   * Instancie l'interface
+   *
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_new_employee);
 
     initUI();
   }
 
+  /**
+   * Initialisation de l'interface
+   *
+   * Ajoute le bon layout
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
+   * Instancie les Views
+   * Ajoute les Listeners
+   */
   private void initUI() {
+    setContentView(R.layout.activity_new_employee);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
@@ -45,64 +74,91 @@ public class AjouterEmployeActivity extends FragmentActivity {
 
     ColorHelper.setStatusBarColor(this);
 
-    etEmployeeName  = (EditText) findViewById(R.id.et_employe_nom);
-    etEmployeeJob   = (EditText) findViewById(R.id.et_employe_poste);
-    etEmployeeMail  = (EditText) findViewById(R.id.et_employe_email);
-    etEmployeePhone = (EditText) findViewById(R.id.et_employe_telephone);
-    btnValidate     = (Button)   findViewById(R.id.btn_valider);
+    etEmployeeNom       = (EditText) findViewById(R.id.et_employe_nom);
+    etEmployeePoste     = (EditText) findViewById(R.id.et_employe_poste);
+    etEmployeeEmail     = (EditText) findViewById(R.id.et_employe_email);
+    etEmployeeTelephone = (EditText) findViewById(R.id.et_employe_telephone);
+    btnValider          = (Button)   findViewById(R.id.btn_valider);
 
-    btnValidate.setOnClickListener(new View.OnClickListener() {
+    btnValider.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        createEmployee();
+        ajouterEmploye();
       }
     });
   }
 
-  public void createEmployee() {
-    String name   = etEmployeeName.getText().toString();
-    String job    = etEmployeeJob.getText().toString();
-    String mail   = etEmployeeMail.getText().toString();
-    String phone  = etEmployeePhone.getText().toString();
 
-    // Toutes les informations obligatoires doivent êtes présentes
-    if (name.length() == 0) {
+  /**
+   *  Envoie les données pour modifier l'Employé
+   *
+   * Va chercher les textes dans les EditTexts
+   * Vérifie si tous les champs obligatoires sont là
+   * Ajoute les valeurs dans une liste de valeurs
+   * Ajoute l'employé
+   * Termine l'activité
+   *
+   * @See TodoContentProvider
+   *
+   * {@link <a href="http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128">Validation du numéro de téléphone</a>}
+   * {@link <a href="http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext">Validation de l'adresse e-mail</a>}
+   */
+  public void ajouterEmploye() {
+    String nom        = etEmployeeNom.getText().toString();
+    String poste      = etEmployeePoste.getText().toString();
+    String email      = etEmployeeEmail.getText().toString();
+    String telephone  = etEmployeeTelephone.getText().toString();
+
+    if (nom.length() == 0) {
+      // Notification Toast
       Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
     // Validation du numéro de téléphone
     // Source : http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128
-    if (phone.length() != 0 && !PhoneNumberUtils.isGlobalPhoneNumber(phone)) {
+    if (telephone.length() != 0 && !PhoneNumberUtils.isGlobalPhoneNumber(telephone)) {
       Toast.makeText(getApplicationContext(), getString(R.string.warning_wrong_phone_format), Toast.LENGTH_LONG).show();
       return;
     }
 
     // Validation de l'adresse e-mail
     // Source : http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext
-    if (mail.length() != 0 && !Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+    if (email.length() != 0 && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
       Toast.makeText(getApplicationContext(), getString(R.string.warning_wrong_mail_format), Toast.LENGTH_LONG).show();
       return;
     }
 
     ContentValues values = new ContentValues();
-    values.put(Employe.KEY_nom,   name);
-    values.put(Employe.KEY_poste,    job);
-    values.put(Employe.KEY_telephone,  phone);
-    values.put(Employe.KEY_email,  mail);
+    values.put(Employe.KEY_nom,       nom);
+    values.put(Employe.KEY_poste,     poste);
+    values.put(Employe.KEY_telephone, telephone);
+    values.put(Employe.KEY_email,     email);
 
-    // Nouvelle tâche
+    // Nouvel employé
     getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYE, values);
 
     finish();
   }
 
+  /**
+   * Ajout des options de menus appropriées
+   *
+   * @param menu  Le {@link Menu}
+   * @return      Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
     return true;
   }
 
+  /**
+   * Change le fragment lorsqu'une option du menu est sélectionnée
+   *
+   * @param item Le {@link MenuItem} sélectionné
+   * @return     Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {

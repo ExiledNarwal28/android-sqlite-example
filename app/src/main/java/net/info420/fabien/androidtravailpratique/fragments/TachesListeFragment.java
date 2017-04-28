@@ -296,7 +296,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   public void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(getContext(), TacheActivity.class);
-    Uri taskUri = Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id);
+    Uri taskUri = Uri.parse(TodoContentProvider.CONTENT_URI_TACHE + "/" + id);
     i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
 
     startActivity(i);
@@ -309,7 +309,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
     // Bundle bundle = new Bundle();
     // bundle.putParcelable( TodoContentProvider.CONTENT_ITEM_TYPE_TACHE,
-    //                       Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id));
+    //                       Uri.parse(TodoContentProvider.CONTENT_URI_TACHE + "/" + id));
     // taskFragment.setArguments(bundle);
 
     // Fragment en PopupWindow
@@ -351,7 +351,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
     // Enlever le filtrage
     String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, KEY_urgence};
-    Cursor taskCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
+    Cursor taskCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TACHE, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
     taskAdapter = new TacheAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
@@ -364,7 +364,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, Tache.KEY_urgence};
 
-    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_TASK, projection, null, null, null);
+    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_TACHE, projection, null, null, null);
 
     return cursorLoader;
   }

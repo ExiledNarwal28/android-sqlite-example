@@ -154,7 +154,7 @@ public class EmployeActivity extends Activity {
         String[] selectionArgs = {Integer.toString(employeeId)};
 
         // Modification des tâches
-        getContentResolver().update(TodoContentProvider.CONTENT_URI_TASK,
+        getContentResolver().update(TodoContentProvider.CONTENT_URI_TACHE,
           values,
           selection,
           selectionArgs);

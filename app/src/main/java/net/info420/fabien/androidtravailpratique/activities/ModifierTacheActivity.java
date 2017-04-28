@@ -99,7 +99,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    * Initialisation de l'interface
    *
    * Ajoute le bon layout
-   * Met le bon texte dans la {@link Toolbar}
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
    * Instancie les Views
    * Remplie le Spinner des employés avec les noms des employés
    * Ajoute les Listeners
@@ -107,7 +107,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    * {@link <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720">Ajout d'items à un Spinner</a>}
    */
   private void initUI() {
-    setContentView(R.layout.activity_edit_task);
+    setContentView(R.layout.activity_modifier_tache);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
@@ -193,7 +193,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
     int employeAssigne = ((spTacheEmployeAssigne.getSelectedItem() != null) && (spTacheEmployeAssigne.getSelectedItemId() != 0)) ? spTacheEmployeAssigneMap.get((int) spTacheEmployeAssigne.getSelectedItemId()) : 0;
 
     if (nom.length() == 0 || tacheDate == 0) {
-      messageAlerte();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
@@ -292,13 +292,6 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
     if (tacheDate != 0) {
       btnTacheDate.setText(DateHelper.getLongueDate((int) tacheDate));
     }
-  }
-
-  /**
-   * Affiche un message d'alerte {@link Toast} lorsqu'il manque des données dans les Views
-   */
-  private void messageAlerte() {
-    Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
   }
 
   /**

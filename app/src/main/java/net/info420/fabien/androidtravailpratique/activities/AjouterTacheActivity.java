@@ -155,16 +155,16 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
 
     // Toutes les informations obligatoires doivent êtes présentes
     if (name.length() == 0 || taskDate == 0) {
-      alert();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
     ContentValues values = new ContentValues();
-    values.put(Tache.KEY_nom,                 name);
-    values.put(Tache.KEY_description,          description);
-    values.put(Tache.KEY_fait,            completed);
-    values.put(Tache.KEY_date,                 date);
-    values.put(Tache.KEY_urgence,        urgencyLevel);
+    values.put(Tache.KEY_nom,         name);
+    values.put(Tache.KEY_description, description);
+    values.put(Tache.KEY_fait,        completed);
+    values.put(Tache.KEY_date,        date);
+    values.put(Tache.KEY_urgence,     urgencyLevel);
 
     if (assinedEmployee != 0) {
       values.put(Tache.KEY_employe_assigne_ID, assinedEmployee);
@@ -173,13 +173,9 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
     }
 
     // Nouvelle tâche
-    getContentResolver().insert(TodoContentProvider.CONTENT_URI_TASK, values);
+    getContentResolver().insert(TodoContentProvider.CONTENT_URI_TACHE, values);
 
     finish();
-  }
-
-  private void alert() {
-    Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
   }
 
   @Override
