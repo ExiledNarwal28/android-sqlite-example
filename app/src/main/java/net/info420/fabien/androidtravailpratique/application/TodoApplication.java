@@ -18,11 +18,11 @@ import org.joda.time.DateTime;
 //      net.info420.fabien.androidtravailpratique
 //
 //        ACTIVITIES
-//          [X]--ModifierEmployeActivity--(Fait    )--<==<<X
-//          [X]--ModifierTacheActivity----(Fait    )--<==<<X
-//          [ ]--EmployeActivity
-//          [X]--AjouterEmployeActivity---(Fait    )--<==<<X
-//          [ ]--AjouterTacheActivity-----(En cours)--<==<<O
+//          [X]--ModifierEmployeActivity--(Fait    )--<==<<
+//          [X]--ModifierTacheActivity----(Fait    )--<==<<
+//          [ ]--EmployeActivity----------(En cours)--<==<<
+//          [X]--AjouterEmployeActivity---(Fait    )--<==<<
+//          [X]--AjouterTacheActivity-----(Fait    )--<==<<
 //          [ ]--PrincipaleActivity
 //          [ ]--TacheActivity
 //

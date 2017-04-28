@@ -149,7 +149,7 @@ public class AjouterEmployeActivity extends FragmentActivity {
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
+    getMenuInflater().inflate(R.menu.menu_mettre_a_jour_item, menu);
     return true;
   }
 

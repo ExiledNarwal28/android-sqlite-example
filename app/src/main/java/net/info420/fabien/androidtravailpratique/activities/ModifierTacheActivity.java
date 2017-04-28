@@ -48,7 +48,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   private final static String TAG = ModifierTacheActivity.class.getName();
 
   // Liste des noms des employés
-  private ArrayAdapter<String> adapterTaskAssignedEmployees;
+  private ArrayAdapter<String> adapterTacheEmployeeAssigne;
 
   // Views pour stocker les données des employés et bouton
   private EditText  etTacheNom;
@@ -71,7 +71,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    * Exécuté à la création de l'activité
    *
    * Instancie l'interface
-   * Va chercher les données d'Employé
+   * Va chercher les données de tâche
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -129,7 +129,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
     employeNoms.add(getString(R.string.tache_aucun_employe)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
-    spTacheEmployeAssigneMap = new HashMap<Integer, Integer>();
+    spTacheEmployeAssigneMap = new HashMap<>();
 
     // Projection et curseur
     String[]  employeProjection = { Employe.KEY_nom, Employe.KEY_ID };
@@ -153,8 +153,8 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
     }
 
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    adapterTaskAssignedEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeNoms);
-    spTacheEmployeAssigne.setAdapter(adapterTaskAssignedEmployees);
+    adapterTacheEmployeeAssigne = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeNoms);
+    spTacheEmployeAssigne.setAdapter(adapterTacheEmployeeAssigne);
 
     btnTacheDate.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -172,12 +172,12 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   }
 
   /**
-   *  Envoie les données pour modifier la Tâche
+   * Envoie les données pour modifier la Tâche
    *
    * Va chercher les valeurs dans les Views
    * Vérifie si tous les champs obligatoires sont là
    * Ajoute les valeurs dans une liste de valeurs
-   * Met à jour l'employé
+   * Met à jour la tâche
    * Termine l'activité
    *
    * @See TodoContentProvider
@@ -302,7 +302,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
+    getMenuInflater().inflate(R.menu.menu_mettre_a_jour_item, menu);
     return true;
   }
 

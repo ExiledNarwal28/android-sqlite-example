@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,34 +28,72 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
+// TODO : J'ai enlevé onResume() qui n'avait que onTacheDateChange()... c'est ok?
 
+/**
+ * {@link android.app.Activity} pour modifier une entrée d'employé dans la base de donnée
+ *
+ * @see Tache
+ * @see TacheActivity
+ * @see FragmentActivity
+ * @see TodoContentProvider
+ * @see OnTacheDateChangeListener
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   ?
+ */
 public class AjouterTacheActivity extends FragmentActivity implements OnTacheDateChangeListener {
   private final static String TAG = AjouterTacheActivity.class.getName();
 
-  private ArrayAdapter<String> adapterTaskAssignedEmployees;
+  // Liste des noms des employés
+  private ArrayAdapter<String> adapterTacheEmployeeAssigne;
 
-  private EditText  etTaskName;
-  private EditText  etTaskDescription;
-  private CheckBox  cbTaskCompleted;
-  private Spinner   spTaskUrgencyLevel;
-  private Button    btnTaskDate;
-  private Button    btnValidate;
-  private Spinner   spTaskAssignedEmployee;
+  // Views pour stocker les données des employés et bouton
+  private EditText  etTacheNom;
+  private EditText  etTacheDescription;
+  private CheckBox  cbTacheFait;
+  private Spinner   spTacheUrgence;
+  private Button    btnTacheDate;
+  private Button    btnValider;
+  private Spinner   spTacheEmployeAssigne;
 
-  private Map<Integer, Integer> spTaskAssignedEmployeeMap;
+  // Sert à lié la position dans le Spinner et le Id
+  private Map<Integer, Integer> spTacheEmployeAssigneMap;
 
-  public long taskDate = 0;
+  // Date de la tâche en millisecondes
+  public long tacheDate = 0;
 
+  /**
+   * Exécuté à la création de l'activité
+   *
+   * Instancie l'interface
+   *
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_new_task);
 
     initUI();
   }
 
+  /**
+   * Initialisation de l'interface
+   *
+   * Ajoute le bon layout
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
+   * Instancie les Views
+   * Remplie le Spinner des employés avec les noms des employés
+   * Ajoute les Listeners
+   *
+   * {@link <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720">Ajout d'items à un Spinner</a>}
+   */
   private void initUI() {
+    setContentView(R.layout.activity_new_task);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
@@ -64,108 +101,95 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
 
     ColorHelper.setStatusBarColor(this);
 
-    etTaskName              = (EditText)  findViewById(R.id.et_tache_nom);
-    etTaskDescription       = (EditText)  findViewById(R.id.et_tache_description);
-    cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_tache_fait);
-    spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_tache_urgence);
-    btnTaskDate             = (Button)    findViewById(R.id.btn_tache_date);
-    btnValidate             = (Button)    findViewById(R.id.btn_valider);
-    spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_tache_employe_assigne);
+    etTacheNom            = (EditText)  findViewById(R.id.et_tache_nom);
+    etTacheDescription    = (EditText)  findViewById(R.id.et_tache_description);
+    cbTacheFait           = (CheckBox)  findViewById(R.id.cb_tache_fait);
+    spTacheUrgence        = (Spinner)   findViewById(R.id.sp_tache_urgence);
+    btnTacheDate          = (Button)    findViewById(R.id.btn_tache_date);
+    btnValider            = (Button)    findViewById(R.id.btn_valider);
+    spTacheEmployeAssigne = (Spinner)   findViewById(R.id.sp_tache_employe_assigne);
 
     // Je mets la seule option actuelle dans le filtre des employés
     ArrayList<String> employeeNames = new ArrayList<>();
     employeeNames.add(getString(R.string.tache_aucun_employe)); // Ceci aura le id 0.
 
     // C'est l'heure d'aller chercher les noms des employés
-    // Ceci sert à associé correctement un nom d'employé et son id
-    spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
+    spTacheEmployeAssigneMap = new HashMap<>();
 
-    String[] employeeProjection = { Employe.KEY_nom, Employe.KEY_ID };
-    Cursor employeeCursor = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, employeeProjection, null, null, null);
+    // Projection et curseur
+    String[] employeProjection  = { Employe.KEY_nom, Employe.KEY_ID };
+    Cursor employeCursor        = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, employeProjection, null, null, null);
 
-    if (employeeCursor != null) {
-      // Position dans le spinner
-      Integer position = 1;
+    // Si le curseur est fonctionnel
+    if (employeCursor != null) {
+      Integer position = 1; // Position de l'employé dans le Spinner
 
-      while (employeeCursor.moveToNext()) {
-        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-        spTaskAssignedEmployeeMap.put(position,
-                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
+      // Pour chaque employé, on ajoute son nom dans le spinner et en associe sa position dans le Spinner et son Id
+      while (employeCursor.moveToNext()) {
+        employeeNames.add(employeCursor.getString(employeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+        spTacheEmployeAssigneMap.put(position,
+                                      employeCursor.getInt(employeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
 
         position++;
       }
 
       // Fermeture du curseur
-      employeeCursor.close();
+      employeCursor.close();
     }
 
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    adapterTaskAssignedEmployees = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeeNames);
-    spTaskAssignedEmployee.setAdapter(adapterTaskAssignedEmployees);
+    adapterTacheEmployeeAssigne = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeeNames);
+    spTacheEmployeAssigne.setAdapter(adapterTacheEmployeeAssigne);
 
-    btnTaskDate.setOnClickListener(new View.OnClickListener() {
+    btnTacheDate.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         showDatePickerDialog(view);
       }
     });
 
-    btnValidate.setOnClickListener(new View.OnClickListener() {
+    btnValider.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        createTask();
+        ajouterTache();
       }
     });
   }
 
-  public void setTacheDate(int tacheDate) { this.taskDate = tacheDate; onTacheDateChange(); }
-
-  public void showDatePickerDialog(View v) {
-    // Afin de mettre la date comme date par défaut dans le calendrier
-    if (taskDate != 0) {
-      DatePickerFragment.newInstance((int) taskDate).show(getFragmentManager(), "datePicker");
-    } else {
-      DatePickerFragment.newInstance().show(getFragmentManager(), "datePicker");
-    }
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    onTacheDateChange();
-  }
-
-  public void onTacheDateChange() {
-    if (taskDate != 0) {
-      Log.d(TAG, String.format("New date : %s", taskDate));
-
-      btnTaskDate.setText(DateHelper.getLongueDate((int) taskDate));
-    }
-  }
-
-  public void createTask() {
-    String name         = etTaskName.getText().toString();
-    String description  = etTaskDescription.getText().toString();
-    int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
-    int date            = (int) taskDate;
-    int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId(); // TODO : Vérifier si ça marche vraiment
+  /**
+   * Envoie les données pour ajouter la Tâche
+   *
+   * Va chercher les valeurs dans les Views
+   * Vérifie si tous les champs obligatoires sont là
+   * Ajoute les valeurs dans une liste de valeurs
+   * Ajoute la tâche
+   * Termine l'activité
+   *
+   * @See TodoContentProvider
+   */
+  public void ajouterTache() {
+    String nom          = etTacheNom.getText().toString();
+    String description  = etTacheDescription.getText().toString();
+    int fait            = cbTacheFait.isChecked() ? 1 : 0;
+    int date            = (int) tacheDate;
+    int urgence         = (int) spTacheUrgence.getSelectedItemId();
 
     // Pour l'employé assigné, je vérifie d'abord si quelque chose a été choisi dans le Spinner. Dans ce cas, j'ajoute le bon Id d'employé. Sinon, null.
-    int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployeeMap.get((int) spTaskAssignedEmployee.getSelectedItemId()) : 0;
+    int assinedEmployee = ((spTacheEmployeAssigne.getSelectedItem() != null) && (spTacheEmployeAssigne.getSelectedItemId() != 0)) ? spTacheEmployeAssigneMap.get((int) spTacheEmployeAssigne.getSelectedItemId()) : 0;
 
-    // Toutes les informations obligatoires doivent êtes présentes
-    if (name.length() == 0 || taskDate == 0) {
+    if (nom.length() == 0 || tacheDate == 0) {
       Toast.makeText(getApplicationContext(), getString(R.string.attention_champs_vides), Toast.LENGTH_LONG).show();
       return;
     }
 
     ContentValues values = new ContentValues();
-    values.put(Tache.KEY_nom,         name);
+    values.put(Tache.KEY_nom,         nom);
     values.put(Tache.KEY_description, description);
-    values.put(Tache.KEY_fait,        completed);
+    values.put(Tache.KEY_fait,        fait);
     values.put(Tache.KEY_date,        date);
-    values.put(Tache.KEY_urgence,     urgencyLevel);
+    values.put(Tache.KEY_urgence,     urgence);
 
+    // Si l'employé assigné a un Id de 0, alors il sera null
     if (assinedEmployee != 0) {
       values.put(Tache.KEY_employe_assigne_ID, assinedEmployee);
     } else {
@@ -178,12 +202,58 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
     finish();
   }
 
+  /**
+   * Modification de la variable de date de la tache
+   *
+   * Modifie la date, puis appelle onTacheDateChange
+   *
+   * @See onTacheDateChange
+   *
+   * @param tacheDate Nouvelle date de la tache en millisecondes
+   */
+  public void setTacheDate(int tacheDate) { this.tacheDate = tacheDate; onTacheDateChange(); }
+
+  /**
+   * Affiche un DatePickerDialog
+   *
+   * @param view La vue qui appelle le {@link android.app.DatePickerDialog } (peut être this pour une {@link android.app.Activity})
+   */
+  public void showDatePickerDialog(View view) {
+    // Afin de mettre la date comme date par défaut dans le calendrier
+    if (tacheDate != 0) {
+      DatePickerFragment.newInstance((int) tacheDate).show(getFragmentManager(), "datePicker");
+    } else {
+      DatePickerFragment.newInstance().show(getFragmentManager(), "datePicker");
+    }
+  }
+
+  /**
+   * Modifie le texte du bouton de date lorsque la date change
+   */
+  public void onTacheDateChange() {
+    if (tacheDate != 0) {
+      btnTacheDate.setText(DateHelper.getLongueDate((int) tacheDate));
+    }
+  }
+
+  /**
+   * Ajout des options de menus appropriées
+   *
+   * @param menu  Le {@link Menu}
+   * @return      Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
+    getMenuInflater().inflate(R.menu.menu_mettre_a_jour_item, menu);
     return true;
   }
 
+  /**
+   * Change le fragment lorsqu'une option du menu est sélectionnée
+   *
+   * @param item Le {@link MenuItem} sélectionné
+   * @return     Booléen signifiant la réussite de l'opération
+   */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
