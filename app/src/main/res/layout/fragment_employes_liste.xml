@@ -31,7 +31,7 @@
     android:clickable="true"
     app:fabSize="normal"
     app:srcCompat="@drawable/ic_plus"
-    android:id="@+id/fab_add_employee"
+    android:id="@+id/fab_ajouter_employe"
     android:layout_alignParentEnd="true"
     android:layout_alignParentBottom="true"/>
 </RelativeLayout>

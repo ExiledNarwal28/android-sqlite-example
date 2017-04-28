@@ -53,7 +53,7 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   private final static int FRAGMENT_PREFS           = 2;
 
   /**
-   * Exécuté à la création de l'activité
+   * Exécuté à la création de l'{@link Activity}
    *
    * Vérifie les permissions
    * Démarre le TempsService
