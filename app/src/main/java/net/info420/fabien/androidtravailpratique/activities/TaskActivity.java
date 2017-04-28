@@ -15,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.helpers.StringHelper;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html#activities
@@ -46,10 +46,10 @@ public class TaskActivity extends Activity {
     initUI();
 
     // On va chercher les informations
-    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-      taskUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
       Log.d(TAG, taskUri.getPath());
 
       fillData(taskUri);
@@ -75,9 +75,9 @@ public class TaskActivity extends Activity {
     btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent i = new Intent(getApplicationContext(), EmployeeActivity.class);
-        Uri employeeUri = Uri.parse(TaskerContentProvider.CONTENT_URI_EMPLOYEE + "/" + assignedEmployeeId);
-        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE, employeeUri);
+        Intent i = new Intent(getApplicationContext(), EmployeActivity.class);
+        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + assignedEmployeeId);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
 
         startActivity(i);
       }
@@ -117,16 +117,16 @@ public class TaskActivity extends Activity {
 
       // Vérification de la colonne
       if (assignedEmployeeId != 0) {
-        String[] employeeProjection = { Employee.KEY_name };
+        String[] employeeProjection = { Employe.KEY_nom};
 
-        Uri employeeUri = Uri.parse(TaskerContentProvider.CONTENT_URI_EMPLOYEE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
+        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
 
         Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
 
         if (employeeCursor != null) {
           employeeCursor.moveToFirst();
 
-          btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+          btnTaskAssignedEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
 
           // Fermeture du curseur
           employeeCursor.close();
@@ -162,7 +162,7 @@ public class TaskActivity extends Activity {
     switch (item.getItemId()) {
       case R.id.menu_edit:
         Intent i = new Intent(this, EditTaskActivity.class);
-        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
         startActivity(i);
         break;
       case R.id.menu_delete:

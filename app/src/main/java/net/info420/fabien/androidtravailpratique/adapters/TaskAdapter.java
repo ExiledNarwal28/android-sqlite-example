@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 /**
@@ -72,16 +72,16 @@ public class TaskAdapter extends SimpleCursorAdapter {
     if (!cursor.isNull(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) {
       // On doit aller chercher le nom de l'employé
 
-      Cursor employeeCursor = context.getContentResolver().query( TaskerContentProvider.CONTENT_URI_EMPLOYEE,
-                                                                  new String[] { Employee.KEY_ID, Employee.KEY_name },
-                                                                  Employee.KEY_ID + " =?",
+      Cursor employeeCursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYEE,
+                                                                  new String[] { Employe.KEY_ID, Employe.KEY_nom},
+                                                                  Employe.KEY_ID + " =?",
                                                                   new String[] { Integer.toString(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID))) },
                                                                   null);
 
       if (employeeCursor != null) {
         employeeCursor.moveToFirst();
 
-        // viewHolder.tvTaskEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        // viewHolder.tvTaskEmployee.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
 
         // Fermeture du curseur
         employeeCursor.close();

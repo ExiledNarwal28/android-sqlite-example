@@ -16,7 +16,7 @@
     
     <provider
       android:authorities="net.info420.fabien.androidtravailpratique.data"
-      android:name=".data.TaskerContentProvider" />
+      android:name=".data.TodoContentProvider" />
 
     <service android:name=".utils.TempsService"/>
 
@@ -64,7 +64,7 @@
     </activity>
     
     <activity
-      android:name=".activities.EditEmployeeActivity"
+      android:name=".activities.ModifierEmployeActivity"
       android:label="@string/title_activity_edit_employee"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">
@@ -78,7 +78,7 @@
     </activity>
     
     <activity
-      android:name=".activities.EmployeeActivity"
+      android:name=".activities.EmployeActivity"
       android:label="@string/title_activity_employee"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">

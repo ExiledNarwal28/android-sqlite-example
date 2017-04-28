@@ -14,9 +14,9 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
@@ -45,11 +45,11 @@ public class NewEmployeeActivity extends FragmentActivity {
 
     ColorHelper.setStatusBarColor(this);
 
-    etEmployeeName  = (EditText) findViewById(R.id.et_employee_name);
-    etEmployeeJob   = (EditText) findViewById(R.id.et_employee_job);
-    etEmployeeMail  = (EditText) findViewById(R.id.et_employee_mail);
-    etEmployeePhone = (EditText) findViewById(R.id.et_employee_phone);
-    btnValidate     = (Button)   findViewById(R.id.btn_validate);
+    etEmployeeName  = (EditText) findViewById(R.id.et_employe_nom);
+    etEmployeeJob   = (EditText) findViewById(R.id.et_employe_poste);
+    etEmployeeMail  = (EditText) findViewById(R.id.et_employe_email);
+    etEmployeePhone = (EditText) findViewById(R.id.et_employe_telephone);
+    btnValidate     = (Button)   findViewById(R.id.btn_valider);
 
     btnValidate.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -86,27 +86,27 @@ public class NewEmployeeActivity extends FragmentActivity {
     }
 
     ContentValues values = new ContentValues();
-    values.put(Employee.KEY_name,   name);
-    values.put(Employee.KEY_job,    job);
-    values.put(Employee.KEY_phone,  phone);
-    values.put(Employee.KEY_email,  mail);
+    values.put(Employe.KEY_nom,   name);
+    values.put(Employe.KEY_poste,    job);
+    values.put(Employe.KEY_telephone,  phone);
+    values.put(Employe.KEY_email,  mail);
 
     // Nouvelle tâche
-    getContentResolver().insert(TaskerContentProvider.CONTENT_URI_EMPLOYEE, values);
+    getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYEE, values);
 
     finish();
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_update_item, menu);
+    getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_cancel:
+      case R.id.menu_annuler:
         finish();
         break;
       default:

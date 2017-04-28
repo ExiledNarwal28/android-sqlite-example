@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 
 /**
  * Created by fabien on 17-03-27.
@@ -51,8 +51,8 @@ public class EmployeeAdapter extends SimpleCursorAdapter {
     viewHolder.tvEmployeeJob  = (TextView) view.findViewById(R.id.tv_task_description);
 
     // Initialisation du UI
-    viewHolder.tvEmployeeName.setText(cursor.getString(cursor.getColumnIndex(Employee.KEY_name)));
-    viewHolder.tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndex(Employee.KEY_job)));
+    viewHolder.tvEmployeeName.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
+    viewHolder.tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
 
     view.setTag(viewHolder);
   }

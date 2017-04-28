@@ -6,16 +6,16 @@ package net.info420.fabien.androidtravailpratique.models;
 
 // Source : http://instinctcoder.com/android-studio-sqlite-database-example/
 
-public class Employee {
+public class Employe {
   // Nom de la table
-  public static final String TABLE = "Employee";
+  public static final String TABLE = "Employe";
 
   // Noms des colonnes de la table
   public static final String KEY_ID     = "_id";
-  public static final String KEY_name   = "name";
-  public static final String KEY_job    = "job";
+  public static final String KEY_nom = "name";
+  public static final String KEY_poste = "job";
   public static final String KEY_email  = "email";
-  public static final String KEY_phone  = "phone";
+  public static final String KEY_telephone = "phone";
 
   // Nom des propriétés
   public int    employee_ID;

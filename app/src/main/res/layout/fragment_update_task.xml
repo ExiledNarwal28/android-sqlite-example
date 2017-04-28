@@ -91,7 +91,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    android:id="@+id/btn_validate"
+    android:id="@+id/btn_valider"
     style="@android:style/Widget.Material.Light.Button"
     tools:text="@string/action_confirm"
     android:background="@color/colorAccent"

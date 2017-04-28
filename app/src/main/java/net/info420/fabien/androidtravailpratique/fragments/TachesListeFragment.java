@@ -22,8 +22,8 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.activities.NewTaskActivity;
 import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 import net.info420.fabien.androidtravailpratique.adapters.TaskAdapter;
 
@@ -118,15 +118,15 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     spTaskAssignedEmployeeMap = new HashMap<>();
 
     // TODO : Je fais ceci souvent, je devrais le mettre dans une fonction
-    Cursor employeeCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, new String[] { Employee.KEY_ID, Employee.KEY_name }, null, null, null);
+    Cursor employeeCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYEE, new String[] { Employe.KEY_ID, Employe.KEY_nom}, null, null, null);
 
     if (employeeCursor != null) {
       Integer position = 1;
 
       while (employeeCursor.moveToNext()) {
-        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
         spTaskAssignedEmployeeMap.put(position,
-                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID)));
+                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
 
         position++;
       }
@@ -296,8 +296,8 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   public void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(getContext(), TaskActivity.class);
-    Uri taskUri = Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id);
-    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+    Uri taskUri = Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id);
+    i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
 
     startActivity(i);
 
@@ -308,8 +308,8 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // TODO : REDESIGN : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
     // Bundle bundle = new Bundle();
-    // bundle.putParcelable( TaskerContentProvider.CONTENT_ITEM_TYPE_TASK,
-    //                       Uri.parse(TaskerContentProvider.CONTENT_URI_TASK + "/" + id));
+    // bundle.putParcelable( TodoContentProvider.CONTENT_ITEM_TYPE_TASK,
+    //                       Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id));
     // taskFragment.setArguments(bundle);
 
     // Fragment en PopupWindow
@@ -351,7 +351,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
     // Enlever le filtrage
     String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, KEY_urgency_level };
-    Cursor taskCursor = getActivity().getContentResolver().query(TaskerContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
+    Cursor taskCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TASK, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
     taskAdapter = new TaskAdapter(getContext(), R.layout.task_row, taskCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
@@ -364,7 +364,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
     String[] projection = { Task.KEY_ID, Task.KEY_name, Task.KEY_date, Task.KEY_assigned_employee_ID, Task.KEY_completed, Task.KEY_urgency_level };
 
-    CursorLoader cursorLoader = new CursorLoader(getContext(), TaskerContentProvider.CONTENT_URI_TASK, projection, null, null, null);
+    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_TASK, projection, null, null, null);
 
     return cursorLoader;
   }

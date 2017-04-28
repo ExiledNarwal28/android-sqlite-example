@@ -10,7 +10,7 @@ import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import org.joda.time.DateTimeConstants;
@@ -145,7 +145,7 @@ public class TempsService extends Service {
 
   // Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
   public int getTasksCount() {
-    Cursor cursor = getContentResolver().query( TaskerContentProvider.CONTENT_URI_TASK,
+    Cursor cursor = getContentResolver().query( TodoContentProvider.CONTENT_URI_TASK,
                                                 new String[] { Task.KEY_ID },
                                                 selection,
                                                 selectionArgs.toArray(new String[selectionArgs.size()]),

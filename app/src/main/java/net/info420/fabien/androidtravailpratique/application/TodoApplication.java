@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.ContentValues;
 
 import net.info420.fabien.androidtravailpratique.data.DBHelper;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import org.joda.time.DateTime;
@@ -18,9 +18,9 @@ import org.joda.time.DateTime;
 //      net.info420.fabien.androidtravailpratique
 //
 //        ACTIVITIES
-//          [ ]--EditEmployeeActivity
-//          [ ]--EditTaskActivity
-//          [ ]--EmployeeActivity
+//          [X]--ModifierEmployeActivity--(Fait   )--<==<<X
+//          [ ]--EditTaskActivity---------(À faire)--<==<<O
+//          [ ]--EmployeActivity
 //          [ ]--NewEmployeeActivity
 //          [ ]--NewTaskActivity
 //          [ ]--PrincipaleActivity
@@ -35,7 +35,7 @@ import org.joda.time.DateTime;
 //
 //        DATA
 //          [ ]--DBHelper
-//          [ ]--TaskerContentProvider
+//          [ ]--TodoContentProvider
 //
 //        FRAGMENTS
 //          [ ]--DatePickerFragment
@@ -56,7 +56,7 @@ import org.joda.time.DateTime;
 //         [ ]--OnTaskDateChangeListener
 //
 //        MODELS
-//          [ ]--Employee
+//          [ ]--Employe
 //          [ ]--Task
 //
 //        UTILS
@@ -191,10 +191,10 @@ public class TodoApplication extends Application {
     for (int i = 0; i < employeeNames.length; i++) {
       ContentValues values = new ContentValues();
 
-      values.put(Employee.KEY_name, employeeNames[i]);
-      values.put(Employee.KEY_job, employeeJobs[i]);
-      values.put(Employee.KEY_email, employeeEmails[i]);
-      values.put(Employee.KEY_phone, employeePhones[i]);
+      values.put(Employe.KEY_nom, employeeNames[i]);
+      values.put(Employe.KEY_poste, employeeJobs[i]);
+      values.put(Employe.KEY_email, employeeEmails[i]);
+      values.put(Employe.KEY_telephone, employeePhones[i]);
     }
   }
 }

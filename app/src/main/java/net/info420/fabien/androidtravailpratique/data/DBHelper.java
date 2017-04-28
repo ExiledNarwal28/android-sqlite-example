@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 /**
@@ -28,12 +28,12 @@ public class DBHelper  extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
     // Tout le nécéssaire pour construire les différentes tables
 
-    String CREATE_TABLE_EMPLOYEE      = "CREATE TABLE " + Employee.TABLE + "("
-      + Employee.KEY_ID               + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-      + Employee.KEY_name             + " TEXT, "
-      + Employee.KEY_job              + " TEXT, "
-      + Employee.KEY_email            + " TEXT, "
-      + Employee.KEY_phone            + " TEXT )";
+    String CREATE_TABLE_EMPLOYEE      = "CREATE TABLE " + Employe.TABLE + "("
+      + Employe.KEY_ID               + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+      + Employe.KEY_nom + " TEXT, "
+      + Employe.KEY_poste + " TEXT, "
+      + Employe.KEY_email            + " TEXT, "
+      + Employe.KEY_telephone + " TEXT )";
 
     String CREATE_TABLE_TASK          = "CREATE TABLE " + Task.TABLE + "("
       + Task.KEY_ID                   + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -55,7 +55,7 @@ public class DBHelper  extends SQLiteOpenHelper {
 
   public void recreateDB(SQLiteDatabase db) {
     // Drop de toutes les tables
-    db.execSQL("DROP TABLE IF EXISTS " + Employee.TABLE);
+    db.execSQL("DROP TABLE IF EXISTS " + Employe.TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Task.TABLE);
 
     // Recréer les tables

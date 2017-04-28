@@ -18,12 +18,12 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.ArrayList;
@@ -61,11 +61,11 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     Bundle extras = getIntent().getExtras();
 
     // Depuis l'instance sauvegarder
-    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
 
     // Ou passée depuis une autre activité
     if (extras != null) {
-      taskUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_TASK);
+      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
 
       fillData(taskUri);
     }
@@ -85,7 +85,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);
     spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_task_urgency_level);
     btnTaskDate             = (Button)    findViewById(R.id.btn_task_date);
-    btnValidate             = (Button)    findViewById(R.id.btn_validate);
+    btnValidate             = (Button)    findViewById(R.id.btn_valider);
     spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_task_assigned_employee);
 
     // Je mets la seule option actuelle dans le filtre des employés
@@ -95,16 +95,16 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     // C'est l'heure d'aller chercher les noms des employés
     spTaskAssignedEmployeeMap = new HashMap<Integer, Integer>();
 
-    String[] employeeProjection = { Employee.KEY_name, Employee.KEY_ID };
-    Cursor employeeCursor = getContentResolver().query(TaskerContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
+    String[] employeeProjection = { Employe.KEY_nom, Employe.KEY_ID };
+    Cursor employeeCursor = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYEE, employeeProjection, null, null, null);
 
     if (employeeCursor != null) {
       Integer position = 1;
 
       while (employeeCursor.moveToNext()) {
-        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employee.KEY_name)));
+        employeeNames.add(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
         spTaskAssignedEmployeeMap.put(position,
-                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employee.KEY_ID)));
+                                      employeeCursor.getInt(employeeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
 
         position++;
       }
@@ -228,14 +228,14 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_update_item, menu);
+    getMenuInflater().inflate(R.menu.menu_modifier_item, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_cancel:
+      case R.id.menu_annuler:
         finish();
         break;
       default:

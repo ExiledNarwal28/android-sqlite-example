@@ -24,13 +24,13 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
-public class EmployeeActivity extends Activity {
-  private final static String TAG = EmployeeActivity.class.getName();
+public class EmployeActivity extends Activity {
+  private final static String TAG = EmployeActivity.class.getName();
 
   private TextView tvEmployeeName;
   private TextView tvEmployeeJob;
@@ -53,10 +53,10 @@ public class EmployeeActivity extends Activity {
     initUI();
 
     // On va chercher les informations
-    employeeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE);
+    employeeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-      employeeUri = extras.getParcelable(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE);
+      employeeUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
       Log.d(TAG, employeeUri.getPath());
 
       fillData(employeeUri);
@@ -94,24 +94,24 @@ public class EmployeeActivity extends Activity {
   }
 
   private void fillData(Uri uri) {
-    String[] projection = {Employee.KEY_ID,
-      Employee.KEY_name,
-      Employee.KEY_job,
-      Employee.KEY_email,
-      Employee.KEY_phone};
+    String[] projection = {Employe.KEY_ID,
+      Employe.KEY_nom,
+      Employe.KEY_poste,
+      Employe.KEY_email,
+      Employe.KEY_telephone};
 
     Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
 
     if (cursor != null) {
       cursor.moveToFirst();
 
-      employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employee.KEY_ID));
-      employeePhone = cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_phone));
+      employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID));
+      employeePhone = cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_telephone));
 
       // On mets les données dans l'UI
-      tvEmployeeName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_name)));
-      tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_job)));
-      tvEmployeeMail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employee.KEY_email)));
+      tvEmployeeName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+      tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_poste)));
+      tvEmployeeMail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_email)));
       tvEmployeePhone.setText(employeePhone);
 
       // Fermeture du curseur
@@ -119,7 +119,7 @@ public class EmployeeActivity extends Activity {
     }
   }
 
-  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'EditEmployeeActivity)
+  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierEmployeActivity)
   @Override
   public void onResume() {
     super.onResume();
@@ -136,8 +136,8 @@ public class EmployeeActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_edit:
-        Intent i = new Intent(this, EditEmployeeActivity.class);
-        i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE, employeeUri);
+        Intent i = new Intent(this, ModifierEmployeActivity.class);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
         startActivity(i);
         break;
       case R.id.menu_delete:
@@ -154,7 +154,7 @@ public class EmployeeActivity extends Activity {
         String[] selectionArgs = {Integer.toString(employeeId)};
 
         // Modification des tâches
-        getContentResolver().update(TaskerContentProvider.CONTENT_URI_TASK,
+        getContentResolver().update(TodoContentProvider.CONTENT_URI_TASK,
           values,
           selection,
           selectionArgs);

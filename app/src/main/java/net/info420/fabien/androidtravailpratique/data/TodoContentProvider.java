@@ -11,7 +11,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
 import java.util.Arrays;
@@ -23,8 +23,8 @@ import java.util.HashSet;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
-public class TaskerContentProvider extends ContentProvider {
-  private final static String TAG = TaskerContentProvider.class.getName();
+public class TodoContentProvider extends ContentProvider {
+  private final static String TAG = TodoContentProvider.class.getName();
 
   // Base de données
   private DBHelper dbHelper;
@@ -45,7 +45,7 @@ public class TaskerContentProvider extends ContentProvider {
   public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
   public static final String CONTENT_ITEM_TYPE_TASK     = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
   public static final String CONTENT_TYPE_EMPLOYEE      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/employees";
-  public static final String CONTENT_ITEM_TYPE_EMPLOYEE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employee";
+  public static final String CONTENT_ITEM_TYPE_EMPLOYE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employee";
 
   private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -107,17 +107,17 @@ public class TaskerContentProvider extends ContentProvider {
         checkColumnsEmployee(projection);
 
         // On prépare la table
-        queryBuilder.setTables(Employee.TABLE);
+        queryBuilder.setTables(Employe.TABLE);
         break;
       case EMPLOYEE_ID:
         // On vérifie si la colonne existe (sécurité)
         checkColumnsEmployee(projection);
 
         // On prépare la table
-        queryBuilder.setTables(Employee.TABLE);
+        queryBuilder.setTables(Employe.TABLE);
 
         // On ajoute le ID au query
-        queryBuilder.appendWhere(Employee.KEY_ID + "=" + uri.getLastPathSegment());
+        queryBuilder.appendWhere(Employe.KEY_ID + "=" + uri.getLastPathSegment());
         break;
       default:
         throw new IllegalArgumentException("URI inconnu : " + uri);
@@ -151,7 +151,7 @@ public class TaskerContentProvider extends ContentProvider {
 
         return Uri.parse(BASE_PATH_TASK + "/" + id);
       case EMPLOYEES:
-        id = sqlDB.insert(Employee.TABLE, null, values);
+        id = sqlDB.insert(Employe.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Log.d(TAG, String.format("Insertion de l'employé #%s", id));
@@ -181,14 +181,14 @@ public class TaskerContentProvider extends ContentProvider {
         }
         break;
       case EMPLOYEES:
-        rowsDeleted = sqlDB.delete(Employee.TABLE, selection, selectionArgs);
+        rowsDeleted = sqlDB.delete(Employe.TABLE, selection, selectionArgs);
         break;
       case EMPLOYEE_ID:
         id = uri.getLastPathSegment();
         if (TextUtils.isEmpty(selection)) {
-          rowsDeleted = sqlDB.delete(Employee.TABLE, Employee.KEY_ID + "=" + id, null);
+          rowsDeleted = sqlDB.delete(Employe.TABLE, Employe.KEY_ID + "=" + id, null);
         } else {
-          rowsDeleted = sqlDB.delete(Employee.TABLE, Employee.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rowsDeleted = sqlDB.delete(Employe.TABLE, Employe.KEY_ID + "=" + id + " and " + selection, selectionArgs);
         }
         break;
       default:
@@ -217,14 +217,14 @@ public class TaskerContentProvider extends ContentProvider {
         }
         break;
       case EMPLOYEES:
-        rowsUpdated = sqlDB.update(Employee.TABLE, values, selection, selectionArgs);
+        rowsUpdated = sqlDB.update(Employe.TABLE, values, selection, selectionArgs);
         break;
       case EMPLOYEE_ID:
         id = uri.getLastPathSegment();
         if (TextUtils.isEmpty(selection)) {
-          rowsUpdated = sqlDB.update(Employee.TABLE, values, Employee.KEY_ID + "=" + id, null);
+          rowsUpdated = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + id, null);
         } else {
-          rowsUpdated = sqlDB.update(Employee.TABLE, values, Employee.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rowsUpdated = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + id + " and " + selection, selectionArgs);
         }
         break;
       default:
@@ -247,11 +247,11 @@ public class TaskerContentProvider extends ContentProvider {
   }
 
   private void checkColumnsEmployee(String[] projection) {
-    String[] available = {  Employee.KEY_ID,
-                            Employee.KEY_name,
-                            Employee.KEY_job,
-                            Employee.KEY_email,
-                            Employee.KEY_phone };
+    String[] available = {  Employe.KEY_ID,
+                            Employe.KEY_nom,
+                            Employe.KEY_poste,
+                            Employe.KEY_email,
+                            Employe.KEY_telephone};
 
     checkColumns(projection, available);
   }

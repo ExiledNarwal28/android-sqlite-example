@@ -18,10 +18,10 @@ import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.activities.EmployeeActivity;
+import net.info420.fabien.androidtravailpratique.activities.EmployeActivity;
 import net.info420.fabien.androidtravailpratique.activities.NewEmployeeActivity;
-import net.info420.fabien.androidtravailpratique.data.TaskerContentProvider;
-import net.info420.fabien.androidtravailpratique.models.Employee;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
+import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.adapters.EmployeeAdapter;
 
 public class EmployeeListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -72,16 +72,16 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
     Log.d(TAG, "onListItemClick : " + id);
 
     super.onListItemClick(l, v, position, id);
-    Intent i = new Intent(getContext(), EmployeeActivity.class);
-    Uri employeeUri = Uri.parse(TaskerContentProvider.CONTENT_URI_EMPLOYEE + "/" + id);
-    i.putExtra(TaskerContentProvider.CONTENT_ITEM_TYPE_EMPLOYEE, employeeUri);
+    Intent i = new Intent(getContext(), EmployeActivity.class);
+    Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYEE + "/" + id);
+    i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
 
     startActivity(i);
   }
 
   private void fillData() {
     // Affiche les champs de la base de données (name)
-    String[] from = new String[]{Employee.KEY_name, Employee.KEY_job};
+    String[] from = new String[]{Employe.KEY_nom, Employe.KEY_poste};
 
     // Où on affiche les champs
     int[] to = new int[]{R.id.tv_employee_name, R.id.tv_task_description};
@@ -95,8 +95,8 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
   // Création d'un nouveau Loader
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-    String[] projection = {Employee.KEY_ID, Employee.KEY_name, Employee.KEY_job};
-    CursorLoader cursorLoader = new CursorLoader(getContext(), TaskerContentProvider.CONTENT_URI_EMPLOYEE, projection, null, null, null);
+    String[] projection = {Employe.KEY_ID, Employe.KEY_nom, Employe.KEY_poste};
+    CursorLoader cursorLoader = new CursorLoader(getContext(), TodoContentProvider.CONTENT_URI_EMPLOYEE, projection, null, null, null);
 
     return cursorLoader;
   }
