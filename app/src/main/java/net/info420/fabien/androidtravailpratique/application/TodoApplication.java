@@ -38,8 +38,8 @@ import org.joda.time.DateTime;
 //          [ ]--TodoContentProvider
 //
 //        FRAGMENTS
-//          [ ]--DatePickerFragment--(En cours)--<==<<
-//          [ ]--EmployesListeFragment
+//          [X]--DatePickerFragment-----(Fait    )--<==<<
+//          [ ]--EmployesListeFragment--(En cours)--<==<<
 //          [ ]--PrefsFragment
 //          [ ]--TachesListeFragment
 //          [ ]--TacheFragment
