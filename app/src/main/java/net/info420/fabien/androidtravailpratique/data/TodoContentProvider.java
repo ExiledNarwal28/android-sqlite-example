@@ -43,7 +43,7 @@ public class TodoContentProvider extends ContentProvider {
   public  static final Uri    CONTENT_URI_EMPLOYEE    = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
 
   public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
-  public static final String CONTENT_ITEM_TYPE_TASK     = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
+  public static final String CONTENT_ITEM_TYPE_TACHE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
   public static final String CONTENT_TYPE_EMPLOYEE      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/employees";
   public static final String CONTENT_ITEM_TYPE_EMPLOYE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employee";
 

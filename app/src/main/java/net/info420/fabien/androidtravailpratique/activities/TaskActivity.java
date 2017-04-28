@@ -46,10 +46,10 @@ public class TaskActivity extends Activity {
     initUI();
 
     // On va chercher les informations
-    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
+    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
+      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
       Log.d(TAG, taskUri.getPath());
 
       fillData(taskUri);
@@ -143,7 +143,7 @@ public class TaskActivity extends Activity {
     }
   }
 
-  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'EditTaskActivity)
+  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierTacheActivity)
   @Override
   public void onResume() {
     super.onResume();
@@ -161,8 +161,8 @@ public class TaskActivity extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_edit:
-        Intent i = new Intent(this, EditTaskActivity.class);
-        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+        Intent i = new Intent(this, ModifierTacheActivity.class);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
         startActivity(i);
         break;
       case R.id.menu_delete:

@@ -20,7 +20,7 @@ import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.activities.NewTaskActivity;
+import net.info420.fabien.androidtravailpratique.activities.NewTacheActivity;
 import net.info420.fabien.androidtravailpratique.activities.TaskActivity;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
@@ -95,7 +95,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
       @Override
       public void onClick(View view) {
         // Nouvelle tâche
-        startActivity(new Intent(getContext(), NewTaskActivity.class));
+        startActivity(new Intent(getContext(), NewTacheActivity.class));
       }
     });
   }
@@ -297,7 +297,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     super.onListItemClick(l, v, position, id);
     Intent i = new Intent(getContext(), TaskActivity.class);
     Uri taskUri = Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id);
-    i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TASK, taskUri);
+    i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
 
     startActivity(i);
 
@@ -308,7 +308,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // TODO : REDESIGN : Passer des données à un Fragment
     // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
     // Bundle bundle = new Bundle();
-    // bundle.putParcelable( TodoContentProvider.CONTENT_ITEM_TYPE_TASK,
+    // bundle.putParcelable( TodoContentProvider.CONTENT_ITEM_TYPE_TACHE,
     //                       Uri.parse(TodoContentProvider.CONTENT_URI_TASK + "/" + id));
     // taskFragment.setArguments(bundle);
 

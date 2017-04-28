@@ -6,7 +6,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
-import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -51,6 +51,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
   }
 
   public void onDateSet(DatePicker view, int year, int month, int day) {
-    ((OnTaskDateChangeListener) getActivity()).setTaskDate((int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000));
+    ((OnTacheDateChangeListener) getActivity()).setTacheDate((int) (new DateTime(year, month + 1, day, 0, 0).getMillis() / 10000));
   }
 }

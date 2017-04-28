@@ -21,7 +21,7 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
-import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -31,8 +31,8 @@ import java.util.Map;
 
 // Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
 
-public class NewTaskActivity extends FragmentActivity implements OnTaskDateChangeListener {
-  private final static String TAG = NewTaskActivity.class.getName();
+public class NewTacheActivity extends FragmentActivity implements OnTacheDateChangeListener {
+  private final static String TAG = NewTacheActivity.class.getName();
 
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
 
@@ -118,8 +118,7 @@ public class NewTaskActivity extends FragmentActivity implements OnTaskDateChang
     });
   }
 
-  @Override
-  public void setTaskDate(int taskDate) { this.taskDate = taskDate; onTaskDateChange(); }
+  public void setTacheDate(int tacheDate) { this.taskDate = tacheDate; onTaskDateChange(); }
 
   public void showDatePickerDialog(View v) {
     // Afin de mettre la date comme date par défaut dans le calendrier

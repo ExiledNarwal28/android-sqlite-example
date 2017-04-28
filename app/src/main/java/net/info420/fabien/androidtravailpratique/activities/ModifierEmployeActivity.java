@@ -20,14 +20,15 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
-
 /**
  * {@link android.app.Activity} pour modifier une entrée d'employé dans la base de donnée
  *
  * @see Employe
  * @see EmployeActivity
+ * @see FragmentActivity
  * @see TodoContentProvider
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
  *
  * @author  Fabien Roy
  * @version 1.0
@@ -48,7 +49,8 @@ public class ModifierEmployeActivity extends FragmentActivity {
   /**
    * Exécuté à la création de l'activité
    *
-   * Instancie
+   * Instancie l'interface
+   * Va chercher les données d'Employé
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -56,7 +58,6 @@ public class ModifierEmployeActivity extends FragmentActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // Initialisation de l'interface
     initUI();
 
     Bundle extras = getIntent().getExtras();

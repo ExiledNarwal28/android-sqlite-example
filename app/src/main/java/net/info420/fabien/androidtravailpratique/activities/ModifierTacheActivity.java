@@ -22,7 +22,7 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
-import net.info420.fabien.androidtravailpratique.interfaces.OnTaskDateChangeListener;
+import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Task;
 
@@ -30,27 +30,52 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
+/**
+ * {@link android.app.Activity} pour modifier une entrée d'employé dans la base de donnée
+ *
+ * @see Task
+ * @see TaskActivity
+ * @see FragmentActivity
+ * @see TodoContentProvider
+ * @see OnTacheDateChangeListener
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   ?
+ */
+public class ModifierTacheActivity extends FragmentActivity implements OnTacheDateChangeListener {
+  private final static String TAG = ModifierTacheActivity.class.getName();
 
-public class EditTaskActivity extends FragmentActivity implements OnTaskDateChangeListener {
-  private final static String TAG = EditTaskActivity.class.getName();
-
+  // Liste des noms des employés
   private ArrayAdapter<String> adapterTaskAssignedEmployees;
 
-  private EditText  etTaskName;
+  // Views pour stocker les données des employés et bouton
+  private EditText  etTaskNom;
   private EditText  etTaskDescription;
-  private CheckBox  cbTaskCompleted;
-  private Spinner   spTaskUrgencyLevel;
-  private Button    btnTaskDate;
-  private Button    btnValidate;
+  private CheckBox  cbTaskFait;
+  private Spinner   spTaskUrgence;
   private Spinner   spTaskAssignedEmployee;
+  private Button    btnTaskDate;
+  private Button    btnValider;
 
+  // Sert à lié la position dans le Spinner et le Id
   private Map<Integer, Integer> spTaskAssignedEmployeeMap;
 
-  public long taskDate = 0;
+  // Date de la tâche en millisecondes
+  public long tacheDate = 0;
 
-  private Uri taskUri;
+  private Uri tacheUri;
 
+  /**
+   * Exécuté à la création de l'activité
+   *
+   * Instancie l'interface
+   * Va chercher les données d'Employé
+   *
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -60,17 +85,19 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
 
     Bundle extras = getIntent().getExtras();
 
+    // On va chercher les données...
     // Depuis l'instance sauvegarder
-    taskUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
+    tacheUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
 
     // Ou passée depuis une autre activité
     if (extras != null) {
-      taskUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TASK);
+      tacheUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE);
 
-      fillData(taskUri);
+      fillData(tacheUri);
     }
   }
 
+  // TODO : DOC : T'ES RENDU ICI
   private void initUI() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
@@ -80,12 +107,12 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     ColorHelper.setStatusBarColor(this);
 
 
-    etTaskName              = (EditText)  findViewById(R.id.et_task_name);
+    etTaskNom = (EditText)  findViewById(R.id.et_task_name);
     etTaskDescription       = (EditText)  findViewById(R.id.et_task_description);
-    cbTaskCompleted         = (CheckBox)  findViewById(R.id.cb_task_completed);
-    spTaskUrgencyLevel      = (Spinner)   findViewById(R.id.sp_task_urgency_level);
+    cbTaskFait = (CheckBox)  findViewById(R.id.cb_task_completed);
+    spTaskUrgence = (Spinner)   findViewById(R.id.sp_task_urgency_level);
     btnTaskDate             = (Button)    findViewById(R.id.btn_task_date);
-    btnValidate             = (Button)    findViewById(R.id.btn_valider);
+    btnValider = (Button)    findViewById(R.id.btn_valider);
     spTaskAssignedEmployee  = (Spinner)   findViewById(R.id.sp_task_assigned_employee);
 
     // Je mets la seule option actuelle dans le filtre des employés
@@ -125,7 +152,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
       }
     });
 
-    btnValidate.setOnClickListener(new View.OnClickListener() {
+    btnValider.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         updateTask();
@@ -133,13 +160,12 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     });
   }
 
-  @Override
-  public void setTaskDate(int taskDate) { this.taskDate = taskDate; onTaskDateChange(); }
+  public void setTacheDate(int tacheDate) { this.tacheDate = tacheDate; onTaskDateChange(); }
 
   public void showDatePickerDialog(View v) {
     // Afin de mettre la date comme date par défaut dans le calendrier
-    if (taskDate != 0) {
-      DatePickerFragment.newInstance((int) taskDate).show(getFragmentManager(), "datePicker");
+    if (tacheDate != 0) {
+      DatePickerFragment.newInstance((int) tacheDate).show(getFragmentManager(), "datePicker");
     } else {
       DatePickerFragment.newInstance().show(getFragmentManager(), "datePicker");
     }
@@ -147,26 +173,26 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
 
   @Override
   public void onTaskDateChange() {
-    if (taskDate != 0) {
-      Log.d(TAG, String.format("New date : %s", taskDate));
+    if (tacheDate != 0) {
+      Log.d(TAG, String.format("New date : %s", tacheDate));
 
-      btnTaskDate.setText(DateHelper.getLongueDate((int) taskDate));
+      btnTaskDate.setText(DateHelper.getLongueDate((int) tacheDate));
     }
   }
 
   public void updateTask() {
-    String name         = etTaskName.getText().toString();
+    String name         = etTaskNom.getText().toString();
     String description  = etTaskDescription.getText().toString();
-    int completed       = cbTaskCompleted.isChecked() ? 1 : 0;
-    int date            = (int) taskDate;
-    int urgencyLevel    = (int) spTaskUrgencyLevel.getSelectedItemId(); // TODO : Vérifier si ça marche vraiment
+    int completed       = cbTaskFait.isChecked() ? 1 : 0;
+    int date            = (int) tacheDate;
+    int urgencyLevel    = (int) spTaskUrgence.getSelectedItemId(); // TODO : Vérifier si ça marche vraiment
 
     // Pour l'employé assigné, je vérifie d'abord si quelque chose a été choisi dans le Spinner. Dans ce cas, j'ajoute le bon Id d'employé. Sinon, null.
     int assinedEmployee = ((spTaskAssignedEmployee.getSelectedItem() != null) && (spTaskAssignedEmployee.getSelectedItemId() != 0)) ? spTaskAssignedEmployeeMap.get((int) spTaskAssignedEmployee.getSelectedItemId()) : 0;
 
     // Toutes les informations obligatoires doivent êtes présentes
-    if (name.length() == 0 || taskDate == 0) {
-      Log.d(TAG, String.format("Name : %s Description : %s TaskDate : %s", name.length(), description.length(), taskDate));
+    if (name.length() == 0 || tacheDate == 0) {
+      Log.d(TAG, String.format("Name : %s Description : %s TaskDate : %s", name.length(), description.length(), tacheDate));
       alert();
       return;
     }
@@ -185,7 +211,7 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
     }
 
     // Modification tâche
-    getContentResolver().update(taskUri, values, null, null);
+    getContentResolver().update(tacheUri, values, null, null);
 
     finish();
   }
@@ -204,17 +230,17 @@ public class EditTaskActivity extends FragmentActivity implements OnTaskDateChan
       cursor.moveToFirst();
 
       // On mets les données dans l'UI
-      etTaskName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_name)));
-      cbTaskCompleted.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
+      etTaskNom.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_name)));
+      cbTaskFait.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_completed))) == 1); // Conversion en boolean
       etTaskDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Task.KEY_description)));
 
       // Conversion en date
       btnTaskDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date))));
 
-      taskDate = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date));
+      tacheDate = cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_date));
 
       // Conversion en niveau d'urgence et de l'employé en sélection du Spinner
-      spTaskUrgencyLevel.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)));
+      spTaskUrgence.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_urgency_level)));
       spTaskAssignedEmployee.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow(Task.KEY_assigned_employee_ID)));
 
       // Fermeture du curseur
