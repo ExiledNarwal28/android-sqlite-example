@@ -8,7 +8,7 @@
   <string name="action_cancel">Annuler</string>
   <string name="action_call">Appeler</string>
   <string name="action_confirm">Valider</string>
-  <string name="action_send">Envoyer</string>
+  <string name="action_envoyer">Envoyer</string>
   <string name="action_send_sms">Envoyer un SMS</string>
 
   <string name="attention_champs_vides">Des champs obligatoires sont vides</string>
@@ -23,8 +23,8 @@
   <string name="info_urgency_low_and_plus">à urgence basse et +</string>
   <string name="info_urgency_medium_and_plus">à urgence moyenne et +</string>
   <string name="info_urgency_high">à urgence haute</string>
-  <string name="info_sending_a_sms">Envoie d\'un SMS</string>
-  <string name="info_enter_your_message">Veuillez entrez votre message</string>
+  <string name="info_envoie_dun_sms">Envoie d\'un SMS</string>
+  <string name="info_entrer_votre_message">Veuillez entrez votre message</string>
 
   <string name="task">Tâche</string>
   <string name="tasks">Tâches</string>

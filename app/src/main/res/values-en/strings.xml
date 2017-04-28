@@ -8,7 +8,7 @@
   <string name="action_cancel">Cancel</string>
   <string name="action_call">Call</string>
   <string name="action_confirm">Confirm</string>
-  <string name="action_send">Send</string>
+  <string name="action_envoyer">Send</string>
   <string name="action_send_sms">Send a SMS</string>
 
   <string name="attention_champs_vides">Some required fields are missing</string>
@@ -23,8 +23,8 @@
   <string name="info_urgency_low_and_plus">low urgency and +</string>
   <string name="info_urgency_medium_and_plus">medium urgency and +</string>
   <string name="info_urgency_high">high urgency</string>
-  <string name="info_sending_a_sms">Sending a SMS</string>
-  <string name="info_enter_your_message">Enter your message</string>
+  <string name="info_envoie_dun_sms">Sending a SMS</string>
+  <string name="info_entrer_votre_message">Enter your message</string>
 
   <string name="task">Task</string>
   <string name="tasks">Tasks</string>

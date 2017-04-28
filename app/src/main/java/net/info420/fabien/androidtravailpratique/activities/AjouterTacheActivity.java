@@ -249,7 +249,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
   }
 
   /**
-   * Change le fragment lorsqu'une option du menu est sélectionnée
+   * Fait les actions appropriées lorsqu'on clique dans le menu
    *
    * @param item Le {@link MenuItem} sélectionné
    * @return     Booléen signifiant la réussite de l'opération

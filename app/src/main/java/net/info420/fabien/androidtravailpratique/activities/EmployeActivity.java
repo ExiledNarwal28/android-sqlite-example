@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,41 +28,73 @@ import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
+/**
+ * {@link android.app.Activity} pour voir les détails d'une entrée d'employé dans la base de donnée
+ *
+ * @see Employe
+ * @see TodoContentProvider
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   ?
+ */
 public class EmployeActivity extends Activity {
   private final static String TAG = EmployeActivity.class.getName();
 
-  private TextView tvEmployeeName;
-  private TextView tvEmployeeJob;
-  private TextView tvEmployeeMail;
-  private TextView tvEmployeePhone;
-  private Button btnEmployeeSendSms;
-  private Button btnEmployeeCall;
+  // Views pour stocker les données des employés et bouton
+  private TextView  tvEmployeNom;
+  private TextView  tvEmployePoste;
+  private TextView  tvEmployeEmail;
+  private TextView  tvEmployeTelephone;
+  private Button    btnEmployeEnvoyerSMS;
+  private Button    btnEmployeAppeler;
 
-  private Uri employeeUri;
+  private Uri employeUri;
 
-  private int employeeId;
+  // Données de l'employé
+  private int employeId;
+  private String employeTelephone;
 
-  private String employeePhone;
-
+  /**
+   * Exécuté à la création de l'activité
+   *
+   * Instancie l'interface
+   * Va chercher les données d'Employé
+   *
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_employee);
 
     initUI();
 
-    // On va chercher les informations
-    employeeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
+    // On va chercher les données...
+    // Depuis l'instance sauvegarder
+    employeUri = (savedInstanceState == null) ? null : (Uri) savedInstanceState.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
+
+    // Ou passée depuis une autre activité
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-      employeeUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
-      Log.d(TAG, employeeUri.getPath());
+      employeUri = extras.getParcelable(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE);
 
-      fillData(employeeUri);
+      rempliData(employeUri);
     }
   }
 
+  /**
+   * Initialisation de l'interface
+   *
+   * Ajoute le bon layout
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
+   * Instancie les Views
+   * Ajoute les Listeners
+   */
   private void initUI() {
+    setContentView(R.layout.activity_employee);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
@@ -71,123 +102,139 @@ public class EmployeActivity extends Activity {
 
     ColorHelper.setStatusBarColor(this);
 
-    tvEmployeeName = (TextView) findViewById(R.id.tv_employee_name);
-    tvEmployeeJob = (TextView) findViewById(R.id.tv_task_description);
-    tvEmployeeMail = (TextView) findViewById(R.id.tv_task_date);
-    tvEmployeePhone = (TextView) findViewById(R.id.tv_employee_phone);
-    btnEmployeeSendSms = (Button) findViewById(R.id.btn_employee_send_sms);
-    btnEmployeeCall = (Button) findViewById(R.id.btn_employee_call);
+    tvEmployeNom          = (TextView) findViewById(R.id.tv_employe_nom);
+    tvEmployePoste        = (TextView) findViewById(R.id.tv_employe_poste);
+    tvEmployeEmail        = (TextView) findViewById(R.id.tv_employe_email);
+    tvEmployeTelephone    = (TextView) findViewById(R.id.tv_employe_telephone);
+    btnEmployeEnvoyerSMS  = (Button) findViewById(R.id.btn_employe_envoyer_sms);
+    btnEmployeAppeler     = (Button) findViewById(R.id.btn_employe_appeler);
 
-    btnEmployeeSendSms.setOnClickListener(new View.OnClickListener() {
+    btnEmployeEnvoyerSMS.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        sendSMS();
+        envoyerSMS();
       }
     });
 
-    btnEmployeeCall.setOnClickListener(new View.OnClickListener() {
+    btnEmployeAppeler.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        callEmployee();
+        appeler();
       }
     });
   }
 
-  private void fillData(Uri uri) {
+  /**
+   *  Envoie les données pour supprimer l'Employé
+   *
+   * Ajoute l'Id dans une liste de valeurs
+   * Enlève l'employé des tâches qui lui sont assignées
+   * Termine l'activité
+   *
+   * @See Tache
+   * @See TodoContentProvider
+   *
+   * {@link <a href="http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval">Ajouter une valeur nulle</a>}
+   * {@link <a href="https://developer.android.com/guide/topics/providers/content-provider-basics.html">Mettre à jour des items</a>}
+   */
+  private void supprimerEmploye() {
+    getContentResolver().delete(employeUri, null, null); // Suppression de l'employé
+
+    // Il faut aussi enlever cet employé de toutes les tâches
+    // Source : http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval
+    ContentValues values = new ContentValues();
+    values.putNull(Tache.KEY_employe_assigne_ID);
+
+    // On n'a besoin que des tâches qui ont cet employé
+    // Source : https://developer.android.com/guide/topics/providers/content-provider-basics.html
+    String    selection     = Tache.KEY_employe_assigne_ID + " = ?";
+    String[]  selectionArgs = {Integer.toString(employeId)};
+
+    // Modification des tâches qui n'auront plus l'employé assigné
+    getContentResolver().update(TodoContentProvider.CONTENT_URI_TACHE,
+                                values,
+                                selection,
+                                selectionArgs);
+
+    finish();
+  }
+
+  /**
+   * Rempli les EditTexts des données
+   *
+   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
+   * Construit le {@link Cursor}
+   * Remplit les EditTexts
+   *
+   * @param employeUri l'Uri vers l'employé à modifier
+   */
+  private void rempliData(Uri employeUri) {
     String[] projection = {Employe.KEY_ID,
       Employe.KEY_nom,
       Employe.KEY_poste,
       Employe.KEY_email,
       Employe.KEY_telephone};
 
-    Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+    Cursor cursor = getContentResolver().query(employeUri, projection, null, null, null);
 
     if (cursor != null) {
       cursor.moveToFirst();
 
-      employeeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID));
-      employeePhone = cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_telephone));
+      // Données de l'employé
+      employeId = cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID));
+      employeTelephone = cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_telephone));
 
       // On mets les données dans l'UI
-      tvEmployeeName.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-      tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_poste)));
-      tvEmployeeMail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_email)));
-      tvEmployeePhone.setText(employeePhone);
+      tvEmployeNom.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+      tvEmployePoste.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_poste)));
+      tvEmployeEmail.setText(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_email)));
+      tvEmployeTelephone.setText(employeTelephone);
 
       // Fermeture du curseur
       cursor.close();
     }
   }
 
-  // On rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierEmployeActivity)
-  @Override
-  public void onResume() {
-    super.onResume();
-    fillData(employeeUri);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.menu_item, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.menu_edit:
-        Intent i = new Intent(this, ModifierEmployeActivity.class);
-        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeeUri);
-        startActivity(i);
-        break;
-      case R.id.menu_delete:
-        getContentResolver().delete(employeeUri, null, null);
-
-        // Il faut aussi enlever cet employé de toutes les tâches
-        // Source : http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval
-        ContentValues values = new ContentValues();
-        values.putNull(Tache.KEY_employe_assigne_ID);
-
-        // On n'a besoin que des tâches qui ont cet employé
-        // Source : https://developer.android.com/guide/topics/providers/content-provider-basics.html
-        String selection = Tache.KEY_employe_assigne_ID + " = ?";
-        String[] selectionArgs = {Integer.toString(employeeId)};
-
-        // Modification des tâches
-        getContentResolver().update(TodoContentProvider.CONTENT_URI_TACHE,
-          values,
-          selection,
-          selectionArgs);
-
-        finish();
-        break;
-      default:
-        break;
-    }
-    return true;
-  }
-
-  private void sendSMS() {
-    // On vérifie qu'il y a bien un numéro de téléphone
-    // On vérifie aussi qu'on a bien la permission d'envoyer un SMS
-    if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
+  /**
+   * Envoie un SMS à l'employé à l'aide de son numéro de téléphone
+   *
+   * Vérifie si le numéro de téléphone est valide et si la permission est accordée
+   * Construit un {@link AlertDialog} contenant l'EditText pour le message
+   * Ajoute les Listeners de réponse au {@link AlertDialog} (si l'utilisateur accepter, envoie le SMS)
+   * Affiche l'{@link AlertDialog}
+   *
+   * @See AlertDialog
+   * @See SmsManager
+   * @See PendingIntent
+   *
+   * {@link <a href="http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271">Mettre un EditText dans un Dialog</a>}
+   * {@link <a href="http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working">Faire fonctionner l'envoie de SMS</a>}
+   */
+  private void envoyerSMS() {
+    if ((employeTelephone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
       // TODO : Faire une classe séparée qui renvoie un dialogue
       // Source : http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271
       AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-      alertDialog.setTitle(getString(R.string.info_sending_a_sms));
-      alertDialog.setMessage(getString(R.string.info_enter_your_message));
 
+      // Titre et message
+      alertDialog.setTitle(getString(R.string.info_envoie_dun_sms));
+      alertDialog.setMessage(getString(R.string.info_entrer_votre_message));
+
+      // Ajout de l'EditText
       final EditText input = new EditText(this);
       input.setLayoutParams(new LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
       alertDialog.setView(input);
 
-      alertDialog.setPositiveButton(getString(R.string.action_send),
+      // Si la réponse est positive...
+      alertDialog.setPositiveButton(getString(R.string.action_envoyer),
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
             String message = input.getText().toString();
+
             if (!message.isEmpty()) {
+              // Il est possible que cela ne marche pas sans PendingIntent
               // Source : http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working
-              SmsManager.getDefault().sendTextMessage(employeePhone,
+              SmsManager.getDefault().sendTextMessage(employeTelephone,
                                                       null,
                                                       message,
                                                       PendingIntent.getBroadcast(getBaseContext(), 0, new Intent("SMS_SENT"), 0),
@@ -196,6 +243,7 @@ public class EmployeActivity extends Activity {
           }
         });
 
+      // Si la réponse est négative, on annule
       alertDialog.setNegativeButton(getString(R.string.action_cancel),
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
@@ -207,13 +255,72 @@ public class EmployeActivity extends Activity {
     }
   }
 
-  private void callEmployee() {
+  /**
+   * Appele l'employé
+   *
+   * Vérifie si le numéro de téléphone est valide et si la permission est accordée
+   * Appele l'employé avec un nouveau {@link Intent}
+   * Pour appeler, il suffit d'ajouter "tel:" au {@link Uri} et d'ajouter Intent.ACTION_CALL à l'{@link Intent}
+   *
+   * @See Uri
+   * @See Intent
+   *
+   * {@link <a href="http://stackoverflow.com/questions/5230912/android-app-to-call-a-number-on-button-click">Appeler un numéro</a>}
+   */
+  private void appeler() {
     // On vérifie qu'il y a bien un numéro de téléphone
     // On vérifie aussi qu'on a bien la permission d'appeler le contact
-    if ((employeePhone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)) {
+    if ((employeTelephone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)) {
+      // Source : Vhttp://stackoverflow.com/questions/5230912/android-app-to-call-a-number-on-button-click
       Intent callIntent = new Intent(Intent.ACTION_CALL);
-      callIntent.setData(Uri.parse("tel:" + employeePhone));
+      callIntent.setData(Uri.parse("tel:" + employeTelephone));
       startActivity(callIntent);
     }
+  }
+
+
+  /**
+   * Rafraîchit quand on revient dans l'Activity (ex. : en revenant d'ModifierEmployeActivity)
+   */
+  @Override
+  public void onResume() {
+    super.onResume();
+    rempliData(employeUri);
+  }
+
+  /**
+   * Ajout des options de menus appropriées
+   *
+   * @param menu  Le {@link Menu}
+   * @return      Booléen signifiant la réussite de l'opération
+   */
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_item, menu);
+    return true;
+  }
+
+  @Override
+  /**
+   * Fait les actions appropriées lorsqu'on clique dans le menu
+   *
+   * @param item Le {@link MenuItem} sélectionné
+   * @return     Booléen signifiant la réussite de l'opération
+   */
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_edit:
+        // Démarre l'activité de modification
+        Intent i = new Intent(this, ModifierEmployeActivity.class);
+        i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_EMPLOYE, employeUri);
+        startActivity(i);
+        break;
+      case R.id.menu_delete:
+        supprimerEmploye();
+        break;
+      default:
+        break;
+    }
+    return true;
   }
 }

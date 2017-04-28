@@ -56,7 +56,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
 
     viewHolder                    = new TacheAdapter.ViewHolder();
     viewHolder.tvTaskName         = (TextView) view.findViewById(R.id.tv_task_name);
-    viewHolder.tvTaskDate         = (TextView) view.findViewById(R.id.tv_task_date);
+    viewHolder.tvTaskDate         = (TextView) view.findViewById(R.id.tv_employe_email);
     viewHolder.tvTaskEmployee     = (TextView) view.findViewById(R.id.tv_task_employee);
     viewHolder.tvTaskUrgencyLevel = (TextView) view.findViewById(R.id.tv_task_urgency_level);
     viewHolder.cbTaskCompleted    = (CheckBox) view.findViewById(R.id.cb_tache_fait);

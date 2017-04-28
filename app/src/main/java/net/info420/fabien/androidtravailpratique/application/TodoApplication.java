@@ -20,11 +20,11 @@ import org.joda.time.DateTime;
 //        ACTIVITIES
 //          [X]--ModifierEmployeActivity--(Fait    )--<==<<
 //          [X]--ModifierTacheActivity----(Fait    )--<==<<
-//          [ ]--EmployeActivity----------(En cours)--<==<<
+//          [X]--EmployeActivity----------(Fait    )--<==<<
 //          [X]--AjouterEmployeActivity---(Fait    )--<==<<
 //          [X]--AjouterTacheActivity-----(Fait    )--<==<<
 //          [ ]--PrincipaleActivity
-//          [ ]--TacheActivity
+//          [ ]--TacheActivity------------(En cours)--<==<<
 //
 //        ADAPTERS
 //          [ ]--EmployeAdapter

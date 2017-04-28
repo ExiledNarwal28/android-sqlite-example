@@ -84,7 +84,7 @@ public class EmployeeListFragment extends ListFragment implements LoaderManager.
     String[] from = new String[]{Employe.KEY_nom, Employe.KEY_poste};
 
     // Où on affiche les champs
-    int[] to = new int[]{R.id.tv_employee_name, R.id.tv_task_description};
+    int[] to = new int[]{R.id.tv_employe_nom, R.id.tv_employe_poste};
 
     getLoaderManager().initLoader(0, null, this);
     employeAdapter = new EmployeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TodoApplication) getActivity().getApplication());

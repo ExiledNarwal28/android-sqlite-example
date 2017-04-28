@@ -16,7 +16,7 @@
     android:text="@string/task_name"
     android:textSize="24sp"
     android:layout_alignParentTop="true"
-    android:layout_alignStart="@+id/tv_task_date"/>
+    android:layout_alignStart="@+id/tv_employe_email"/>
 
   <TextView
     android:id="@+id/tv_task_date"
@@ -36,7 +36,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:layout_marginStart="5dp"
-    android:layout_below="@+id/tv_task_date"
+    android:layout_below="@+id/tv_employe_email"
     android:layout_toEndOf="@id/tv_task_urgency_level"
     android:lines="1"
     android:text="@string/task_assigned_employee"

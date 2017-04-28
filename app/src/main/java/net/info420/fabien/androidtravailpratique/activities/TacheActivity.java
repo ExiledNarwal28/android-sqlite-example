@@ -68,8 +68,8 @@ public class TacheActivity extends Activity {
     tvTaskName              = (TextView)  findViewById(R.id.tv_task_name);
     cbTaskComplete          = (CheckBox)  findViewById(R.id.cb_tache_fait);
     tvTaskUrgencyLevel      = (TextView)  findViewById(R.id.tv_task_urgency_level);
-    tvTaskDescription       = (TextView)  findViewById(R.id.tv_task_description);
-    tvTaskDate              = (TextView)  findViewById(R.id.tv_task_date);
+    tvTaskDescription       = (TextView)  findViewById(R.id.tv_employe_poste);
+    tvTaskDate              = (TextView)  findViewById(R.id.tv_employe_email);
     btnTaskAssignedEmployee = (Button)    findViewById(R.id.btn_task_assigned_employee);
 
     btnTaskAssignedEmployee.setOnClickListener(new View.OnClickListener() {
