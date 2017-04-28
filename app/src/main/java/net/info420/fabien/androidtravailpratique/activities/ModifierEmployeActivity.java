@@ -115,7 +115,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
    * Met à jour l'employé
    * Termine l'activité
    *
-   * @See TodoContentProvider
+   * @see TodoContentProvider
    *
    * {@link <a href="http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128">Validation du numéro de téléphone</a>}
    * {@link <a href="http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext">Validation de l'adresse e-mail</a>}

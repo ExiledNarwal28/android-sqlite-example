@@ -24,8 +24,8 @@ import net.info420.fabien.androidtravailpratique.activities.EmployeActivity;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
-public class EmployeeListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
-  private final static String TAG = EmployeeListFragment.class.getName();
+public class EmployesListeFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+  private final static String TAG = EmployesListeFragment.class.getName();
 
   private FloatingActionButton fabAddEmployee;
 

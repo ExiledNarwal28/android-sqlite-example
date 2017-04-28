@@ -98,7 +98,7 @@ public class AjouterEmployeActivity extends FragmentActivity {
    * Ajoute l'employé
    * Termine l'activité
    *
-   * @See TodoContentProvider
+   * @see TodoContentProvider
    *
    * {@link <a href="http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128">Validation du numéro de téléphone</a>}
    * {@link <a href="http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext">Validation de l'adresse e-mail</a>}
@@ -154,7 +154,7 @@ public class AjouterEmployeActivity extends FragmentActivity {
   }
 
   /**
-   * Fait les actions appropriées lorsqu'on clique dans le menu
+   * Change le fragment lorsqu'une option du menu est sélectionnée
    *
    * @param item Le {@link MenuItem} sélectionné
    * @return     Booléen signifiant la réussite de l'opération

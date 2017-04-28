@@ -131,8 +131,8 @@ public class EmployeActivity extends Activity {
    * Enlève l'employé des tâches qui lui sont assignées
    * Termine l'activité
    *
-   * @See Tache
-   * @See TodoContentProvider
+   * @see Tache
+   * @see TodoContentProvider
    *
    * {@link <a href="http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval">Ajouter une valeur nulle</a>}
    * {@link <a href="https://developer.android.com/guide/topics/providers/content-provider-basics.html">Mettre à jour des items</a>}
@@ -203,9 +203,9 @@ public class EmployeActivity extends Activity {
    * Ajoute les Listeners de réponse au {@link AlertDialog} (si l'utilisateur accepter, envoie le SMS)
    * Affiche l'{@link AlertDialog}
    *
-   * @See AlertDialog
-   * @See SmsManager
-   * @See PendingIntent
+   * @see AlertDialog
+   * @see SmsManager
+   * @see PendingIntent
    *
    * {@link <a href="http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271">Mettre un EditText dans un Dialog</a>}
    * {@link <a href="http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working">Faire fonctionner l'envoie de SMS</a>}
@@ -262,8 +262,8 @@ public class EmployeActivity extends Activity {
    * Appele l'employé avec un nouveau {@link Intent}
    * Pour appeler, il suffit d'ajouter "tel:" au {@link Uri} et d'ajouter Intent.ACTION_CALL à l'{@link Intent}
    *
-   * @See Uri
-   * @See Intent
+   * @see Uri
+   * @see Intent
    *
    * {@link <a href="http://stackoverflow.com/questions/5230912/android-app-to-call-a-number-on-button-click">Appeler un numéro</a>}
    */

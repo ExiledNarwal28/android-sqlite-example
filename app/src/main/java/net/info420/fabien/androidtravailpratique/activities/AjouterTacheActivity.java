@@ -165,7 +165,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    * Ajoute la tâche
    * Termine l'activité
    *
-   * @See TodoContentProvider
+   * @see TodoContentProvider
    */
   public void ajouterTache() {
     String nom          = etTacheNom.getText().toString();
@@ -207,7 +207,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    *
    * Modifie la date, puis appelle onTacheDateChange
    *
-   * @See onTacheDateChange
+   * @see onTacheDateChange
    *
    * @param tacheDate Nouvelle date de la tache en millisecondes
    */

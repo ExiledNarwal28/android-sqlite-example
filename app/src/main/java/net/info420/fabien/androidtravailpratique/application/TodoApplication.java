@@ -18,13 +18,13 @@ import org.joda.time.DateTime;
 //      net.info420.fabien.androidtravailpratique
 //
 //        ACTIVITIES
-//          [X]--ModifierEmployeActivity--(Fait    )--<==<<
-//          [X]--ModifierTacheActivity----(Fait    )--<==<<
-//          [X]--EmployeActivity----------(Fait    )--<==<<
-//          [X]--AjouterEmployeActivity---(Fait    )--<==<<
-//          [X]--AjouterTacheActivity-----(Fait    )--<==<<
-//          [ ]--PrincipaleActivity-------(En cours)--<==<<
-//          [X]--TacheActivity------------(Fait    )--<==<<
+//          [X]--ModifierEmployeActivity--(Fait)--<==<<
+//          [X]--ModifierTacheActivity----(Fait)--<==<<
+//          [X]--EmployeActivity----------(Fait)--<==<<
+//          [X]--AjouterEmployeActivity---(Fait)--<==<<
+//          [X]--AjouterTacheActivity-----(Fait)--<==<<
+//          [X]--PrincipaleActivity-------(Fait)--<==<<
+//          [X]--TacheActivity------------(Fait)--<==<<
 //
 //        ADAPTERS
 //          [ ]--EmployeAdapter
@@ -38,8 +38,8 @@ import org.joda.time.DateTime;
 //          [ ]--TodoContentProvider
 //
 //        FRAGMENTS
-//          [ ]--DatePickerFragment
-//          [ ]--EmployeeListFragment
+//          [ ]--DatePickerFragment--(En cours)--<==<<
+//          [ ]--EmployesListeFragment
 //          [ ]--PrefsFragment
 //          [ ]--TachesListeFragment
 //          [ ]--TacheFragment

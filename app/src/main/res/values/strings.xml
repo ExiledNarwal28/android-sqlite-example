@@ -103,7 +103,7 @@
     <item>crp</item>
   </string-array>
 
-  <string name="title_task_list">Liste des tâches</string>
+  <string name="titre_taches_liste">Liste des tâches</string>
   <string name="no_tasks">Vous n\'avez pas de tâche... pour l\'instant.</string>
   <string name="task_filter_all_employee">Tous les employés</string>
   <string-array name="task_filters_filters">
@@ -141,11 +141,11 @@
   <string name="title_activity_new_task">Nouvelle tâche</string>
   <string name="tache_aucun_employe">Aucun employé assigné</string>
 
-  <string name="title_employee_list">Liste des employés</string>
+  <string name="titre_employes_liste">Liste des employés</string>
   <string name="no_employees">Vous n\'avez pas d\'employé (sur l\'application)</string>
 
   <string name="title_activity_employee">Détails d\'un employé</string>
   <string name="title_activity_edit_employee">Modification d\'un employé</string>
   <string name="title_activity_new_employee">Nouvel employé</string>
-  <string name="title_prefs">Préférences</string>
+  <string name="titre_prefs">Préférences</string>
 </resources>

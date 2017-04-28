@@ -15,7 +15,7 @@ import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.fragments.EmployeeListFragment;
+import net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment;
 import net.info420.fabien.androidtravailpratique.fragments.PrefsFragment;
 import net.info420.fabien.androidtravailpratique.fragments.TachesListeFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
@@ -24,15 +24,16 @@ import net.info420.fabien.androidtravailpratique.utils.TempsReceiver;
 import net.info420.fabien.androidtravailpratique.utils.TempsService;
 
 /**
- * Activité principale
- * Elle contrôle les trois fragments principaux :
- *  @See TachesListeFragment
- *  @See EmployeeListFragment
- *  @See PrefsFragment
+ * {@link android.app.Activity} principale
  *
- *  @author   Fabien Roy
- *  @version  1.0
- *  @since    ?
+ * Elle contrôle les trois fragments principaux :
+ *  @see TachesListeFragment
+ *  @see EmployesListeFragment
+ *  @see PrefsFragment
+ *
+ * @author   Fabien Roy
+ * @version  1.0
+ * @since    ?
  */
 public class PrincipaleActivity extends Activity implements SharedPreferences.OnSharedPreferenceChangeListener {
   private final static String TAG = PrincipaleActivity.class.getName();
@@ -53,13 +54,20 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
 
   /**
    * Exécuté à la création de l'activité
+   *
+   * Vérifie les permissions
+   * Démarre le TempsService
+   * Initialise le LocaleHelper
+   * Instancie l'interface
+   *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
+   *
+   * @see TempsService
+   * @see LocaleHelper
    */
-  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // On demande les permissions
     ActivityCompat.requestPermissions(this,
                                       new String[] { Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS },
                                       1);
@@ -68,46 +76,47 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
     tempsServiceIntent = new Intent(this, TempsService.class);
     startService(tempsServiceIntent);
 
-    // Initialisation de la locale, en fonction des préférences
     LocaleHelper.initialize(this);
 
-    // Démarrage de l'interface utilisateur
     initUI();
   }
 
   /**
+   * Initialisation de l'interface
+   *
    * Ajoute le bon layout
-   * Place le fragment initiale (liste des tâches)
-   * Met le bon texte dans la {@link Toolbar}
-   * Met la bonne couleur à la {@link Toolbar}
+   * Met le fragment de base (TachesListeFragment)
+   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
+   *
+   * @see TachesListeFragment
    */
   private void initUI() {
     setContentView(R.layout.activity_main);
 
-    // Fragment initiale
     TachesListeFragment tachesListeFragment = new TachesListeFragment();
 
     // Met le fragment d'une liste (ou n'importe quel autre fragment) dans un conteneur à cet effet.
     getFragmentManager().beginTransaction().add(R.id.fragment_container, tachesListeFragment).commit();
 
-    // Change le texte de la Toolbar
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_task_list);
+    toolbar.setTitle(R.string.titre_taches_liste);
 
-    // Change la couleur de la barre de statut
     ColorHelper.setStatusBarColor(this);
   }
 
   /**
    * Change le fragment dans {@link PrincipaleActivity}
+   *
+   * Enlève le contenu du menu
+   * En fonction de fragmentId, change le menu, le titre de la toolbar et le fragment
+   *
    * @param fragmentId Id du fragment
    */
   private void setFragment(int fragmentId) {
     // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
 
-    // Enlève le contenu du menu
     menu.clear();
 
     // Variables pour la modification du fragment
@@ -118,17 +127,17 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
     switch(fragmentId) {
       case FRAGMENT_TACHES_LISTE:
         getMenuInflater().inflate(R.menu.menu_taches_liste, menu);
-        toolbar.setTitle(R.string.title_task_list);
+        toolbar.setTitle(R.string.titre_taches_liste);
         transaction.replace(R.id.fragment_container, new TachesListeFragment());
         break;
       case FRAGMENT_EMPLOYES_LISTE:
-        getMenuInflater().inflate(R.menu.menu_employee_list, menu);
-        toolbar.setTitle(R.string.title_employee_list);
-        transaction.replace(R.id.fragment_container, new EmployeeListFragment());
+        getMenuInflater().inflate(R.menu.menu_employes_liste, menu);
+        toolbar.setTitle(R.string.titre_employes_liste);
+        transaction.replace(R.id.fragment_container, new EmployesListeFragment());
         break;
       case FRAGMENT_PREFS:
         getMenuInflater().inflate(R.menu.menu_prefs, menu);
-        toolbar.setTitle(R.string.title_prefs);
+        toolbar.setTitle(R.string.titre_prefs);
         transaction.replace(R.id.fragment_container, new PrefsFragment());
         break;
     }
@@ -138,8 +147,13 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   }
 
   /**
+   * Enregistre le nécéssaire lorsqu'on revient à l'{@link Activity}
+   *
    * Enregistre l'activité en temps que {@link android.content.SharedPreferences.OnSharedPreferenceChangeListener}
    * Enregistre le {@link TempsReceiver}
+   *
+   * @see android.content.SharedPreferences.OnSharedPreferenceChangeListener
+   * @see TempsService
    */
   @Override
   protected void onResume() {
@@ -149,8 +163,13 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   }
 
   /**
+   * Désenregistre le nécéssaire lorsqu'on quitte l'{@link Activity}
+   *
    * Désenregistre l'activité en temps que {@link android.content.SharedPreferences.OnSharedPreferenceChangeListener}
    * Désenregistre le {@link TempsReceiver}
+   *
+   * @see android.content.SharedPreferences.OnSharedPreferenceChangeListener
+   * @see TempsService
    */
   @Override
   protected void onPause() {
@@ -161,6 +180,7 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
 
   /**
    * Ajout des options de menus appropriées
+   *
    * @param menu  Le {@link Menu}
    * @return      Booléen signifiant la réussite de l'opération
    */
@@ -174,7 +194,8 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   }
 
   /**
-   * Change le fragment lorsqu'une option du menu est sélectionnée
+   * Fait les actions appropriées lorsqu'on clique dans le menu
+   *
    * @param item Le {@link MenuItem} sélectionné
    * @return     Booléen signifiant la réussite de l'opération
    */
@@ -196,8 +217,11 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   }
 
   /**
+   * Appeler lorsqu'une préférence est modifiée
+   *
    * Lorsqu'une préférence de toast est modifiée, on recommence le TempsService
    * Lorsqu'une préférence de locale est modifiée, on change la locale et on redémarre le fragment
+   *
    * @param sharedPreferences La {@link SharedPreferences} qui a été modifiée
    * @param key               La clé (nom) de la {@link SharedPreferences} qui a été modifiée
    */

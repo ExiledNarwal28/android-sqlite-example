@@ -180,7 +180,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    * Met à jour la tâche
    * Termine l'activité
    *
-   * @See TodoContentProvider
+   * @see TodoContentProvider
    */
   public void modifierTache() {
     String nom          = etTacheNom.getText().toString();
@@ -264,7 +264,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    *
    * Modifie la date, puis appelle onTacheDateChange
    *
-   * @See onTacheDateChange
+   * @see onTacheDateChange
    *
    * @param tacheDate Nouvelle date de la tache en millisecondes
    */

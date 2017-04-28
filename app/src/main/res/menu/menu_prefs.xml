@@ -7,21 +7,21 @@
 
   <item
     android:id="@+id/ic_taches_liste"
-    android:title="@string/title_task_list"
+    android:title="@string/titre_taches_liste"
     android:showAsAction="always"
     android:icon="@drawable/ic_task_disabled">
   </item>
 
   <item
     android:id="@+id/ic_employes_liste"
-    android:title="@string/title_employee_list"
+    android:title="@string/titre_employes_liste"
     android:showAsAction="always"
     android:icon="@drawable/ic_employee_disabled">
   </item>
 
   <item
     android:id="@+id/ic_prefs"
-    android:title="@string/title_employee_list"
+    android:title="@string/titre_employes_liste"
     android:showAsAction="always"
     android:icon="@drawable/ic_prefs_enabled">
   </item>

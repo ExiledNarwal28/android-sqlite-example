@@ -120,7 +120,7 @@ public class TacheActivity extends Activity {
    * Supprimer la tâche de la base de données
    * Termine l'activité
    *
-   * @See TodoContentProvider
+   * @see TodoContentProvider
    */
   private void supprimerTache() {
     getContentResolver().delete(tacheUri, null, null);
@@ -137,9 +137,9 @@ public class TacheActivity extends Activity {
    *
    * @param tacheUri l'Uri vers l'employé à modifier
    *
-   * @See Employe
-   * @See DateHelper
-   * @See StringHelper
+   * @see Employe
+   * @see DateHelper
+   * @see StringHelper
    */
   private void rempliData(Uri tacheUri) {
     String[] projection = { Tache.KEY_employe_assigne_ID,

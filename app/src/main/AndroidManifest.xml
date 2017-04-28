@@ -57,8 +57,8 @@
 
     <!-- TODO : Pourquoi j'essaie de faire passé un fragment en activité?? -->
     <activity
-      android:name=".fragments.EmployeeListFragment"
-      android:label="@string/title_employee_list"
+      android:name=".fragments.EmployesListeFragment"
+      android:label="@string/titre_employes_liste"
       android:theme="@style/AppTheme.NoActionBar"
       android:configChanges="locale|layoutDirection">
     </activity>
