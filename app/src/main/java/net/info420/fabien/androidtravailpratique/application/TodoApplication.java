@@ -9,7 +9,104 @@ import net.info420.fabien.androidtravailpratique.models.Task;
 
 import org.joda.time.DateTime;
 
-// TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure/
+// TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure
+
+// TODO : Traduire, documenter et parfaire les fichiers suivants :
+//
+//    JAVA
+//
+//      net.info420.fabien.androidtravailpratique
+//
+//        ACTIVITIES
+//          [ ]--EditEmployeeActivity
+//          [ ]--EditTaskActivity
+//          [ ]--EmployeeActivity
+//          [ ]--NewEmployeeActivity
+//          [ ]--NewTaskActivity
+//          [ ]--PrincipaleActivity
+//          [ ]--TaskActivity
+//
+//        ADAPTERS
+//          [ ]--EmployeeAdapter
+//          [ ]--TaskAdapter
+//
+//        APPLICATION
+//          [ ]--TodoApplication
+//
+//        DATA
+//          [ ]--DBHelper
+//          [ ]--TaskerContentProvider
+//
+//        FRAGMENTS
+//          [ ]--DatePickerFragment
+//          [ ]--EmployeeListFragment
+//          [ ]--PrefsFragment
+//          [ ]--TachesListeFragment
+//          [ ]--TaskFragment
+//          [ ]--UpdateEmployeeFragment
+//          [ ]--UpdateTaskFragment
+//
+//        HELPERS
+//          [ ]--ColorHelper
+//          [ ]--DateHelper
+//          [ ]--LocaleHelper
+//          [ ]--StringHelper
+//
+//        INTERFACES
+//         [ ]--OnTaskDateChangeListener
+//
+//        MODELS
+//          [ ]--Employee
+//          [ ]--Task
+//
+//        UTILS
+//          [ ]--TempsReceiver
+//          [ ]--TempsService
+//
+//    res
+//
+//        LAYOUT
+//          [ ]--activity_edit_employee.xml
+//          [ ]--activity_edit_task.xml
+//          [ ]--activity_employee.xml
+//          [ ]--activity_main.xml
+//          [ ]--activity_new_employee.xml
+//          [ ]--activity_new_task.xml
+//          [ ]--activity_task.xml
+//          [ ]--employee_row.xml
+//          [ ]--fragment_employee_list.xml
+//          [ ]--fragment_task.xml
+//          [ ]--fragment_task_list.xml
+//          [ ]--fragment_update_employee.xml
+//          [ ]--fragment_update_task.xml
+//          [ ]--task_row.xml
+//          [ ]--toolbar.xml
+//
+//        MENU
+//          [ ]--menu_employee_list.xml
+//          [ ]--menu_item.xml
+//          [ ]--menu_prefs.xml
+//          [ ]--menu_taches_liste.xml
+//          [ ]--menu_update_item.xml
+//
+//        VALUES
+//          [ ]--attrs.xml
+//          [ ]--colors.xml
+//          [ ]--dimens.xml
+//          [ ]--strings.xml
+//          [ ]--styles.xml
+//
+//        VALUES
+//          [ ]--attrs.xml
+//          [ ]--colors.xml
+//          [ ]--dimens.xml
+//          [ ]--strings.xml
+//          [ ]--styles.xml
+//
+//        XML
+//          [ ]--prefs_items.xml
+//
+//    [ ]--------AndroidManifest.xml
 
 /**
  * L'application de base
