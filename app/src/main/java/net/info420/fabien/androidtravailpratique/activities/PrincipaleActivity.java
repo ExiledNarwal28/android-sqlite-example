@@ -91,7 +91,7 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
    * @see TachesListeFragment
    */
   private void initUI() {
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_principale);
 
     TachesListeFragment tachesListeFragment = new TachesListeFragment();
 

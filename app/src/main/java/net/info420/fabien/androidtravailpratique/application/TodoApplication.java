@@ -19,90 +19,83 @@ import org.joda.time.DateTime;
 //      net.info420.fabien.androidtravailpratique
 //
 //        ACTIVITIES
-//          [X]--ModifierEmployeActivity-----(Fait)--<==<<
-//          [X]--ModifierTacheActivity-------(Fait)--<==<<
-//          [X]--EmployeActivity-------------(Fait)--<==<<
-//          [X]--AjouterEmployeActivity------(Fait)--<==<<
-//          [X]--AjouterTacheActivity--------(Fait)--<==<<
-//          [X]--PrincipaleActivity----------(Fait)--<==<<
-//          [X]--TacheActivity---------------(Fait)--<==<<
+//          [X]--ModifierEmployeActivity-------------(Fait)--<==<<
+//          [X]--ModifierTacheActivity---------------(Fait)--<==<<
+//          [X]--EmployeActivity---------------------(Fait)--<==<<
+//          [X]--AjouterEmployeActivity--------------(Fait)--<==<<
+//          [X]--AjouterTacheActivity----------------(Fait)--<==<<
+//          [X]--PrincipaleActivity------------------(Fait)--<==<<
+//          [X]--TacheActivity-----------------------(Fait)--<==<<
 //
 //        ADAPTERS
-//          [X]--EmployeAdapter--------------(Fait)--<==<<
-//          [X]--TacheAdapter----------------(Fait)--<==<<
+//          [X]--EmployeAdapter----------------------(Fait)--<==<<
+//          [X]--TacheAdapter------------------------(Fait)--<==<<
 //
 //        APPLICATION
-//          [X]--TodoApplication-------------(Fait)--<==<<
+//          [X]--TodoApplication---------------------(Fait)--<==<<
 //
 //        DATA
-//          [X]--DBHelper--------------------(Fait)--<==<<
-//          [X]--TodoContentProvider---------(Fait)--<==<<
+//          [X]--DBHelper----------------------------(Fait)--<==<<
+//          [X]--TodoContentProvider-----------------(Fait)--<==<<
 //
 //        FRAGMENTS
-//          [X]--DatePickerFragment----------(Fait)--<==<<
-//          [X]--EmployesListeFragment-------(Fait)--<==<<
-//          [X]--PrefsFragment---------------(Fait)--<==<<
-//          [X]--TachesListeFragment---------(Fait)--<==<<
-//          [O]--TacheFragment---------------(TODO)--<==<<
-//          [X]--MettreAJourEmployeFragment--(Fait)--<==<<
-//          [X]--MettreAJourTacheFragment----(Fait)--<==<<
+//          [X]--DatePickerFragment------------------(Fait)--<==<<
+//          [X]--EmployesListeFragment---------------(Fait)--<==<<
+//          [X]--PrefsFragment-----------------------(Fait)--<==<<
+//          [X]--TachesListeFragment-----------------(Fait)--<==<<
+//          [O]--TacheFragment-----------------------(TODO)--<==<<
+//          [X]--MettreAJourEmployeFragment----------(Fait)--<==<<
+//          [X]--MettreAJourTacheFragment------------(Fait)--<==<<
 //
 //        HELPERS
-//          [X]--ColorHelper-----------------(Fait)--<==<<
-//          [X]--DateHelper------------------(Fait)--<==<<
-//          [X]--LocaleHelper----------------(Fait)--<==<<
-//          [X]--StringHelper----------------(Fait)--<==<<
+//          [X]--ColorHelper-------------------------(Fait)--<==<<
+//          [X]--DateHelper--------------------------(Fait)--<==<<
+//          [X]--LocaleHelper------------------------(Fait)--<==<<
+//          [X]--StringHelper------------------------(Fait)--<==<<
 //
 //        INTERFACES
-//          [X]--OnTacheDateChangeListener---(Fait)--<==<<
+//          [X]--OnTacheDateChangeListener-----------(Fait)--<==<<
 //
 //        MODELS
-//          [X]--Employe---------------------(Fait)--<==<<
-//          [X]--Tache-----------------------(Fait)--<==<<
+//          [X]--Employe-----------------------------(Fait)--<==<<
+//          [X]--Tache-------------------------------(Fait)--<==<<
 //
 //        UTILS
-//          [X]--TempsReceiver---------------(Fait)--<==<<
-//          [X]--TempsService----------------(Fait)--<==<<
+//          [X]--TempsReceiver-----------------------(Fait)--<==<<
+//          [X]--TempsService------------------------(Fait)--<==<<
 //
 //    res
 //
 //        LAYOUT
-//          [ ]--activity_edit_employee.xml
-//          [ ]--activity_edit_task.xml
-//          [ ]--activity_employee.xml
-//          [ ]--activity_main.xml
-//          [ ]--activity_new_employee.xml
-//          [ ]--activity_new_task.xml
-//          [ ]--activity_task.xml
-//          [ ]--employee_row.xml
-//          [ ]--fragment_employee_list.xml
-//          [ ]--fragment_task.xml
-//          [ ]--fragment_task_list.xml
-//          [ ]--fragment_update_employee.xml
-//          [ ]--fragment_update_task.xml
-//          [ ]--task_row.xml
-//          [ ]--toolbar.xml
+//          [X]--activity_modifier_employe.xml-------(Fait)--<==<<
+//          [X]--activity_modifier_tache.xml---------(Fait)--<==<<
+//          [X]--activity_employe.xml----------------(Fait)--<==<<
+//          [X]--activity_principale.xml-------------(Fait)--<==<<
+//          [X]--activity_ajouter_employe.xml--------(Fait)--<==<<
+//          [X]--activity_ajouter_tache.xml----------(Fait)--<==<<
+//          [X]--activity_tache.xml------------------(Fait)--<==<<
+//          [X]--employe_row.xml---------------------(Fait)--<==<<
+//          [X]--fragment_employes_liste.xml---------(Fait)--<==<<
+//          [X]--fragment_tache.xml------------------(TODO)--<==<<
+//          [X]--fragment_taches_liste.xml-----------(Fait)--<==<<
+//          [X]--fragment_mettre_a_jour_employe.xml--(Fait)--<==<<
+//          [X]--fragment_mettre_a_jour_tache.xml----(Fait)--<==<<
+//          [X]--tache_row.xml-----------------------(Fait)--<==<<
+//          [X]--toolbar.xml-------------------------(Fait)--<==<<
 //
 //        MENU
-//          [ ]--menu_employee_list.xml
+//          [ ]--menu_employe_liste.xml
 //          [ ]--menu_item.xml
 //          [ ]--menu_prefs.xml
 //          [ ]--menu_taches_liste.xml
-//          [ ]--menu_update_item.xml
+//          [ ]--menu_mettre_a_jour_item.xml
 //
 //        VALUES
-//          [ ]--attrs.xml
-//          [ ]--colors.xml
-//          [ ]--dimens.xml
-//          [ ]--strings.xml
-//          [ ]--styles.xml
-//
-//        VALUES
-//          [X]--attrs.xml--------(Fait)--<==<<
-//          [X]--colors.xml-------(Fait)--<==<<
-//          [X]--dimens.xml-------(Fait)--<==<<
-//          [X]--strings.xml------(Fait)--<==<<
-//          [X]--styles.xml-------(Fait)--<==<<
+//          [X]--attrs.xml--------------------------(Fait)--<==<<
+//          [X]--colors.xml-------------------------(Fait)--<==<<
+//          [X]--dimens.xml-------------------------(Fait)--<==<<
+//          [X]--strings.xml------------------------(Fait)--<==<<
+//          [X]--styles.xml-------------------------(Fait)--<==<<
 //
 //        XML
 //          [X]--prefs_items.xml--(Fait)--<==<<

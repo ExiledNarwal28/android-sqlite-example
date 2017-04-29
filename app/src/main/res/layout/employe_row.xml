@@ -13,7 +13,7 @@
     android:layout_marginTop="6dp"
     android:lines="1"
     android:text="@string/employe_nom"
-    android:textSize="24dp" />
+    android:textSize="24sp" />
 
   <TextView
     android:id="@+id/tv_employe_poste"
@@ -23,6 +23,6 @@
     android:layout_below="@+id/tv_employe_nom"
     android:lines="1"
     android:text="@string/employe_poste"
-    android:textSize="20dp" />
+    android:textSize="20sp" />
 
 </RelativeLayout>

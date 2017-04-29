@@ -85,7 +85,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    final View view = inflater.inflate(R.layout.fragment_task_list, container, false);
+    final View view = inflater.inflate(R.layout.fragment_taches_liste, container, false);
 
     initUI(view);
     setupEmployeAssigneUI();
@@ -473,7 +473,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // Fragment en PopupWindow
     // Source : http://stackoverflow.com/questions/11754309/android-popupwindow-from-a-fragment#11754352
     // LayoutInflater layoutInflater = (LayoutInflater) getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    // View popupView = layoutInflater.inflate(R.layout.fragment_task, null);
+    // View popupView = layoutInflater.inflate(R.layout.fragment_tache, null);
 
     // Affichage du popup au centre de l'écran
     // Source : http://stackoverflow.com/questions/6063667/show-a-popupwindow-centralized#7440187
@@ -486,7 +486,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     // getChildFragmentManager().executePendingTransactions();
 
     // TODO : REDESIGN : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
-    //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_task_list.xml).
+    //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_taches_liste.xmlxml).
     // taskFragment.show(getFragmentManager(), "dialog");
   }
 }

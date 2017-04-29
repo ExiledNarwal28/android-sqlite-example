@@ -6,7 +6,7 @@
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".activities.ModifierTacheActivity">
+  tools:context=".activities.AjouterEmployeActivity">
 
   <include
     layout="@layout/toolbar"
@@ -15,11 +15,11 @@
 
   <fragment
     android:id="@+id/fragment"
-    android:name="net.info420.fabien.androidtravailpratique.fragments.MettreAJourTacheFragment"
     android:layout_marginTop="55dp"
+    android:name="net.info420.fabien.androidtravailpratique.fragments.MettreAJourEmployeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:layout="@layout/fragment_mettre_a_jour_tache"/>
+    tools:layout="@layout/fragment_mettre_a_jour_employe"/>
 
 </RelativeLayout>

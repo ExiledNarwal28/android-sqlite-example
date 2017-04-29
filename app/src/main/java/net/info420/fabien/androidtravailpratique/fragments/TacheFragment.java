@@ -21,7 +21,7 @@ public class TacheFragment extends DialogFragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    final View view = inflater.inflate(R.layout.fragment_task, container, false);
+    final View view = inflater.inflate(R.layout.fragment_tache, container, false);
 
     initUI(view);
 

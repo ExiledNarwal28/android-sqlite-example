@@ -14,53 +14,53 @@
                android:layout_height="match_parent"/> -->
 
   <Spinner
+    android:id="@+id/sp_tache_filtre_filtres"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_marginBottom="10dp"
-    android:id="@+id/sp_tache_filtre_filtres"
     android:entries="@array/task_filters_filters"
     android:spinnerMode="dropdown"/>
 
   <Spinner
+    android:id="@+id/sp_tache_filtre_dates"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_tache_filtre_dates"
     android:entries="@array/task_filters_dates"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
 
   <Spinner
+    android:id="@+id/sp_tache_filtre_employe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_tache_filtre_employe"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
 
   <Spinner
+    android:id="@+id/sp_tache_filtre_urgence"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_tache_filtre_urgence"
     android:entries="@array/task_filters_urgencies"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
 
   <Spinner
+    android:id="@+id/sp_tache_filtre_fait"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_tache_filtre_fait"
     android:entries="@array/task_filters_completion"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
@@ -77,21 +77,20 @@
 
   <!-- On a besoin de l'appeler 'list' (ListActivity) -->
   <ListView
+    android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@android:id/list"
     android:layout_below="@+id/sp_tache_filtre_fait"
     android:layout_alignParentStart="true"/>
 
   <android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab_ajouter_tache"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginRight="10dp"
     android:layout_marginBottom="10dp"
     android:clickable="true"
     app:fabSize="normal"
     app:srcCompat="@drawable/ic_plus"
-    android:id="@+id/fab_ajouter_tache"
     android:layout_alignParentEnd="true"
     android:layout_alignParentBottom="true"/>
 

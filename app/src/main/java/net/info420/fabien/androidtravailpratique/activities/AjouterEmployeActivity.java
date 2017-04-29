@@ -65,7 +65,7 @@ public class AjouterEmployeActivity extends FragmentActivity {
    * Ajoute les Listeners
    */
   private void initUI() {
-    setContentView(R.layout.activity_new_employee);
+    setContentView(R.layout.activity_ajouter_employe);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");

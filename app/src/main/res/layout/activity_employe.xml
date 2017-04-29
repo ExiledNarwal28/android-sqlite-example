@@ -13,69 +13,63 @@
     android:layout_width="match_parent"/>
 
   <TextView
-    android:text="TextView"
+    android:id="@+id/tv_employe_nom"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:layout_marginTop="65dp"
-    android:id="@+id/tv_employe_nom"
-    tools:text="@string/employe_nom"
+    android:text="@string/employe_nom"
     android:textAppearance="@android:style/TextAppearance.Material.Title"
     android:textSize="20sp"/>
 
   <TextView
+    android:id="@+id/tv_employe_poste"
     android:text="@string/employe_poste"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:layout_below="@+id/tv_employe_nom"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:id="@+id/tv_employe_poste"/>
+    android:layout_alignParentStart="true" />
 
   <TextView
+    android:id="@+id/tv_employe_email"
     android:text="@string/employe_email"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/tv_employe_poste"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/tv_employe_email"
     android:layout_marginTop="10dp"/>
 
   <TextView
+    android:id="@+id/tv_employe_telephone"
     android:text="@string/employe_telephone"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/tv_employe_email"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/tv_employe_telephone"
     android:layout_marginTop="10dp"/>
 
   <Button
+    android:id="@+id/btn_employe_appeler"
     android:text="@string/action_appeler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/btn_employe_appeler"
     android:textAppearance="@android:style/TextAppearance.Material.Widget.Button.Colored"
     android:fontFamily="sans-serif-medium"
     style="@android:style/Widget.Material.Button.Colored"
     android:background="@color/colorAccent"/>
 
   <Button
+    android:id="@+id/btn_employe_envoyer_sms"
     android:text="@string/action_envoyer_sms"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/btn_employe_envoyer_sms"
     style="@android:style/Widget.Material.Button.Colored"
     android:background="@color/colorPrimary"
     android:layout_above="@+id/btn_employe_appeler"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:layout_marginBottom="10dp"/>
 

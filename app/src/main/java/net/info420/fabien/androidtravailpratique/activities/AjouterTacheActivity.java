@@ -92,7 +92,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    * {@link <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720">Ajout d'items à un Spinner</a>}
    */
   private void initUI() {
-    setContentView(R.layout.activity_new_task);
+    setContentView(R.layout.activity_ajouter_tache);
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
