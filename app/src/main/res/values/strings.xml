@@ -15,8 +15,8 @@
   <string name="warning_wrong_phone_format">Format de numéro de téléphone invalide</string>
   <string name="warning_wrong_mail_format">Format d\'adresse courriel invalide</string>
 
-  <string name="info_you_have">Vous avez</string>
-  <string name="info_you_have_no">Vous n\'avez aucune</string>
+  <string name="info_vous_avez">Vous avez</string>
+  <string name="info_vous_avez_pas">Vous n\'avez aucune</string>
   <string name="info_to_do_this_day">à faire aujourd\'hui</string>
   <string name="info_to_do_this_week">à faire cette semaine</string>
   <string name="info_to_do_this_month">à faire ce mois</string>
@@ -26,8 +26,8 @@
   <string name="info_envoie_dun_sms">Envoie d\'un SMS</string>
   <string name="info_entrer_votre_message">Veuillez entrez votre message</string>
 
-  <string name="task">Tâche</string>
-  <string name="tasks">Tâches</string>
+  <string name="tache">Tâche</string>
+  <string name="taches">Tâches</string>
   <string name="task_name">Nom</string>
   <string name="task_description">Description</string>
   <string name="task_date">Date d\'échéance</string>

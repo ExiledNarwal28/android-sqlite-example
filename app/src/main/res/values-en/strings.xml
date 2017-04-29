@@ -15,8 +15,8 @@
   <string name="warning_wrong_phone_format">Wrong phone number format</string>
   <string name="warning_wrong_mail_format">Wrong e-mail format</string>
 
-  <string name="info_you_have">You have</string>
-  <string name="info_you_have_no">You have no</string>
+  <string name="info_vous_avez">You have</string>
+  <string name="info_vous_avez_pas">You have no</string>
   <string name="info_to_do_this_day">to do today</string>
   <string name="info_to_do_this_week">to do this week</string>
   <string name="info_to_do_this_month">to do this month</string>
@@ -26,8 +26,8 @@
   <string name="info_envoie_dun_sms">Sending a SMS</string>
   <string name="info_entrer_votre_message">Enter your message</string>
 
-  <string name="task">Task</string>
-  <string name="tasks">Tasks</string>
+  <string name="tache">Task</string>
+  <string name="taches">Tasks</string>
   <string name="task_name">Name</string>
   <string name="task_description">Description</string>
   <string name="task_date">Due date</string>

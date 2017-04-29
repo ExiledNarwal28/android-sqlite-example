@@ -15,8 +15,8 @@
   <string name="warning_wrong_phone_format">Envalid telefòn fòma nimewo</string>
   <string name="warning_wrong_mail_format">Valab imel adrès fòma</string>
 
-  <string name="info_you_have">Ou gen</string>
-  <string name="info_you_have_no">Ou pa gen</string>
+  <string name="info_vous_avez">Ou gen</string>
+  <string name="info_vous_avez_pas">Ou pa gen</string>
   <string name="info_to_do_this_day">fè jodi a</string>
   <string name="info_to_do_this_week">fè semèn sa a</string>
   <string name="info_to_do_this_month">fè mwa sa a</string>
@@ -26,8 +26,8 @@
   <string name="info_envoie_dun_sms">Voye SMS</string>
   <string name="info_entrer_votre_message">Antre nan mesaj ou a</string>
 
-  <string name="task">Travay</string>
-  <string name="tasks">Travay</string>
+  <string name="tache">Travay</string>
+  <string name="taches">Travay</string>
   <string name="task_name">Non</string>
   <string name="task_description">Deskripsyon</string>
   <string name="task_date">Dat fen</string>
