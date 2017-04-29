@@ -97,7 +97,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_new_task);
+    toolbar.setTitle(R.string.titre_activity_ajout_tache);
 
     ColorHelper.setStatusBarColor(this);
 

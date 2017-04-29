@@ -112,7 +112,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_edit_task);
+    toolbar.setTitle(R.string.titre_activity_modifier_tache);
 
     ColorHelper.setStatusBarColor(this);
 

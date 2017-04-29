@@ -90,7 +90,7 @@ public class TacheActivity extends Activity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_task);
+    toolbar.setTitle(R.string.titre_tache);
 
     ColorHelper.setStatusBarColor(this);
 

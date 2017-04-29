@@ -5,12 +5,12 @@
 
   <item
     android:id="@+id/menu_modifier"
-    android:title="@string/action_edit"
+    android:title="@string/action_modifier"
     app:showAsAction="never"/>
 
   <item
     android:id="@+id/menu_supprimer"
-    android:title="@string/action_delete"
+    android:title="@string/action_supprimer"
     app:showAsAction="never"/>
 
 </menu>

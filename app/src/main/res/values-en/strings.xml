@@ -3,56 +3,56 @@
 
   <string name="erreur">Error</string>
 
-  <string name="action_edit">Edit</string>
-  <string name="action_delete">Delete</string>
-  <string name="action_cancel">Cancel</string>
-  <string name="action_call">Call</string>
-  <string name="action_confirm">Confirm</string>
+  <string name="action_modifier">Edit</string>
+  <string name="action_supprimer">Delete</string>
+  <string name="action_annuler">Cancel</string>
+  <string name="action_appeler">Call</string>
+  <string name="action_valider">Confirm</string>
   <string name="action_envoyer">Send</string>
-  <string name="action_send_sms">Send a SMS</string>
+  <string name="action_envoyer_sms">Send a SMS</string>
 
   <string name="attention_champs_vides">Some required fields are missing</string>
-  <string name="warning_wrong_phone_format">Wrong phone number format</string>
-  <string name="warning_wrong_mail_format">Wrong e-mail format</string>
+  <string name="attention_mauvais_format_telephone">Wrong phone number format</string>
+  <string name="attention_mauvais_format_email">Wrong e-mail format</string>
 
   <string name="info_vous_avez">You have</string>
   <string name="info_vous_avez_pas">You have no</string>
-  <string name="info_to_do_this_day">to do today</string>
-  <string name="info_to_do_this_week">to do this week</string>
-  <string name="info_to_do_this_month">to do this month</string>
-  <string name="info_urgency_low_and_plus">low urgency and +</string>
-  <string name="info_urgency_medium_and_plus">medium urgency and +</string>
-  <string name="info_urgency_high">high urgency</string>
+  <string name="info_a_faire_aujoudhui">to do today</string>
+  <string name="info_a_faire_cette_semaine">to do this week</string>
+  <string name="info_a_faire_ce_mois">to do this month</string>
+  <string name="info_urgence_bas_et_plus">low urgency and +</string>
+  <string name="info_urgence_moyen_et_plus">medium urgency and +</string>
+  <string name="info_urgence_haut">high urgency</string>
   <string name="info_envoie_dun_sms">Sending a SMS</string>
   <string name="info_entrer_votre_message">Enter your message</string>
 
   <string name="tache">Task</string>
   <string name="taches">Tasks</string>
-  <string name="task_name">Name</string>
-  <string name="task_description">Description</string>
-  <string name="task_date">Due date</string>
-  <string name="task_urgency_level">Urgency level</string>
-  <string name="task_assigned_employee">Assigned employee</string>
+  <string name="tache_nom">Name</string>
+  <string name="tache_description">Description</string>
+  <string name="tache_date">Due date</string>
+  <string name="tache_urgence">Urgency level</string>
+  <string name="tache_employe_assigne">Assigned employee</string>
 
   <string name="tache_urgence_bas">Low</string>
   <string name="tache_urgence_moyen">Medium</string>
   <string name="tache_urgence_haut">High</string>
 
-  <string name="employee_name">Name</string>
-  <string name="employee_mail">E-mail</string>
-  <string name="employee_phone">Phone number</string>
-  <string name="employee_job">Job</string>
+  <string name="employe_nom">Name</string>
+  <string name="employe_email">E-mail</string>
+  <string name="employe_telephone">Phone number</string>
+  <string name="employe_poste">Job</string>
 
   <string name="pref_toasts">Toast notifications</string>
-  <string name="pref_toasts_summary">Activate or deactivate Toast notifications concerning the amount of tasks to do</string>
-  <string name="pref_toasts_frequency">Frequency</string>
-  <string name="pref_toasts_frequency_summary">Frequency between Toast notifications</string>
-  <string name="pref_toasts_timespan">Timespan</string>
-  <string name="pref_toasts_timespan_summary">Timespan in which we check the amount of tasks to do</string>
-  <string name="pref_toasts_urgency_level">Urgency level</string>
-  <string name="pref_toasts_urgency_level_summary">Urgency level required to count tasks</string>
-  <string name="pref_language">Language</string>
-  <string name="pref_language_summary">Application language</string>
+  <string name="pref_toasts_resume">Activate or deactivate Toast notifications concerning the amount of tasks to do</string>
+  <string name="pref_toasts_frequence">Frequency</string>
+  <string name="pref_toasts_frequence_resume">Frequency between Toast notifications</string>
+  <string name="pref_toasts_laps_temps">Timespan</string>
+  <string name="pref_toasts_laps_temps_resume">Timespan in which we check the amount of tasks to do</string>
+  <string name="pref_toasts_urgence">Urgency level</string>
+  <string name="pref_toasts_urgence_resume">Urgency level required to count tasks</string>
+  <string name="pref_langue">Language</string>
+  <string name="pref_langue_resume">Application language</string>
 
   <string-array name="pref_toasts_frequency_names">
     <item>A day</item>
@@ -104,7 +104,7 @@
   </string-array>
 
   <string name="titre_taches_liste">Tasks list</string>
-  <string name="no_tasks">You have no task... for now.</string>
+  <string name="aucune_tache">You have no task... for now.</string>
   <string name="tache_filtre_tous_les_employes">All employees</string>
   <string-array name="task_filters_filters">
     <item>No filter</item>
@@ -136,16 +136,16 @@
     <item>High</item>
   </string-array>
 
-  <string name="title_task">Task detail</string>
-  <string name="title_activity_edit_task">Edit task</string>
-  <string name="title_activity_new_task">New task</string>
+  <string name="titre_tache">Task detail</string>
+  <string name="titre_activity_modifier_tache">Edit task</string>
+  <string name="titre_activity_ajout_tache">New task</string>
   <string name="tache_aucun_employe">No assigned employee</string>
 
   <string name="titre_employes_liste">Employees list</string>
-  <string name="no_employees">You have no employee (in this application)</string>
+  <string name="aucun_employe">You have no employee (in this application)</string>
 
-  <string name="title_activity_employee">Employee detail</string>
-  <string name="title_activity_edit_employee">Edit employee</string>
-  <string name="title_activity_new_employee">New employee</string>
+  <string name="titre_activity_employe">Employee detail</string>
+  <string name="titre_activity_modifier_employe">Edit employee</string>
+  <string name="titre_activity_ajouter_employe">New employee</string>
   <string name="titre_prefs">Preferences</string>
 </resources>

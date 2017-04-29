@@ -13,7 +13,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:lines="1"
-    android:text="@string/task_name"
+    android:text="@string/tache_nom"
     android:textSize="24sp"
     android:layout_alignParentTop="true"
     android:layout_alignStart="@+id/tv_tache_date"/>
@@ -27,7 +27,7 @@
     android:layout_below="@+id/tv_tache_nom"
     android:layout_toEndOf="@id/tv_tache_urgence"
     android:lines="1"
-    android:text="@string/task_date"
+    android:text="@string/tache_date"
     android:textSize="16sp" />
 
   <TextView
@@ -39,7 +39,7 @@
     android:layout_below="@+id/tv_tache_date"
     android:layout_toEndOf="@id/tv_tache_urgence"
     android:lines="1"
-    android:text="@string/task_assigned_employee"
+    android:text="@string/tache_employe_assigne"
     android:textSize="16sp" />
 
   <TextView

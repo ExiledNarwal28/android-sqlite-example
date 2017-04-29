@@ -132,7 +132,7 @@ public class TempsService extends Service {
 
         selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
 
-        lapsTempsTexte = getString(R.string.info_to_do_this_day);
+        lapsTempsTexte = getString(R.string.info_a_faire_aujoudhui);
         break;
       case 1:
         // Semaine
@@ -142,7 +142,7 @@ public class TempsService extends Service {
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-        lapsTempsTexte = getString(R.string.info_to_do_this_week);
+        lapsTempsTexte = getString(R.string.info_a_faire_cette_semaine);
         break;
       case 2:
         // Mois
@@ -152,20 +152,20 @@ public class TempsService extends Service {
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
         selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
 
-        lapsTempsTexte = getString(R.string.info_to_do_this_month);
+        lapsTempsTexte = getString(R.string.info_a_faire_ce_mois);
         break;
     }
 
     // On va ensuite chercher le texte qui décrit le niveau d'urgence
     switch (Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0)))) {
       case 0:
-        urgenceTexte = getString(R.string.info_urgency_low_and_plus);
+        urgenceTexte = getString(R.string.info_urgence_bas_et_plus);
         break;
       case 1:
-        urgenceTexte = getString(R.string.info_urgency_medium_and_plus);
+        urgenceTexte = getString(R.string.info_urgence_moyen_et_plus);
         break;
       case 2:
-        urgenceTexte = getString(R.string.info_urgency_high);
+        urgenceTexte = getString(R.string.info_urgence_haut);
         break;
     }
 

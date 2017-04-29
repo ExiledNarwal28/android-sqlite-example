@@ -18,7 +18,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:inputType="text"
-    android:hint="@string/task_name"
+    android:hint="@string/tache_nom"
     android:ems="10"
     android:id="@+id/et_tache_nom"
     android:textAppearance="@android:style/TextAppearance.Material.Title"
@@ -42,7 +42,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:inputType="text"
-    android:text="@string/task_urgency_level"
+    android:text="@string/tache_urgence"
     android:ems="10"
     android:id="@+id/sp_tache_urgence"
     android:textAppearance="@android:style/TextAppearance.Material.Subhead"
@@ -56,14 +56,14 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:inputType="text"
-    android:hint="@string/task_description"
+    android:hint="@string/tache_description"
     android:ems="10"
     android:id="@+id/et_tache_description"
     android:textAppearance="@android:style/TextAppearance.Material.Small"
     android:fontFamily="sans-serif"/>
 
   <Button
-    android:text="@string/task_date"
+    android:text="@string/tache_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/et_tache_description"
@@ -81,19 +81,19 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:inputType="text"
-    android:text="@string/task_urgency_level"
+    android:text="@string/tache_urgence"
     android:ems="10"
     android:id="@+id/sp_tache_employe_assigne"/>
 
   <Button
-    android:text="@string/action_confirm"
+    android:text="@string/action_valider"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:id="@+id/btn_valider"
     style="@android:style/Widget.Material.Light.Button"
-    tools:text="@string/action_confirm"
+    tools:text="@string/action_valider"
     android:background="@color/colorAccent"
     android:textAppearance="@android:style/TextAppearance.Material.Button"
     android:textColor="@color/colorPrimaryTextLight"/>

@@ -101,11 +101,11 @@ import org.joda.time.DateTime;
 //          [ ]--attrs.xml
 //          [ ]--colors.xml
 //          [ ]--dimens.xml
-//          [ ]--strings.xml
+//          [X]--strings.xml------(Fait)--<==<<
 //          [ ]--styles.xml
 //
 //        XML
-//          [ ]--prefs_items.xml
+//          [X]--prefs_items.xml--(Fait)--<==<<
 //
 //    [ ]--------AndroidManifest.xml
 

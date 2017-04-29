@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:lines="1"
-    android:text="@string/employee_name"
+    android:text="@string/employe_nom"
     android:textSize="24dp" />
 
   <TextView
@@ -22,7 +22,7 @@
     android:layout_marginTop="6dp"
     android:layout_below="@+id/tv_employe_nom"
     android:lines="1"
-    android:text="@string/employee_job"
+    android:text="@string/employe_poste"
     android:textSize="20dp" />
 
 </RelativeLayout>

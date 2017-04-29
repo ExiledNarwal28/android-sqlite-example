@@ -21,12 +21,12 @@
     android:layout_alignParentStart="true"
     android:layout_marginTop="65dp"
     android:id="@+id/tv_employe_nom"
-    tools:text="@string/employee_name"
+    tools:text="@string/employe_nom"
     android:textAppearance="@android:style/TextAppearance.Material.Title"
     android:textSize="20sp"/>
 
   <TextView
-    android:text="@string/employee_job"
+    android:text="@string/employe_poste"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -36,7 +36,7 @@
     android:id="@+id/tv_employe_poste"/>
 
   <TextView
-    android:text="@string/employee_mail"
+    android:text="@string/employe_email"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/tv_employe_poste"
@@ -46,7 +46,7 @@
     android:layout_marginTop="10dp"/>
 
   <TextView
-    android:text="@string/employee_phone"
+    android:text="@string/employe_telephone"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/tv_employe_email"
@@ -56,7 +56,7 @@
     android:layout_marginTop="10dp"/>
 
   <Button
-    android:text="@string/action_call"
+    android:text="@string/action_appeler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
@@ -68,7 +68,7 @@
     android:background="@color/colorAccent"/>
 
   <Button
-    android:text="@string/action_send_sms"
+    android:text="@string/action_envoyer_sms"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/btn_employe_envoyer_sms"

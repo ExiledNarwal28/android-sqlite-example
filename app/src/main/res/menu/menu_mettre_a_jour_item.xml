@@ -5,6 +5,6 @@
 
   <item
     android:id="@+id/menu_annuler"
-    android:title="@string/action_cancel"
+    android:title="@string/action_annuler"
     app:showAsAction="never"/>
 </menu>

@@ -88,7 +88,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_edit_employee);
+    toolbar.setTitle(R.string.titre_activity_modifier_employe);
 
     ColorHelper.setStatusBarColor(this);
 
@@ -135,14 +135,14 @@ public class ModifierEmployeActivity extends FragmentActivity {
     // Validation du numéro de téléphone
     // Source : http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128
     if (telephone.length() != 0 && !PhoneNumberUtils.isGlobalPhoneNumber(telephone)) {
-      Toast.makeText(getApplicationContext(), getString(R.string.warning_wrong_phone_format), Toast.LENGTH_LONG).show();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_mauvais_format_telephone), Toast.LENGTH_LONG).show();
       return;
     }
 
     // Validation de l'adresse e-mail
     // Source : http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext
     if (email.length() != 0 && !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-      Toast.makeText(getApplicationContext(), getString(R.string.warning_wrong_mail_format), Toast.LENGTH_LONG).show();
+      Toast.makeText(getApplicationContext(), getString(R.string.attention_mauvais_format_email), Toast.LENGTH_LONG).show();
       return;
     }
 

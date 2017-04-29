@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <!-- Il faut utiliser android:depedency pour s'assurer que les options de Toasts sont désactivées si les Toasts sont désactivés -->
+  <!-- Il faut utiliser android:dependency pour s'assurer que les options de Toasts sont désactivées si les Toasts sont désactivés -->
   <!-- Source : http://stackoverflow.com/questions/7751525/android-checkboxpreference-how-to-disable-and-enable-other-preferences-on-prefe#7751967 -->
 
   <CheckBoxPreference
@@ -9,44 +9,48 @@
     android:defaultValue="true"
     android:singleLine="true"
     android:title="@string/pref_toasts"
-    android:summary="@string/pref_toasts_summary"/>
+    android:summary="@string/pref_toasts_resume"/>
+
   <ListPreference
-    android:id="@+id/lp_pref_toasts_frequency"
+    android:id="@+id/lp_pref_toasts_frequence"
     android:key="toasts_frequence"
     android:dependency="toasts"
     android:defaultValue="1"
     android:singleLine="true"
-    android:title="@string/pref_toasts_frequency"
-    android:summary="@string/pref_toasts_frequency_summary"
-    android:entries="@array/pref_toasts_frequency_names"
-    android:entryValues="@array/pref_toasts_frequency_values"/>
+    android:title="@string/pref_toasts_frequence"
+    android:summary="@string/pref_toasts_frequence_resume"
+    android:entries="@array/pref_toasts_frequence_noms"
+    android:entryValues="@array/pref_toasts_frequence_valeurs"/>
+
   <ListPreference
-    android:id="@+id/lp_pref_toasts_timespan"
+    android:id="@+id/lp_pref_toasts_laps_temps"
     android:key="toasts_laps_temps"
     android:dependency="toasts"
     android:defaultValue="600"
     android:singleLine="true"
-    android:title="@string/pref_toasts_timespan"
-    android:summary="@string/pref_toasts_timespan_summary"
-    android:entries="@array/pref_toasts_timespan_names"
-    android:entryValues="@array/pref_toasts_timespan_values"/>
+    android:title="@string/pref_toasts_laps_temps"
+    android:summary="@string/pref_toasts_laps_temps_resume"
+    android:entries="@array/pref_toasts_laps_temps_noms"
+    android:entryValues="@array/pref_toasts_laps_temps_valeurs"/>
+
   <ListPreference
-    android:id="@+id/lp_pref_toasts_urgency_level"
+    android:id="@+id/lp_pref_toasts_urgence"
     android:key="toasts_urgence"
     android:dependency="toasts"
     android:defaultValue="0"
     android:singleLine="true"
-    android:title="@string/pref_toasts_urgency_level"
-    android:summary="@string/pref_toasts_urgency_level_summary"
-    android:entries="@array/pref_toasts_urgency_level_names"
-    android:entryValues="@array/pref_toasts_urgency_level_values"/>
+    android:title="@string/pref_toasts_urgence"
+    android:summary="@string/pref_toasts_urgence_resume"
+    android:entries="@array/pref_toasts_urgence_noms"
+    android:entryValues="@array/pref_toasts_urgence_valeurs"/>
+
   <ListPreference
-    android:id="@+id/lp_pref_language"
+    android:id="@+id/lp_pref_langue"
     android:key="langue"
     android:defaultValue="fr"
     android:singleLine="true"
-    android:title="@string/pref_language"
-    android:summary="@string/pref_language_summary"
-    android:entries="@array/pref_language_names"
-    android:entryValues="@array/pref_language_values"/>
+    android:title="@string/pref_langue"
+    android:summary="@string/pref_langue_resume"
+    android:entries="@array/pref_langue_noms"
+    android:entryValues="@array/pref_langue_valeurs"/>
 </PreferenceScreen>

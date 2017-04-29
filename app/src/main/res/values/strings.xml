@@ -3,58 +3,58 @@
 
   <string name="erreur">Erreur</string>
 
-  <string name="action_edit">Modifier</string>
-  <string name="action_delete">Suprimer</string>
-  <string name="action_cancel">Annuler</string>
-  <string name="action_call">Appeler</string>
-  <string name="action_confirm">Valider</string>
+  <string name="action_modifier">Modifier</string>
+  <string name="action_supprimer">Suprimer</string>
+  <string name="action_annuler">Annuler</string>
+  <string name="action_appeler">Appeler</string>
+  <string name="action_valider">Valider</string>
   <string name="action_envoyer">Envoyer</string>
-  <string name="action_send_sms">Envoyer un SMS</string>
+  <string name="action_envoyer_sms">Envoyer un SMS</string>
 
   <string name="attention_champs_vides">Des champs obligatoires sont vides</string>
-  <string name="warning_wrong_phone_format">Format de numéro de téléphone invalide</string>
-  <string name="warning_wrong_mail_format">Format d\'adresse courriel invalide</string>
+  <string name="attention_mauvais_format_telephone">Format de numéro de téléphone invalide</string>
+  <string name="attention_mauvais_format_email">Format d\'adresse courriel invalide</string>
 
   <string name="info_vous_avez">Vous avez</string>
   <string name="info_vous_avez_pas">Vous n\'avez aucune</string>
-  <string name="info_to_do_this_day">à faire aujourd\'hui</string>
-  <string name="info_to_do_this_week">à faire cette semaine</string>
-  <string name="info_to_do_this_month">à faire ce mois</string>
-  <string name="info_urgency_low_and_plus">à urgence basse et +</string>
-  <string name="info_urgency_medium_and_plus">à urgence moyenne et +</string>
-  <string name="info_urgency_high">à urgence haute</string>
+  <string name="info_a_faire_aujoudhui">à faire aujourd\'hui</string>
+  <string name="info_a_faire_cette_semaine">à faire cette semaine</string>
+  <string name="info_a_faire_ce_mois">à faire ce mois</string>
+  <string name="info_urgence_bas_et_plus">à urgence basse et +</string>
+  <string name="info_urgence_moyen_et_plus">à urgence moyenne et +</string>
+  <string name="info_urgence_haut">à urgence haute</string>
   <string name="info_envoie_dun_sms">Envoie d\'un SMS</string>
   <string name="info_entrer_votre_message">Veuillez entrez votre message</string>
 
   <string name="tache">Tâche</string>
   <string name="taches">Tâches</string>
-  <string name="task_name">Nom</string>
-  <string name="task_description">Description</string>
-  <string name="task_date">Date d\'échéance</string>
-  <string name="task_urgency_level">Niveau d\'urgence</string>
-  <string name="task_assigned_employee">Employé assigné</string>
+  <string name="tache_nom">Nom</string>
+  <string name="tache_description">Description</string>
+  <string name="tache_date">Date d\'échéance</string>
+  <string name="tache_urgence">Niveau d\'urgence</string>
+  <string name="tache_employe_assigne">Employé assigné</string>
 
   <string name="tache_urgence_bas">Faible</string>
   <string name="tache_urgence_moyen">Normal</string>
   <string name="tache_urgence_haut">Haut</string>
 
-  <string name="employee_name">Nom</string>
-  <string name="employee_mail">Adresse courriel</string>
-  <string name="employee_phone">Numéro de téléphone</string>
-  <string name="employee_job">Poste</string>
+  <string name="employe_nom">Nom</string>
+  <string name="employe_email">Adresse courriel</string>
+  <string name="employe_telephone">Numéro de téléphone</string>
+  <string name="employe_poste">Poste</string>
 
   <string name="pref_toasts">Avertissements Toasts</string>
-  <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>
-  <string name="pref_toasts_frequency">Fréquence</string>
-  <string name="pref_toasts_frequency_summary">Attendre %s entre les Toasts</string>
-  <string name="pref_toasts_timespan">Laps de temps</string>
-  <string name="pref_toasts_timespan_summary">Vérification des tâches à faire pour %s</string>
-  <string name="pref_toasts_urgency_level">Niveau d\'urgence</string>
-  <string name="pref_toasts_urgency_level_summary">Affiche les tâches avec un niveau d\'urgence %s ou supérieur</string>
-  <string name="pref_language">Langue</string>
-  <string name="pref_language_summary">Langue générale de l\'application</string>
+  <string name="pref_toasts_resume">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>
+  <string name="pref_toasts_frequence">Fréquence</string>
+  <string name="pref_toasts_frequence_resume">Attendre %s entre les Toasts</string>
+  <string name="pref_toasts_laps_temps">Laps de temps</string>
+  <string name="pref_toasts_laps_temps_resume">Vérification des tâches à faire pour %s</string>
+  <string name="pref_toasts_urgence">Niveau d\'urgence</string>
+  <string name="pref_toasts_urgence_resume">Affiche les tâches avec un niveau d\'urgence %s ou supérieur</string>
+  <string name="pref_langue">Langue</string>
+  <string name="pref_langue_resume">Langue générale de l\'application</string>
 
-  <string-array name="pref_toasts_frequency_names">
+  <string-array name="pref_toasts_frequence_noms">
     <item>Une journée</item>
     <item>Une heure</item>
     <item>Une demi-heure</item>
@@ -63,7 +63,7 @@
     <item>Trente secondes</item>
     <item>Jamais</item>
   </string-array>
-  <string-array name="pref_toasts_frequency_values">
+  <string-array name="pref_toasts_frequence_valeurs">
     <item>86400</item>
     <item>3600</item>
     <item>1800</item>
@@ -72,80 +72,80 @@
     <item>30</item>
     <item>0</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_names">
+  <string-array name="pref_toasts_laps_temps_noms">
     <item>Aujourd\'hui</item>
     <item>Cette semaine</item>
     <item>Ce mois</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_values">
+  <string-array name="pref_toasts_laps_temps_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_names">
+  <string-array name="pref_toasts_urgence_noms">
     <item>Bas</item>
     <item>Moyen</item>
     <item>Haut</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_values">
+  <string-array name="pref_toasts_urgence_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_language_names">
+  <string-array name="pref_langue_noms">
     <item>Français</item>
     <item>Anglais</item>
     <item>Créole</item>
   </string-array>
-  <string-array name="pref_language_values">
+  <string-array name="pref_langue_valeurs">
     <item>fr</item>
     <item>en</item>
     <item>crp</item>
   </string-array>
 
   <string name="titre_taches_liste">Liste des tâches</string>
-  <string name="no_tasks">Vous n\'avez pas de tâche… pour l\'instant.</string>
+  <string name="aucune_tache">Vous n\'avez pas de tâche… pour l\'instant.</string>
   <string name="tache_filtre_tous_les_employes">Tous les employés</string>
-  <string-array name="task_filters_filters">
+  <string-array name="tache_filtre_filtres">
     <item>Aucun filtre</item>
     <item>Date</item>
     <item>Employé</item>
     <item>Niveau d\'urgence</item>
     <item>Complétion</item>
   </string-array>
-  <string-array name="task_filters_dates">
+  <string-array name="tache_filtre_dates">
     <item>Toutes les dates</item>
     <item>Aujourd\'hui</item>
     <item>Cette semaine</item>
     <item>Ce mois</item>
   </string-array>
-  <string-array name="task_filters_urgencies">
+  <string-array name="tache_filtre_urgences">
     <item>Tous les niveaux d\'urgence</item>
     <item>Bas</item>
     <item>Moyen</item>
     <item>Haut</item>
   </string-array>
-  <string-array name="task_filters_completion">
+  <string-array name="tache_filtre_fait">
     <item>Toutes les tâches</item>
     <item>Tâches en cours</item>
     <item>Tâches complétées</item>
   </string-array>
-  <string-array name="task_filters_urgencies_edit">
+  <string-array name="tache_filtre_urgences_modifier">
     <item>Bas</item>
     <item>Moyen</item>
     <item>Haut</item>
   </string-array>
 
-  <string name="title_task">Détails d\'une tâche</string>
-  <string name="title_activity_edit_task">Modification d\'une tâche</string>
-  <string name="title_activity_new_task">Nouvelle tâche</string>
+  <string name="titre_tache">Détails d\'une tâche</string>
+  <string name="titre_activity_modifier_tache">Modification d\'une tâche</string>
+  <string name="titre_activity_ajout_tache">Nouvelle tâche</string>
   <string name="tache_aucun_employe">Aucun employé assigné</string>
 
   <string name="titre_employes_liste">Liste des employés</string>
-  <string name="no_employees">Vous n\'avez pas d\'employé (sur l\'application)</string>
+  <string name="aucun_employe">Vous n\'avez pas d\'employé (sur l\'application)</string>
 
-  <string name="title_activity_employee">Détails d\'un employé</string>
-  <string name="title_activity_edit_employee">Modification d\'un employé</string>
-  <string name="title_activity_new_employee">Nouvel employé</string>
+  <string name="titre_activity_employe">Détails d\'un employé</string>
+  <string name="titre_activity_modifier_employe">Modification d\'un employé</string>
+  <string name="titre_activity_ajouter_employe">Nouvel employé</string>
   <string name="titre_prefs">Préférences</string>
 </resources>

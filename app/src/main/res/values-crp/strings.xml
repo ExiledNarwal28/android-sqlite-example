@@ -3,56 +3,56 @@
 
   <string name="erreur">Erè</string>
 
-  <string name="action_edit">Chanjman</string>
-  <string name="action_delete">Retire</string>
-  <string name="action_cancel">Anile</string>
-  <string name="action_call">Rele</string>
-  <string name="action_confirm">Valide</string>
+  <string name="action_modifier">Chanjman</string>
+  <string name="action_supprimer">Retire</string>
+  <string name="action_annuler">Anile</string>
+  <string name="action_appeler">Rele</string>
+  <string name="action_valider">Valide</string>
   <string name="action_envoyer">Voye</string>
-  <string name="action_send_sms">Voye SMS</string>
+  <string name="action_envoyer_sms">Voye SMS</string>
 
   <string name="attention_champs_vides">Jaden Obligatwa yo vid</string>
-  <string name="warning_wrong_phone_format">Envalid telefòn fòma nimewo</string>
-  <string name="warning_wrong_mail_format">Valab imel adrès fòma</string>
+  <string name="attention_mauvais_format_telephone">Envalid telefòn fòma nimewo</string>
+  <string name="attention_mauvais_format_email">Valab imel adrès fòma</string>
 
   <string name="info_vous_avez">Ou gen</string>
   <string name="info_vous_avez_pas">Ou pa gen</string>
-  <string name="info_to_do_this_day">fè jodi a</string>
-  <string name="info_to_do_this_week">fè semèn sa a</string>
-  <string name="info_to_do_this_month">fè mwa sa a</string>
-  <string name="info_urgency_low_and_plus">enpòtans ki ba</string>
-  <string name="info_urgency_medium_and_plus">enpòtans ki mwayen</string>
-  <string name="info_urgency_high">empòtans segondè</string>
+  <string name="info_a_faire_aujoudhui">fè jodi a</string>
+  <string name="info_a_faire_cette_semaine">fè semèn sa a</string>
+  <string name="info_a_faire_ce_mois">fè mwa sa a</string>
+  <string name="info_urgence_bas_et_plus">enpòtans ki ba</string>
+  <string name="info_urgence_moyen_et_plus">enpòtans ki mwayen</string>
+  <string name="info_urgence_haut">empòtans segondè</string>
   <string name="info_envoie_dun_sms">Voye SMS</string>
   <string name="info_entrer_votre_message">Antre nan mesaj ou a</string>
 
   <string name="tache">Travay</string>
   <string name="taches">Travay</string>
-  <string name="task_name">Non</string>
-  <string name="task_description">Deskripsyon</string>
-  <string name="task_date">Dat fen</string>
-  <string name="task_urgency_level">Enpòtans</string>
-  <string name="task_assigned_employee">Anplwaye asiyen</string>
+  <string name="tache_nom">Non</string>
+  <string name="tache_description">Deskripsyon</string>
+  <string name="tache_date">Dat fen</string>
+  <string name="tache_urgence">Enpòtans</string>
+  <string name="tache_employe_assigne">Anplwaye asiyen</string>
 
   <string name="tache_urgence_bas">Ba</string>
   <string name="tache_urgence_moyen">Mwayen</string>
   <string name="tache_urgence_haut">Segondè</string>
 
-  <string name="employee_name">Non</string>
-  <string name="employee_mail">Imel</string>
-  <string name="employee_phone">Nimewo telefòn</string>
-  <string name="employee_job">Pòs</string>
+  <string name="employe_nom">Non</string>
+  <string name="employe_email">Imel</string>
+  <string name="employe_telephone">Nimewo telefòn</string>
+  <string name="employe_poste">Pòs</string>
 
   <string name="pref_toasts">Avètisman Toasts</string>
-  <string name="pref_toasts_summary">Pèmèt oswa ou pa popup ki gen rapò nimewo a nan travay yo fè</string>
-  <string name="pref_toasts_frequency">Frekans</string>
-  <string name="pref_toasts_frequency_summary">Frekans ant popup</string>
-  <string name="pref_toasts_timespan">Tan</string>
-  <string name="pref_toasts_timespan_summary">Tan nan ki chèk nimewo a nan travay yo fè</string>
-  <string name="pref_toasts_urgency_level">Enpòtans</string>
-  <string name="pref_toasts_urgency_level_summary">Enpòtans obligatwa pou travay konte</string>
-  <string name="pref_language">Lang</string>
-  <string name="pref_language_summary">Jeneral ak lang aplikasyon</string>
+  <string name="pref_toasts_resume">Pèmèt oswa ou pa popup ki gen rapò nimewo a nan travay yo fè</string>
+  <string name="pref_toasts_frequence">Frekans</string>
+  <string name="pref_toasts_frequence_resume">Frekans ant popup</string>
+  <string name="pref_toasts_laps_temps">Tan</string>
+  <string name="pref_toasts_laps_temps_resume">Tan nan ki chèk nimewo a nan travay yo fè</string>
+  <string name="pref_toasts_urgence">Enpòtans</string>
+  <string name="pref_toasts_urgence_resume">Enpòtans obligatwa pou travay konte</string>
+  <string name="pref_langue">Lang</string>
+  <string name="pref_langue_resume">Jeneral ak lang aplikasyon</string>
 
   <string-array name="pref_toasts_frequency_names">
     <item>Yon jou</item>
@@ -104,7 +104,7 @@
   </string-array>
 
   <string name="titre_taches_liste">Lis travay</string>
-  <string name="no_tasks">Ou pa oblije travay ... pou kounye a.</string>
+  <string name="aucune_tache">Ou pa oblije travay ... pou kounye a.</string>
   <string name="tache_filtre_tous_les_employes">Tout anplwaye</string>
   <string-array name="task_filters_filters">
     <item>Pa gen okenn filtè</item>
@@ -136,16 +136,16 @@
     <item>Segondè</item>
   </string-array>
 
-  <string name="title_task">Ti detay nan yon travay</string>
-  <string name="title_activity_edit_task">Koreksyon yon travay</string>
-  <string name="title_activity_new_task">Nouvo travay</string>
+  <string name="titre_tache">Ti detay nan yon travay</string>
+  <string name="titre_activity_modifier_tache">Koreksyon yon travay</string>
+  <string name="titre_activity_ajout_tache">Nouvo travay</string>
   <string name="tache_aucun_employe">Se pa anplwaye asiyen</string>
 
   <string name="titre_employes_liste">Lis anplwaye</string>
-  <string name="no_employees">Ou pa gen yon anplwaye (sou aplikasyon an)</string>
+  <string name="aucun_employe">Ou pa gen yon anplwaye (sou aplikasyon an)</string>
 
-  <string name="title_activity_employee">Detay yo de yon anplwaye</string>
-  <string name="title_activity_edit_employee">Koreksyon yon anplwaye</string>
-  <string name="title_activity_new_employee">Nouvo anplwaye</string>
+  <string name="titre_activity_employe">Detay yo de yon anplwaye</string>
+  <string name="titre_activity_modifier_employe">Koreksyon yon anplwaye</string>
+  <string name="titre_activity_ajouter_employe">Nouvo anplwaye</string>
   <string name="titre_prefs">Preferans</string>
 </resources>

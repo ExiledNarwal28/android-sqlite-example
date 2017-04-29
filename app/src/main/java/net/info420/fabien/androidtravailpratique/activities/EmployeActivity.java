@@ -98,7 +98,7 @@ public class EmployeActivity extends Activity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");
     setActionBar(toolbar);
-    toolbar.setTitle(R.string.title_activity_employee);
+    toolbar.setTitle(R.string.titre_activity_employe);
 
     ColorHelper.setStatusBarColor(this);
 
@@ -244,7 +244,7 @@ public class EmployeActivity extends Activity {
         });
 
       // Si la réponse est négative, on annule
-      alertDialog.setNegativeButton(getString(R.string.action_cancel),
+      alertDialog.setNegativeButton(getString(R.string.action_annuler),
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
