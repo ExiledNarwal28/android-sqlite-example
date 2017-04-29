@@ -28,15 +28,15 @@ import org.joda.time.DateTime;
 //          [X]--TacheActivity------------(Fait)--<==<<
 //
 //        ADAPTERS
-//          [ ]--EmployeAdapter
+//          [ ]--EmployeAdapter--(À faire)--<==<<
 //          [ ]--TacheAdapter
 //
 //        APPLICATION
 //          [X]--TodoApplication--(Fait)--<==<<
 //
 //        DATA
-//          [X]--DBHelper-------------(Fait   )--<==<<
-//          [ ]--TodoContentProvider--(À faire)--<==<<
+//          [X]--DBHelper-------------(Fait)--<==<<
+//          [X]--TodoContentProvider--(Fait)--<==<<
 //
 //        FRAGMENTS
 //          [X]--DatePickerFragment----------(Fait     )--<==<<

@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
@@ -18,11 +17,20 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
- * Created by fabien on 17-03-26.
+ * {@link ContentProvider} pour la sélection, l'insertion, la modification et la suppression de
+ * tâches et d'employés
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   17-03-26
+ *
+ * @see Employe
+ * @see Tache
+ * @see DBHelper
+ * @see ContentProvider
+ *
+ * {@link <a href="http://instinctcoder.com/android-studio-sqlite-database-example/">Base de données SQLite et Android</a>}
  */
-
-// Source : http://www.vogella.com/tutorials/AndroidSQLite/article.html
-
 public class TodoContentProvider extends ContentProvider {
   private final static String TAG = TodoContentProvider.class.getName();
 
@@ -32,30 +40,37 @@ public class TodoContentProvider extends ContentProvider {
   private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.data";
 
   // Utilisé pour le UriMatcher
-  private static final int TASKS        = 10;
-  private static final int TASK_ID      = 20;
-  private static final int EMPLOYEES    = 30;
-  private static final int EMPLOYEE_ID  = 40;
+  private static final int TACHES     = 10;
+  private static final int TACHE_ID   = 20;
+  private static final int EMPLOYES   = 30;
+  private static final int EMPLOYE_ID = 40;
 
-  private static final String BASE_PATH_TASK          = "tasks";
-  private static final String BASE_PATH_EMPLOYEE      = "employees";
-  public  static final Uri CONTENT_URI_TACHE = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TASK);
-  public  static final Uri CONTENT_URI_EMPLOYE = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYEE);
+  private static final String BASE_PATH_TACHE     = "taches";
+  private static final String BASE_PATH_EMPLOYE   = "employes";
+  public  static final Uri    CONTENT_URI_TACHE   = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TACHE);
+  public  static final Uri    CONTENT_URI_EMPLOYE = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYE);
 
-  public static final String CONTENT_TYPE_TASK          = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/tasks";
-  public static final String CONTENT_ITEM_TYPE_TACHE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/task";
-  public static final String CONTENT_TYPE_EMPLOYEE      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/employees";
-  public static final String CONTENT_ITEM_TYPE_EMPLOYE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employee";
+  public static final String CONTENT_TYPE_TACHES        = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/taches";
+  public static final String CONTENT_ITEM_TYPE_TACHE    = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/tache";
+  public static final String CONTENT_TYPE_EMPLOYES      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/employes";
+  public static final String CONTENT_ITEM_TYPE_EMPLOYE  = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employe";
 
   private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
   static {
-    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK,              TASKS);
-    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TASK + "/#",       TASK_ID);
-    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE,         EMPLOYEES);
-    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYEE + "/#",  EMPLOYEE_ID);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TACHE,          TACHES);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_TACHE + "/#",   TACHE_ID);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYE,        EMPLOYES);
+    sURIMatcher.addURI(AUTHORITY, BASE_PATH_EMPLOYE + "/#", EMPLOYE_ID);
   }
 
+  /**
+   * Exécuté à la création
+   *
+   * Instancie le {@link DBHelper}
+   *
+   * @return un boolean
+   */
   @Override
   public boolean onCreate() {
     dbHelper = new DBHelper(getContext());
@@ -63,164 +78,238 @@ public class TodoContentProvider extends ContentProvider {
     return false;
   }
 
+  /**
+   * Sélection dans la base de données
+   *
+   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
+   * Vérifie si les colonnes de la projection sont valides
+   * Choisit la table du {@link SQLiteQueryBuilder}
+   * Si on choisit une seule tâche/un seul employé, sélectionne l'item spécifique
+   * Exécute le SELECT
+   *
+   * @param uri           Uri envoyé pour la sélection
+   * @param projection    Le SELECT         (ex. : "_id, date, employe_assigne")
+   * @param selection     Le WHERE          (ex. : "_id =?")
+   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @param sortOrder     Le ORDER BY       (ex. : "date ASC")
+   * @return              Le {@link Cursor} du SELECT
+   *
+   * @see Cursor
+   * @see SQLiteQueryBuilder
+   * @see SQLiteDatabase
+   */
   @Override
   public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
     // On utilise SQLiteQueryBuilder plutôt que query()
     SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
-    // Log.d(TAG, String.format("Uri recu : %s", uri.getPath()));
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        checkColumnsTache(projection);
 
-    int uriType = sURIMatcher.match(uri);
-    switch (uriType) {
-      case TASKS:
-        // On vérifie si la colonne existe (sécurité)
-        checkColumnsTask(projection);
-
-        // On prépare la table
         queryBuilder.setTables(Tache.TABLE);
         break;
-      case TASK_ID:
-        // On vérifie si la colonne existe (sécurité)
-        checkColumnsTask(projection);
+      case TACHE_ID:
+        checkColumnsTache(projection);
 
-        // On prépare la table
         queryBuilder.setTables(Tache.TABLE);
 
         // On ajoute le ID au query
         queryBuilder.appendWhere(Tache.KEY_ID + "=" + uri.getLastPathSegment());
         break;
-      case EMPLOYEES:
-        // On vérifie si la colonne existe (sécurité)
-        checkColumnsEmployee(projection);
+      case EMPLOYES:
+        checkColumnsEmploye(projection);
 
-        // On prépare la table
         queryBuilder.setTables(Employe.TABLE);
         break;
-      case EMPLOYEE_ID:
-        // On vérifie si la colonne existe (sécurité)
-        checkColumnsEmployee(projection);
+      case EMPLOYE_ID:
+        checkColumnsEmploye(projection);
 
-        // On prépare la table
         queryBuilder.setTables(Employe.TABLE);
 
         // On ajoute le ID au query
         queryBuilder.appendWhere(Employe.KEY_ID + "=" + uri.getLastPathSegment());
         break;
       default:
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
 
-    SQLiteDatabase db = dbHelper.getWritableDatabase();
-    Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+    SQLiteDatabase  db      = dbHelper.getWritableDatabase();
+    Cursor          cursor  = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+
     // S'assurer que tous les Listeners soient notifiés
     cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
     return cursor;
   }
 
-  @Override
-  public String getType(@NonNull Uri uri) {
-    return null;
-  }
-
+  /**
+   * Ajout dans la base de données
+   *
+   * Vérifie l'Uri (tache/employé)
+   * Exécute le INSERT dans la bonne table
+   * Notifie les Listeners
+   *
+   * @param uri    Uri envoyé pour l'ajout
+   * @param values Valeurs à ajouter dans la base de données
+   * @return       L'{@link Uri} du INSERT
+   *
+   * @see SQLiteDatabase
+   */
   @Override
   public Uri insert(@NonNull Uri uri, ContentValues values) {
-    int uriType = sURIMatcher.match(uri);
-    SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
     long id = 0;
-    switch (uriType) {
-      case TASKS:
-        id = sqlDB.insert(Tache.TABLE, null, values);
+
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        id = db.insert(Tache.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
-        // Log.d(TAG, String.format("Insertion de la tâche #%s", id));
-
-        return Uri.parse(BASE_PATH_TASK + "/" + id);
-      case EMPLOYEES:
-        id = sqlDB.insert(Employe.TABLE, null, values);
+        return Uri.parse(BASE_PATH_TACHE + "/" + id);
+      case EMPLOYES:
+        id = db.insert(Employe.TABLE, null, values);
         getContext().getContentResolver().notifyChange(uri, null);
 
-        // Log.d(TAG, String.format("Insertion de l'employé #%s", id));
-
-        return Uri.parse(BASE_PATH_EMPLOYEE + "/" + id);
+        return Uri.parse(BASE_PATH_EMPLOYE + "/" + id);
       default:
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
   }
 
+  /**
+   * Suppression dans la base de données
+   *
+   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
+   * Supprime l'item ou les items dans la base de données
+   *
+   * @param uri           Uri envoyé pour la suppression
+   * @param selection     Le WHERE          (ex. : "_id =?")
+   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @return              Le nombre de rangée supprimées
+   *
+   * @see SQLiteDatabase
+   */
   @Override
   public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-    int uriType = sURIMatcher.match(uri);
-    SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
-    int rowsDeleted = 0;
-    String id;
-    switch (uriType) {
-      case TASKS:
-        rowsDeleted = sqlDB.delete(Tache.TABLE, selection, selectionArgs);
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+    int rangeesSupprimees = 0;
+
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        rangeesSupprimees = db.delete(Tache.TABLE, selection, selectionArgs);
         break;
-      case TASK_ID:
-        id = uri.getLastPathSegment();
-        if (TextUtils.isEmpty(selection)) {
-          rowsDeleted = sqlDB.delete(Tache.TABLE, Tache.KEY_ID + "=" + id, null);
+      case TACHE_ID:
+        if (selection.isEmpty()) {
+          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
-          rowsDeleted = sqlDB.delete(Tache.TABLE, Tache.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
         }
         break;
-      case EMPLOYEES:
-        rowsDeleted = sqlDB.delete(Employe.TABLE, selection, selectionArgs);
+      case EMPLOYES:
+        rangeesSupprimees = db.delete(Employe.TABLE, selection, selectionArgs);
         break;
-      case EMPLOYEE_ID:
-        id = uri.getLastPathSegment();
-        if (TextUtils.isEmpty(selection)) {
-          rowsDeleted = sqlDB.delete(Employe.TABLE, Employe.KEY_ID + "=" + id, null);
+      case EMPLOYE_ID:
+        if (selection.isEmpty()) {
+          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
-          rowsDeleted = sqlDB.delete(Employe.TABLE, Employe.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
         }
         break;
       default:
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
+
+    // S'assurer que tous les Listeners soient notifiés
     getContext().getContentResolver().notifyChange(uri, null);
-    return rowsDeleted;
+
+    return rangeesSupprimees;
   }
 
+  /**
+   * Modification dans la base de données
+   *
+   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
+   * Modifie l'item ou les items dans la base de données
+   *
+   * @param uri           Uri envoyé pour la modification
+   * @param selection     Le WHERE          (ex. : "_id =?")
+   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @return              Le nombre de rangée modifiées
+   *
+   * @see SQLiteDatabase
+   */
   @Override
   public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-    int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
-    int rowsUpdated = 0;
-    String id;
-    switch (uriType) {
-      case TASKS:
-        rowsUpdated = sqlDB.update(Tache.TABLE, values, selection, selectionArgs);
+
+    int rangeesModifiees = 0;
+
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        rangeesModifiees = sqlDB.update(Tache.TABLE, values, selection, selectionArgs);
         break;
-      case TASK_ID:
-        id = uri.getLastPathSegment();
-        if (TextUtils.isEmpty(selection)) {
-          rowsUpdated = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + id, null);
+      case TACHE_ID:
+        if (selection.isEmpty()) {
+          rangeesModifiees = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
-          rowsUpdated = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rangeesModifiees = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
         }
         break;
-      case EMPLOYEES:
-        rowsUpdated = sqlDB.update(Employe.TABLE, values, selection, selectionArgs);
+      case EMPLOYES:
+        rangeesModifiees = sqlDB.update(Employe.TABLE, values, selection, selectionArgs);
         break;
-      case EMPLOYEE_ID:
-        id = uri.getLastPathSegment();
-        if (TextUtils.isEmpty(selection)) {
-          rowsUpdated = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + id, null);
+      case EMPLOYE_ID:
+        if (selection.isEmpty()) {
+          rangeesModifiees = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
-          rowsUpdated = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + id + " and " + selection, selectionArgs);
+          rangeesModifiees = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
         }
         break;
       default:
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
+
+    // S'assurer que tous les Listeners soient notifiés
     getContext().getContentResolver().notifyChange(uri, null);
-    return rowsUpdated;
+
+    return rangeesModifiees;
   }
 
-  private void checkColumnsTask(String[] projection) {
+  /**
+   * Retourne le type d'un {@link Uri}
+   *
+   * @param uri {@link Uri} à vérifier le type
+   * @return    String du type de l'Uri
+   */
+  @Override
+  public String getType(@NonNull Uri uri) {
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        return CONTENT_TYPE_TACHES;
+      case TACHE_ID:
+        return CONTENT_ITEM_TYPE_TACHE;
+      case EMPLOYES:
+        return CONTENT_TYPE_EMPLOYES;
+      case EMPLOYE_ID:
+        return CONTENT_ITEM_TYPE_EMPLOYE;
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Vérifie si les colonnes d'une projection de tâche sont valide
+   *
+   * @param projection Projection à vérifier
+   */
+  private void checkColumnsTache(String[] projection) {
     String[] available = {  Tache.KEY_ID,
                             Tache.KEY_employe_assigne_ID,
                             Tache.KEY_nom,
@@ -232,7 +321,12 @@ public class TodoContentProvider extends ContentProvider {
     checkColumns(projection, available);
   }
 
-  private void checkColumnsEmployee(String[] projection) {
+  /**
+   * Vérifie si les colonnes d'une projection d'employé sont valide
+   *
+   * @param projection Projection à vérifier
+   */
+  private void checkColumnsEmploye(String[] projection) {
     String[] available = {  Employe.KEY_ID,
                             Employe.KEY_nom,
                             Employe.KEY_poste,
@@ -242,15 +336,20 @@ public class TodoContentProvider extends ContentProvider {
     checkColumns(projection, available);
   }
 
+  /**
+   * Vérifie si les colonnes d'une projection sont valides avec un tableau de String à cet effet
+   *
+   * @param projection  Projection à vérifier
+   * @param available   Tableau de String pour comparer à la projection
+   */
   private void checkColumns(String[] projection, String[] available) {
     if (projection != null) {
-      HashSet<String> requestedColumns = new HashSet<String>(
-        Arrays.asList(projection));
-      HashSet<String> availableColumns = new HashSet<String>(
-        Arrays.asList(available));
-      // check if all columns which are requested are available
+      HashSet<String> requestedColumns = new HashSet<>( Arrays.asList(projection));
+      HashSet<String> availableColumns = new HashSet<>( Arrays.asList(available));
+
       if (!availableColumns.containsAll(requestedColumns)) {
         throw new IllegalArgumentException(
+          // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
           "Colonne inconnue dans la projection");
       }
     }
