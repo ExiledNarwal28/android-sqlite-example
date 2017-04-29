@@ -39,16 +39,16 @@ import org.joda.time.DateTime;
 //          [ ]--TodoContentProvider
 //
 //        FRAGMENTS
-//          [X]--DatePickerFragment-----(Fait     )--<==<<
-//          [X]--EmployesListeFragment--(Fait     )--<==<<
-//          [ ]--PrefsFragment----------(En cours )--<==<<
-//          [X]--TachesListeFragment----(Fait     )--<==<<
-//          [O]--TacheFragment----------(À enlever)--<==<<
-//          [ ]--MettreAJourEmployeFragment
-//          [ ]--MettreAJourTacheFragment
+//          [X]--DatePickerFragment----------(Fait     )--<==<<
+//          [X]--EmployesListeFragment-------(Fait     )--<==<<
+//          [X]--PrefsFragment---------------(Fait     )--<==<<
+//          [X]--TachesListeFragment---------(Fait     )--<==<<
+//          [O]--TacheFragment---------------(À enlever)--<==<<
+//          [X]--MettreAJourEmployeFragment--(Fait     )--<==<<
+//          [X]--MettreAJourTacheFragment----(Fait     )--<==<<
 //
 //        HELPERS
-//          [ ]--ColorHelper
+//          [ ]--ColorHelper--(À faire)-<==<<
 //          [ ]--DateHelper
 //          [ ]--LocaleHelper
 //          [ ]--StringHelper
