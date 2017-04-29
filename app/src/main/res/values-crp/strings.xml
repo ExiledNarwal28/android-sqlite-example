@@ -105,7 +105,7 @@
 
   <string name="titre_taches_liste">Lis travay</string>
   <string name="no_tasks">Ou pa oblije travay ... pou kounye a.</string>
-  <string name="task_filter_all_employee">Tout anplwaye</string>
+  <string name="tache_filtre_tous_les_employes">Tout anplwaye</string>
   <string-array name="task_filters_filters">
     <item>Pa gen okenn filtè</item>
     <item>Dat</item>

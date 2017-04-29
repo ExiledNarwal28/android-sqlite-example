@@ -207,7 +207,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    *
    * Modifie la date, puis appelle onTacheDateChange
    *
-   * @see onTacheDateChange
+   * @see OnTacheDateChangeListener
    *
    * @param tacheDate Nouvelle date de la tache en millisecondes
    */

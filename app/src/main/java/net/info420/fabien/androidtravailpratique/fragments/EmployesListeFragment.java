@@ -40,7 +40,6 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
 
   private FloatingActionButton fabAjouterEmploye;
 
-  // private Cursor cursor;
   private EmployeAdapter employeAdapter;
 
   /**

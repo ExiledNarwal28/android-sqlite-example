@@ -42,7 +42,7 @@
     android:layout_below="@+id/tv_employe_poste"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/tv_task_date"
+    android:id="@+id/tv_employe_email"
     android:layout_marginTop="10dp"/>
 
   <TextView

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.ContentValues;
 
 import net.info420.fabien.androidtravailpratique.data.DBHelper;
+import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
@@ -129,9 +130,9 @@ public class TodoApplication extends Application {
 
   // TODO : Prod : Enlever ceci
   // Variables de développement
-  public boolean  recreationDb         = false;
-  public boolean  creationTestTaches   = false;
-  public boolean  creationTestEmployes = false;
+  public boolean  recreationDb         = true;
+  public boolean  creationTestTaches   = true;
+  public boolean  creationTestEmployes = true;
 
   /**
    * S'exécute lors de la création de la classe
@@ -174,11 +175,13 @@ public class TodoApplication extends Application {
         values.putNull(Tache.KEY_employe_assigne_ID);
       }
 
-      values.put(Tache.KEY_nom,                 taskNames[i]);
-      values.put(Tache.KEY_description,          taskDescriptions[i]);
-      values.put(Tache.KEY_fait,            taskCompleteds[i]);
-      values.put(Tache.KEY_date,                 taskDates[i]);
-      values.put(Tache.KEY_urgence,        taskUrgencyLevels[i]);
+      values.put(Tache.KEY_nom,         taskNames[i]);
+      values.put(Tache.KEY_description, taskDescriptions[i]);
+      values.put(Tache.KEY_fait,        taskCompleteds[i]);
+      values.put(Tache.KEY_date,        taskDates[i]);
+      values.put(Tache.KEY_urgence,     taskUrgencyLevels[i]);
+
+      getContentResolver().insert(TodoContentProvider.CONTENT_URI_TACHE, values);
     }
   }
 
@@ -191,10 +194,12 @@ public class TodoApplication extends Application {
     for (int i = 0; i < employeeNames.length; i++) {
       ContentValues values = new ContentValues();
 
-      values.put(Employe.KEY_nom, employeeNames[i]);
-      values.put(Employe.KEY_poste, employeeJobs[i]);
-      values.put(Employe.KEY_email, employeeEmails[i]);
+      values.put(Employe.KEY_nom,       employeeNames[i]);
+      values.put(Employe.KEY_poste,     employeeJobs[i]);
+      values.put(Employe.KEY_email,     employeeEmails[i]);
       values.put(Employe.KEY_telephone, employeePhones[i]);
+
+      getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYE, values);
     }
   }
 }

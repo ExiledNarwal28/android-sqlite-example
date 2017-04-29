@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import net.info420.fabien.androidtravailpratique.models.Employe;
@@ -29,7 +29,7 @@ public class TodoContentProvider extends ContentProvider {
   // Base de données
   private DBHelper dbHelper;
 
-  private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.contentprovider";
+  private static final String AUTHORITY = "net.info420.fabien.androidtravailpratique.data";
 
   // Utilisé pour le UriMatcher
   private static final int TASKS        = 10;
@@ -60,24 +60,11 @@ public class TodoContentProvider extends ContentProvider {
   public boolean onCreate() {
     dbHelper = new DBHelper(getContext());
 
-    // Log.d(TAG, String.format("Obtention de la base de donnée %s, version %s", dbHelper.getDatabaseName(), dbHelper.getReadableDatabase().getVersion()));
-
-    // Lecture des champs, je garde ça ici car ça peut redevenir utile.
-
-    /*
-     * Cursor ti = dbHelper.getReadableDatabase().rawQuery("PRAGMA table_info(" + Tache.TABLE + ")", null);
-     * if ( ti.moveToFirst() ) {
-     *   do {
-     *     Log.d(TAG, String.format("Colonne %s", ti.getString(1)));
-     *   } while (ti.moveToNext());
-     * }
-     */
-
     return false;
   }
 
   @Override
-  public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+  public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
     // On utilise SQLiteQueryBuilder plutôt que query()
     SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
@@ -131,14 +118,13 @@ public class TodoContentProvider extends ContentProvider {
     return cursor;
   }
 
-  @Nullable
   @Override
-  public String getType(Uri uri) {
+  public String getType(@NonNull Uri uri) {
     return null;
   }
 
   @Override
-  public Uri insert(Uri uri, ContentValues values) {
+  public Uri insert(@NonNull Uri uri, ContentValues values) {
     int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     long id = 0;
@@ -163,7 +149,7 @@ public class TodoContentProvider extends ContentProvider {
   }
 
   @Override
-  public int delete(Uri uri, String selection, String[] selectionArgs) {
+  public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
     int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     int rowsDeleted = 0;
@@ -199,7 +185,7 @@ public class TodoContentProvider extends ContentProvider {
   }
 
   @Override
-  public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+  public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
     int uriType = sURIMatcher.match(uri);
     SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
     int rowsUpdated = 0;

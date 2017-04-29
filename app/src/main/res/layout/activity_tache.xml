@@ -52,23 +52,23 @@
     android:layout_below="@+id/tv_tache_urgence"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/tv_employe_poste"/>
+    android:id="@+id/tv_tache_description"/>
 
   <TextView
     android:text="@string/task_date"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/tv_employe_poste"
+    android:layout_below="@+id/tv_tache_description"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:id="@+id/tv_task_date"
+    android:id="@+id/tv_tache_date"
     android:layout_marginTop="10dp"/>
 
   <Button
     android:text="@string/task_assigned_employee"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/tv_employe_email"
+    android:layout_below="@+id/tv_tache_date"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:id="@+id/btn_tache_employe_assigne"

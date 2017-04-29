@@ -18,7 +18,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_marginBottom="10dp"
-    android:id="@+id/sp_task_filters_filters"
+    android:id="@+id/sp_tache_filtre_filtres"
     android:entries="@array/task_filters_filters"
     android:spinnerMode="dropdown"/>
 
@@ -26,9 +26,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_filters"
+    android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_dates"
+    android:id="@+id/sp_tache_filtre_dates"
     android:entries="@array/task_filters_dates"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
@@ -37,9 +37,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_filters"
+    android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_employees"
+    android:id="@+id/sp_tache_filtre_employe"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
 
@@ -47,9 +47,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_filters"
+    android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_urgencies"
+    android:id="@+id/sp_tache_filtre_urgence"
     android:entries="@array/task_filters_urgencies"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
@@ -58,9 +58,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:layout_below="@+id/sp_task_filters_filters"
+    android:layout_below="@+id/sp_tache_filtre_filtres"
     android:layout_centerHorizontal="true"
-    android:id="@+id/sp_task_filters_completion"
+    android:id="@+id/sp_tache_filtre_fait"
     android:entries="@array/task_filters_completion"
     android:spinnerMode="dropdown"
     android:visibility="invisible"/>
@@ -72,7 +72,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/no_tasks"
-    android:layout_below="@id/sp_task_filters_completion"
+    android:layout_below="@id/sp_tache_filtre_fait"
     android:layout_centerHorizontal="true"/>
 
   <!-- On a besoin de l'appeler 'list' (ListActivity) -->
@@ -80,7 +80,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@android:id/list"
-    android:layout_below="@+id/sp_task_filters_completion"
+    android:layout_below="@+id/sp_tache_filtre_fait"
     android:layout_alignParentStart="true"/>
 
   <android.support.design.widget.FloatingActionButton
@@ -91,7 +91,7 @@
     android:clickable="true"
     app:fabSize="normal"
     app:srcCompat="@drawable/ic_plus"
-    android:id="@+id/fab_add_task"
+    android:id="@+id/fab_ajouter_tache"
     android:layout_alignParentEnd="true"
     android:layout_alignParentBottom="true"/>
 

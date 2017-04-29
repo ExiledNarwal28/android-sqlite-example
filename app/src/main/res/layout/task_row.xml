@@ -16,10 +16,10 @@
     android:text="@string/task_name"
     android:textSize="24sp"
     android:layout_alignParentTop="true"
-    android:layout_alignStart="@+id/tv_employe_email"/>
+    android:layout_alignStart="@+id/tv_tache_date"/>
 
   <TextView
-    android:id="@+id/tv_task_date"
+    android:id="@+id/tv_tache_date"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
@@ -31,12 +31,12 @@
     android:textSize="16sp" />
 
   <TextView
-    android:id="@+id/tv_task_employee"
+    android:id="@+id/tv_tache_employe"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
     android:layout_marginStart="5dp"
-    android:layout_below="@+id/tv_employe_email"
+    android:layout_below="@+id/tv_tache_date"
     android:layout_toEndOf="@id/tv_tache_urgence"
     android:lines="1"
     android:text="@string/task_assigned_employee"
@@ -49,15 +49,15 @@
     android:layout_width="5dp"
     android:layout_height="wrap_content"
     android:layout_alignTop="@id/tv_tache_nom"
-    android:layout_alignBottom="@id/tv_task_employee"/>
+    android:layout_alignBottom="@id/tv_tache_employe"/>
 
   <CheckBox
+    android:id="@+id/cb_tache_fait"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/cb_tache_fait"
     android:layout_alignTop="@id/tv_tache_nom"
     android:layout_alignParentRight="true"
-    android:layout_alignBottom="@id/tv_task_employee"
+    android:layout_alignBottom="@id/tv_tache_employe"
     style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
     tools:ignore="RtlHardcoded"/>
 

@@ -105,7 +105,7 @@
 
   <string name="titre_taches_liste">Tasks list</string>
   <string name="no_tasks">You have no task... for now.</string>
-  <string name="task_filter_all_employee">All employees</string>
+  <string name="tache_filtre_tous_les_employes">All employees</string>
   <string-array name="task_filters_filters">
     <item>No filter</item>
     <item>Date</item>
