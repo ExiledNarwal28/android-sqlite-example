@@ -4,10 +4,20 @@ package net.info420.fabien.androidtravailpratique.interfaces;
  * Created by fabien on 17-04-23.
  */
 
+/**
+ * Interface servant aux {@link android.app.Activity} qui ont un {@link net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment}
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   17-04-23
+ *
+ * @see net.info420.fabien.androidtravailpratique.models.Tache
+ * @see net.info420.fabien.androidtravailpratique.activities.AjouterTacheActivity
+ * @see net.info420.fabien.androidtravailpratique.activities.ModifierTacheActivity
+ *
+ */
 public interface OnTacheDateChangeListener {
-  public long taskDate = 0;
+  void setTacheDate(int tacheDate);
 
-  public void setTacheDate(int tacheDate);
-
-  public void onTacheDateChange();
+  void onTacheDateChange();
 }

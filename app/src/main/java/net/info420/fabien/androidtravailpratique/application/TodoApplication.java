@@ -54,14 +54,14 @@ import org.joda.time.DateTime;
 //          [X]--StringHelper--(Fait)--<==<<
 //
 //        INTERFACES
-//          [ ]--OnTacheDateChangeListener--(À faire)--<==<<
+//          [X]--OnTacheDateChangeListener--(Fait)--<==<<
 //
 //        MODELS
 //          [ ]--Employe
 //          [ ]--Tache
 //
 //        UTILS
-//          [ ]--TempsReceiver
+//          [ ]--TempsReceiver--(À faire)--<==<<
 //          [ ]--TempsService
 //
 //    res
