@@ -48,8 +48,8 @@ import org.joda.time.DateTime;
 //          [X]--MettreAJourTacheFragment----(Fait     )--<==<<
 //
 //        HELPERS
-//          [ ]--ColorHelper--(À faire)-<==<<
-//          [ ]--DateHelper
+//          [X]--ColorHelper--(Fait)------<==<<
+//          [ ]--DateHelper---(En cours)--<==<<
 //          [ ]--LocaleHelper
 //          [ ]--StringHelper
 //
