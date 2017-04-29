@@ -13,35 +13,74 @@ import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
 /**
- * Created by fabien on 17-03-27.
+ * {@link android.widget.SimpleCursorAdapter} d'employés d'{@link net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment}
+ *
+ * @author   Fabien Roy
+ * @version  1.0
+ * @since    17-03-27
+ *
+ * @see EmployeAdapter
+ * @see net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment
+ * @see TodoApplication
+ *
+ * {@link <a href="http://www.vogella.com/tutorials/AndroidListView/article.html">Les ListViews et Android</a>}
  */
-
-// Source : http://www.vogella.com/tutorials/AndroidListView/article.html
-
 public class EmployeAdapter extends SimpleCursorAdapter {
   private final String TAG = EmployeAdapter.class.getName();
 
   private final LayoutInflater inflater;
-  private final TodoApplication application;
 
+  // Le contenu du XML de l'Adapter
   private final class ViewHolder {
-    public TextView tvEmployeeNom;
-    public TextView tvEmployeePoste;
+    TextView tvEmployeeNom;
+    TextView tvEmployeePoste;
   }
 
-  // TODO : Vérifier si on a besoin de l'application
-  public EmployeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
+  /**
+   * Constructeur d'{@link EmployeAdapter}
+   *
+   * Envoie les paramètres à {@link SimpleCursorAdapter}
+   * Instancie le {@link LayoutInflater}
+   *
+   * @param context {@link Context} où afficher l'{@link EmployeAdapter}
+   * @param layout  Id du {@link android.text.Layout} à utiliser
+   * @param cursor  {@link Cursor} de la sélection
+   * @param from    Données à mettre dans des champs
+   * @param to      Id des champs à remplir
+   * @param flags   Flags de {@link SimpleCursorAdapter}
+   */
+  public EmployeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags) {
     super(context, layout, cursor, from, to, flags);
 
     this.inflater = LayoutInflater.from(context);
-    this.application = application;
   }
 
+  /**
+   * Exécuter lors de la création d'un nouveau {@link View}
+   *
+   * Retourne le {@link LayoutInflater} avec le bon {@link android.text.Layout}
+   *
+   * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
+   * @param cursor    {@link Cursor} de la sélection
+   * @param viewGroup Groupes de {@link View} contenant la {@link View}
+   * @return          La {@link View} retournée par le {@link LayoutInflater}
+   */
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
     return inflater.inflate(R.layout.employee_row, viewGroup, false);
   }
 
+  /**
+   * Exécuter lors de l'association de champs de base de données à un {@link View}
+   *
+   * Instancie les {@link View}
+   * Ajoute les informations aux champs
+   * Mets les bons tags au viewHolder
+   *
+   * @param view      {@link View} qui est bindée
+   * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
+   * @param cursor    {@link Cursor} de la sélection
+   */
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
     EmployeAdapter.ViewHolder viewHolder;
@@ -50,7 +89,6 @@ public class EmployeAdapter extends SimpleCursorAdapter {
     viewHolder.tvEmployeeNom    = (TextView) view.findViewById(R.id.tv_employe_nom);
     viewHolder.tvEmployeePoste  = (TextView) view.findViewById(R.id.tv_employe_poste);
 
-    // Initialisation du UI
     viewHolder.tvEmployeeNom.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
     viewHolder.tvEmployeePoste.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
 

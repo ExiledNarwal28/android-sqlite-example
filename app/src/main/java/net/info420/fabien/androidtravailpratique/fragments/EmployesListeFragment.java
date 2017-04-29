@@ -18,7 +18,6 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.activities.AjouterEmployeActivity;
 import net.info420.fabien.androidtravailpratique.activities.EmployeActivity;
 import net.info420.fabien.androidtravailpratique.adapters.EmployeAdapter;
-import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
@@ -132,7 +131,7 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
     int[] to = new int[]{R.id.tv_employe_nom, R.id.tv_employe_poste};
 
     getLoaderManager().initLoader(0, null, this);
-    employeAdapter = new EmployeAdapter(getContext(), R.layout.employee_row, null, from, to, 0, (TodoApplication) getActivity().getApplication());
+    employeAdapter = new EmployeAdapter(getContext(), R.layout.employee_row, null, from, to, 0);
 
     setListAdapter(employeAdapter);
   }
