@@ -32,7 +32,7 @@ import org.joda.time.DateTime;
 //          [ ]--TacheAdapter
 //
 //        APPLICATION
-//          [ ]--TodoApplication
+//          [X]--TodoApplication--(Fait)--<==<<
 //
 //        DATA
 //          [ ]--DBHelper
@@ -111,6 +111,7 @@ import org.joda.time.DateTime;
 
 /**
  * L'application de base
+ *
  * Cette classe est le point d'entrée dans l'application Android.
  * Elle contient des variables utilisées partout dans l'application.
  *
