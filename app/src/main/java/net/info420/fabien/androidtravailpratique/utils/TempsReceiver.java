@@ -26,29 +26,29 @@ public class TempsReceiver extends BroadcastReceiver {
    *
    * Vérifie le nombre de tâche afin de mettre un texte représentatif
    *
-   * @param contexte  {@link Context} pour afficher le {@link Toast}
+   * @param context  {@link Context} pour afficher le {@link Toast}
    * @param intent    {@link Intent} contenant le {@link android.os.Bundle}
    *
    * @see TempsService
    * @see BroadcastReceiver
    */
   @Override
-  public void onReceive(Context contexte, Intent intent) {
+  public void onReceive(Context context, Intent intent) {
     if(intent.getExtras() != null) {
       if (intent.getExtras().getInt(TempsService.TACHES_NB) == 0) {
-        Toast.makeText( contexte,
+        Toast.makeText( context,
                         String.format("%s %s %s %s.",
-                                      contexte.getString(R.string.info_vous_avez_pas),
-                                      contexte.getString(R.string.tache).toLowerCase(),
+                                      context.getString(R.string.info_vous_avez_pas),
+                                      context.getString(R.string.tache).toLowerCase(),
                                       intent.getExtras().getString(TempsService.URGENCE),
                                       intent.getExtras().getString(TempsService.LAPS_TEMPS)),
                         Toast.LENGTH_SHORT).show();
       } else {
-        Toast.makeText( contexte,
+        Toast.makeText( context,
                         String.format("%s %s %s %s %s.",
-                                      contexte.getString(R.string.info_vous_avez),
+                                      context.getString(R.string.info_vous_avez),
                                       intent.getExtras().getInt(TempsService.TACHES_NB),
-                                      ((intent.getExtras().getInt(TempsService.TACHES_NB) > 1) ? contexte.getString(R.string.taches) : contexte.getString(R.string.tache)).toLowerCase(),
+                                      ((intent.getExtras().getInt(TempsService.TACHES_NB) > 1) ? context.getString(R.string.taches) : context.getString(R.string.tache)).toLowerCase(),
                                       intent.getExtras().getString(TempsService.URGENCE),
                                       intent.getExtras().getString(TempsService.LAPS_TEMPS)),
                         Toast.LENGTH_SHORT).show();

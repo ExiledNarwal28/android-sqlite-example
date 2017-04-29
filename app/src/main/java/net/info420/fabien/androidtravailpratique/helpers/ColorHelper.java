@@ -21,19 +21,19 @@ public class ColorHelper {
    * Méthode statique pour recherche une couleur en fonction du niveau d'urgence
    *
    * @param urgence  Id du niveau d'urgence
-   * @param contexte Contexte pour appeler la méthode getColor()
+   * @param context Context pour appeler la méthode getColor()
    * @return         Couleur en lien avec le niveau d'urgence
    */
-  public static int getUrgencyLevelColor(int urgence, Context contexte) {
+  public static int getUrgencyLevelColor(int urgence, Context context) {
     switch (urgence) {
       case 0:
-        return contexte.getColor(R.color.colorUrgenceBas);
+        return context.getColor(R.color.colorUrgenceBas);
       case 1:
-        return contexte.getColor(R.color.colorUrgenceMoyen);
+        return context.getColor(R.color.colorUrgenceMoyen);
       case 2:
-        return contexte.getColor(R.color.colorUrgenceHaut);
+        return context.getColor(R.color.colorUrgenceHaut);
       default:
-        return contexte.getColor(R.color.colorPrimaryText);
+        return context.getColor(R.color.colorPrimaryText);
     }
   }
 

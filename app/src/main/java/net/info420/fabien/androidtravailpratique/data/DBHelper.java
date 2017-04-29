@@ -33,10 +33,10 @@ public class DBHelper  extends SQLiteOpenHelper {
   /**
    * Constructeur du {@link SQLiteOpenHelper}
    *
-   * @param contexte  {@link Context} appelant le {@link DBHelper}
+   * @param context  {@link Context} appelant le {@link DBHelper}
    */
-  public DBHelper(Context contexte ) {
-    super(contexte, DB_NOM, null, DB_VERSION);
+  public DBHelper(Context context ) {
+    super(context, DB_NOM, null, DB_VERSION);
   }
 
   /**

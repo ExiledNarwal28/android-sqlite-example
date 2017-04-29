@@ -37,7 +37,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
     CheckBox cbTaskCompleted;
   }
 
-  // TODO : Passe un contexte plutôt qu'une Application
+  // TODO : Passe un Context plutôt qu'une Application
   public TacheAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags, TodoApplication application) {
     super(context, layout, cursor, from, to, flags);
 

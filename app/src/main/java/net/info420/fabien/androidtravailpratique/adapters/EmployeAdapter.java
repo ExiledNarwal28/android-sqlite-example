@@ -25,8 +25,8 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   private final TodoApplication application;
 
   private final class ViewHolder {
-    public TextView tvEmployeeName;
-    public TextView tvEmployeeJob;
+    public TextView tvEmployeeNom;
+    public TextView tvEmployeePoste;
   }
 
   // TODO : Vérifier si on a besoin de l'application
@@ -46,13 +46,13 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   public void bindView(View view, Context context, Cursor cursor) {
     EmployeAdapter.ViewHolder viewHolder;
 
-    viewHolder                = new EmployeAdapter.ViewHolder();
-    viewHolder.tvEmployeeName = (TextView) view.findViewById(R.id.tv_employe_nom);
-    viewHolder.tvEmployeeJob  = (TextView) view.findViewById(R.id.tv_employe_poste);
+    viewHolder                  = new EmployeAdapter.ViewHolder();
+    viewHolder.tvEmployeeNom    = (TextView) view.findViewById(R.id.tv_employe_nom);
+    viewHolder.tvEmployeePoste  = (TextView) view.findViewById(R.id.tv_employe_poste);
 
     // Initialisation du UI
-    viewHolder.tvEmployeeName.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
-    viewHolder.tvEmployeeJob.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
+    viewHolder.tvEmployeeNom.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
+    viewHolder.tvEmployeePoste.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
 
     view.setTag(viewHolder);
   }

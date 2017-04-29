@@ -131,7 +131,7 @@ public class TodoContentProvider extends ContentProvider {
         queryBuilder.appendWhere(Employe.KEY_ID + "=" + uri.getLastPathSegment());
         break;
       default:
-        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
 
@@ -175,7 +175,7 @@ public class TodoContentProvider extends ContentProvider {
 
         return Uri.parse(BASE_PATH_EMPLOYE + "/" + id);
       default:
-        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
   }
@@ -221,7 +221,7 @@ public class TodoContentProvider extends ContentProvider {
         }
         break;
       default:
-        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
 
@@ -272,7 +272,7 @@ public class TodoContentProvider extends ContentProvider {
         }
         break;
       default:
-        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
         throw new IllegalArgumentException("URI inconnu : " + uri);
     }
 
@@ -349,7 +349,7 @@ public class TodoContentProvider extends ContentProvider {
 
       if (!availableColumns.containsAll(requestedColumns)) {
         throw new IllegalArgumentException(
-          // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un contexte.
+          // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
           "Colonne inconnue dans la projection");
       }
     }

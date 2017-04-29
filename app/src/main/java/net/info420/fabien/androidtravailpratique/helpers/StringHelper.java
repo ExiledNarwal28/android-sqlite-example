@@ -17,19 +17,19 @@ public class StringHelper {
    * Méthode statique pour obtenir le nom d'un niveau d'urgence
    *
    * @param urgence  Id du niveau d'urgence
-   * @param contexte Contexte pour appeler la méthode getString()
+   * @param context Context pour appeler la méthode getString()
    * @return         Le nom du niveau d'urgence, en fonction de la locale
    */
-  public static String getUrgence(int urgence, Context contexte) {
+  public static String getUrgence(int urgence, Context context) {
     switch (urgence) {
       case 0:
-        return contexte.getString(R.string.tache_urgence_bas);
+        return context.getString(R.string.tache_urgence_bas);
       case 1:
-        return contexte.getString(R.string.tache_urgence_moyen);
+        return context.getString(R.string.tache_urgence_moyen);
       case 2:
-        return contexte.getString(R.string.tache_urgence_haut);
+        return context.getString(R.string.tache_urgence_haut);
       default:
-        return contexte.getString(R.string.erreur);
+        return context.getString(R.string.erreur);
     }
   }
 }

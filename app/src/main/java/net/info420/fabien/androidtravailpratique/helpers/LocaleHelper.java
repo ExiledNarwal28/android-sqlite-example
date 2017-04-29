@@ -32,35 +32,35 @@ public class LocaleHelper {
    * Si aucune {@link Locale} n'a été sélectionnée dans les {@link android.content.SharedPreferences},
    * on utilise la {@link Locale} par défaut
    *
-   * @param contexte {@link Context} pour appeler la méthode setLocale
+   * @param context {@link Context} pour appeler la méthode setLocale
    */
-  public static void initialize(Context contexte) {
-    setLocale(contexte, PreferenceManager.getDefaultSharedPreferences(contexte).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
+  public static void initialize(Context context) {
+    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
   }
 
   /**
    * Méthode statique publique pour modifier la {@link Locale} avec une langue spécifiée
    *
-   * @param contexte  {@link Context} pour appeler la méthode setLocale
+   * @param context  {@link Context} pour appeler la méthode setLocale
    * @param langue    String représentant la locale
    * @return          boolean représentant la réussite de l'opération
    */
-  public static boolean setLocale(Context contexte, String langue) {
-    return updateResources(contexte, langue);
+  public static boolean setLocale(Context context, String langue) {
+    return updateResources(context, langue);
   }
 
   /**
    * Méthode statique privée pour modifier la {@link Locale} avec une langue spécifiée
    *
-   * @param contexte  {@link Context} pour appeler la méthode setLocale
+   * @param context  {@link Context} pour appeler la méthode setLocale
    * @param langue    String représentant la locale
    * @return          boolean représentant la réussite de l'opération
    */
-  private static boolean updateResources(Context contexte, String langue) {
+  private static boolean updateResources(Context context, String langue) {
     Locale locale = new Locale(langue);
     Locale.setDefault(locale);
 
-    Resources resources = contexte.getResources();
+    Resources resources = context.getResources();
 
     Configuration configuration = resources.getConfiguration();
     configuration.setLocale(locale);
