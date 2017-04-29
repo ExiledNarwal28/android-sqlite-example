@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">ROYF_Android</string>
 
-  <string name="error">Erreur</string>
+  <string name="erreur">Erreur</string>
 
   <string name="action_edit">Modifier</string>
   <string name="action_delete">Suprimer</string>
@@ -34,9 +34,9 @@
   <string name="task_urgency_level">Niveau d\'urgence</string>
   <string name="task_assigned_employee">Employé assigné</string>
 
-  <string name="task_urgency_level_low">Faible</string>
-  <string name="task_urgency_level_medium">Normal</string>
-  <string name="task_urgency_level_high">Haut</string>
+  <string name="tache_urgence_bas">Faible</string>
+  <string name="tache_urgence_moyen">Normal</string>
+  <string name="tache_urgence_haut">Haut</string>
 
   <string name="employee_name">Nom</string>
   <string name="employee_mail">Adresse courriel</string>

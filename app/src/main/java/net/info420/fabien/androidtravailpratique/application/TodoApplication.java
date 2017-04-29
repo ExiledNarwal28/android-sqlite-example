@@ -51,7 +51,7 @@ import org.joda.time.DateTime;
 //          [X]--ColorHelper---(Fait    )--<==<<
 //          [X]--DateHelper----(Fait    )--<==<<
 //          [ ]--LocaleHelper--(En cours)--<==<<
-//          [ ]--StringHelper
+//          [X]--StringHelper--(Fait    )--<==<<
 //
 //        INTERFACES
 //         [ ]--OnTacheDateChangeListener
