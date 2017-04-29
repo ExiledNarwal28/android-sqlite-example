@@ -35,8 +35,8 @@ import org.joda.time.DateTime;
 //          [X]--TodoApplication--(Fait)--<==<<
 //
 //        DATA
-//          [ ]--DBHelper
-//          [ ]--TodoContentProvider
+//          [X]--DBHelper-------------(Fait   )--<==<<
+//          [ ]--TodoContentProvider--(À faire)--<==<<
 //
 //        FRAGMENTS
 //          [X]--DatePickerFragment----------(Fait     )--<==<<
