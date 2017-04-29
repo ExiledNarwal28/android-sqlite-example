@@ -9,7 +9,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
 /**
@@ -19,9 +18,9 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
  * @version  1.0
  * @since    17-03-27
  *
- * @see EmployeAdapter
+ * @see Employe
  * @see net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment
- * @see TodoApplication
+ * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
  *
  * {@link <a href="http://www.vogella.com/tutorials/AndroidListView/article.html">Les ListViews et Android</a>}
  */
@@ -32,8 +31,8 @@ public class EmployeAdapter extends SimpleCursorAdapter {
 
   // Le contenu du XML de l'Adapter
   private final class ViewHolder {
-    TextView tvEmployeeNom;
-    TextView tvEmployeePoste;
+    TextView tvEmployeNom;
+    TextView tvEmployePoste;
   }
 
   /**
@@ -48,6 +47,8 @@ public class EmployeAdapter extends SimpleCursorAdapter {
    * @param from    Données à mettre dans des champs
    * @param to      Id des champs à remplir
    * @param flags   Flags de {@link SimpleCursorAdapter}
+   *
+   * @see SimpleCursorAdapter
    */
   public EmployeAdapter(Context context, int layout, Cursor cursor, String[] from, int[] to, int flags) {
     super(context, layout, cursor, from, to, flags);
@@ -67,7 +68,7 @@ public class EmployeAdapter extends SimpleCursorAdapter {
    */
   @Override
   public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-    return inflater.inflate(R.layout.employee_row, viewGroup, false);
+    return inflater.inflate(R.layout.employe_row, viewGroup, false);
   }
 
   /**
@@ -85,12 +86,12 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   public void bindView(View view, Context context, Cursor cursor) {
     EmployeAdapter.ViewHolder viewHolder;
 
-    viewHolder                  = new EmployeAdapter.ViewHolder();
-    viewHolder.tvEmployeeNom    = (TextView) view.findViewById(R.id.tv_employe_nom);
-    viewHolder.tvEmployeePoste  = (TextView) view.findViewById(R.id.tv_employe_poste);
+    viewHolder                = new EmployeAdapter.ViewHolder();
+    viewHolder.tvEmployeNom   = (TextView) view.findViewById(R.id.tv_employe_nom);
+    viewHolder.tvEmployePoste = (TextView) view.findViewById(R.id.tv_employe_poste);
 
-    viewHolder.tvEmployeeNom.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
-    viewHolder.tvEmployeePoste.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
+    viewHolder.tvEmployeNom.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
+    viewHolder.tvEmployePoste.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
 
     view.setTag(viewHolder);
   }

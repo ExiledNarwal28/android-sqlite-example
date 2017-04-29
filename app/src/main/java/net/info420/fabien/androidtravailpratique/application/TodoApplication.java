@@ -19,50 +19,50 @@ import org.joda.time.DateTime;
 //      net.info420.fabien.androidtravailpratique
 //
 //        ACTIVITIES
-//          [X]--ModifierEmployeActivity--(Fait)--<==<<
-//          [X]--ModifierTacheActivity----(Fait)--<==<<
-//          [X]--EmployeActivity----------(Fait)--<==<<
-//          [X]--AjouterEmployeActivity---(Fait)--<==<<
-//          [X]--AjouterTacheActivity-----(Fait)--<==<<
-//          [X]--PrincipaleActivity-------(Fait)--<==<<
-//          [X]--TacheActivity------------(Fait)--<==<<
+//          [X]--ModifierEmployeActivity-----(Fait)--<==<<
+//          [X]--ModifierTacheActivity-------(Fait)--<==<<
+//          [X]--EmployeActivity-------------(Fait)--<==<<
+//          [X]--AjouterEmployeActivity------(Fait)--<==<<
+//          [X]--AjouterTacheActivity--------(Fait)--<==<<
+//          [X]--PrincipaleActivity----------(Fait)--<==<<
+//          [X]--TacheActivity---------------(Fait)--<==<<
 //
 //        ADAPTERS
-//          [X]--EmployeAdapter--(Fait)--<==<<
-//          [ ]--TacheAdapter----(À faire)--<==<<
+//          [X]--EmployeAdapter--------------(Fait)--<==<<
+//          [X]--TacheAdapter----------------(Fait)--<==<<
 //
 //        APPLICATION
-//          [X]--TodoApplication--(Fait)--<==<<
+//          [X]--TodoApplication-------------(Fait)--<==<<
 //
 //        DATA
-//          [X]--DBHelper-------------(Fait)--<==<<
-//          [X]--TodoContentProvider--(Fait)--<==<<
+//          [X]--DBHelper--------------------(Fait)--<==<<
+//          [X]--TodoContentProvider---------(Fait)--<==<<
 //
 //        FRAGMENTS
-//          [X]--DatePickerFragment----------(Fait     )--<==<<
-//          [X]--EmployesListeFragment-------(Fait     )--<==<<
-//          [X]--PrefsFragment---------------(Fait     )--<==<<
-//          [X]--TachesListeFragment---------(Fait     )--<==<<
-//          [O]--TacheFragment---------------(À enlever)--<==<<
-//          [X]--MettreAJourEmployeFragment--(Fait     )--<==<<
-//          [X]--MettreAJourTacheFragment----(Fait     )--<==<<
+//          [X]--DatePickerFragment----------(Fait)--<==<<
+//          [X]--EmployesListeFragment-------(Fait)--<==<<
+//          [X]--PrefsFragment---------------(Fait)--<==<<
+//          [X]--TachesListeFragment---------(Fait)--<==<<
+//          [O]--TacheFragment---------------(TODO)--<==<<
+//          [X]--MettreAJourEmployeFragment--(Fait)--<==<<
+//          [X]--MettreAJourTacheFragment----(Fait)--<==<<
 //
 //        HELPERS
-//          [X]--ColorHelper---(Fait)--<==<<
-//          [X]--DateHelper----(Fait)--<==<<
-//          [X]--LocaleHelper--(Fait)--<==<<
-//          [X]--StringHelper--(Fait)--<==<<
+//          [X]--ColorHelper-----------------(Fait)--<==<<
+//          [X]--DateHelper------------------(Fait)--<==<<
+//          [X]--LocaleHelper----------------(Fait)--<==<<
+//          [X]--StringHelper----------------(Fait)--<==<<
 //
 //        INTERFACES
-//          [X]--OnTacheDateChangeListener--(Fait)--<==<<
+//          [X]--OnTacheDateChangeListener---(Fait)--<==<<
 //
 //        MODELS
-//          [X]--Employe--(Fait)--<==<<
-//          [X]--Tache----(Fait)--<==<<
+//          [X]--Employe---------------------(Fait)--<==<<
+//          [X]--Tache-----------------------(Fait)--<==<<
 //
 //        UTILS
-//          [X]--TempsReceiver--(Fait)--<==<<
-//          [X]--TempsService---(Fait)--<==<<
+//          [X]--TempsReceiver---------------(Fait)--<==<<
+//          [X]--TempsService----------------(Fait)--<==<<
 //
 //    res
 //

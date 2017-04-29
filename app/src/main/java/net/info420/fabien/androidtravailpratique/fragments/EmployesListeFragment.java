@@ -131,7 +131,7 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
     int[] to = new int[]{R.id.tv_employe_nom, R.id.tv_employe_poste};
 
     getLoaderManager().initLoader(0, null, this);
-    employeAdapter = new EmployeAdapter(getContext(), R.layout.employee_row, null, from, to, 0);
+    employeAdapter = new EmployeAdapter(getContext(), R.layout.employe_row, null, from, to, 0);
 
     setListAdapter(employeAdapter);
   }

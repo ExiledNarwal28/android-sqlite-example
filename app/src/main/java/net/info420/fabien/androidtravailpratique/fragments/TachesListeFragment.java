@@ -21,7 +21,6 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.activities.AjouterTacheActivity;
 import net.info420.fabien.androidtravailpratique.activities.TacheActivity;
 import net.info420.fabien.androidtravailpratique.adapters.TacheAdapter;
-import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
@@ -268,7 +267,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     Cursor tacheCursor  = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TACHE, projection, selection, selectionArgs, sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
-    tacheAdapter = new TacheAdapter(getContext(), R.layout.task_row, tacheCursor, from, to, 0, (TodoApplication) getActivity().getApplication());
+    tacheAdapter = new TacheAdapter(getContext(), R.layout.tache_row, tacheCursor, from, to, 0);
 
     setListAdapter(tacheAdapter);
   }
