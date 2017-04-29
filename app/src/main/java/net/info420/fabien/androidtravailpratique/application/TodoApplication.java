@@ -12,7 +12,11 @@ import org.joda.time.DateTime;
 
 // TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure
 
-// TODO : Traduire, documenter et parfaire les fichiers suivants :
+// ***************************************************************
+// *                                                             *
+// *                  INDEX DE LA DOCUMENTATION                  *
+// *                                                             *
+// ***************************************************************
 //
 //    JAVA
 //
@@ -98,9 +102,9 @@ import org.joda.time.DateTime;
 //          [X]--styles.xml--------------------------(Fait)--<==<<
 //
 //        XML
-//          [X]--prefs_items.xml--(Fait)--<==<<
+//          [X]--prefs_items.xml---------------------(Fait)--<==<<
 //
-//    [ ]--------AndroidManifest.xml
+//    [X]--------AndroidManifest.xml-----------------(Fait)--<==<<
 
 /**
  * L'application de base

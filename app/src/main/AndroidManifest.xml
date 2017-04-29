@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.info420.fabien.androidtravailpratique">
 
-  <!-- SDK permission requirement -->
+  <!-- Permissions -->
   <uses-permission android:name="android.permission.CALL_PHONE"/>
   <uses-permission android:name="android.permission.SEND_SMS"/>
 
@@ -55,14 +55,6 @@
       android:configChanges="locale|layoutDirection">
     </activity>
 
-    <!-- TODO : Pourquoi j'essaie de faire passé un fragment en activité?? -->
-    <activity
-      android:name=".fragments.EmployesListeFragment"
-      android:label="@string/titre_employes_liste"
-      android:theme="@style/AppTheme.NoActionBar"
-      android:configChanges="locale|layoutDirection">
-    </activity>
-    
     <activity
       android:name=".activities.ModifierEmployeActivity"
       android:label="@string/titre_activity_modifier_employe"
