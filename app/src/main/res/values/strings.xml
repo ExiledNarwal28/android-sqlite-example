@@ -46,11 +46,11 @@
   <string name="pref_toasts">Avertissements Toasts</string>
   <string name="pref_toasts_summary">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>
   <string name="pref_toasts_frequency">Fréquence</string>
-  <string name="pref_toasts_frequency_summary">Fréquence entre les Toasts</string>
+  <string name="pref_toasts_frequency_summary">Attendre %s entre les Toasts</string>
   <string name="pref_toasts_timespan">Laps de temps</string>
-  <string name="pref_toasts_timespan_summary">Laps de temps dans lequel on vérifie le nombre de tâches à faire</string>
+  <string name="pref_toasts_timespan_summary">Vérification des tâches à faire pour %s</string>
   <string name="pref_toasts_urgency_level">Niveau d\'urgence</string>
-  <string name="pref_toasts_urgency_level_summary">Niveau d\'urgence requis pour compter les tâches</string>
+  <string name="pref_toasts_urgency_level_summary">Affiche les tâches avec un niveau d\'urgence %s ou supérieur</string>
   <string name="pref_language">Langue</string>
   <string name="pref_language_summary">Langue générale de l\'application</string>
 
@@ -104,7 +104,7 @@
   </string-array>
 
   <string name="titre_taches_liste">Liste des tâches</string>
-  <string name="no_tasks">Vous n\'avez pas de tâche... pour l\'instant.</string>
+  <string name="no_tasks">Vous n\'avez pas de tâche… pour l\'instant.</string>
   <string name="tache_filtre_tous_les_employes">Tous les employés</string>
   <string-array name="task_filters_filters">
     <item>Aucun filtre</item>

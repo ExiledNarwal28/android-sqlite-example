@@ -39,7 +39,7 @@ import java.util.Map;
 import static net.info420.fabien.androidtravailpratique.models.Tache.KEY_urgence;
 
 /**
- * {@link android.app.Fragment} de la liste des employés
+ * {@link android.app.Fragment} de la liste des tâches
  *
  * @author   Fabien Roy
  * @version  1.0

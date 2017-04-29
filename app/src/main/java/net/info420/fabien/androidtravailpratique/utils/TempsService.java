@@ -3,14 +3,11 @@ package net.info420.fabien.androidtravailpratique.utils;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
-import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import org.joda.time.DateTimeConstants;
@@ -45,8 +42,6 @@ public class TempsService extends Service {
 
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    Log.d(TAG, NOTIFICATION);
-
     getInfoFromPrefs();
 
     // Si la fréquence est "jamais", on ne veut pas starter de Timer
@@ -136,15 +131,15 @@ public class TempsService extends Service {
         break;
     }
 
-    // selectionArgs.add(getPrefs("urgencyLevel");
+    // Pour afficher un petit descriptif du genre : (bas et +)
     selectionArgs.add(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0))); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
     selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
-
-    // Pour afficher un petit descriptif du genre : (bas et +)
   }
 
   // Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
   public int getTasksCount() {
+    // TODO : Ceci plante!
+    /*
     Cursor cursor = getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
                                                 new String[] { Tache.KEY_ID },
                                                 selection,
@@ -152,10 +147,12 @@ public class TempsService extends Service {
                                                 null);
 
     return (cursor != null) ? cursor.getCount() : 0;
+    */
+    return 0;
   }
 
   // Ce qui sera exécuté chaque X seconde
-  class TimeTask extends TimerTask {
+  private class TimeTask extends TimerTask {
     public void run() {
       Intent timeIntent = new Intent(NOTIFICATION);
 
