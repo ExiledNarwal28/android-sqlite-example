@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- Les noms de ces attributs sont en anglais, afin de suivre les normes de Google -->
   <attr name="colorDivider" format="reference" />
   <attr name="colorPrimaryText" format="reference" />
   <attr name="colorPrimaryTextLight" format="reference" />

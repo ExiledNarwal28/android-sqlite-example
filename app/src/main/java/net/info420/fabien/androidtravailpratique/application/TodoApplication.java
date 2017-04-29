@@ -98,11 +98,11 @@ import org.joda.time.DateTime;
 //          [ ]--styles.xml
 //
 //        VALUES
-//          [ ]--attrs.xml
-//          [ ]--colors.xml
-//          [ ]--dimens.xml
+//          [X]--attrs.xml--------(Fait)--<==<<
+//          [X]--colors.xml-------(Fait)--<==<<
+//          [X]--dimens.xml-------(Fait)--<==<<
 //          [X]--strings.xml------(Fait)--<==<<
-//          [ ]--styles.xml
+//          [X]--styles.xml-------(Fait)--<==<<
 //
 //        XML
 //          [X]--prefs_items.xml--(Fait)--<==<<

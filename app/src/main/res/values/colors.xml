@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- Les noms de ces couleurs sont en anglais, afin de suivre les normes de Google -->
   <color name="colorPrimary">#8BC34A</color>
   <color name="colorPrimaryDark">#689F38</color>
   <color name="colorPrimaryLight">#DCEDC8</color>

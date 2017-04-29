@@ -1,8 +1,8 @@
 <resources>
-
-  <!-- Base application theme. -->
+  <!-- Thème de base -->
   <style name="AppTheme" parent="PreferenceFixTheme.Light.NoActionBar">
-    <!-- Customize your theme here. -->
+
+    <!-- Les noms de ces items sont en anglais, afin de suivre les normes de Google -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
