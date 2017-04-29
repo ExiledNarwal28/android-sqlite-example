@@ -48,13 +48,13 @@ import org.joda.time.DateTime;
 //          [X]--MettreAJourTacheFragment----(Fait     )--<==<<
 //
 //        HELPERS
-//          [X]--ColorHelper---(Fait    )--<==<<
-//          [X]--DateHelper----(Fait    )--<==<<
-//          [ ]--LocaleHelper--(En cours)--<==<<
-//          [X]--StringHelper--(Fait    )--<==<<
+//          [X]--ColorHelper---(Fait)--<==<<
+//          [X]--DateHelper----(Fait)--<==<<
+//          [X]--LocaleHelper--(Fait)--<==<<
+//          [X]--StringHelper--(Fait)--<==<<
 //
 //        INTERFACES
-//         [ ]--OnTacheDateChangeListener
+//          [ ]--OnTacheDateChangeListener--(À faire)--<==<<
 //
 //        MODELS
 //          [ ]--Employe

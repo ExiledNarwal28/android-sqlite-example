@@ -10,23 +10,57 @@ import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import java.util.Locale;
 
 /**
- * Created by fabien on 17-04-26.
+ * Classe contenant des méthodes pour facilier la recherche de Strings
+ *
+ * @author  Fabien Roy
+ * @version 1.0
+ * @since   17-04-26
+ *
+ * @see Configuration
+ * @see Locale
+ *
+ * {@link <a href="http://gunhansancar.com/change-language-programmatically-in-android/">Changer la {@link Locale} de l'application</a>}
+ * {@link <a href="http://stackoverflow.com/questions/43292013/how-can-i-change-language-of-whole-application-by-only-single-click/43292068">Changer la {@link Locale} de l'application, aussi</a>}
  */
-
 public class LocaleHelper {
-  public static void initialize(Context context) {
-    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
+  private static final String TAG = LocaleHelper.class.getName();
+
+  /**
+   * Méthode statique pour initialiser la {@link Locale} avec les {@link android.content.SharedPreferences}
+   *
+   * Appele setLocale
+   * Si aucune {@link Locale} n'a été sélectionnée dans les {@link android.content.SharedPreferences},
+   * on utilise la {@link Locale} par défaut
+   *
+   * @param contexte {@link Context} pour appeler la méthode setLocale
+   */
+  public static void initialize(Context contexte) {
+    setLocale(contexte, PreferenceManager.getDefaultSharedPreferences(contexte).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
   }
 
-  public static boolean setLocale(Context context, String language) {
-    return updateResources(context, language);
+  /**
+   * Méthode statique publique pour modifier la {@link Locale} avec une langue spécifiée
+   *
+   * @param contexte  {@link Context} pour appeler la méthode setLocale
+   * @param langue    String représentant la locale
+   * @return          boolean représentant la réussite de l'opération
+   */
+  public static boolean setLocale(Context contexte, String langue) {
+    return updateResources(contexte, langue);
   }
 
-  private static boolean updateResources(Context context, String language) {
-    Locale locale = new Locale(language);
+  /**
+   * Méthode statique privée pour modifier la {@link Locale} avec une langue spécifiée
+   *
+   * @param contexte  {@link Context} pour appeler la méthode setLocale
+   * @param langue    String représentant la locale
+   * @return          boolean représentant la réussite de l'opération
+   */
+  private static boolean updateResources(Context contexte, String langue) {
+    Locale locale = new Locale(langue);
     Locale.setDefault(locale);
 
-    Resources resources = context.getResources();
+    Resources resources = contexte.getResources();
 
     Configuration configuration = resources.getConfiguration();
     configuration.setLocale(locale);
