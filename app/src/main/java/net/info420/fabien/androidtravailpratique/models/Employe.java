@@ -1,26 +1,32 @@
 package net.info420.fabien.androidtravailpratique.models;
 
 /**
- * Created by fabien on 17-03-23.
+ * Définition d'un employé dans la base de données SQLite
+ *
+ * @author   Fabien Roy
+ * @version  1.0
+ * @since    17-03-23
+ *
+ * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
+ * @see net.info420.fabien.androidtravailpratique.data.DBHelper
+ *
+ * {@link <a href="http://instinctcoder.com/android-studio-sqlite-database-example/">Base de données SQLite et Android</a>}
  */
-
-// Source : http://instinctcoder.com/android-studio-sqlite-database-example/
-
 public class Employe {
   // Nom de la table
   public static final String TABLE = "Employe";
 
   // Noms des colonnes de la table
-  public static final String KEY_ID     = "_id";
-  public static final String KEY_nom = "name";
-  public static final String KEY_poste = "job";
-  public static final String KEY_email  = "email";
-  public static final String KEY_telephone = "phone";
+  public static final String KEY_ID         = "_id";
+  public static final String KEY_nom        = "nom";
+  public static final String KEY_poste      = "poste";
+  public static final String KEY_email      = "email";
+  public static final String KEY_telephone  = "telephone";
 
-  // Nom des propriétés
-  public int    employee_ID;
-  public String name;
-  public String job;
+  // Types des propriétés
+  public int    employe_ID;
+  public String nom;
+  public String poste;
   public String email;
-  public String phone;
+  public String telephone;
 }

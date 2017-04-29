@@ -15,7 +15,7 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
 
 public class DBHelper  extends SQLiteOpenHelper {
   // Version de la base de donnée, qui doit être augmenté à chaque changement dans les tables
-  private static final int DATABASE_VERSION = 4;
+  private static final int DATABASE_VERSION = 5;
 
   // Nom de la base de données
   private static final String DATABASE_NAME = "royf_android.db";

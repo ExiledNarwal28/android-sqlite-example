@@ -257,7 +257,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * @see TacheAdapter
    */
   private void rempliData(String selection, String[] selectionArgs, String sortOrder) {
-    // Affiche les champs de la base de données (name)
+    // Affiche les champs de la base de données (nom)
     String[] from = new String[] { Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID};
 
     // Où on affiche les champs

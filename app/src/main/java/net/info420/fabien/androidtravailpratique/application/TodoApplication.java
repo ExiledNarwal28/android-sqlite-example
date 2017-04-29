@@ -57,8 +57,8 @@ import org.joda.time.DateTime;
 //          [X]--OnTacheDateChangeListener--(Fait)--<==<<
 //
 //        MODELS
-//          [ ]--Employe--(À faire)--<==<<
-//          [ ]--Tache
+//          [X]--Employe--(Fait)--<==<<
+//          [X]--Tache----(Fait)--<==<<
 //
 //        UTILS
 //          [X]--TempsReceiver--(Fait)--<==<<

@@ -125,7 +125,7 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
    * @see EmployeAdapter
    */
   private void remplirData() {
-    // Affiche les champs de la base de données (name)
+    // Affiche les champs de la base de données (nom)
     String[] from = new String[]{Employe.KEY_nom, Employe.KEY_poste};
 
     // Où on affiche les champs
