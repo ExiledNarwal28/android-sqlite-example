@@ -21,7 +21,7 @@
 
   <item
     android:id="@+id/ic_prefs"
-    android:title="@string/titre_employes_liste"
+    android:title="@string/titre_prefs"
     android:showAsAction="always"
     android:icon="@drawable/ic_prefs_enabled">
   </item>

@@ -84,18 +84,18 @@ import org.joda.time.DateTime;
 //          [X]--toolbar.xml-------------------------(Fait)--<==<<
 //
 //        MENU
-//          [ ]--menu_employe_liste.xml
-//          [ ]--menu_item.xml
-//          [ ]--menu_prefs.xml
-//          [ ]--menu_taches_liste.xml
-//          [ ]--menu_mettre_a_jour_item.xml
+//          [X]--menu_employe_liste.xml--------------(Fait)--<==<<
+//          [X]--menu_item.xml-----------------------(Fait)--<==<<
+//          [X]--menu_prefs.xml----------------------(Fait)--<==<<
+//          [X]--menu_taches_liste.xml---------------(Fait)--<==<<
+//          [X]--menu_mettre_a_jour_item.xml---------(Fait)--<==<<
 //
 //        VALUES
-//          [X]--attrs.xml--------------------------(Fait)--<==<<
-//          [X]--colors.xml-------------------------(Fait)--<==<<
-//          [X]--dimens.xml-------------------------(Fait)--<==<<
-//          [X]--strings.xml------------------------(Fait)--<==<<
-//          [X]--styles.xml-------------------------(Fait)--<==<<
+//          [X]--attrs.xml---------------------------(Fait)--<==<<
+//          [X]--colors.xml--------------------------(Fait)--<==<<
+//          [X]--dimens.xml--------------------------(Fait)--<==<<
+//          [X]--strings.xml-------------------------(Fait)--<==<<
+//          [X]--styles.xml--------------------------(Fait)--<==<<
 //
 //        XML
 //          [X]--prefs_items.xml--(Fait)--<==<<
