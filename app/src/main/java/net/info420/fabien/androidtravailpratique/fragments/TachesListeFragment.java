@@ -48,7 +48,9 @@ import static net.info420.fabien.androidtravailpratique.models.Tache.KEY_urgence
  * @see TacheAdapter
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  */
 public class TachesListeFragment extends ListFragment implements AdapterView.OnItemSelectedListener, LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = TachesListeFragment.class.getName();
@@ -74,9 +76,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Exécuté à la création du {@link View}
    *
-   * Instancie la {@link View}
-   * Instancie l'interface
-   * Ajoute les données d'employés dans le Spinner à cet effet
+   * <ul>
+   *  <li>Instancie la {@link View}</li>
+   *  <li>Instancie l'interface</li>
+   *  <li>Ajoute les données d'employés dans le Spinner à cet effet</li>
+   * </ul>
    *
    * @param inflater            @See {@link LayoutInflater}
    * @param container           La {@link View} qui contient le fragment
@@ -96,9 +100,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Exécuté à la création de l'{@link android.app.Activity}
    *
-   * Place le {@link ListView} correctement
-   * Va chercher les données nécéssaires
-   * Enregistre le {@link ListView}
+   * <ul>
+   *  <li>Place le {@link ListView} correctement</li>
+   *  <li>Va chercher les données nécéssaires</li>
+   *  <li>Enregistre le {@link ListView}</li>
+   * </ul>
    *
    * @param savedInstanceState  {@link Bundle} pouvant contenir des données
    */
@@ -115,11 +121,14 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Exécuté à la création du {@link Loader}
    *
-   * Construit et retourne un curseur avec la projection nécéssaire pour remplir le {@link ListView}
+   * <ul>
+   *  <li>Construit et retourne un curseur avec la projection nécéssaire pour remplir le
+   *  {@link ListView}</li>
+   * </ul>
    *
-   * @param id    Id du {@link Loader}
-   * @param args  Arguments
-   * @return      Un nouveau {@link CursorLoader} avec la projection
+   * @param   id    Id du {@link Loader}
+   * @param   args  Arguments
+   * @return  Un nouveau {@link CursorLoader} avec la projection
    */
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -131,8 +140,10 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Initialisation de l'interface
    *
-   * Instancie les {@link View}
-   * Ajoute les Listeners
+   * <ul>
+   *  <li>Instancie les {@link View}</li>
+   *  <li>Ajoute les Listeners</li>
+   * </ul>
    */
   private void initUI (View view) {
     // TODO : REDESIGN : Remove spinners
@@ -162,16 +173,20 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Ajoute la liste des employés au Spinner approprié
    *
-   * Met l'option de base (Tous les employés)
-   * Ajoute les employés dans une liste de noms
-   * Construit un {@link HashMap} pour faire le lien entre l'Id d'un employé et sa position dans le {@link Spinner}
-   * Ajoute l'{@link android.widget.Adapter} au {@link Spinner}
+   * <ul>
+   *  <li>Met l'option de base (Tous les employés)</li>
+   *  <li>Ajoute les employés dans une liste de noms</li>
+   *  <li>Construit un {@link HashMap} pour faire le lien entre l'Id d'un employé et sa position dans le {@link Spinner}</li>
+   *  <li>Ajoute l'{@link android.widget.Adapter} au {@link Spinner}</li>
+   * </ul>
    *
    * @see Employe
    * @see TodoContentProvider
    * @see HashMap
    *
-   * {@link <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720">Ajout manuel d'item dans un Spinner</a>}
+   * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
+   *      target="_blank">
+   *      Source : Ajout manuel d'item dans un Spinner</a>
    */
   private void setupEmployeAssigneUI() {
     // Seule option actuelle dans le filtre des employés
@@ -232,14 +247,14 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   }
 
   /**
-   * Appele rempliData avec un ordre par date
+   * Appelle rempliData avec un ordre par date
    */
   private void setRempliData() {
     rempliData(null, null, Tache.KEY_date + " ASC");
   }
 
   /**
-   * Appele rempliData avec un ordre par date et des données filtrées
+   * Appelle rempliData avec un ordre par date et des données filtrées
    */
   private void setRempliData(String selection, String[] selectionArgs, String sortOrder) {
     rempliData(selection, selectionArgs, sortOrder);
@@ -248,10 +263,12 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Rempli la {@link ListView} des données
    *
-   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
-   * Construit un curseur avec les données reçue (selection + selectionArgs filtrés ou null)
-   * Se sert du {@link CursorLoader} afin de placer les données dans un {@link TacheAdapter}
-   * Ajoute l'{@link TacheAdapter} à la {@link ListView}
+   * <ul>
+   *  <li>Construit un tableau de String, c'est le SELECT du {@link Cursor}</li>
+   *  <li>Construit un curseur avec les données reçue (selection + selectionArgs filtrés ou null)</li>
+   *  <li>Se sert du {@link CursorLoader} afin de placer les données dans un {@link TacheAdapter}</li>
+   *  <li>Ajoute l'{@link TacheAdapter} à la {@link ListView}</li>
+   * </ul>
    *
    * @see TacheAdapter
    */
@@ -275,9 +292,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Filtre les données avec la sélection des {@link Spinner}
    *
-   * Construit la sélection de base (non-filtré, en ordre de date)
-   * Construit la sélection en fonction du Spinner (voir le switch-case)
-   * Change les données du {@link ListView} avec les données filtrées
+   * <ul>
+   *  <li>Construit la sélection de base (non-filtré, en ordre de date)</li>
+   *  <li>Construit la sélection en fonction du Spinner (voir le switch-case)</li>
+   *  <li>Change les données du {@link ListView} avec les données filtrées</li>
+   * </ul>
    *
    * @param adapterView La {@link View} {@link android.widget.Adapter} (en l'occurence, un item dans le {@link Spinner}
    * @param view        Le {@link Spinner}
@@ -286,7 +305,9 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    *
    * @see android.widget.AdapterView.OnItemSelectedListener
    *
-   * {@link <a href="http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/">Conversion d'{@link ArrayList} à {@link java.util.Arrays}</a>}
+   * @see <a href="http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/"
+   *      target="_blank">
+   *      Source : Conversion d'{@link ArrayList} à {@link java.util.Arrays}</a>
    */
   @Override
   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long Id) {
@@ -440,9 +461,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Ouvre les détails d'une tâche lorsqu'appuyé
    *
-   * Fait un nouveau {@link Intent} pour l'{@link TacheActivity}
-   * Ajoute l'{@link Uri} dans le {@link Bundle}
-   * Démarre {@link TacheActivity}
+   * <ul>
+   *  <li>Fait un nouveau {@link Intent} pour l'{@link TacheActivity}</li>
+   *  <li>Ajoute l'{@link Uri} dans le {@link Bundle}</li>
+   *  <li>Démarre {@link TacheActivity}</li>
+   * </ul>
    *
    * @param listView  La {@link ListView}
    * @param view      La {@link View} cliquée

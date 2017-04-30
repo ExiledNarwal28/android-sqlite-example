@@ -32,7 +32,9 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
  * @see EmployeAdapter
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  */
 public class EmployesListeFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = EmployesListeFragment.class.getName();
@@ -44,13 +46,15 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Exécuté à la création du {@link View}
    *
-   * Instancie la {@link View}
-   * Instancie l'interface
+   * <ul>
+   *  <li>Instancie la {@link View}</li>
+   *  <li>Instancie l'interface</li>
+   * </ul>
    *
-   * @param inflater            @See {@link LayoutInflater}
-   * @param container           La {@link View} qui contient le fragment
-   * @param savedInstanceState  {@link Bundle} pouvant contenir des données
-   * @return                    La {@link View} instanciée
+   * @param   inflater            @See {@link LayoutInflater}
+   * @param   container           La {@link View} qui contient le fragment
+   * @param   savedInstanceState  {@link Bundle} pouvant contenir des données
+   * @return  La {@link View} instanciée
    */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,11 +68,13 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Exécuté à la création de l'{@link android.app.Activity}
    *
-   * Place le {@link ListView} correctement
-   * Va chercher les données nécéssaires
-   * Enregistre le {@link ListView}
+   * <ul>
+   *  <li>Place le {@link ListView} correctement</li>
+   *  <li>Va chercher les données nécéssaires</li>
+   *  <li>Enregistre le {@link ListView}</li>
+   * </ul>
    *
-   * @param savedInstanceState  {@link Bundle} pouvant contenir des données
+   * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
@@ -83,11 +89,14 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Exécuté à la création du {@link Loader}
    *
-   * Construit et retourne un curseur avec la projection nécéssaire pour remplir le {@link ListView}
+   * <ul>
+   *  <li>Construit et retourne un curseur avec la projection nécéssaire pour remplir le
+   *  {@link ListView}</li>
+   * </ul>
    *
-   * @param id    Id du {@link Loader}
-   * @param args  Arguments
-   * @return      Un nouveau {@link CursorLoader} avec la projection
+   * @param   id    Id du {@link Loader}
+   * @param   args  Arguments
+   * @return  Un nouveau {@link CursorLoader} avec la projection
    */
   @Override
   public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -99,8 +108,10 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Initialisation de l'interface
    *
-   * Instancie le {@link FloatingActionButton}
-   * Ajoute les Listeners
+   * <ul>
+   *  <li>Instancie le {@link FloatingActionButton}</li>
+   *  <li>Ajoute les Listeners</li>
+   * </ul>
    */
   private void initUI (View view) {
     fabAjouterEmploye = (FloatingActionButton)  view.findViewById(R.id.fab_ajouter_employe);
@@ -117,9 +128,11 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Rempli la {@link ListView} des données
    *
-   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
-   * Se sert du {@link CursorLoader} afin de placer les données dans un {@link EmployeAdapter}
-   * Ajoute l'{@link EmployeAdapter} à la {@link ListView}
+   * <ul>
+   *  <li>Construit un tableau de String, c'est le SELECT du {@link Cursor}</li>
+   *  <li>Se sert du {@link CursorLoader} afin de placer les données dans un {@link EmployeAdapter}</li>
+   *  <li>Ajoute l'{@link EmployeAdapter} à la {@link ListView}</li>
+   * </ul>
    *
    * @see EmployeAdapter
    */
@@ -162,9 +175,11 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   /**
    * Ouvre les détails d'un employé lorsqu'appuyé
    *
-   * Fait un nouveau {@link Intent} pour l'{@link EmployeActivity}
-   * Ajoute l'{@link Uri} dans le {@link Bundle}
-   * Démarre {@link EmployeActivity}
+   * <ul>
+   *  <li>Fait un nouveau {@link Intent} pour l'{@link EmployeActivity}</li>
+   *  <li>Ajoute l'{@link Uri} dans le {@link Bundle}</li>
+   *  <li>Démarre {@link EmployeActivity}</li>
+   * </ul>
    *
    * @param listView  La {@link ListView}
    * @param view      La {@link View} cliquée

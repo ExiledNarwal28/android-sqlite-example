@@ -22,7 +22,8 @@ import net.info420.fabien.androidtravailpratique.R;
  * @see PreferenceFragment
  * @see SharedPreferences
  * @see OnSharedPreferenceChangeListener
- * @see net.info420.fabien.androidtravailpratique.application.TodoApplication où il y a les noms des préférences
+ * @see net.info420.fabien.androidtravailpratique.application.TodoApplication où il y a les noms
+ * des préférences
  */
 public class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
   private static final String TAG = PrefsFragment.class.getName();
@@ -30,7 +31,9 @@ public class PrefsFragment extends PreferenceFragment implements OnSharedPrefere
   /**
    * Exécuté à la création du {@link PrefsFragment}
    *
-   * Ajoute les préférences depuis R.xml.pref_items
+   * <ul>
+   *  <li>Ajoute les préférences depuis R.xml.pref_items</li>
+   * </ul>
    *
    * @param savedInstanceState  {@link Bundle} pouvant contenir des données
    */
@@ -50,8 +53,9 @@ public class PrefsFragment extends PreferenceFragment implements OnSharedPrefere
    * @param sharedPreferences {@link SharedPreferences} modifiée
    * @param key               Nom de la {@link SharedPreferences}
    *
-   * {@link <a href="http://stackoverflow.com/questions/531427/how-do-i-display-the-current-value-of-an-android-preference-in-the-preference-su">Afficher les
-   * préférences dans la liste des préférences</a>}
+   * @see <a href="http://stackoverflow.com/questions/531427/how-do-i-display-the-current-value-of-an-android-preference-in-the-preference-su"
+   *      target="_blank">
+   *      Source : Afficher les préférences dans la liste des préférences</a>
    */
   @Override
   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {

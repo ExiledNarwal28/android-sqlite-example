@@ -19,7 +19,9 @@ import net.info420.fabien.androidtravailpratique.R;
  * @see net.info420.fabien.androidtravailpratique.adapters.TacheAdapter
  * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  */
 public class MettreAJourTacheFragment extends Fragment {
   private final static String TAG = MettreAJourTacheFragment.class.getName();
@@ -27,13 +29,15 @@ public class MettreAJourTacheFragment extends Fragment {
   /**
    * Exécuté à la création du {@link View}
    *
-   * Instancie la {@link View}
-   * Instancie l'interface
+   * <ul>
+   *  <li>Instancie la {@link View}</li>
+   *  <li>Instancie l'interface</li>
+   * </ul>
    *
-   * @param inflater            @See {@link LayoutInflater}
-   * @param container           La {@link View} qui contient le fragment
-   * @param savedInstanceState  {@link Bundle} pouvant contenir des données
-   * @return                    La {@link View} instanciée
+   * @param   inflater            @See {@link LayoutInflater}
+   * @param   container           La {@link View} qui contient le fragment
+   * @param   savedInstanceState  {@link Bundle} pouvant contenir des données
+   * @return  La {@link View} instanciée
    */
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

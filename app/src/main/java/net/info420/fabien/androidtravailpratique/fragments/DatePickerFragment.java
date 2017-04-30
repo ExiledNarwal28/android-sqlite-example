@@ -13,9 +13,8 @@ import org.joda.time.DateTimeZone;
 
 /**
  * {@link android.app.Fragment} de {@link DatePicker}
- * Source : https://developer.android.com/guide/topics/ui/controls/pickers.html
  *
- * Il permet d'afficher un {@link DatePicker} dans une {@link android.app.Fragment}
+ * <p>Il permet d'afficher un {@link DatePicker} dans une {@link android.app.Fragment}.
  * Semblable à un {@link android.widget.PopupWindow}
  *
  * @author   Fabien Roy
@@ -23,6 +22,10 @@ import org.joda.time.DateTimeZone;
  * @since    17-04-23
  *
  * @see DialogFragment
+ *
+ * @see <a href="https://developer.android.com/guide/topics/ui/controls/pickers.html"
+ *      target="_blank">
+ *      Source : Les Pickers d'Android</a>
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
   private static final String TAG = DatePickerFragment.class.getName();
@@ -30,12 +33,17 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
   /**
    * Exécuté à la création du {@link DialogFragment}
    *
-   * Vérifie si un argment de date a été envoyé.
-   *  Si oui, c'est cette date qui est affichée
-   *  Sinon,  c'est la date actuelle
+   * <ul>
+   *  <li>Vérifie si un argment de date a été envoyé.
+   *    <ul>
+   *      <li>Si oui, c'est cette date qui est affichée</li>
+   *      <li>Sinon,  c'est la date actuelle</li>
+   *    </ul>
+   *  </li>
+   * </ul>
    *
-   * @param savedInstanceState  {@link Bundle} pouvant contenir des données
-   * @return                    Un nouveau {@link DatePickerDialog} avec la bonne date
+   * @param   savedInstanceState  {@link Bundle} pouvant contenir des données
+   * @return  Un nouveau {@link DatePickerDialog} avec la bonne date
    */
   @Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -69,7 +77,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
    * Retourne une nouvelle instance de {@link DatePickerFragment}
    *
    * @param  date Date à afficher dans le {@link DatePickerFragment}, en millisecondes
-   * @return      Nouvelle instance de {@link DatePickerFragment}, avec date en argument de {@link Bundle}
+   * @return Nouvelle instance de {@link DatePickerFragment}, avec date en argument de {@link Bundle}
    *
    * @see Bundle
    */
@@ -86,10 +94,10 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
   /**
    * Modifie la date sur l'{@link android.app.Activity}
    *
-   * @param view  {@link android.view.View} qui a changé la date
-   * @param annee                           int de l'année de la date
-   * @param mois                            int du mois de la date
-   * @param jour                            int de la journée de la date
+   * @param view    {@link android.view.View} qui a changé la date
+   * @param annee   int de l'année de la date
+   * @param mois    int du mois de la date
+   * @param jour    int de la journée de la date
    *
    * @see android.app.DatePickerDialog.OnDateSetListener
    * @see OnTacheDateChangeListener
