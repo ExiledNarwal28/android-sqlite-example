@@ -46,13 +46,13 @@
   <string name="pref_toasts">Avertissements Toasts</string>
   <string name="pref_toasts_resume">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>
   <string name="pref_toasts_frequence">Fréquence</string>
-  <string name="pref_toasts_frequence_resume">Attendre %s entre les Toasts</string>
+  <string name="pref_toasts_frequence_resume">Temps entre les Toasts : %s</string>
   <string name="pref_toasts_laps_temps">Laps de temps</string>
-  <string name="pref_toasts_laps_temps_resume">Vérification des tâches à faire pour %s</string>
+  <string name="pref_toasts_laps_temps_resume">Laps de temps pour calculer le nombre de Toasts : %s</string>
   <string name="pref_toasts_urgence">Niveau d\'urgence</string>
-  <string name="pref_toasts_urgence_resume">Affiche les tâches avec un niveau d\'urgence %s ou supérieur</string>
+  <string name="pref_toasts_urgence_resume">Affiche les tâches avec un niveau d\'urgence : %s ou supérieur</string>
   <string name="pref_langue">Langue</string>
-  <string name="pref_langue_resume">Langue générale de l\'application</string>
+  <string name="pref_langue_resume">Langue générale de l\'application : %s</string>
 
   <string-array name="pref_toasts_frequence_noms">
     <item>Une journée</item>

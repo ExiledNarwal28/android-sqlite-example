@@ -100,10 +100,8 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   private void initUI() {
     setContentView(R.layout.activity_principale);
 
-    TachesListeFragment tachesListeFragment = new TachesListeFragment();
-
     // Met le fragment d'une liste (ou n'importe quel autre fragment) dans un conteneur à cet effet.
-    getFragmentManager().beginTransaction().add(R.id.fragment_container, tachesListeFragment).commit();
+    getFragmentManager().beginTransaction().add(R.id.fragment_container, new TachesListeFragment()).commit();
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     toolbar.setTitle("");

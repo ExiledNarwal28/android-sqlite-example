@@ -43,7 +43,7 @@
     android:text="@string/tache_urgence"
     android:ems="10"
     android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-    android:entries="@array/task_filters_urgencies_edit"/>
+    android:entries="@array/tache_filtre_urgences_modifier"/>
 
   <EditText
     android:id="@+id/et_tache_description"

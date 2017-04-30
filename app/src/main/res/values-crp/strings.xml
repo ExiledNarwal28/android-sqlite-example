@@ -46,15 +46,15 @@
   <string name="pref_toasts">Avètisman Toasts</string>
   <string name="pref_toasts_resume">Pèmèt oswa ou pa popup ki gen rapò nimewo a nan travay yo fè</string>
   <string name="pref_toasts_frequence">Frekans</string>
-  <string name="pref_toasts_frequence_resume">Frekans ant popup</string>
+  <string name="pref_toasts_frequence_resume">Frekans ant popup : %s</string>
   <string name="pref_toasts_laps_temps">Tan</string>
-  <string name="pref_toasts_laps_temps_resume">Tan nan ki chèk nimewo a nan travay yo fè</string>
-  <string name="pref_toasts_urgence">Enpòtans</string>
-  <string name="pref_toasts_urgence_resume">Enpòtans obligatwa pou travay konte</string>
+  <string name="pref_toasts_laps_temps_resume">Tan nan ki chèk nimewo a nan travay yo fè : %s</string>
+  <string name="pref_toasts_urgence">Enprtans</string>
+  <string name="pref_toasts_urgence_resume">Enpòtans obligatwa pou travay konte : %s</string>
   <string name="pref_langue">Lang</string>
-  <string name="pref_langue_resume">Jeneral ak lang aplikasyon</string>
+  <string name="pref_langue_resume">Jeneral ak lang aplikasyon : %s</string>
 
-  <string-array name="pref_toasts_frequency_names">
+  <string-array name="pref_toasts_frequence_noms">
     <item>Yon jou</item>
     <item>Yon sèl è</item>
     <item>Mwatye yon èdtan</item>
@@ -63,7 +63,7 @@
     <item>Trant segonn</item>
     <item>Tout tan tout tan</item>
   </string-array>
-  <string-array name="pref_toasts_frequency_values">
+  <string-array name="pref_toasts_frequence_valeurs">
     <item>86400</item>
     <item>3600</item>
     <item>1800</item>
@@ -72,65 +72,65 @@
     <item>30</item>
     <item>0</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_names">
+  <string-array name="pref_toasts_laps_temps_noms">
     <item>Jodi a</item>
     <item>Semèn sa a</item>
     <item>Mwa sa a</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_values">
+  <string-array name="pref_toasts_laps_temps_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_names">
+  <string-array name="pref_toasts_urgence_noms">
     <item>Ba</item>
     <item>Mwayen</item>
     <item>Segondè</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_values">
+  <string-array name="pref_toasts_urgence_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_language_names">
+  <string-array name="pref_langue_noms">
     <item>Franse</item>
     <item>Angle</item>
     <item>Kreyòl</item>
   </string-array>
-  <string-array name="pref_language_values">
+  <string-array name="pref_langue_valeurs">
     <item>fr</item>
     <item>en</item>
     <item>crp</item>
   </string-array>
 
   <string name="titre_taches_liste">Lis travay</string>
-  <string name="aucune_tache">Ou pa oblije travay ... pou kounye a.</string>
+  <string name="aucune_tache">Ou pa oblije travay… pou kounye a.</string>
   <string name="tache_filtre_tous_les_employes">Tout anplwaye</string>
-  <string-array name="task_filters_filters">
+  <string-array name="tache_filtre_filtres">
     <item>Pa gen okenn filtè</item>
     <item>Dat</item>
     <item>Anplwaye</item>
     <item>Enpòtans</item>
     <item>Fini</item>
   </string-array>
-  <string-array name="task_filters_dates">
+  <string-array name="tache_filtre_dates">
     <item>Tout dat</item>
     <item>Jodi a</item>
     <item>Semèn sa a</item>
     <item>Mwa sa a</item>
   </string-array>
-  <string-array name="task_filters_urgencies">
+  <string-array name="tache_filtre_urgences">
     <item>Tout enpòtans</item>
     <item>Ba</item>
     <item>Mwayen</item>
     <item>Segondè</item>
   </string-array>
-  <string-array name="task_filters_completion">
+  <string-array name="tache_filtre_fait">
     <item>Tout travay</item>
     <item>Travay ranpli</item>
     <item>Travay nan pwogrè</item>
   </string-array>
-  <string-array name="task_filters_urgencies_edit">
+  <string-array name="tache_filtre_urgences_modifier">
     <item>Ba</item>
     <item>Mwayen</item>
     <item>Segondè</item>

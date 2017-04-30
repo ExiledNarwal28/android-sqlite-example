@@ -46,15 +46,15 @@
   <string name="pref_toasts">Toast notifications</string>
   <string name="pref_toasts_resume">Activate or deactivate Toast notifications concerning the amount of tasks to do</string>
   <string name="pref_toasts_frequence">Frequency</string>
-  <string name="pref_toasts_frequence_resume">Frequency between Toast notifications</string>
+  <string name="pref_toasts_frequence_resume">Frequency between Toast notifications : %s</string>
   <string name="pref_toasts_laps_temps">Timespan</string>
-  <string name="pref_toasts_laps_temps_resume">Timespan in which we check the amount of tasks to do</string>
+  <string name="pref_toasts_laps_temps_resume">Timespan in which we check the amount of tasks to do : %s</string>
   <string name="pref_toasts_urgence">Urgency level</string>
-  <string name="pref_toasts_urgence_resume">Urgency level required to count tasks</string>
+  <string name="pref_toasts_urgence_resume">Urgency level required to count tasks : %s</string>
   <string name="pref_langue">Language</string>
-  <string name="pref_langue_resume">Application language</string>
+  <string name="pref_langue_resume">Application language : %s</string>
 
-  <string-array name="pref_toasts_frequency_names">
+  <string-array name="pref_toasts_frequence_noms">
     <item>A day</item>
     <item>An hour</item>
     <item>Half an hour</item>
@@ -63,7 +63,7 @@
     <item>Thirty seconds</item>
     <item>Never</item>
   </string-array>
-  <string-array name="pref_toasts_frequency_values">
+  <string-array name="pref_toasts_frequence_valeurs">
     <item>86400</item>
     <item>3600</item>
     <item>1800</item>
@@ -72,65 +72,65 @@
     <item>30</item>
     <item>0</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_names">
+  <string-array name="pref_toasts_laps_temps_noms">
     <item>Today</item>
     <item>This week</item>
     <item>This month</item>
   </string-array>
-  <string-array name="pref_toasts_timespan_values">
+  <string-array name="pref_toasts_laps_temps_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_names">
+  <string-array name="pref_toasts_urgence_noms">
     <item>Low</item>
     <item>Medium</item>
     <item>High</item>
   </string-array>
-  <string-array name="pref_toasts_urgency_level_values">
+  <string-array name="pref_toasts_urgence_valeurs">
     <item>0</item>
     <item>1</item>
     <item>2</item>
   </string-array>
-  <string-array name="pref_language_names">
+  <string-array name="pref_langue_noms">
     <item>French</item>
     <item>English</item>
     <item>Creole</item>
   </string-array>
-  <string-array name="pref_language_values">
+  <string-array name="pref_langue_valeurs">
     <item>fr</item>
     <item>en</item>
     <item>crp</item>
   </string-array>
 
   <string name="titre_taches_liste">Tasks list</string>
-  <string name="aucune_tache">You have no task... for now.</string>
+  <string name="aucune_tache">You have no task… for now.</string>
   <string name="tache_filtre_tous_les_employes">All employees</string>
-  <string-array name="task_filters_filters">
+  <string-array name="tache_filtre_filtres">
     <item>No filter</item>
     <item>Date</item>
     <item>Employee</item>
     <item>Urgency level</item>
     <item>Completion</item>
   </string-array>
-  <string-array name="task_filters_dates">
+  <string-array name="tache_filtre_dates">
     <item>All dates</item>
     <item>Today</item>
     <item>This week</item>
     <item>This month</item>
   </string-array>
-  <string-array name="task_filters_urgencies">
+  <string-array name="tache_filtre_urgences">
     <item>All urgency levels</item>
     <item>Low</item>
     <item>Medium</item>
     <item>High</item>
   </string-array>
-  <string-array name="task_filters_completion">
+  <string-array name="tache_filtre_fait">
     <item>All tasks</item>
     <item>Non-completed tasks</item>
     <item>Completed tasks</item>
   </string-array>
-  <string-array name="task_filters_urgencies_edit">
+  <string-array name="tache_filtre_urgences_modifier">
     <item>Low</item>
     <item>Medium</item>
     <item>High</item>
