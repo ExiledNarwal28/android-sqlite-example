@@ -27,7 +27,9 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
  * @see Tache
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  *
  * @author  Fabien Roy
  * @version 1.0
@@ -52,8 +54,10 @@ public class TacheActivity extends Activity {
   /**
    * Exécuté à la création de l'activité
    *
-   * Instancie l'interface
-   * Va chercher les données de la tâche
+   * <ul>
+   *   <li>Instancie l'interface</li>
+   *   <li>Va chercher les données de la tâche</li>
+   * </ul>
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -79,10 +83,12 @@ public class TacheActivity extends Activity {
   /**
    * Initialisation de l'interface
    *
-   * Ajoute le bon layout
-   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
-   * Instancie les Views
-   * Ajoute les Listeners
+   * <ul>
+   *   <li>Ajoute le bon layout</li>
+   *   <li>Met le bon texte et la bonne couleur dans la {@link Toolbar}</li>
+   *   <li>Instancie les {@link View}</li>
+   *   <li>Ajoute les Listeners</li>
+   * </ul>
    */
   private void initUI() {
     setContentView(R.layout.activity_tache);
@@ -115,10 +121,12 @@ public class TacheActivity extends Activity {
   }
 
   /**
-   *  Envoie les données pour supprimer l'Employé
+   * Envoie les données pour supprimer l'Employé
    *
-   * Supprimer la tâche de la base de données
-   * Termine l'activité
+   * <ul>
+   *   <li>Supprime la tâche de la base de données</li>
+   *   <li>Termine l'activité</li>
+   * </ul>
    *
    * @see TodoContentProvider
    */
@@ -131,9 +139,12 @@ public class TacheActivity extends Activity {
   /**
    * Rempli les Views des données
    *
-   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
-   * Construit le {@link Cursor}
-   * Remplit les Views (voir le nom de l'employé, on a besoin d'un deuxième {@link Cursor})
+   * <ul>
+   *   <li>Construit un tableau de String, c'est le SELECT du {@link Cursor}</li>
+   *   <li>Construit le {@link Cursor}</li>
+   *   <li>Remplit les {@link View} (voir le nom de l'employé, on a besoin d'un deuxième
+   *   {@link Cursor})</li>
+   * </ul>
    *
    * @param tacheUri l'Uri vers l'employé à modifier
    *
@@ -208,8 +219,8 @@ public class TacheActivity extends Activity {
   /**
    * Ajout des options de menus appropriées
    *
-   * @param menu  Le {@link Menu}
-   * @return      Booléen signifiant la réussite de l'opération
+   * @param   menu  Le {@link Menu}
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -220,8 +231,8 @@ public class TacheActivity extends Activity {
   /**
    * Fait les actions appropriées lorsqu'on clique dans le menu
    *
-   * @param item Le {@link MenuItem} sélectionné
-   * @return     Booléen signifiant la réussite de l'opération
+   * @param   item Le {@link MenuItem} sélectionné
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {

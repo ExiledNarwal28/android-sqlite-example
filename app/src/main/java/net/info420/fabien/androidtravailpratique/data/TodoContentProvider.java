@@ -234,13 +234,12 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Modification dans la base de données
    *
-   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
-   * Modifie l'item ou les items dans la base de données
+   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul), modifie l'item ou les items dans la base de données
    *
-   * @param uri           Uri envoyé pour la modification
-   * @param selection     Le WHERE          (ex. : "_id =?")
-   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
-   * @return              Le nombre de rangée modifiées
+   * @param  uri Uri envoyé pour la modification
+   * @param  selection Le WHERE          (ex. : "_id =?")
+   * @param  selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @return Le nombre de rangée modifiées
    *
    * @see SQLiteDatabase
    */

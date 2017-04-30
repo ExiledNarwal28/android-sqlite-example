@@ -38,7 +38,9 @@ import java.util.Map;
  * @see TodoContentProvider
  * @see OnTacheDateChangeListener
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  *
  * @author  Fabien Roy
  * @version 1.0
@@ -70,8 +72,10 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Exécuté à la création de l'activité
    *
-   * Instancie l'interface
-   * Va chercher les données de tâche
+   * <ul>
+   *   <li>Instancie l'interface</li>
+   *   <li>Va chercher les données de tâche</li>
+   * </ul>
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -98,13 +102,17 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Initialisation de l'interface
    *
-   * Ajoute le bon layout
-   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
-   * Instancie les Views
-   * Remplie le Spinner des employés avec les noms des employés
-   * Ajoute les Listeners
+   * <ul>
+   *   <li>Ajoute le bon layout</li>
+   *   <li>Met le bon texte et la bonne couleur dans la {@link Toolbar}</li>
+   *   <li>Instancie les Views</li>
+   *   <li>Rempli le Spinner des employés avec les noms des employés</li>
+   *   <li>Ajoute les Listeners</li>
+   * </ul>
    *
-   * {@link <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720">Ajout d'items à un Spinner</a>}
+   * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
+   *      target="_blank">
+   *      Ajout d'items à un Spinner</a>
    */
   private void initUI() {
     setContentView(R.layout.activity_modifier_tache);
@@ -174,11 +182,13 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Envoie les données pour modifier la Tâche
    *
-   * Va chercher les valeurs dans les Views
-   * Vérifie si tous les champs obligatoires sont là
-   * Ajoute les valeurs dans une liste de valeurs
-   * Met à jour la tâche
-   * Termine l'activité
+   * <ul>
+   *   <li>Va chercher les valeurs dans les Views</li>
+   *   <li>Vérifie si tous les champs obligatoires sont là</li>
+   *   <li>Ajoute les valeurs dans une liste de valeurs</li>
+   *   <li>Met à jour la tâche</li>
+   *   <li>Termine l'activité</li>
+   * </ul>
    *
    * @see TodoContentProvider
    */
@@ -220,9 +230,11 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Rempli les Views des données
    *
-   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
-   * Construit le {@link Cursor}
-   * Remplit les Views
+   * <ul>
+   *   <li>Construit un tableau de String, c'est le SELECT du {@link Cursor}</li>
+   *   <li>Construit le {@link Cursor}</li>
+   *   <li>Rempli les {@link View}</li>
+   * </ul>
    *
    * @param tacheUri l'Uri vers la tâche à modifier
    */
@@ -262,7 +274,10 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Modification de la variable de date de la tache
    *
-   * Modifie la date, puis appelle onTacheDateChange
+   * <ul>
+   *   <li>Modifie la date</li>
+   *   <li>Appelle onTacheDateChange</li>
+   * </ul>
    *
    * @see OnTacheDateChangeListener
    *
@@ -297,8 +312,8 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Ajout des options de menus appropriées
    *
-   * @param menu  Le {@link Menu}
-   * @return      Booléen signifiant la réussite de l'opération
+   * @param   menu  Le {@link Menu}
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -309,8 +324,8 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   /**
    * Fait les actions appropriées lorsqu'on clique dans le menu
    *
-   * @param item Le {@link MenuItem} sélectionné
-   * @return     Booléen signifiant la réussite de l'opération
+   * @param   item Le {@link MenuItem} sélectionné
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {

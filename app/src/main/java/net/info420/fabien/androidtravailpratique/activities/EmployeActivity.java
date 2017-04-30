@@ -34,7 +34,9 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
  * @see Employe
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *      target="_blank">
+ *      Source : SQLite</a>
  *
  * @author  Fabien Roy
  * @version 1.0
@@ -60,8 +62,10 @@ public class EmployeActivity extends Activity {
   /**
    * Exécuté à la création de l'activité
    *
-   * Instancie l'interface
-   * Va chercher les données d'Employé
+   * <ul>
+   *   <li>Instancie l'interface</li>
+   *   <li>Va chercher les données d'Employé</li>
+   * </ul>
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -87,10 +91,12 @@ public class EmployeActivity extends Activity {
   /**
    * Initialisation de l'interface
    *
-   * Ajoute le bon layout
-   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
-   * Instancie les Views
-   * Ajoute les Listeners
+   * <ul>
+   *   <li>Ajoute le bon layout</li>
+   *   <li>Met le bon texte et la bonne couleur dans la {@link Toolbar}</li>
+   *   <li>Instancie les Views</li>
+   *   <li>Ajoute les Listeners</li>
+   * </ul>
    */
   private void initUI() {
     setContentView(R.layout.activity_employe);
@@ -127,15 +133,21 @@ public class EmployeActivity extends Activity {
   /**
    *  Envoie les données pour supprimer l'Employé
    *
-   * Supprimer l'employé de la base de données
-   * Enlève l'employé des tâches qui lui sont assignées
-   * Termine l'activité
+   * <ul>
+   *   <li>ime l'employé de la base de données</li>
+   *   <li>e l'employé des tâches qui lui sont assignées</li>
+   *   <li>Termine l'activité</li>
+   * </ul>
    *
    * @see Tache
    * @see TodoContentProvider
    *
-   * {@link <a href="http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval">Ajouter une valeur nulle</a>}
-   * {@link <a href="https://developer.android.com/guide/topics/providers/content-provider-basics.html">Mettre à jour des items</a>}
+   * @see <a href="http://stackoverflow.com/questions/6234171/how-do-i-update-an-android-sqlite-database-column-value-to-null-using-contentval"
+   *      target="_blank">
+   *      Source : Ajouter une valeur nulle</a>
+   * @see <a href="https://developer.android.com/guide/topics/providers/content-provider-basics.html"
+   *      target="_blank">
+   *      Source : Mettre à jour des items</a>
    */
   private void supprimerEmploye() {
     getContentResolver().delete(employeUri, null, null); // Suppression de l'employé
@@ -162,9 +174,11 @@ public class EmployeActivity extends Activity {
   /**
    * Rempli les EditTexts des données
    *
-   * Construit un tableau de String, c'est le SELECT du {@link Cursor}
-   * Construit le {@link Cursor}
-   * Remplit les EditTexts
+   * <ul>
+   *   <li>Construit un tableau de String, c'est le SELECT du {@link Cursor}</li>
+   *   <li>Construit le {@link Cursor}</li>
+   *   <li>Rempli les EditTexts</li>
+   * </ul>
    *
    * @param employeUri l'Uri vers l'employé à modifier
    */
@@ -198,17 +212,24 @@ public class EmployeActivity extends Activity {
   /**
    * Envoie un SMS à l'employé à l'aide de son numéro de téléphone
    *
-   * Vérifie si le numéro de téléphone est valide et si la permission est accordée
-   * Construit un {@link AlertDialog} contenant l'EditText pour le message
-   * Ajoute les Listeners de réponse au {@link AlertDialog} (si l'utilisateur accepter, envoie le SMS)
-   * Affiche l'{@link AlertDialog}
+   * <ul>
+   *   <li>Vérifie si le numéro de téléphone est valide et si la permission est accordée</li>
+   *   <li>Construit un {@link AlertDialog} contenant l'EditText pour le message</li>
+   *   <li>Ajoute les Listeners de réponse au {@link AlertDialog} (si l'utilisateur accepter, envoie
+   *   le SMS)</li>
+   *   <li>Affiche l'{@link AlertDialog}</li>
+   * </ul>
    *
    * @see AlertDialog
    * @see SmsManager
    * @see PendingIntent
    *
-   * {@link <a href="http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271">Mettre un EditText dans un Dialog</a>}
-   * {@link <a href="http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working">Faire fonctionner l'envoie de SMS</a>}
+   * @see <a href="http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271"
+   *      target="_blank">
+   *      Source : Mettre un EditText dans un Dialog</a>
+   * @see <a href="http://stackoverflow.com/questions/10752394/smsmanager-sendtextmessage-is-not-working"
+   *      target="_blank">
+   *      Source : Faire fonctionner l'envoie de SMS</a>
    */
   private void envoyerSMS() {
     if ((employeTelephone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
@@ -258,14 +279,19 @@ public class EmployeActivity extends Activity {
   /**
    * Appele l'employé
    *
-   * Vérifie si le numéro de téléphone est valide et si la permission est accordée
-   * Appele l'employé avec un nouveau {@link Intent}
-   * Pour appeler, il suffit d'ajouter "tel:" au {@link Uri} et d'ajouter Intent.ACTION_CALL à l'{@link Intent}
+   * <ul>
+   *   <li>Vérifie si le numéro de téléphone est valide et si la permission est accordée</li>
+   *   <li>Appelle l'employé avec un nouveau {@link Intent}</li>
+   *   <li>Pour appeler, il suffit d'ajouter "tel:" au {@link Uri} et d'ajouter Intent.ACTION_CALL
+   *   à l'{@link Intent}</li>
+   * </ul>
    *
    * @see Uri
    * @see Intent
    *
-   * {@link <a href="http://stackoverflow.com/questions/5230912/android-app-to-call-a-number-on-button-click">Appeler un numéro</a>}
+   * @see <a href="http://stackoverflow.com/questions/5230912/android-app-to-call-a-number-on-button-click"
+   *      target="_blank">
+   *      Source : Appeler un numéro</a>
    */
   private void appeler() {
     // On vérifie qu'il y a bien un numéro de téléphone
@@ -290,8 +316,8 @@ public class EmployeActivity extends Activity {
   /**
    * Ajout des options de menus appropriées
    *
-   * @param menu  Le {@link Menu}
-   * @return      Booléen signifiant la réussite de l'opération
+   * @param   menu  Le {@link Menu}
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -302,8 +328,8 @@ public class EmployeActivity extends Activity {
   /**
    * Fait les actions appropriées lorsqu'on clique dans le menu
    *
-   * @param item Le {@link MenuItem} sélectionné
-   * @return     Booléen signifiant la réussite de l'opération
+   * @param   item Le {@link MenuItem} sélectionné
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {

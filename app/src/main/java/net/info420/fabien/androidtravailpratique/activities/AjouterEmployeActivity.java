@@ -26,7 +26,9 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
  * @see FragmentActivity
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html">Source SQLite</a>}
+ * @see   <a href="http://www.vogella.com/tutorials/AndroidSQLite/article.html"
+ *        target="_blank">
+ *        Source : SQLite</a>
  *
  * @author  Fabien Roy
  * @version 1.0
@@ -45,7 +47,9 @@ public class AjouterEmployeActivity extends FragmentActivity {
   /**
    * Exécuté à la création de l'activité
    *
-   * Instancie l'interface
+   * <ul>
+   *   <li>Instancie l'interface</li>
+   * </ul>
    *
    * @param savedInstanceState {@link Bundle} pouvant contenir des données
    */
@@ -59,10 +63,11 @@ public class AjouterEmployeActivity extends FragmentActivity {
   /**
    * Initialisation de l'interface
    *
-   * Ajoute le bon layout
-   * Met le bon texte et la bonne couleur dans la {@link Toolbar}
-   * Instancie les Views
-   * Ajoute les Listeners
+   * <ul>
+   *   <li>Ajoute le bon layout</li>
+   *   <li>Met le bon texte et la bonne couleur dans la {@link Toolbar}</li>
+   *   <li>Instancie les Views, ajoute les Listeners</li>
+   * </ul>
    */
   private void initUI() {
     setContentView(R.layout.activity_ajouter_employe);
@@ -92,16 +97,21 @@ public class AjouterEmployeActivity extends FragmentActivity {
   /**
    *  Envoie les données pour modifier l'Employé
    *
-   * Va chercher les textes dans les EditTexts
-   * Vérifie si tous les champs obligatoires sont là
-   * Ajoute les valeurs dans une liste de valeurs
-   * Ajoute l'employé
-   * Termine l'activité
+   * <ul>
+   *   <li>Va chercher les textes dans les {@link EditText}</li>
+   *   <li>ie si tous les champs obligatoires sont là</li>
+   *   <li>e les valeurs dans une liste de valeurs</li>
+   *   <li>e l'employé, termine l'activité</li>
+   * </ul>
    *
    * @see TodoContentProvider
    *
-   * {@link <a href="http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128">Validation du numéro de téléphone</a>}
-   * {@link <a href="http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext">Validation de l'adresse e-mail</a>}
+   * @see <a href="http://stackoverflow.com/questions/6358380/phone-number-validation-android#6359128"
+   *        target="_blank">
+   *        Source : Validation du numéro de téléphone</a>
+   * @see <a href="http://stackoverflow.com/questions/12947620/email-address-validation-in-android-on-edittext"
+   *        target="_blank">
+   *        Source : Validation de l'adresse e-mail</a>
    */
   public void ajouterEmploye() {
     String nom        = etEmployeeNom.getText().toString();
@@ -144,8 +154,8 @@ public class AjouterEmployeActivity extends FragmentActivity {
   /**
    * Ajout des options de menus appropriées
    *
-   * @param menu  Le {@link Menu}
-   * @return      Booléen signifiant la réussite de l'opération
+   * @param   menu  Le {@link Menu}
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,8 +166,8 @@ public class AjouterEmployeActivity extends FragmentActivity {
   /**
    * Change le fragment lorsqu'une option du menu est sélectionnée
    *
-   * @param item Le {@link MenuItem} sélectionné
-   * @return     Booléen signifiant la réussite de l'opération
+   * @param   item Le {@link MenuItem} sélectionné
+   * @return  Booléen signifiant la réussite de l'opération
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
