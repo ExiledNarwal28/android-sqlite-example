@@ -29,7 +29,9 @@ import java.util.HashSet;
  * @see DBHelper
  * @see ContentProvider
  *
- * {@link <a href="http://instinctcoder.com/android-studio-sqlite-database-example/">Base de données SQLite et Android</a>}
+ * @see <a href="http://instinctcoder.com/android-studio-sqlite-database-example/"
+ *      target="_blank">
+ *      Source : Base de données SQLite et Android</a>
  */
 public class TodoContentProvider extends ContentProvider {
   private final static String TAG = TodoContentProvider.class.getName();
@@ -67,7 +69,9 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Exécuté à la création
    *
-   * Instancie le {@link DBHelper}
+   * <ul>
+   *  <li>Instancie le {@link DBHelper}</li>
+   * </ul>
    *
    * @return un boolean
    */
@@ -81,18 +85,20 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Sélection dans la base de données
    *
-   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
-   * Vérifie si les colonnes de la projection sont valides
-   * Choisit la table du {@link SQLiteQueryBuilder}
-   * Si on choisit une seule tâche/un seul employé, sélectionne l'item spécifique
-   * Exécute le SELECT
+   * <ul>
+   *  <li>Vérifie l'Uri (tache/employé et tout sélectionné/un seul)</li>
+   *  <li>Vérifie si les colonnes de la projection sont valides</li>
+   *  <li>Choisit la table du {@link SQLiteQueryBuilder}</li>
+   *  <li>Si on choisit une seule tâche/un seul employé, sélectionne l'item spécifique</li>
+   *  <li>Exécute le SELECT</li>
+   * </ul>
    *
-   * @param uri           Uri envoyé pour la sélection
-   * @param projection    Le SELECT         (ex. : "_id, date, employe_assigne")
-   * @param selection     Le WHERE          (ex. : "_id =?")
-   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
-   * @param sortOrder     Le ORDER BY       (ex. : "date ASC")
-   * @return              Le {@link Cursor} du SELECT
+   * @param   uri           Uri envoyé pour la sélection
+   * @param   projection    Le SELECT         (ex. : "_id, date, employe_assigne")
+   * @param   selection     Le WHERE          (ex. : "_id =?")
+   * @param   selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @param   sortOrder     Le ORDER BY       (ex. : "date ASC")
+   * @return  Le {@link Cursor} du SELECT
    *
    * @see Cursor
    * @see SQLiteQueryBuilder
@@ -147,13 +153,15 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Ajout dans la base de données
    *
-   * Vérifie l'Uri (tache/employé)
-   * Exécute le INSERT dans la bonne table
-   * Notifie les Listeners
+   * <ul>
+   *  <li>Vérifie l'Uri (tache/employé)</li>
+   *  <li>Exécute le INSERT dans la bonne table</li>
+   *  <li>Notifie les Listeners</li>
+   * </ul>
    *
-   * @param uri    Uri envoyé pour l'ajout
-   * @param values Valeurs à ajouter dans la base de données
-   * @return       L'{@link Uri} du INSERT
+   * @param   uri    Uri envoyé pour l'ajout
+   * @param   values Valeurs à ajouter dans la base de données
+   * @return  L'{@link Uri} du INSERT
    *
    * @see SQLiteDatabase
    */
@@ -183,13 +191,15 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Suppression dans la base de données
    *
-   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul)
-   * Supprime l'item ou les items dans la base de données
+   * <ul>
+   *  <li>Vérifie l'Uri (tache/employé et tout sélectionné/un seul)</li>
+   *  <li>Supprime l'item ou les items dans la base de données</li>
+   * </ul>
    *
-   * @param uri           Uri envoyé pour la suppression
-   * @param selection     Le WHERE          (ex. : "_id =?")
-   * @param selectionArgs Les "?" du WHERE  (ex. : { "1" })
-   * @return              Le nombre de rangée supprimées
+   * @param   uri           Uri envoyé pour la suppression
+   * @param   selection     Le WHERE          (ex. : "_id =?")
+   * @param   selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @return  Le nombre de rangée supprimées
    *
    * @see SQLiteDatabase
    */
@@ -234,7 +244,10 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Modification dans la base de données
    *
-   * Vérifie l'Uri (tache/employé et tout sélectionné/un seul), modifie l'item ou les items dans la base de données
+   * <ul>
+   *  <li>Vérifie l'Uri (tache/employé et tout sélectionné/un seul), modifie l'item ou les items
+   *  dans la base de données</li>
+   * </ul>
    *
    * @param  uri Uri envoyé pour la modification
    * @param  selection Le WHERE          (ex. : "_id =?")
@@ -284,8 +297,8 @@ public class TodoContentProvider extends ContentProvider {
   /**
    * Retourne le type d'un {@link Uri}
    *
-   * @param uri {@link Uri} à vérifier le type
-   * @return    String du type de l'Uri
+   * @param   uri {@link Uri} à vérifier le type
+   * @return  String du type de l'Uri
    */
   @Override
   public String getType(@NonNull Uri uri) {

@@ -22,7 +22,9 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
  * @see net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment
  * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidListView/article.html">Les ListViews et Android</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidListView/article.html"
+ *      target="_blank">
+ *      Source : Les ListViews et Android</a>
  */
 public class EmployeAdapter extends SimpleCursorAdapter {
   private final String TAG = EmployeAdapter.class.getName();
@@ -38,8 +40,10 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   /**
    * Constructeur d'{@link EmployeAdapter}
    *
-   * Envoie les paramètres à {@link SimpleCursorAdapter}
-   * Instancie le {@link LayoutInflater}
+   * <ul>
+   *  <li>Envoie les paramètres à {@link SimpleCursorAdapter}</li>
+   *  <li>Instancie le {@link LayoutInflater}</li>
+   * </ul>
    *
    * @param context {@link Context} où afficher l'{@link EmployeAdapter}
    * @param layout  Id du {@link android.text.Layout} à utiliser
@@ -59,7 +63,9 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   /**
    * Exécuter lors de la création d'un nouveau {@link View}
    *
-   * Retourne le {@link LayoutInflater} avec le bon {@link android.text.Layout}
+   * <ul>
+   *  <li>Retourne le {@link LayoutInflater} avec le bon {@link android.text.Layout}</li>
+   * </ul>
    *
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
    * @param cursor    {@link Cursor} de la sélection
@@ -74,9 +80,11 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   /**
    * Exécuter lors de l'association de champs de base de données à un {@link View}
    *
-   * Instancie les {@link View}
-   * Ajoute les informations aux champs
-   * Mets les bons tags au viewHolder
+   * <ul>
+   *  <li>Instancie les {@link View}</li>
+   *  <li>Ajoute les informations aux champs</li>
+   *  <li>Mets les bons tags au viewHolder</li>
+   * </ul>
    *
    * @param view      {@link View} qui est bindée
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}

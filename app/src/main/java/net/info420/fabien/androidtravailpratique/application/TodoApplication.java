@@ -109,7 +109,7 @@ import org.joda.time.DateTime;
 /**
  * L'application de base
  *
- * Cette classe est le point d'entrée dans l'application Android.
+ * <p>Cette classe est le point d'entrée dans l'application Android.
  * Elle contient des variables utilisées partout dans l'application.
  *
  * @author  Fabien Roy

@@ -27,7 +27,9 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
  * @see net.info420.fabien.androidtravailpratique.fragments.TachesListeFragment
  * @see TodoContentProvider
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidListView/article.html">Les ListViews et Android</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidListView/article.html"
+ *      target="_blank">
+ *      Source : Les ListViews et Android</a>
  */
 public class TacheAdapter extends SimpleCursorAdapter {
   private final String TAG = TacheAdapter.class.getName();
@@ -46,8 +48,10 @@ public class TacheAdapter extends SimpleCursorAdapter {
   /**
    * Constructeur d'{@link TacheAdapter}
    *
-   * Envoie les paramètres à {@link SimpleCursorAdapter}
-   * Instancie le {@link LayoutInflater}
+   * <ul>
+   *  <li>Envoie les paramètres à {@link SimpleCursorAdapter}</li>
+   *  <li>Instancie le {@link LayoutInflater}</li>
+   * </ul>
    *
    * @param context {@link Context} où afficher l'{@link TacheAdapter}
    * @param layout  Id du {@link android.text.Layout} à utiliser
@@ -67,7 +71,9 @@ public class TacheAdapter extends SimpleCursorAdapter {
   /**
    * Exécuter lors de la création d'un nouveau {@link View}
    *
-   * Retourne le {@link LayoutInflater} avec le bon {@link android.text.Layout}
+   * <ul>
+   *  <li>Retourne le {@link LayoutInflater} avec le bon {@link android.text.Layout}</li>
+   * </ul>
    *
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
    * @param cursor    {@link Cursor} de la sélection
@@ -82,11 +88,13 @@ public class TacheAdapter extends SimpleCursorAdapter {
   /**
    * Exécuter lors de l'association de champs de base de données à un {@link View}
    *
-   * Instancie les {@link View}
-   * Ajoute les informations aux champs
-   * Ajoute le nom de l'employé (doit faire une requête séparée)
-   * Ajoute les Listeners
-   * Mets les bons tags au viewHolder
+   * <ul>
+   *  <li>Instancie les {@link View}</li>
+   *  <li>Ajoute les informations aux champs</li>
+   *  <li>Ajoute le nom de l'employé (doit faire une requête séparée)</li>
+   *  <li>Ajoute les Listeners</li>
+   *  <li>Mets les bons tags au viewHolder</li>
+   * </ul>
    *
    * @param view      {@link View} qui est bindée
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}

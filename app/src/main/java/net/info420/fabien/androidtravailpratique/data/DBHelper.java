@@ -21,7 +21,9 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
  * @see TodoContentProvider
  * @see SQLiteOpenHelper
  *
- * {@link <a href="http://instinctcoder.com/android-studio-sqlite-database-example/">Base de données SQLite et Android</a>}
+ * @see <a href="http://instinctcoder.com/android-studio-sqlite-database-example/"
+ *      target="_blank">
+ *      Source : Base de données SQLite et Android</a>
  */
 public class DBHelper  extends SQLiteOpenHelper {
   // Version de la base de donnée, qui doit être augmenté à chaque changement dans les tables
@@ -42,7 +44,9 @@ public class DBHelper  extends SQLiteOpenHelper {
   /**
    * Crée la base de données
    *
-   * Crée les tables d'employés et de taĉhes
+   * <ul>
+   *  <li>Crée les tables d'employés et de taĉhes</li>
+   * </ul>
    *
    * @param db  Base de données à créer
    */
@@ -85,8 +89,10 @@ public class DBHelper  extends SQLiteOpenHelper {
   /**
    * Recrée la base de données
    *
-   * Drop les tables
-   * Crée la base de données
+   * <ul>
+   *  <li>Drop les tables</li>
+   *  <li>Crée la base de données</li>
+   * </ul>
    *
    * @param db Base de données à recréer
    */
