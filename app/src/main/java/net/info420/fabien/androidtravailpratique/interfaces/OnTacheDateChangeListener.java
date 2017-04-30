@@ -1,11 +1,8 @@
 package net.info420.fabien.androidtravailpratique.interfaces;
 
 /**
- * Created by fabien on 17-04-23.
- */
-
-/**
- * Interface servant aux {@link android.app.Activity} qui ont un {@link net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment}
+ * Interface servant aux {@link android.app.Activity} qui ont un
+ * {@link net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment}
  *
  * @author  Fabien Roy
  * @version 1.0

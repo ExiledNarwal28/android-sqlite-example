@@ -16,7 +16,9 @@ import net.info420.fabien.androidtravailpratique.R;
  *
  * @see TempsService
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidServices/article.html">Services d'Android</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidServices/article.html"
+ *      target="_blank">
+ *      Source : Services d'Android</a>}
  */
 public class TempsReceiver extends BroadcastReceiver {
   private final static String TAG = TempsReceiver.class.getName();
@@ -24,7 +26,9 @@ public class TempsReceiver extends BroadcastReceiver {
   /**
    * Affiche un {@link Toast} en fonction des extras dans le {@link android.os.Bundle}
    *
-   * Vérifie le nombre de tâche afin de mettre un texte représentatif
+   * <ul>
+   *  <li>Vérifie le nombre de tâche afin de mettre un texte représentatif</li>
+   * </ul>
    *
    * @param context  {@link Context} pour afficher le {@link Toast}
    * @param intent    {@link Intent} contenant le {@link android.os.Bundle}

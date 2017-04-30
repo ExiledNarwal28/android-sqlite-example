@@ -10,7 +10,9 @@ package net.info420.fabien.androidtravailpratique.models;
  * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
  * @see net.info420.fabien.androidtravailpratique.data.DBHelper
  *
- * {@link <a href="http://instinctcoder.com/android-studio-sqlite-database-example/">Base de données SQLite et Android</a>}
+ * @see <a href="http://instinctcoder.com/android-studio-sqlite-database-example/"
+ *      target="_blank">
+ *      Source : Base de données SQLite et Android</a>
  */
 public class Tache {
   // Nom de la table

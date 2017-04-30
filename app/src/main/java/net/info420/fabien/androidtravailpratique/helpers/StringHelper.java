@@ -16,9 +16,9 @@ public class StringHelper {
   /**
    * Méthode statique pour obtenir le nom d'un niveau d'urgence
    *
-   * @param urgence  Id du niveau d'urgence
-   * @param context Context pour appeler la méthode getString()
-   * @return         Le nom du niveau d'urgence, en fonction de la locale
+   * @param   urgence  Id du niveau d'urgence
+   * @param   context Context pour appeler la méthode getString()
+   * @return  Le nom du niveau d'urgence, en fonction de la locale
    */
   public static String getUrgence(int urgence, Context context) {
     switch (urgence) {

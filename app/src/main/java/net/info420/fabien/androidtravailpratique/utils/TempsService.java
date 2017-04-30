@@ -33,7 +33,9 @@ import java.util.TimerTask;
  * @see TempsReceiver
  * @see TodoApplication
  *
- * {@link <a href="http://www.vogella.com/tutorials/AndroidServices/article.html">Services d'Android</a>}
+ * @see <a href="http://www.vogella.com/tutorials/AndroidServices/article.html"
+ *      target="_blank">
+ *      Source : Services d'Android</a>
  */
 public class TempsService extends Service {
   public static final String TAG = TempsService.class.getName();
@@ -55,15 +57,16 @@ public class TempsService extends Service {
   /**
    * Commande exécuté au démarrage du {@link Service}
    *
-   * Va chercher les informations des préférences
-   * Crée un {@link Timer} avec un {@link TimerTask} qui envoie un broadcast à {@link TempsReceiver}
-   * Suite au {@link Timer}, redémarre le {@link Service}
+   * <ul>
+   *  <li>Va chercher les informations des préférences</li>
+   *  <li>Crée un {@link Timer} avec un {@link TimerTask} qui envoie un broadcast à {@link TempsReceiver}</li>
+   *  <li>Suite au {@link Timer}, redémarre le {@link Service}</li>
+   * </ul>
    *
-   * @param intent  {@link Intent} contenant le {@link android.os.Bundle}
-   * @param flags   Flags du {@link Service}
-   * @param startId Id du {@link Service}
-   *
-   * @return        Retourne un flag qui détermine le comportement du service
+   * @param   intent  {@link Intent} contenant le {@link android.os.Bundle}
+   * @param   flags   Flags du {@link Service}
+   * @param   startId Id du {@link Service}
+   * @return  boolean qui détermine le comportement du service
    */
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
@@ -87,9 +90,8 @@ public class TempsService extends Service {
   /**
    * S'exécute lorsque bindé
    *
-   * @param intent  {@link Intent} contenant le {@link android.os.Bundle}
-   *
-   * @return        {@link IBinder}
+   * @param   intent  {@link Intent} contenant le {@link android.os.Bundle}
+   * @return  {@link IBinder}
    */
   @Override
   public IBinder onBind(Intent intent) {
@@ -99,20 +101,27 @@ public class TempsService extends Service {
   /**
    * Va chercher les informations depuis les préférences
    *
-   * Place les informations des préférences dans les variables
-   * Construit la sélection en fonction des préférences
-   * Ajoute les textes en fonction des préférences
+   * <ul>
+   *  <li>Place les informations des préférences dans les variables</li>
+   *  <li>Construit la sélection en fonction des préférences</li>
+   *  <li>Ajoute les textes en fonction des préférences</li>
+   * </ul>
    *
-   * Infos à aller chercher : Booléen pour l'activation des toasts
-   *                          Laps de temps (aujourd'hui, semaine, mois)
-   *                          Niveau d'urgence minimum
-   *                          Fréquence des notifications
+   * <p>Infos à aller chercher : </p>
+   *
+   * <ul>
+   *  <li>Booléen pour l'activation des toasts</li>
+   *  <li>Laps de temps (aujourd'hui, semaine, mois)</li>
+   *  <li>Niveau d'urgence minimum</li>
+   *  <li>Fréquence des notifications</li>
+   * </ul>
    *
    * @see SharedPreferences
    * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
    *
-   * {@link <a href="http://stackoverflow.com/questions/21820031/getting-value-from-edittext-preference-in-preference-screen">
-   *   Aller chercher les données des préférences</a>}
+   * @see <a href="http://stackoverflow.com/questions/21820031/getting-value-from-edittext-preference-in-preference-screen"
+   *      target="_blank">
+   *      Source : Aller chercher les données des préférences</a>
    */
   private void getInfoFromPrefs() {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -177,8 +186,10 @@ public class TempsService extends Service {
   /**
    * Retourne le nombre de tâches en fonction du niveau d'urgence minimum et de la période de temps
    *
-   * Construit un {@link android.database.Cursor} avec la sélection
-   * Va chercher le nombre de rangée dans la sélection
+   * <ul>
+   *  <li>Construit un {@link android.database.Cursor} avec la sélection</li>
+   *  <li>Va chercher le nombre de rangée dans la sélection</li>
+   * </ul>
    *
    * @return le nombre de tâches, en fonction de la sélection
    *
@@ -200,8 +211,10 @@ public class TempsService extends Service {
   /**
    * {@link TimerTask} avec la commande à exécuté à chaque fréquence
    *
-   * Construit un {@link Intent} avec les informations des préférences
-   * Envoie un broadcast à {@link TempsReceiver}
+   * <ul>
+   *  <li>Construit un {@link Intent} avec les informations des préférences</li>
+   *  <li>Envoie un broadcast à {@link TempsReceiver}</li>
+   * </ul>
    *
    * @see TempsReceiver
    */

@@ -19,8 +19,12 @@ import java.util.Locale;
  * @see Configuration
  * @see Locale
  *
- * {@link <a href="http://gunhansancar.com/change-language-programmatically-in-android/">Changer la {@link Locale} de l'application</a>}
- * {@link <a href="http://stackoverflow.com/questions/43292013/how-can-i-change-language-of-whole-application-by-only-single-click/43292068">Changer la {@link Locale} de l'application, aussi</a>}
+ * @see <a href="http://gunhansancar.com/change-language-programmatically-in-android/"
+ *      target="_blank">
+ *      Source : Changer la {@link Locale} de l'application</a>
+ * @see <a href="http://stackoverflow.com/questions/43292013/how-can-i-change-language-of-whole-application-by-only-single-click/43292068"
+ *      target="_blank">
+ *      Source : Changer la {@link Locale} de l'application, aussi</a>}
  */
 public class LocaleHelper {
   private static final String TAG = LocaleHelper.class.getName();
@@ -28,9 +32,11 @@ public class LocaleHelper {
   /**
    * Méthode statique pour initialiser la {@link Locale} avec les {@link android.content.SharedPreferences}
    *
-   * Appele setLocale
-   * Si aucune {@link Locale} n'a été sélectionnée dans les {@link android.content.SharedPreferences},
-   * on utilise la {@link Locale} par défaut
+   * <ul>
+   *  <li>Appele setLocale</li>
+   *  <li>Si aucune {@link Locale} n'a été sélectionnée dans les {@link android.content.SharedPreferences},
+   *  on utilise la {@link Locale} par défaut</li>
+   * </ul>
    *
    * @param context {@link Context} pour appeler la méthode setLocale
    */
@@ -41,9 +47,9 @@ public class LocaleHelper {
   /**
    * Méthode statique publique pour modifier la {@link Locale} avec une langue spécifiée
    *
-   * @param context  {@link Context} pour appeler la méthode setLocale
-   * @param langue    String représentant la locale
-   * @return          boolean représentant la réussite de l'opération
+   * @param   context  {@link Context} pour appeler la méthode setLocale
+   * @param   langue    String représentant la locale
+   * @return  boolean représentant la réussite de l'opération
    */
   public static boolean setLocale(Context context, String langue) {
     return updateResources(context, langue);
@@ -52,9 +58,9 @@ public class LocaleHelper {
   /**
    * Méthode statique privée pour modifier la {@link Locale} avec une langue spécifiée
    *
-   * @param context  {@link Context} pour appeler la méthode setLocale
-   * @param langue    String représentant la locale
-   * @return          boolean représentant la réussite de l'opération
+   * @param   context  {@link Context} pour appeler la méthode setLocale
+   * @param   langue    String représentant la locale
+   * @return  boolean représentant la réussite de l'opération
    */
   private static boolean updateResources(Context context, String langue) {
     Locale locale = new Locale(langue);
