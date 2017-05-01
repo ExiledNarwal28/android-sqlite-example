@@ -22,7 +22,6 @@ import net.info420.fabien.androidtravailpratique.activities.TacheActivity;
 import net.info420.fabien.androidtravailpratique.adapters.TacheAdapter;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
-import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import org.joda.time.DateTimeConstants;
@@ -85,7 +84,6 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     final View view = inflater.inflate(R.layout.fragment_taches_liste, container, false);
 
     initUI(view);
-    setupEmployeAssigneUI();
 
     return view;
   }
@@ -136,9 +134,12 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * <ul>
    *  <li>Instancie les {@link View}</li>
    *  <li>Ajoute les Listeners</li>
+   *  <li>Ajoute la liste des employés au Spinner approprié</li>
    * </ul>
+   *
+   * @see EmployeHelper
    */
-  private void initUI (View view) {
+  private void initUI(View view) {
     spTacheFiltreFiltres  = (Spinner)               view.findViewById(R.id.sp_tache_filtre_filtres);
     spTacheFiltreDates    = (Spinner)               view.findViewById(R.id.sp_tache_filtre_dates);
     spTacheFiltreEmploye  = (Spinner)               view.findViewById(R.id.sp_tache_filtre_employe);
@@ -159,16 +160,9 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
         startActivity(new Intent(getContext(), AjouterTacheActivity.class));
       }
     });
-  }
 
-  /**
-   * Ajoute la liste des employés au Spinner approprié
-   *
-   * @see EmployeHelper
-   */
-  private void setupEmployeAssigneUI() {
     spTacheEmployeAssigneMap = new HashMap<>();
-    EmployeHelper.fillEmployesSpinner(getActivity(), spTacheFiltreEmploye, spTacheEmployeAssigneMap, true);
+    EmployeHelper.fillEmployesSpinner(getActivity(), spTacheFiltreEmploye, spTacheEmployeAssigneMap, true, false);
   }
 
   /**
@@ -433,35 +427,5 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     i.putExtra(TodoContentProvider.CONTENT_ITEM_TYPE_TACHE, taskUri);
 
     startActivity(i);
-
-    // taskFragment  = new TacheFragment();
-
-    // taskFragment = TacheFragment.newInstance(R.string.title_task);
-
-    // TODO : REDESIGN : Passer des données à un Fragment
-    // Source : http://stackoverflow.com/questions/15392261/android-pass-dataextras-to-a-fragment#15392591
-    // Bundle bundle = new Bundle();
-    // bundle.putParcelable( TodoContentProvider.CONTENT_ITEM_TYPE_TACHE,
-    //                       Uri.parse(TodoContentProvider.CONTENT_URI_TACHE + "/" + id));
-    // taskFragment.setArguments(bundle);
-
-    // Fragment en PopupWindow
-    // Source : http://stackoverflow.com/questions/11754309/android-popupwindow-from-a-fragment#11754352
-    // LayoutInflater layoutInflater = (LayoutInflater) getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    // View popupView = layoutInflater.inflate(R.layout.fragment_tache, null);
-
-    // Affichage du popup au centre de l'écran
-    // Source : http://stackoverflow.com/questions/6063667/show-a-popupwindow-centralized#7440187
-    // new PopupWindow(popupView,
-    //                 ViewGroup.LayoutParams.WRAP_CONTENT,
-    //                 ViewGroup.LayoutParams.WRAP_CONTENT).showAtLocation(getView(), Gravity.CENTER, 0, 0);
-
-    // getFragmentManager().beginTransaction().add(R.id.fragment_container, taskFragment).commit();
-    // getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
-    // getChildFragmentManager().executePendingTransactions();
-
-    // TODO : REDESIGN : On pourrait aussi faire ça comme ça, mais ça n'affiche pas la bonne tâche! Ça affiche ce qu'il y a déjà dans le FragmentManager(), donc les listes des tâches et d'employés ou les préférences.
-    //        Dans ce ça là, ce sera la liste des tâches, parce que c'est ce qu'il y a dans le FragmentManager (fragment_taches_liste.xmlxml).
-    // taskFragment.show(getFragmentManager(), "dialog");
   }
 }

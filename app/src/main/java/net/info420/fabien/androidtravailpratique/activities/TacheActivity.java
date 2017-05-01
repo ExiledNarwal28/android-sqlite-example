@@ -168,7 +168,12 @@ public class TacheActivity extends Activity {
       cursor.moveToFirst();
 
       // Données de l'employé
-      employeAssigneId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
+      if (cursor.isNull(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) {
+        btnTacheEmployeAssigne.setVisibility(View.GONE);
+      } else {
+        employeAssigneId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
+        btnTacheEmployeAssigne.setText(EmployeHelper.getEmployeNom(this, employeAssigneId));
+      }
 
       // On mets les données dans l'UI
       tvTacheNom.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_nom)));
@@ -181,18 +186,8 @@ public class TacheActivity extends Activity {
       // Conversion en niveau d'urgence textuel
       tvTacheUrgence.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));
 
-      // Vérification de la colonne
-      if (employeAssigneId != 0) {
-        btnTacheEmployeAssigne.setText(EmployeHelper.getEmployeNom(this, employeAssigneId));
-      }
-
       // Fermeture du curseur
       cursor.close();
-    }
-
-    // On cache le bouton si aucun employé n'est assigné.
-    if (employeAssigneId == 0) {
-      btnTacheEmployeAssigne.setVisibility(View.GONE);
     }
   }
 

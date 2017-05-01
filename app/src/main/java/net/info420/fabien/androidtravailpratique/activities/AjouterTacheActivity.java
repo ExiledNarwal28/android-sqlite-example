@@ -23,7 +23,6 @@ import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,13 +109,10 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
     btnValider            = (Button)    findViewById(R.id.btn_valider);
     spTacheEmployeAssigne = (Spinner)   findViewById(R.id.sp_tache_employe_assigne);
 
-    // Je mets la seule option actuelle dans le filtre des employés
-    ArrayList<String> employeeNames = new ArrayList<>();
-    employeeNames.add(getString(R.string.tache_aucun_employe)); // Ceci aura le id 0.
-
     // C'est l'heure d'aller chercher les noms des employés
     spTacheEmployeAssigneMap = new HashMap<>();
-    EmployeHelper.fillEmployesSpinner(this, spTacheEmployeAssigne, spTacheEmployeAssigneMap);
+    EmployeHelper.fillEmployesSpinner(this, spTacheEmployeAssigne, spTacheEmployeAssigneMap, false, true);
+    spTacheEmployeAssigne.setSelection(0); // 'Aucun employé assigné'
 
     btnTacheDate.setOnClickListener(new View.OnClickListener() {
       @Override

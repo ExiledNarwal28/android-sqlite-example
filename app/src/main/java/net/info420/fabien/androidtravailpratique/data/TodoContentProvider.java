@@ -214,7 +214,7 @@ public class TodoContentProvider extends ContentProvider {
         rangeesSupprimees = db.delete(Tache.TABLE, selection, selectionArgs);
         break;
       case TACHE_ID:
-        if (selection.isEmpty()) {
+        if ((selection == null) || (selection.isEmpty())) {
           rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
           rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
@@ -224,7 +224,7 @@ public class TodoContentProvider extends ContentProvider {
         rangeesSupprimees = db.delete(Employe.TABLE, selection, selectionArgs);
         break;
       case EMPLOYE_ID:
-        if (selection.isEmpty()) {
+        if ((selection == null) || (selection.isEmpty())) {
           rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
           rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
@@ -267,7 +267,7 @@ public class TodoContentProvider extends ContentProvider {
         rangeesModifiees = sqlDB.update(Tache.TABLE, values, selection, selectionArgs);
         break;
       case TACHE_ID:
-        if (selection.isEmpty()) {
+        if ((selection == null) || (selection.isEmpty())) {
           rangeesModifiees = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
           rangeesModifiees = sqlDB.update(Tache.TABLE, values, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
@@ -277,7 +277,7 @@ public class TodoContentProvider extends ContentProvider {
         rangeesModifiees = sqlDB.update(Employe.TABLE, values, selection, selectionArgs);
         break;
       case EMPLOYE_ID:
-        if (selection.isEmpty()) {
+        if ((selection == null) || (selection.isEmpty())) {
           rangeesModifiees = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
         } else {
           rangeesModifiees = sqlDB.update(Employe.TABLE, values, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);

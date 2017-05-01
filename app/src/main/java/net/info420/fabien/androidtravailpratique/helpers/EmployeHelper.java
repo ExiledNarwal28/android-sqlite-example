@@ -3,6 +3,7 @@ package net.info420.fabien.androidtravailpratique.helpers;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -55,32 +56,6 @@ public class EmployeHelper {
   }
 
   /**
-   * Méthode qui appelle fillEmployesSpinner
-   *
-   * @param context {@link Context} pour obtenir le {@link android.content.ContentResolver}
-   * @param spinner {@link Spinner} pour ajouter les noms d'employés
-   *
-   * @see #fillEmployesSpinner(Context, Spinner, Map, boolean)
-   */
-  public static void fillEmployesSpinner(Context context, Spinner spinner) {
-    fillEmployesSpinner(context, spinner, null, false);
-  }
-
-  /**
-   * Méthode qui appelle fillEmployesSpinner
-   *
-   * @param context {@link Context} pour obtenir le {@link android.content.ContentResolver}
-   * @param spinner {@link Spinner} pour ajouter les noms d'employés
-   * @param map     {@link HashMap} pour associé le Id de l'{@link Employe} et sa position dans le
-   *                {@link Spinner}
-   *
-   * @see #fillEmployesSpinner(Context, Spinner, Map, boolean)
-   */
-  public static void fillEmployesSpinner(Context context, Spinner spinner, Map<Integer, Integer> map) {
-    fillEmployesSpinner(context, spinner, map, false);
-  }
-
-  /**
    * Ajoute la liste des employés au Spinner approprié
    *
    * <ul>
@@ -95,7 +70,8 @@ public class EmployeHelper {
    * @param spinner                 {@link Spinner} pour ajouter les noms d'employés
    * @param map                     {@link HashMap} pour associé le Id de l'{@link Employe} et sa position dans le
    *                                {@link Spinner}
-   * @param ajouterTousLesEmployes  boolean vrai si on ajoute 'Tous les employés
+   * @param ajouterTousLesEmployes  boolean vrai si on ajoute 'Tous les employés'
+   * @param ajouterAucunEmploye     boolean vrai si on ajoute 'Tous les employés
    *
    * @see Employe
    * @see TodoContentProvider
@@ -108,33 +84,40 @@ public class EmployeHelper {
    *      target="_blank">
    *      Ajout d'items à un Spinner</a>
    */
-  public static void fillEmployesSpinner(Context context, Spinner spinner, Map<Integer, Integer> map, boolean ajouterTousLesEmployes) {
+  public static void fillEmployesSpinner(Context context, Spinner spinner, Map<Integer, Integer> map,
+                                         boolean ajouterTousLesEmployes, boolean ajouterAucunEmploye) {
     ArrayList<String> employeeNoms = new ArrayList<>();
 
-    // Seule option actuelle dans le filtre des employés
     if (ajouterTousLesEmployes) employeeNoms.add(context.getString(R.string.tache_filtre_tous_les_employes));
+    if (ajouterAucunEmploye)    employeeNoms.add(context.getString(R.string.tache_aucun_employe));
 
-    Cursor employeCursor = context.getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, new String[] { Employe.KEY_ID, Employe.KEY_nom}, null, null, null);
+    Cursor cursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYE,
+                                                        new String[] { Employe.KEY_ID, Employe.KEY_nom},
+                                                        null, null, null);
 
-    if (employeCursor != null) {
-      Integer position = (ajouterTousLesEmployes) ? 1 : 0;
+    if (cursor != null) {
 
-      while (employeCursor.moveToNext()) {
-        employeeNoms.add(employeCursor.getString(employeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+      while (cursor.moveToNext()) {
+        employeeNoms.add(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
 
         if (map != null) {
-          map.put(  position,
-                    employeCursor.getInt(employeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
+          map.put(employeeNoms.size() - 1,
+                  cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID)));
+          Log.d(TAG, String.format("Ajout : %s %s (%s)",  employeeNoms.size() - 1,
+                                                          cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID)),
+                                                          cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom))));
         }
-
-        position++;
       }
 
       // Fermeture du curseur
-      employeCursor.close();
+      cursor.close();
+    }
+
+    for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
+      Log.d(TAG, String.format("Entrée : %s %s", entry.getKey(), entry.getValue()));
     }
 
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    spinner.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, employeeNoms));
+    spinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, employeeNoms));
   }
 }

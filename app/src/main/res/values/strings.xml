@@ -33,6 +33,7 @@
   <string name="tache_date">Date d\'échéance</string>
   <string name="tache_urgence">Niveau d\'urgence</string>
   <string name="tache_employe_assigne">Employé assigné</string>
+  <string name="tache_aucun_employe">Aucun employé assigné</string>
 
   <string name="tache_urgence_bas">Faible</string>
   <string name="tache_urgence_moyen">Normal</string>
@@ -139,7 +140,6 @@
   <string name="titre_tache">Détails d\'une tâche</string>
   <string name="titre_activity_modifier_tache">Modification d\'une tâche</string>
   <string name="titre_activity_ajout_tache">Nouvelle tâche</string>
-  <string name="tache_aucun_employe">Aucun employé assigné</string>
 
   <string name="titre_employes_liste">Liste des employés</string>
   <string name="aucun_employe">Vous n\'avez pas d\'employé (sur l\'application)</string>
