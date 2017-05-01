@@ -140,14 +140,9 @@ public class TodoApplication extends Application {
     super.onCreate();
 
     // Pour le développement, recréation de la base de données
-    if (recreationDb)
-      recreerDb();
-
-    if (creationTestTaches)
-      creerTestTaches();
-
-    if (creationTestEmployes)
-      creerTestEmployes();
+    if (recreationDb)         recreerDb();
+    if (creationTestTaches)   creerTestTaches();
+    if (creationTestEmployes) creerTestEmployes();
   }
 
   // TODO : Enlever les méthodes de développement que la base de données fonctionne
@@ -160,7 +155,7 @@ public class TodoApplication extends Application {
     String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
     String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
     Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
-    int[]     taskDates           = { (int) (new DateTime().getMillis() / 10000), (int) (new DateTime(2017, 4, 20, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 22, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 4, 28, 0, 0).getMillis() / 10000) };
+    int[]     taskDates           = { (int) (new DateTime().getMillis() / 10000), (int) (new DateTime(2017, 5, 1, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 5, 8, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 5, 3, 0, 0).getMillis() / 10000) };
     int[]     taskUrgencyLevels   = { 0,                                          2,                                                            1,                                                            0 };
 
     for (int i = 0; i < taskNames.length; i++) {

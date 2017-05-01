@@ -20,7 +20,8 @@ public class DateHelper {
    * @return  Date de format EEE d MMM
    */
   public static String getDate(int unixDate) {
-    return DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L));
+    String date = DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L));
+    return date.substring(0, 1).toUpperCase() + date.substring(1);
   }
 
   /**
@@ -30,6 +31,7 @@ public class DateHelper {
    * @return  Date de format EEE d MMMM yyyy
    */
   public static String getLongueDate(int unixDate) {
-    return DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L));
+    String date = DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L));
+    return date.substring(0, 1).toUpperCase() + date.substring(1);
   }
 }
