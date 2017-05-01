@@ -104,6 +104,9 @@ public class EmployeHelper {
    * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
    *      target="_blank">
    *      Source : Ajout manuel d'item dans un Spinner</a>
+   * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
+   *      target="_blank">
+   *      Ajout d'items à un Spinner</a>
    */
   public static void fillEmployesSpinner(Context context, Spinner spinner, Map<Integer, Integer> map, boolean ajouterTousLesEmployes) {
     ArrayList<String> employeeNoms = new ArrayList<>();

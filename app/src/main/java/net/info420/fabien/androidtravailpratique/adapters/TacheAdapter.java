@@ -13,7 +13,7 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
-import net.info420.fabien.androidtravailpratique.models.Employe;
+import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
 /**
@@ -117,24 +117,9 @@ public class TacheAdapter extends SimpleCursorAdapter {
 
     viewHolder.tvTacheUrgence.setBackgroundColor(ColorHelper.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), context));
 
-    // TODO : Méthode pour aller chercher le nom d'un employé
     // Vérifie s'il y a un employé associé
     if (!cursor.isNull(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) {
-      // Curseur pour aller chercher le nom de l'employé
-      Cursor employeeCursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYE,
-                                                                  new String[] { Employe.KEY_ID, Employe.KEY_nom},
-                                                                  Employe.KEY_ID + " =?",
-                                                                  new String[] { Integer.toString(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) },
-                                                                  null);
-
-      if (employeeCursor != null) {
-        employeeCursor.moveToFirst();
-
-        viewHolder.tvTacheEmploye.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-
-        // Fermeture du curseur
-        employeeCursor.close();
-      }
+      viewHolder.tvTacheEmploye.setText(EmployeHelper.getEmployeNom(context, cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))));
     } else {
       viewHolder.tvTacheEmploye.setText(context.getString(R.string.tache_aucun_employe));
     }

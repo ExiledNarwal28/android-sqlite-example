@@ -1,7 +1,6 @@
 package net.info420.fabien.androidtravailpratique.activities;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -20,8 +19,8 @@ import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.fragments.DatePickerFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
+import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.interfaces.OnTacheDateChangeListener;
-import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import java.util.ArrayList;
@@ -92,10 +91,6 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    *   <li>Remplie le Spinner des employés avec les noms des employés</li>
    *   <li>Ajoute les Listeners</li>
    * </ul>
-   *
-   * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
-   *      target="_blank">
-   *      Ajout d'items à un Spinner</a>
    */
   private void initUI() {
     setContentView(R.layout.activity_ajouter_tache);
@@ -121,31 +116,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
 
     // C'est l'heure d'aller chercher les noms des employés
     spTacheEmployeAssigneMap = new HashMap<>();
-
-    // Projection et curseur
-    String[] employeProjection  = { Employe.KEY_nom, Employe.KEY_ID };
-    Cursor employeCursor        = getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, employeProjection, null, null, null);
-
-    // Si le curseur est fonctionnel
-    if (employeCursor != null) {
-      Integer position = 1; // Position de l'employé dans le Spinner
-
-      // Pour chaque employé, on ajoute son nom dans le spinner et en associe sa position dans le Spinner et son Id
-      while (employeCursor.moveToNext()) {
-        employeeNames.add(employeCursor.getString(employeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-        spTacheEmployeAssigneMap.put(position,
-                                      employeCursor.getInt(employeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
-
-        position++;
-      }
-
-      // Fermeture du curseur
-      employeCursor.close();
-    }
-
-    // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    adapterTacheEmployeeAssigne = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, employeeNames);
-    spTacheEmployeAssigne.setAdapter(adapterTacheEmployeeAssigne);
+    EmployeHelper.fillEmployesSpinner(this, spTacheEmployeAssigne, spTacheEmployeAssigneMap);
 
     btnTacheDate.setOnClickListener(new View.OnClickListener() {
       @Override
