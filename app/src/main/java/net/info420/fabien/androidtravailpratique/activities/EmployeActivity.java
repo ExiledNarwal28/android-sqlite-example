@@ -233,7 +233,6 @@ public class EmployeActivity extends Activity {
    */
   private void envoyerSMS() {
     if ((employeTelephone != null) && (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)) {
-      // TODO : Faire une classe séparée qui renvoie un dialogue
       // Source : http://stackoverflow.com/questions/18799216/how-to-make-a-edittext-box-in-a-dialog#29048271
       AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
@@ -277,7 +276,7 @@ public class EmployeActivity extends Activity {
   }
 
   /**
-   * Appele l'employé
+   * Appelle l'employé
    *
    * <ul>
    *   <li>Vérifie si le numéro de téléphone est valide et si la permission est accordée</li>

@@ -17,6 +17,7 @@ import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
+import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.helpers.StringHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
@@ -151,6 +152,7 @@ public class TacheActivity extends Activity {
    * @see Employe
    * @see DateHelper
    * @see StringHelper
+   * @see EmployeHelper
    */
   private void rempliData(Uri tacheUri) {
     String[] projection = { Tache.KEY_employe_assigne_ID,
@@ -181,20 +183,7 @@ public class TacheActivity extends Activity {
 
       // Vérification de la colonne
       if (employeAssigneId != 0) {
-        // Projection, Uri et curseur
-        String[] employeeProjection = { Employe.KEY_nom};
-        Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID)));
-        Cursor employeeCursor = getContentResolver().query(employeeUri, employeeProjection, null, null, null);
-
-        if (employeeCursor != null) {
-          employeeCursor.moveToFirst();
-
-          // On met le nom de l'employé sur le bouton
-          btnTacheEmployeAssigne.setText(employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-
-          // Fermeture du curseur
-          employeeCursor.close();
-        }
+        btnTacheEmployeAssigne.setText(EmployeHelper.getEmployeNom(this, employeAssigneId));
       }
 
       // Fermeture du curseur

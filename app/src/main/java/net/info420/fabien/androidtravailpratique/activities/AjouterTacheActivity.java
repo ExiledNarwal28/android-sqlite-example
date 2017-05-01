@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO : J'ai enlevé onResume() qui n'avait que onTacheDateChange()... c'est ok?
-
 /**
  * {@link android.app.Activity} pour modifier une entrée d'employé dans la base de donnée
  *

@@ -122,8 +122,6 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
    * @param fragmentId Id du fragment
    */
   private void setFragment(int fragmentId) {
-    // TODO : REDESIGN : Ne pas changer le fragment si c'est le fragment actuel
-
     menu.clear();
 
     // Variables pour la modification du fragment

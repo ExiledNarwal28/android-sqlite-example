@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -22,6 +21,7 @@ import net.info420.fabien.androidtravailpratique.activities.AjouterTacheActivity
 import net.info420.fabien.androidtravailpratique.activities.TacheActivity;
 import net.info420.fabien.androidtravailpratique.adapters.TacheAdapter;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
@@ -66,13 +66,6 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
 
   private TacheAdapter tacheAdapter;
 
-  // private TacheFragment taskFragment;
-
-  // public TachesListeFragment() {
-  //   getChildFragmentManager().beginTransaction().add(R.id.fragment_container_task, taskFragment).commit();
-  //   getChildFragmentManager().executePendingTransactions();
-  // }
-
   /**
    * Exécuté à la création du {@link View}
    *
@@ -112,7 +105,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
+    this.getListView().setDividerHeight(2);
     setRempliData();
 
     registerForContextMenu(getListView());
@@ -146,8 +139,6 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * </ul>
    */
   private void initUI (View view) {
-    // TODO : REDESIGN : Remove spinners
-
     spTacheFiltreFiltres  = (Spinner)               view.findViewById(R.id.sp_tache_filtre_filtres);
     spTacheFiltreDates    = (Spinner)               view.findViewById(R.id.sp_tache_filtre_dates);
     spTacheFiltreEmploye  = (Spinner)               view.findViewById(R.id.sp_tache_filtre_employe);
@@ -173,50 +164,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
   /**
    * Ajoute la liste des employés au Spinner approprié
    *
-   * <ul>
-   *  <li>Met l'option de base (Tous les employés)</li>
-   *  <li>Ajoute les employés dans une liste de noms</li>
-   *  <li>Construit un {@link HashMap} pour faire le lien entre l'Id d'un employé et sa position dans le {@link Spinner}</li>
-   *  <li>Ajoute l'{@link android.widget.Adapter} au {@link Spinner}</li>
-   * </ul>
-   *
-   * @see Employe
-   * @see TodoContentProvider
-   * @see HashMap
-   *
-   * @see <a href="http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720"
-   *      target="_blank">
-   *      Source : Ajout manuel d'item dans un Spinner</a>
+   * @see EmployeHelper
    */
   private void setupEmployeAssigneUI() {
-    // Seule option actuelle dans le filtre des employés
-    ArrayList<String> employeeNoms = new ArrayList<>();
-    employeeNoms.add(getString(R.string.tache_filtre_tous_les_employes));
-
-    // Ceci sert à associé correctement un nom d'employé et son id
     spTacheEmployeAssigneMap = new HashMap<>();
-
-    // TODO : Je fais ceci souvent, je devrais le mettre dans une fonction
-    Cursor employeCursor = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_EMPLOYE, new String[] { Employe.KEY_ID, Employe.KEY_nom}, null, null, null);
-
-    if (employeCursor != null) {
-      Integer position = 1; // 1, car 'Tous les employés' est en 0
-
-      while (employeCursor.moveToNext()) {
-        employeeNoms.add(employeCursor.getString(employeCursor.getColumnIndexOrThrow(Employe.KEY_nom)));
-        spTacheEmployeAssigneMap.put( position,
-                                      employeCursor.getInt(employeCursor.getColumnIndexOrThrow(Employe.KEY_ID)));
-
-        position++;
-      }
-
-      // Fermeture du curseur
-      employeCursor.close();
-    }
-
-    // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    ArrayAdapter<String> adapterTacheFiltreEmployes = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, employeeNoms);
-    spTacheFiltreEmploye.setAdapter(adapterTacheFiltreEmployes);
+    EmployeHelper.fillEmployesSpinner(getActivity(), spTacheFiltreEmploye, spTacheEmployeAssigneMap, true);
   }
 
   /**
