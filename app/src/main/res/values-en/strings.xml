@@ -24,10 +24,11 @@
   <string name="info_urgence_moyen_et_plus">medium urgency and +</string>
   <string name="info_urgence_haut">high urgency</string>
   <string name="info_envoie_dun_sms">Sending a SMS</string>
-  <string name="info_entrer_votre_message">Enter your message</string>
+  <string name="info_aucune_tache_assignee">No assigned task</string>
 
   <string name="tache">Task</string>
-  <string name="taches">Tasks</string>
+  <string name="tache_assignee">assigned task</string>
+  <string name="taches_assignees">assigned tasks</string>
   <string name="tache_nom">Name</string>
   <string name="tache_description">Description</string>
   <string name="tache_date">Due date</string>

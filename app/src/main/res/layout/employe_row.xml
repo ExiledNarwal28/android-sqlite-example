@@ -11,6 +11,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
+    android:layout_marginLeft="5dp"
     android:lines="1"
     android:text="@string/employe_nom"
     android:textSize="24sp" />
@@ -20,9 +21,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"
+    android:layout_marginLeft="5dp"
     android:layout_below="@+id/tv_employe_nom"
     android:lines="1"
     android:text="@string/employe_poste"
-    android:textSize="20sp" />
+    android:textSize="16sp" />
+
+  <TextView
+    android:id="@+id/tv_employe_nb_taches"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginLeft="5dp"
+    android:layout_below="@+id/tv_employe_poste"
+    android:lines="1"
+    android:text="@string/info_aucune_tache_assignee"
+    android:textSize="16sp" />
 
 </RelativeLayout>

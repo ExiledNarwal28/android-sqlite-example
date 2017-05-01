@@ -3,13 +3,13 @@ package net.info420.fabien.androidtravailpratique.helpers;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.models.Employe;
+import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,21 +38,39 @@ public class EmployeHelper {
   public static String getEmployeNom(Context context, int id) {
     String retString = null;
 
-    // Projection, Uri et curseur
-    String[] employeeProjection = { Employe.KEY_nom};
-    Uri employeeUri = Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + id);
-    Cursor employeeCursor = context.getContentResolver().query(employeeUri, employeeProjection, null, null, null);
+    Cursor cursor = context.getContentResolver().query( Uri.parse(TodoContentProvider.CONTENT_URI_EMPLOYE + "/" + id),
+                                                        new String[] { Employe.KEY_nom },
+                                                        Employe.KEY_ID + "=?",
+                                                        new String[] { Integer.toString(id) },
+                                                        null);
 
-    if (employeeCursor != null) {
-      employeeCursor.moveToFirst();
+    if (cursor != null) {
+      cursor.moveToFirst();
 
-      retString = employeeCursor.getString(employeeCursor.getColumnIndexOrThrow(Employe.KEY_nom));
+      retString = cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom));
 
       // Fermeture du curseur
-      employeeCursor.close();
+      cursor.close();
     }
 
     return retString;
+  }
+
+  /**
+   * Méthode statique pour obtenir le nombre de tâches d'un employé avec son id
+   *
+   * @param   context {@link Context} pour obtenir le {@link android.content.ContentResolver}
+   * @param   id      Id de l'{@link Employe}
+   * @return  Integer du compte de tâches de l'employé
+   */
+  public static Integer getEmployeNbTache(Context context, int id) {
+    Cursor cursor = context.getContentResolver().query( Uri.parse(TodoContentProvider.CONTENT_URI_TACHE + "/" + id),
+                                                        new String[] { Tache.KEY_ID, Tache.KEY_employe_assigne_ID },
+                                                        Tache.KEY_employe_assigne_ID + "=?",
+                                                        new String[] { Integer.toString(id) },
+                                                        null);
+
+    return (cursor != null) ? cursor.getCount() : 0;
   }
 
   /**
@@ -86,10 +104,10 @@ public class EmployeHelper {
    */
   public static void fillEmployesSpinner(Context context, Spinner spinner, Map<Integer, Integer> map,
                                          boolean ajouterTousLesEmployes, boolean ajouterAucunEmploye) {
-    ArrayList<String> employeeNoms = new ArrayList<>();
+    ArrayList<String> noms = new ArrayList<>();
 
-    if (ajouterTousLesEmployes) employeeNoms.add(context.getString(R.string.tache_filtre_tous_les_employes));
-    if (ajouterAucunEmploye)    employeeNoms.add(context.getString(R.string.tache_aucun_employe));
+    if (ajouterTousLesEmployes) noms.add(context.getString(R.string.tache_filtre_tous_les_employes));
+    if (ajouterAucunEmploye)    noms.add(context.getString(R.string.tache_aucun_employe));
 
     Cursor cursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_EMPLOYE,
                                                         new String[] { Employe.KEY_ID, Employe.KEY_nom},
@@ -98,14 +116,11 @@ public class EmployeHelper {
     if (cursor != null) {
 
       while (cursor.moveToNext()) {
-        employeeNoms.add(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
+        noms.add(cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom)));
 
         if (map != null) {
-          map.put(employeeNoms.size() - 1,
+          map.put(noms.size() - 1,
                   cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID)));
-          Log.d(TAG, String.format("Ajout : %s %s (%s)",  employeeNoms.size() - 1,
-                                                          cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID)),
-                                                          cursor.getString(cursor.getColumnIndexOrThrow(Employe.KEY_nom))));
         }
       }
 
@@ -113,11 +128,7 @@ public class EmployeHelper {
       cursor.close();
     }
 
-    for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
-      Log.d(TAG, String.format("Entrée : %s %s", entry.getKey(), entry.getValue()));
-    }
-
     // Source : http://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android#5241720
-    spinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, employeeNoms));
+    spinner.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, noms));
   }
 }

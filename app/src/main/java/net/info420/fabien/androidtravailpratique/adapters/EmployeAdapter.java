@@ -9,6 +9,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import net.info420.fabien.androidtravailpratique.R;
+import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.models.Employe;
 
 /**
@@ -35,6 +36,7 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   private final class ViewHolder {
     TextView tvEmployeNom;
     TextView tvEmployePoste;
+    TextView tvEmployeNbTaches;
   }
 
   /**
@@ -94,12 +96,27 @@ public class EmployeAdapter extends SimpleCursorAdapter {
   public void bindView(View view, Context context, Cursor cursor) {
     EmployeAdapter.ViewHolder viewHolder;
 
-    viewHolder                = new EmployeAdapter.ViewHolder();
-    viewHolder.tvEmployeNom   = (TextView) view.findViewById(R.id.tv_employe_nom);
-    viewHolder.tvEmployePoste = (TextView) view.findViewById(R.id.tv_employe_poste);
+    viewHolder                    = new EmployeAdapter.ViewHolder();
+    viewHolder.tvEmployeNom       = (TextView) view.findViewById(R.id.tv_employe_nom);
+    viewHolder.tvEmployePoste     = (TextView) view.findViewById(R.id.tv_employe_poste);
+    viewHolder.tvEmployeNbTaches  = (TextView) view.findViewById(R.id.tv_employe_nb_taches);
 
     viewHolder.tvEmployeNom.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_nom)));
     viewHolder.tvEmployePoste.setText(cursor.getString(cursor.getColumnIndex(Employe.KEY_poste)));
+
+    // Ajout du nombre de tâches
+    Integer nbTaches = EmployeHelper.getEmployeNbTache(context, cursor.getInt(cursor.getColumnIndexOrThrow(Employe.KEY_ID)));
+    String  nbTachesTexte;
+
+    if (nbTaches == 0) {
+      nbTachesTexte = context.getString(R.string.info_aucune_tache_assignee);
+    } else if (nbTaches == 1) {
+      nbTachesTexte = Integer.toString(nbTaches) + " " + context.getString(R.string.tache_assignee);
+    } else {
+      nbTachesTexte = Integer.toString(nbTaches) + " " + context.getString(R.string.taches_assignees);
+    }
+
+    viewHolder.tvEmployeNbTaches.setText(nbTachesTexte);
 
     view.setTag(viewHolder);
   }

@@ -25,9 +25,12 @@
   <string name="info_urgence_haut">empòtans segondè</string>
   <string name="info_envoie_dun_sms">Voye SMS</string>
   <string name="info_entrer_votre_message">Antre nan mesaj ou a</string>
+  <string name="info_aucune_tache_assignee">No travay asiyen</string>
 
   <string name="tache">Travay</string>
   <string name="taches">Travay</string>
+  <string name="tache_assignee">travay asiyen</string>
+  <string name="taches_assignees">travay asiyen</string>
   <string name="tache_nom">Non</string>
   <string name="tache_description">Deskripsyon</string>
   <string name="tache_date">Dat fen</string>

@@ -25,9 +25,12 @@
   <string name="info_urgence_haut">à urgence haute</string>
   <string name="info_envoie_dun_sms">Envoie d\'un SMS</string>
   <string name="info_entrer_votre_message">Veuillez entrez votre message</string>
+  <string name="info_aucune_tache_assignee">Aucune tâche assignée</string>
 
   <string name="tache">Tâche</string>
   <string name="taches">Tâches</string>
+  <string name="tache_assignee">tâche assignée</string>
+  <string name="taches_assignees">tâches assignées</string>
   <string name="tache_nom">Nom</string>
   <string name="tache_description">Description</string>
   <string name="tache_date">Date d\'échéance</string>
