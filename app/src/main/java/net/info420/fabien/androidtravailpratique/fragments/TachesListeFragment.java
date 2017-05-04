@@ -428,6 +428,10 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * @param view      La {@link View} cliquée
    * @param position  La position de l'item cliqué dans la liste
    * @param id        L'id de l'item
+   *
+   * @see <a href="http://stackoverflow.com/questions/15352486/cant-click-on-items-in-listview-with-custom-adapter"
+   *      target="_blank">
+   *      Source : S'assurer que onListItemClick fonctionne</a>
    */
   @Override
   public void onListItemClick(ListView listView, View view, int position, long id) {
