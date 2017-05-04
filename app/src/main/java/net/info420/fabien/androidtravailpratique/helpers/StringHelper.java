@@ -32,4 +32,14 @@ public class StringHelper {
         return context.getString(R.string.erreur);
     }
   }
+
+  /**
+   * Méthode statique pour mettre une majuscule à la première lettre d'un String
+   *
+   * @param   string String à modifier
+   * @return  String modifiée
+   */
+  public static String capitalize(String string) {
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
+  }
 }

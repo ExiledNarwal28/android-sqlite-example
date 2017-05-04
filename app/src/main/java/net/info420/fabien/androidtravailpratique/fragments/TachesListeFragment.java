@@ -2,6 +2,7 @@ package net.info420.fabien.androidtravailpratique.fragments;
 
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -21,14 +22,9 @@ import net.info420.fabien.androidtravailpratique.activities.AjouterTacheActivity
 import net.info420.fabien.androidtravailpratique.activities.TacheActivity;
 import net.info420.fabien.androidtravailpratique.adapters.TacheAdapter;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.helpers.EmployeHelper;
 import net.info420.fabien.androidtravailpratique.models.Tache;
-
-import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,6 +134,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * </ul>
    *
    * @see EmployeHelper
+   * @see EmployeHelper#fillEmployesSpinner(Context, Spinner, Map, boolean, boolean)
    */
   private void initUI(View view) {
     spTacheFiltreFiltres  = (Spinner)               view.findViewById(R.id.sp_tache_filtre_filtres);
@@ -226,8 +223,17 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
     int[] to = new int[] { R.id.tv_tache_nom, R.id.tv_tache_date, R.id.tv_tache_employe };
 
     // Pour le filtrage, on se fait un curseur spécial
-    String[] projection = { Tache.KEY_ID, Tache.KEY_nom, Tache.KEY_date, Tache.KEY_employe_assigne_ID, Tache.KEY_fait, KEY_urgence };
-    Cursor tacheCursor  = getActivity().getContentResolver().query(TodoContentProvider.CONTENT_URI_TACHE, projection, selection, selectionArgs, sortOrder);
+    String[] projection = { Tache.KEY_ID,
+                            Tache.KEY_nom,
+                            Tache.KEY_date,
+                            Tache.KEY_employe_assigne_ID,
+                            Tache.KEY_fait,
+                            Tache.KEY_urgence };
+    Cursor tacheCursor  = getActivity().getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
+                                                                    projection,
+                                                                    selection,
+                                                                    selectionArgs,
+                                                                    sortOrder);
 
     getLoaderManager().initLoader(0, null, this);
     tacheAdapter = new TacheAdapter(getContext(), R.layout.tache_row, tacheCursor, from, to, 0);
@@ -250,6 +256,11 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    * @param Id          Id de l'item sélectionné en
    *
    * @see android.widget.AdapterView.OnItemSelectedListener
+   * @see DateHelper#getAujourdhuiMillis()
+   * @see DateHelper#getLundiMillis()
+   * @see DateHelper#getDimancheMillis()
+   * @see DateHelper#getPremierJourDuMoisMillis()
+   * @see DateHelper#getDernierJourDuMoisMillis()
    *
    * @see <a href="http://viralpatel.net/blogs/convert-arraylist-to-arrays-in-java/"
    *      target="_blank">
@@ -290,21 +301,21 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
           case 1:
             // Aujourd'hui
             selection = Tache.KEY_date + " =?";
-            selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
+            selectionArgs.add(DateHelper.getAujourdhuiMillis());
 
             break;
           case 2:
             // Cette semaine
             selection = Tache.KEY_date + " BETWEEN ? AND ?";
-            selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-            selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+            selectionArgs.add(DateHelper.getLundiMillis());
+            selectionArgs.add(DateHelper.getDimancheMillis());
 
             break;
           case 3:
             // Ce mois
             selection = Tache.KEY_date + " BETWEEN ? AND ?";
-            selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-            selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+            selectionArgs.add(DateHelper.getPremierJourDuMoisMillis());
+            selectionArgs.add(DateHelper.getDernierJourDuMoisMillis());
 
             break;
         }

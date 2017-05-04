@@ -11,13 +11,8 @@ import android.widget.Toast;
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
+import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
 import net.info420.fabien.androidtravailpratique.models.Tache;
-
-import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -122,6 +117,11 @@ public class TempsService extends Service {
    *
    * @see SharedPreferences
    * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
+   * @see DateHelper#getAujourdhuiMillis()
+   * @see DateHelper#getLundiMillis()
+   * @see DateHelper#getDimancheMillis()
+   * @see DateHelper#getPremierJourDuMoisMillis()
+   * @see DateHelper#getDernierJourDuMoisMillis()
    *
    * @see <a href="http://stackoverflow.com/questions/21820031/getting-value-from-edittext-preference-in-preference-screen"
    *      target="_blank">
@@ -146,32 +146,29 @@ public class TempsService extends Service {
                                               TodoApplication.PREFS_TOATS_LAPS_TEMPS_DEFAUT))) {
       case 0:
         // Aujourd'hui
-
         selection = "(" + Tache.KEY_date + " =?) AND (" + Tache.KEY_urgence + " >=?) AND (" + Tache.KEY_fait + " =?)";
-
-        selectionArgs.add(Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000));
+        selectionArgs.add(DateHelper.getAujourdhuiMillis());
 
         lapsTempsTexte = getString(R.string.info_a_faire_aujoudhui);
+
         break;
       case 1:
         // Semaine
-
         selection = "(" + Tache.KEY_date + " BETWEEN ? AND ?) AND (" + Tache.KEY_urgence + " >=?) AND (" + Tache.KEY_fait + " =?)";
-
-        selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-        selectionArgs.add(Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+        selectionArgs.add(DateHelper.getLundiMillis());
+        selectionArgs.add(DateHelper.getDimancheMillis());
 
         lapsTempsTexte = getString(R.string.info_a_faire_cette_semaine);
+
         break;
       case 2:
         // Mois
-
         selection = "(" + Tache.KEY_date + " BETWEEN ? AND ?) AND (" + Tache.KEY_urgence + " >=?) AND (" + Tache.KEY_fait + " =?)";
-
-        selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
-        selectionArgs.add(Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000));
+        selectionArgs.add(DateHelper.getPremierJourDuMoisMillis());
+        selectionArgs.add(DateHelper.getDernierJourDuMoisMillis());
 
         lapsTempsTexte = getString(R.string.info_a_faire_ce_mois);
+
         break;
     }
 
@@ -180,12 +177,15 @@ public class TempsService extends Service {
                                               TodoApplication.PREFS_TOATS_URGENCE_DEFAUT))) {
       case 0:
         urgenceTexte = getString(R.string.info_urgence_bas_et_plus);
+
         break;
       case 1:
         urgenceTexte = getString(R.string.info_urgence_moyen_et_plus);
+
         break;
       case 2:
         urgenceTexte = getString(R.string.info_urgence_haut);
+
         break;
     }
 

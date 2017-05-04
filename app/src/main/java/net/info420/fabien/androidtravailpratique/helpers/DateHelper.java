@@ -1,6 +1,11 @@
 package net.info420.fabien.androidtravailpratique.helpers;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 
 /**
@@ -18,10 +23,14 @@ public class DateHelper {
    *
    * @param   unixDate Date en millisecondes (UnixTime)
    * @return  Date de format EEE d MMM
+   *
+   * @see DateTimeFormat
+   * @see DateTimeFormat#forPattern(String)
+   * @see DateTime#withMillis(long)
+   * @see StringHelper#capitalize(String)
    */
   public static String getDate(int unixDate) {
-    String date = DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L));
-    return date.substring(0, 1).toUpperCase() + date.substring(1);
+    return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L)));
   }
 
   /**
@@ -29,9 +38,73 @@ public class DateHelper {
    *
    * @param   unixDate Date en millisecondes (UnixTime)
    * @return  Date de format EEE d MMMM yyyy
+   *
+   * @see DateTimeFormat
+   * @see DateTimeFormat#forPattern(String)
+   * @see DateTime#withMillis(long)
+   * @see StringHelper#capitalize(String)
    */
   public static String getLongueDate(int unixDate) {
-    String date = DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L));
-    return date.substring(0, 1).toUpperCase() + date.substring(1);
+    return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L)));
+  }
+
+  /**
+   * Méthode statique pour obtenir les millisecondes d'aujourd'hui
+   *
+   * @return String des millisecondes d'aujoud'hui
+   *
+   * @see LocalDate#toDateTime(LocalTime, DateTimeZone)
+   * @see DateTime#getMillis()
+   */
+  public static String getAujourdhuiMillis() {
+    return Long.toString(new LocalDate().toDateTime(LocalTime.MIDNIGHT, DateTimeZone.UTC).getMillis() / 10000);
+  }
+
+  /**
+   * Méthode statique pour obtenir les millisecondes du lundi de la semaine
+   *
+   * @return String des millisecondes du lundi de la semaine
+   *
+   * @see LocalDate#toDateTime(LocalTime, DateTimeZone)
+   * @see DateTime#getMillis()
+   */
+  public static String getLundiMillis() {
+    return Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.MONDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000);
+  }
+
+  /**
+   * Méthode statique pour obtenir les millisecondes du dimanche de la semaine
+   *
+   * @return String des millisecondes du dimanche de la semaine
+   *
+   * @see LocalDate#toDateTime(LocalTime, DateTimeZone)
+   * @see DateTime#getMillis()
+   */
+  public static String getDimancheMillis() {
+    return Long.toString(new LocalDateTime().withDayOfWeek(DateTimeConstants.SUNDAY).toDateTime(DateTimeZone.getDefault()).getMillis() / 10000);
+  }
+
+  /**
+   * Méthode statique pour obtenir les millisecondes du premier jour du mois
+   *
+   * @return String des millisecondes du premier jour du mois
+   *
+   * @see LocalDate#toDateTime(LocalTime, DateTimeZone)
+   * @see DateTime#getMillis()
+   */
+  public static String getPremierJourDuMoisMillis() {
+    return Long.toString(new LocalDateTime().dayOfMonth().withMinimumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000);
+  }
+
+  /**
+   * Méthode statique pour obtenir les millisecondes du dernier jour du mois
+   *
+   * @return String des millisecondes du dernier jour du mois
+   *
+   * @see LocalDate#toDateTime(LocalTime, DateTimeZone)
+   * @see DateTime#getMillis()
+   */
+  public static String getDernierJourDuMoisMillis() {
+    return Long.toString(new LocalDateTime().dayOfMonth().withMaximumValue().toDateTime(DateTimeZone.getDefault()).getMillis() / 10000);
   }
 }
