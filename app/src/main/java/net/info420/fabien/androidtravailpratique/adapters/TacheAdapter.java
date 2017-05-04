@@ -102,7 +102,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
    */
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    TacheAdapter.ViewHolder viewHolder;
+    final TacheAdapter.ViewHolder viewHolder;
 
     viewHolder                = new TacheAdapter.ViewHolder();
     viewHolder.tvTacheNom     = (TextView) view.findViewById(R.id.tv_tache_nom);
@@ -123,13 +123,6 @@ public class TacheAdapter extends SimpleCursorAdapter {
     } else {
       viewHolder.tvTacheEmploye.setText(context.getString(R.string.tache_aucun_employe));
     }
-
-    viewHolder.cbTacheFait.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        // TODO : Changer la complétion lorsqu'on appuie sur le Checkbox
-      }
-    });
 
     view.setTag(viewHolder);
   }

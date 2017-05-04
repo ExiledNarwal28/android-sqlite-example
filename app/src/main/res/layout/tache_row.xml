@@ -59,6 +59,7 @@
     android:layout_alignParentRight="true"
     android:layout_alignBottom="@id/tv_tache_employe"
     style="@android:style/Widget.Material.Light.CompoundButton.CheckBox"
+    android:clickable="false"
     tools:ignore="RtlHardcoded"/>
 
 </RelativeLayout>
