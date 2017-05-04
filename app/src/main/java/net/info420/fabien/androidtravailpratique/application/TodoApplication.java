@@ -1,16 +1,8 @@
 package net.info420.fabien.androidtravailpratique.application;
 
 import android.app.Application;
-import android.content.ContentValues;
 
-import net.info420.fabien.androidtravailpratique.data.DBHelper;
-import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
-import net.info420.fabien.androidtravailpratique.models.Employe;
-import net.info420.fabien.androidtravailpratique.models.Tache;
-
-import org.joda.time.DateTime;
-
-// TODO : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure
+// TODO : DOC : Ajouter l'organisation des fichiers dans la doc http://blog.smartlogic.io/2013-07-09-organizing-your-android-development-code-structure
 
 // ***************************************************************
 // *                                                             *
@@ -47,7 +39,6 @@ import org.joda.time.DateTime;
 //          [X]--EmployesListeFragment---------------(Fait)--<==<<
 //          [X]--PrefsFragment-----------------------(Fait)--<==<<
 //          [X]--TachesListeFragment-----------------(Fait)--<==<<
-//          [O]--TacheFragment-----------------------(TODO)--<==<<
 //          [X]--MettreAJourEmployeFragment----------(Fait)--<==<<
 //          [X]--MettreAJourTacheFragment------------(Fait)--<==<<
 //
@@ -80,7 +71,6 @@ import org.joda.time.DateTime;
 //          [X]--activity_tache.xml------------------(Fait)--<==<<
 //          [X]--employe_row.xml---------------------(Fait)--<==<<
 //          [X]--fragment_employes_liste.xml---------(Fait)--<==<<
-//          [X]--fragment_tache.xml------------------(TODO)--<==<<
 //          [X]--fragment_taches_liste.xml-----------(Fait)--<==<<
 //          [X]--fragment_mettre_a_jour_employe.xml--(Fait)--<==<<
 //          [X]--fragment_mettre_a_jour_tache.xml----(Fait)--<==<<
@@ -126,73 +116,11 @@ public class TodoApplication extends Application {
   public static final String PREFS_TOASTS_URGENCE     = "toasts_urgence";
   public static final String PREFS_LANGUE             = "langue";
 
-  // TODO : Prod : Enlever ceci
-  // Variables de développement
-  public boolean  recreationDb         = true;
-  public boolean  creationTestTaches   = true;
-  public boolean  creationTestEmployes = true;
-
   /**
    * S'exécute lors de la création de la classe
    */
   @Override
   public void onCreate() {
     super.onCreate();
-
-    // Pour le développement, recréation de la base de données
-    if (recreationDb)         recreerDb();
-    if (creationTestTaches)   creerTestTaches();
-    if (creationTestEmployes) creerTestEmployes();
-  }
-
-  // TODO : Enlever les méthodes de développement que la base de données fonctionne
-  private void recreerDb() {
-    DBHelper dbHelper = new DBHelper(this);
-    dbHelper.recreateDB(dbHelper.getWritableDatabase());
-  }
-
-  private void creerTestTaches() {
-    String[]  taskNames           = { "Test0",                                    "Test1",                                                      "Test2",                                                      "Test3" };
-    String[]  taskDescriptions    = { "Description0",                             "Description1",                                               "Description2",                                               "Description3" };
-    Boolean[] taskCompleteds      = { false,                                      false,                                                        true,                                                         false };
-    int[]     taskDates           = { (int) (new DateTime().getMillis() / 10000), (int) (new DateTime(2017, 5, 1, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 5, 8, 0, 0).getMillis() / 10000),  (int) (new DateTime(2017, 5, 3, 0, 0).getMillis() / 10000) };
-    int[]     taskUrgencyLevels   = { 0,                                          2,                                                            1,                                                            0 };
-
-    for (int i = 0; i < taskNames.length; i++) {
-      ContentValues values = new ContentValues();
-
-      // La tâche #4 n'a pas d'employé assigné (pour des tests)
-      if (i <= 2) {
-        values.put(Tache.KEY_employe_assigne_ID, i + 1); // Employés auto-généré (en bas)
-      } else {
-        values.putNull(Tache.KEY_employe_assigne_ID);
-      }
-
-      values.put(Tache.KEY_nom,         taskNames[i]);
-      values.put(Tache.KEY_description, taskDescriptions[i]);
-      values.put(Tache.KEY_fait,        taskCompleteds[i]);
-      values.put(Tache.KEY_date,        taskDates[i]);
-      values.put(Tache.KEY_urgence,     taskUrgencyLevels[i]);
-
-      getContentResolver().insert(TodoContentProvider.CONTENT_URI_TACHE, values);
-    }
-  }
-
-  private void creerTestEmployes() {
-    String[] employeeNames  = {"Fabien Roy",            "William Leblanc",      "Jean-Sébastien Giroux"};
-    String[] employeeJobs   = {"Programmeur-analyste",  "PDG de BlazeIt inc.",  "Icône de l'Internet"};
-    String[] employeeEmails = {"fabien@cognitio.ca",    "william@blazeit.org",  "giroux@twitch.com"};
-    String[] employeePhones = {"418-409-6568",          "420-420-4242",         "123-456-7890"};
-
-    for (int i = 0; i < employeeNames.length; i++) {
-      ContentValues values = new ContentValues();
-
-      values.put(Employe.KEY_nom,       employeeNames[i]);
-      values.put(Employe.KEY_poste,     employeeJobs[i]);
-      values.put(Employe.KEY_email,     employeeEmails[i]);
-      values.put(Employe.KEY_telephone, employeePhones[i]);
-
-      getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYE, values);
-    }
   }
 }

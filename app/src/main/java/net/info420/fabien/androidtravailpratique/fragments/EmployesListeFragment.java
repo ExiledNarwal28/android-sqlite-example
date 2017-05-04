@@ -80,7 +80,7 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    this.getListView().setDividerHeight(2); // TODO : Tester ce que fais ceci
+    this.getListView().setDividerHeight(2);
     remplirData();
 
     registerForContextMenu(getListView());

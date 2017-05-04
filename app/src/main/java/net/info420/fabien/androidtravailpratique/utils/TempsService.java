@@ -196,11 +196,10 @@ public class TempsService extends Service {
    * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
    */
   public int getTachesNb() {
-    // TODO : Si aucune préférences, plante
     Cursor cursor = getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
                                                 new String[] { Tache.KEY_ID },
                                                 selection,
-                                                selectionArgs.toArray(new String[selectionArgs.size()]),
+                                                (selection != null) ? selectionArgs.toArray(new String[selectionArgs.size()]) : null,
                                                 null);
 
     return (cursor != null) ? cursor.getCount() : 0;

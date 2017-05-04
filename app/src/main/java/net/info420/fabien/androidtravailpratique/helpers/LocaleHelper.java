@@ -58,6 +58,12 @@ public class LocaleHelper {
   /**
    * Méthode statique privée pour modifier la {@link Locale} avec une langue spécifiée
    *
+   * <p>La ligne {@code resources.updateConfiguration(configuration, resources.getDisplayMetrics());}
+   * est incorrecte. En fait, il faudrait utiliser {@code context.createConfigurationContext(configuration))}.
+   * Par contre, cela ne fonctionne pas. La configuration n'est pas mise à jour automatiquement,
+   * seulement au redémarrage de l'{@link android.app.Application}. Puisque cela n'est pas l'effet
+   * désiré, je me sert simplement de ce qui n'est plus supporté.</p>
+   *
    * @param   context  {@link Context} pour appeler la méthode setLocale
    * @param   langue    String représentant la locale
    * @return  boolean représentant la réussite de l'opération
@@ -71,9 +77,8 @@ public class LocaleHelper {
     Configuration configuration = resources.getConfiguration();
     configuration.setLocale(locale);
 
-    // TODO : Ceci n'est plus supporté. Pourtant, createConfigurationContent ne semble pas fonctionner!
     resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-    // context.getApplicationContext().createConfigurationContext(configuration);
+    // context.createConfigurationContext(configuration);
 
     return true;
   }
