@@ -46,7 +46,8 @@ public class TempsReceiver extends BroadcastReceiver {
                                       context.getString(R.string.tache).toLowerCase(),
                                       intent.getExtras().getString(TempsService.URGENCE),
                                       intent.getExtras().getString(TempsService.LAPS_TEMPS)),
-                        Toast.LENGTH_SHORT).show();
+                                      (intent.getExtras().getInt(TempsService.AFFICHAGE) == Toast.LENGTH_SHORT) ?
+                                        Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show();
       } else {
         Toast.makeText( context,
                         String.format("%s %s %s %s %s.",
@@ -55,7 +56,8 @@ public class TempsReceiver extends BroadcastReceiver {
                                       ((intent.getExtras().getInt(TempsService.TACHES_NB) > 1) ? context.getString(R.string.taches) : context.getString(R.string.tache)).toLowerCase(),
                                       intent.getExtras().getString(TempsService.URGENCE),
                                       intent.getExtras().getString(TempsService.LAPS_TEMPS)),
-                        Toast.LENGTH_SHORT).show();
+                                      (intent.getExtras().getInt(TempsService.AFFICHAGE) == Toast.LENGTH_SHORT) ?
+                                        Toast.LENGTH_SHORT : Toast.LENGTH_LONG).show();
       }
     }
   }

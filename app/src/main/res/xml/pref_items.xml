@@ -15,42 +15,53 @@
     android:id="@+id/lp_pref_toasts_frequence"
     android:key="toasts_frequence"
     android:dependency="toasts"
-    android:defaultValue="1"
     android:singleLine="true"
     android:title="@string/pref_toasts_frequence"
     android:summary="@string/pref_toasts_frequence_resume"
     android:entries="@array/pref_toasts_frequence_noms"
-    android:entryValues="@array/pref_toasts_frequence_valeurs"/>
+    android:entryValues="@array/pref_toasts_frequence_valeurs"
+    android:defaultValue="600" />
 
   <ListPreference
     android:id="@+id/lp_pref_toasts_laps_temps"
     android:key="toasts_laps_temps"
     android:dependency="toasts"
-    android:defaultValue="600"
     android:singleLine="true"
     android:title="@string/pref_toasts_laps_temps"
     android:summary="@string/pref_toasts_laps_temps_resume"
     android:entries="@array/pref_toasts_laps_temps_noms"
-    android:entryValues="@array/pref_toasts_laps_temps_valeurs"/>
+    android:entryValues="@array/pref_toasts_laps_temps_valeurs"
+    android:defaultValue="1" />
 
   <ListPreference
     android:id="@+id/lp_pref_toasts_urgence"
     android:key="toasts_urgence"
     android:dependency="toasts"
-    android:defaultValue="0"
     android:singleLine="true"
     android:title="@string/pref_toasts_urgence"
     android:summary="@string/pref_toasts_urgence_resume"
     android:entries="@array/pref_toasts_urgence_noms"
-    android:entryValues="@array/pref_toasts_urgence_valeurs"/>
+    android:entryValues="@array/pref_toasts_urgence_valeurs"
+    android:defaultValue="0" />
+
+  <ListPreference
+    android:id="@+id/lp_pref_toasts_affichage"
+    android:key="toasts_affichage"
+    android:dependency="toasts"
+    android:singleLine="true"
+    android:title="@string/pref_toasts_affichage"
+    android:summary="@string/pref_toasts_affichage_resume"
+    android:entries="@array/pref_toasts_affichage_noms"
+    android:entryValues="@array/pref_toasts_affichage_valeurs"
+    android:defaultValue="1" />
 
   <ListPreference
     android:id="@+id/lp_pref_langue"
     android:key="langue"
-    android:defaultValue="fr"
     android:singleLine="true"
     android:title="@string/pref_langue"
     android:summary="@string/pref_langue_resume"
     android:entries="@array/pref_langue_noms"
-    android:entryValues="@array/pref_langue_valeurs"/>
+    android:entryValues="@array/pref_langue_valeurs"
+    android:defaultValue="fr" />
 </PreferenceScreen>

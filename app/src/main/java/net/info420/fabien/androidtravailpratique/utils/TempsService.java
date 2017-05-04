@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
@@ -45,12 +46,14 @@ public class TempsService extends Service {
   public static final String TACHES_NB    = "tachesNb";
   public static final String LAPS_TEMPS   = "lapsTemps";
   public static final String URGENCE      = "urgence";
+  public static final String AFFICHAGE    = "affichage";
 
   // Variables pour aller chercher le nombre de tâches
   private boolean           toastsActive    = true;
   private String            selection       = null;
   private ArrayList<String> selectionArgs   = new ArrayList<>();
   private int               frequence       = 0;
+  private int               affichage       = 0;
   private String            lapsTempsTexte  = null;
   private String            urgenceTexte    = null;
 
@@ -112,6 +115,7 @@ public class TempsService extends Service {
    * <ul>
    *  <li>Booléen pour l'activation des toasts</li>
    *  <li>Laps de temps (aujourd'hui, semaine, mois)</li>
+   *  <li>Temps d'affichage des Toasts</li>
    *  <li>Niveau d'urgence minimum</li>
    *  <li>Fréquence des notifications</li>
    * </ul>
@@ -126,14 +130,20 @@ public class TempsService extends Service {
   private void getInfoFromPrefs() {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-    toastsActive = prefs.getBoolean(TodoApplication.PREFS_TOASTS, true);
-    frequence = Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_FREQUENCE, "600"));
+    toastsActive  = prefs.getBoolean(TodoApplication.PREFS_TOASTS, true);
+    frequence     = Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_FREQUENCE,
+                                                      TodoApplication.PREFS_TOASTS_FREQUENCE_DEFAUT));
+
+    affichage = (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_AFFICHAGE,
+                                                   TodoApplication.PREFS_TOASTS_AFFICHAGE_DEFAUT)) == 0) ?
+                Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
 
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
 
     // Laps de temps
-    switch (Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_LAPS_TEMPS, "1"))) {
+    switch (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_LAPS_TEMPS,
+                                              TodoApplication.PREFS_TOATS_LAPS_TEMPS_DEFAUT))) {
       case 0:
         // Aujourd'hui
 
@@ -166,7 +176,8 @@ public class TempsService extends Service {
     }
 
     // On va ensuite chercher le texte qui décrit le niveau d'urgence
-    switch (Integer.parseInt(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0)))) {
+    switch (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_URGENCE,
+                                              TodoApplication.PREFS_TOATS_URGENCE_DEFAUT))) {
       case 0:
         urgenceTexte = getString(R.string.info_urgence_bas_et_plus);
         break;
@@ -179,7 +190,8 @@ public class TempsService extends Service {
     }
 
     // Pour afficher un petit descriptif du genre : (bas et +)
-    selectionArgs.add(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE, Integer.toString(0))); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
+    selectionArgs.add(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE,
+                                      TodoApplication.PREFS_TOATS_URGENCE_DEFAUT)); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
     selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
   }
 
@@ -224,6 +236,7 @@ public class TempsService extends Service {
       timeIntent.putExtra(TACHES_NB,  getTachesNb());   // Nombre de tâche
       timeIntent.putExtra(LAPS_TEMPS, lapsTempsTexte);  // Texte en lien avec la période de temps
       timeIntent.putExtra(URGENCE,    urgenceTexte);    // Texte en lien avec le niveau d'urgence
+      timeIntent.putExtra(AFFICHAGE,  affichage);       // Longueur de l'affichage du Toast
 
       sendBroadcast(timeIntent);
     }

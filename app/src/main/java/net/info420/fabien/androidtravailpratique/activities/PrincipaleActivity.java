@@ -242,7 +242,8 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
     if (key.equals(TodoApplication.PREFS_TOASTS)            ||
         key.equals(TodoApplication.PREFS_TOASTS_FREQUENCE)  ||
         key.equals(TodoApplication.PREFS_TOASTS_LAPS_TEMPS) ||
-        key.equals(TodoApplication.PREFS_TOASTS_URGENCE)) {
+        key.equals(TodoApplication.PREFS_TOASTS_URGENCE)    ||
+        key.equals(TodoApplication.PREFS_TOASTS_AFFICHAGE)) {
 
       // Recommence le service
       stopService(tempsServiceIntent);
@@ -252,7 +253,8 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
     // Si la préférence concerne la langue...
     if (key.equals(TodoApplication.PREFS_LANGUE)) {
       // Change la locale
-      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString(TodoApplication.PREFS_LANGUE, "fr"));
+      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString( TodoApplication.PREFS_LANGUE,
+                                                                                                  TodoApplication.PREFS_LANGUE_DEFAUT));
 
       // Redémarre le fragment, afin d'y appliquer les changements
       setFragment(FRAGMENT_PREFS);
