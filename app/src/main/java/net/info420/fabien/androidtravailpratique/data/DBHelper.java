@@ -26,6 +26,8 @@ import net.info420.fabien.androidtravailpratique.models.Tache;
  *      Source : Base de données SQLite et Android</a>
  */
 public class DBHelper  extends SQLiteOpenHelper {
+  private static final String TAG = DBHelper.class.getName();
+
   // Version de la base de donnée, qui doit être augmenté à chaque changement dans les tables
   private static final int DB_VERSION = 5;
 
@@ -37,7 +39,7 @@ public class DBHelper  extends SQLiteOpenHelper {
    *
    * @param context  {@link Context} appelant le {@link DBHelper}
    */
-  public DBHelper(Context context ) {
+  public DBHelper(Context context) {
     super(context, DB_NOM, null, DB_VERSION);
   }
 
@@ -96,7 +98,7 @@ public class DBHelper  extends SQLiteOpenHelper {
    *
    * @param db Base de données à recréer
    */
-  public void recreateDB(SQLiteDatabase db) {
+  private void recreateDB(SQLiteDatabase db) {
     db.execSQL("DROP TABLE IF EXISTS " + Employe.TABLE);
     db.execSQL("DROP TABLE IF EXISTS " + Tache.TABLE);
 

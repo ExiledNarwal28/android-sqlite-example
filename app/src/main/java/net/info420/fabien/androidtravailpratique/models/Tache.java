@@ -26,13 +26,4 @@ public class Tache {
   public static final String KEY_fait               = "fait";
   public static final String KEY_date               = "date";
   public static final String KEY_urgence            = "urgence";
-
-  // Types des propriétés
-  public int      tache_ID;
-  public int      employe_assigne_ID;
-  public String   nom;
-  public String   description;
-  public boolean  fait;
-  public int      date; // date est un integer "Unix Time"
-  public int      urgence;
 }

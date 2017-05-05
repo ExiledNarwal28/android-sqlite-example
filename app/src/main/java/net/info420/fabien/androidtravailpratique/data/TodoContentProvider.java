@@ -47,15 +47,17 @@ public class TodoContentProvider extends ContentProvider {
   private static final int EMPLOYES   = 30;
   private static final int EMPLOYE_ID = 40;
 
-  private static final String BASE_PATH_TACHE     = "taches";
-  private static final String BASE_PATH_EMPLOYE   = "employes";
+  private static final String BASE_PATH_TACHE         = "taches";
+  private static final String BASE_PATH_ITEM_TACHE    = "tache";
+  private static final String BASE_PATH_EMPLOYE       = "employes";
+  private static final String BASE_PATH_ITEM_EMPLOYE  = "employe";
   public  static final Uri    CONTENT_URI_TACHE   = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TACHE);
   public  static final Uri    CONTENT_URI_EMPLOYE = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_EMPLOYE);
 
-  public static final String CONTENT_TYPE_TACHES        = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/taches";
-  public static final String CONTENT_ITEM_TYPE_TACHE    = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/tache";
-  public static final String CONTENT_TYPE_EMPLOYES      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/employes";
-  public static final String CONTENT_ITEM_TYPE_EMPLOYE  = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/employe";
+  public static final String CONTENT_TYPE_TACHES        = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/" + BASE_PATH_TACHE;
+  public static final String CONTENT_ITEM_TYPE_TACHE    = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + BASE_PATH_ITEM_TACHE;
+  public static final String CONTENT_TYPE_EMPLOYES      = ContentResolver.CURSOR_DIR_BASE_TYPE  + "/" + BASE_PATH_EMPLOYE;
+  public static final String CONTENT_ITEM_TYPE_EMPLOYE  = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + BASE_PATH_ITEM_EMPLOYE;
 
   private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -189,59 +191,6 @@ public class TodoContentProvider extends ContentProvider {
   }
 
   /**
-   * Suppression dans la base de données
-   *
-   * <ul>
-   *  <li>Vérifie l'Uri (tache/employé et tout sélectionné/un seul)</li>
-   *  <li>Supprime l'item ou les items dans la base de données</li>
-   * </ul>
-   *
-   * @param   uri           Uri envoyé pour la suppression
-   * @param   selection     Le WHERE          (ex. : "_id =?")
-   * @param   selectionArgs Les "?" du WHERE  (ex. : { "1" })
-   * @return  Le nombre de rangée supprimées
-   *
-   * @see SQLiteDatabase
-   */
-  @Override
-  public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
-    SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-    int rangeesSupprimees = 0;
-
-    switch (sURIMatcher.match(uri)) {
-      case TACHES:
-        rangeesSupprimees = db.delete(Tache.TABLE, selection, selectionArgs);
-        break;
-      case TACHE_ID:
-        if ((selection == null) || (selection.isEmpty())) {
-          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
-        } else {
-          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
-        }
-        break;
-      case EMPLOYES:
-        rangeesSupprimees = db.delete(Employe.TABLE, selection, selectionArgs);
-        break;
-      case EMPLOYE_ID:
-        if ((selection == null) || (selection.isEmpty())) {
-          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
-        } else {
-          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
-        }
-        break;
-      default:
-        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
-        throw new IllegalArgumentException("URI inconnu : " + uri);
-    }
-
-    // S'assurer que tous les Listeners soient notifiés
-    getContext().getContentResolver().notifyChange(uri, null);
-
-    return rangeesSupprimees;
-  }
-
-  /**
    * Modification dans la base de données
    *
    * <ul>
@@ -292,6 +241,59 @@ public class TodoContentProvider extends ContentProvider {
     getContext().getContentResolver().notifyChange(uri, null);
 
     return rangeesModifiees;
+  }
+
+  /**
+   * Suppression dans la base de données
+   *
+   * <ul>
+   *  <li>Vérifie l'Uri (tache/employé et tout sélectionné/un seul)</li>
+   *  <li>Supprime l'item ou les items dans la base de données</li>
+   * </ul>
+   *
+   * @param   uri           Uri envoyé pour la suppression
+   * @param   selection     Le WHERE          (ex. : "_id =?")
+   * @param   selectionArgs Les "?" du WHERE  (ex. : { "1" })
+   * @return  Le nombre de rangée supprimées
+   *
+   * @see SQLiteDatabase
+   */
+  @Override
+  public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+    int rangeesSupprimees = 0;
+
+    switch (sURIMatcher.match(uri)) {
+      case TACHES:
+        rangeesSupprimees = db.delete(Tache.TABLE, selection, selectionArgs);
+        break;
+      case TACHE_ID:
+        if ((selection == null) || (selection.isEmpty())) {
+          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
+        } else {
+          rangeesSupprimees = db.delete(Tache.TABLE, Tache.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
+        }
+        break;
+      case EMPLOYES:
+        rangeesSupprimees = db.delete(Employe.TABLE, selection, selectionArgs);
+        break;
+      case EMPLOYE_ID:
+        if ((selection == null) || (selection.isEmpty())) {
+          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment(),                       null);
+        } else {
+          rangeesSupprimees = db.delete(Employe.TABLE, Employe.KEY_ID + "=" + uri.getLastPathSegment() + " and " + selection, selectionArgs);
+        }
+        break;
+      default:
+        // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.
+        throw new IllegalArgumentException("URI inconnu : " + uri);
+    }
+
+    // S'assurer que tous les Listeners soient notifiés
+    getContext().getContentResolver().notifyChange(uri, null);
+
+    return rangeesSupprimees;
   }
 
   /**

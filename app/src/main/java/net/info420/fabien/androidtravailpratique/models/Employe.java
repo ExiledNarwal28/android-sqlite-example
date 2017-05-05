@@ -24,11 +24,4 @@ public class Employe {
   public static final String KEY_poste      = "poste";
   public static final String KEY_email      = "email";
   public static final String KEY_telephone  = "telephone";
-
-  // Types des propriétés
-  public int    employe_ID;
-  public String nom;
-  public String poste;
-  public String email;
-  public String telephone;
 }

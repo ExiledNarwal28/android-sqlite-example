@@ -24,7 +24,7 @@ public class ColorHelper {
    * @param   context Context pour appeler la méthode getColor()
    * @return  Couleur en lien avec le niveau d'urgence
    */
-  public static int getUrgencyLevelColor(int urgence, Context context) {
+  public static int getUrgencyLevelColor(Context context, int urgence) {
     switch (urgence) {
       case 0:
         return context.getColor(R.color.colorUrgenceBas);

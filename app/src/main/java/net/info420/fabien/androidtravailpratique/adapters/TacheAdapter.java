@@ -99,6 +99,10 @@ public class TacheAdapter extends SimpleCursorAdapter {
    * @param view      {@link View} qui est bindée
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
    * @param cursor    {@link Cursor} de la sélection
+   *
+   * @see DateHelper#getDate(int)
+   * @see ColorHelper#getUrgencyLevelColor(Context, int)
+   * @see EmployeHelper#getEmployeNom(Context, int)
    */
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
@@ -115,7 +119,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
     viewHolder.tvTacheDate.setText(DateHelper.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
     viewHolder.cbTacheFait.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
 
-    viewHolder.tvTacheUrgence.setBackgroundColor(ColorHelper.getUrgencyLevelColor(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), context));
+    viewHolder.tvTacheUrgence.setBackgroundColor(ColorHelper.getUrgencyLevelColor(context, cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence))));
 
     // Vérifie s'il y a un employé associé
     if (!cursor.isNull(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) {
