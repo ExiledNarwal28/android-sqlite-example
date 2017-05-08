@@ -39,8 +39,6 @@ import net.info420.fabien.androidtravailpratique.models.Employe;
 public class EmployesListeFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
   private final static String TAG = EmployesListeFragment.class.getName();
 
-  private FloatingActionButton fabAjouterEmploye;
-
   private EmployeAdapter employeAdapter;
 
   /**
@@ -114,9 +112,7 @@ public class EmployesListeFragment extends ListFragment implements LoaderManager
    * </ul>
    */
   private void initUI (View view) {
-    fabAjouterEmploye = (FloatingActionButton)  view.findViewById(R.id.fab_ajouter_employe);
-
-    fabAjouterEmploye.setOnClickListener(new View.OnClickListener() {
+    view.findViewById(R.id.fab_ajouter_employe).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         // Nouvelle tâche

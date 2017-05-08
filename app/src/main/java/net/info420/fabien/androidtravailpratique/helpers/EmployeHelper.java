@@ -64,7 +64,7 @@ public class EmployeHelper {
    * @return  Integer du compte de tâches de l'employé
    */
   public static Integer getEmployeNbTache(Context context, int id) {
-    Cursor cursor = context.getContentResolver().query( Uri.parse(TodoContentProvider.CONTENT_URI_TACHE + "/" + id),
+    Cursor cursor = context.getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
                                                         new String[] { Tache.KEY_ID, Tache.KEY_employe_assigne_ID },
                                                         Tache.KEY_employe_assigne_ID + "=?",
                                                         new String[] { Integer.toString(id) },

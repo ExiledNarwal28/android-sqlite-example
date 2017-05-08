@@ -114,29 +114,29 @@ public class TodoContentProvider extends ContentProvider {
     switch (sURIMatcher.match(uri)) {
       case TACHES:
         checkColumnsTache(projection);
-
         queryBuilder.setTables(Tache.TABLE);
+
         break;
       case TACHE_ID:
         checkColumnsTache(projection);
-
         queryBuilder.setTables(Tache.TABLE);
 
         // On ajoute le ID au query
         queryBuilder.appendWhere(Tache.KEY_ID + "=" + uri.getLastPathSegment());
+
         break;
       case EMPLOYES:
         checkColumnsEmploye(projection);
-
         queryBuilder.setTables(Employe.TABLE);
+
         break;
       case EMPLOYE_ID:
         checkColumnsEmploye(projection);
-
         queryBuilder.setTables(Employe.TABLE);
 
         // On ajoute le ID au query
         queryBuilder.appendWhere(Employe.KEY_ID + "=" + uri.getLastPathSegment());
+
         break;
       default:
         // Oui, c'est en français. C'est moins compliqué qu'appelé getString() avec un context.

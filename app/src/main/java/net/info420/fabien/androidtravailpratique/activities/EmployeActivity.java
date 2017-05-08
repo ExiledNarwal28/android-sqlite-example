@@ -108,12 +108,12 @@ public class EmployeActivity extends Activity {
 
     ColorHelper.setStatusBarColor(this);
 
-    tvEmployeNom          = (TextView) findViewById(R.id.tv_employe_nom);
-    tvEmployePoste        = (TextView) findViewById(R.id.tv_employe_poste);
-    tvEmployeEmail        = (TextView) findViewById(R.id.tv_employe_email);
-    tvEmployeTelephone    = (TextView) findViewById(R.id.tv_employe_telephone);
-    btnEmployeEnvoyerSMS  = (Button) findViewById(R.id.btn_employe_envoyer_sms);
-    btnEmployeAppeler     = (Button) findViewById(R.id.btn_employe_appeler);
+    tvEmployeNom          = (TextView)  findViewById(R.id.tv_employe_nom);
+    tvEmployePoste        = (TextView)  findViewById(R.id.tv_employe_poste);
+    tvEmployeEmail        = (TextView)  findViewById(R.id.tv_employe_email);
+    tvEmployeTelephone    = (TextView)  findViewById(R.id.tv_employe_telephone);
+    btnEmployeEnvoyerSMS  = (Button)    findViewById(R.id.btn_employe_envoyer_sms);
+    btnEmployeAppeler     = (Button)    findViewById(R.id.btn_employe_appeler);
 
     btnEmployeEnvoyerSMS.setOnClickListener(new View.OnClickListener() {
       @Override

@@ -229,6 +229,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
                             Tache.KEY_employe_assigne_ID,
                             Tache.KEY_fait,
                             Tache.KEY_urgence };
+
     Cursor tacheCursor  = getActivity().getContentResolver().query( TodoContentProvider.CONTENT_URI_TACHE,
                                                                     projection,
                                                                     selection,

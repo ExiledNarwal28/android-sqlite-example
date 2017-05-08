@@ -217,8 +217,6 @@ public class TempsService extends Service {
     return (cursor != null) ? cursor.getCount() : 0;
   }
 
-  // Ce qui sera exécuté chaque X seconde
-
   /**
    * {@link TimerTask} avec la commande à exécuté à chaque fréquence
    *
