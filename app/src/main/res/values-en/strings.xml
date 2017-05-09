@@ -15,6 +15,7 @@
   <string name="attention_mauvais_format_telephone">Wrong phone number format</string>
   <string name="attention_mauvais_format_email">Wrong e-mail format</string>
 
+  <string name="info_voir">See</string>
   <string name="info_vous_avez">You have</string>
   <string name="info_vous_avez_pas">You have no</string>
   <string name="info_a_faire_aujoudhui">to do today</string>
@@ -36,10 +37,12 @@
   <string name="tache_date">Due date</string>
   <string name="tache_urgence">Urgency level</string>
   <string name="tache_employe_assigne">Assigned employee</string>
+  <string name="tache_aucun_employe">No assigned employee</string>
+  <string name="tache_due_pour">Due for</string>
 
-  <string name="tache_urgence_bas">Low</string>
-  <string name="tache_urgence_moyen">Medium</string>
-  <string name="tache_urgence_haut">High</string>
+  <string name="tache_urgence_bas">Low urgency</string>
+  <string name="tache_urgence_moyen">Medium urgency</string>
+  <string name="tache_urgence_haut">High urgency</string>
 
   <string name="employe_nom">Name</string>
   <string name="employe_email">E-mail</string>
@@ -144,15 +147,14 @@
     <item>Completed tasks</item>
   </string-array>
   <string-array name="tache_filtre_urgences_modifier">
-    <item>Low</item>
-    <item>Medium</item>
-    <item>High</item>
+    <item>Low urgency</item>
+    <item>Medium urgency</item>
+    <item>High urgency</item>
   </string-array>
 
   <string name="titre_tache">Task detail</string>
   <string name="titre_activity_modifier_tache">Edit task</string>
   <string name="titre_activity_ajout_tache">New task</string>
-  <string name="tache_aucun_employe">No assigned employee</string>
 
   <string name="titre_employes_liste">Employees list</string>
   <string name="aucun_employe">You have no employee (in this application)</string>

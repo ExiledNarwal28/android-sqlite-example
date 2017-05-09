@@ -59,6 +59,17 @@
       android:layout_marginTop="10dp"/>
 
     <Button
+      android:id="@+id/btn_employe_envoyer_sms"
+      android:text="@string/action_envoyer_sms"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      style="@android:style/Widget.Material.Button.Colored"
+      android:background="@color/colorPrimary"
+      android:layout_above="@+id/btn_employe_appeler"
+      android:layout_alignParentStart="true"
+      android:layout_marginBottom="10dp"/>
+
+    <Button
       android:id="@+id/btn_employe_appeler"
       android:text="@string/action_appeler"
       android:layout_width="match_parent"
@@ -69,17 +80,6 @@
       android:fontFamily="sans-serif-medium"
       style="@android:style/Widget.Material.Button.Colored"
       android:background="@color/colorAccent"/>
-
-    <Button
-      android:id="@+id/btn_employe_envoyer_sms"
-      android:text="@string/action_envoyer_sms"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      style="@android:style/Widget.Material.Button.Colored"
-      android:background="@color/colorPrimary"
-      android:layout_above="@+id/btn_employe_appeler"
-      android:layout_alignParentStart="true"
-      android:layout_marginBottom="10dp"/>
 
   </RelativeLayout>
 

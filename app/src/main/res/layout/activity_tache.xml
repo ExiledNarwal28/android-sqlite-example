@@ -66,17 +66,26 @@
       android:layout_alignParentStart="true"
       android:layout_marginTop="10dp"/>
 
+    <TextView
+      android:id="@+id/tv_tache_employe_assigne"
+      android:text="@string/tache_employe_assigne"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/tv_tache_date"
+      android:layout_alignParentStart="true"
+      android:layout_marginTop="10dp"/>
+
     <Button
       android:id="@+id/btn_tache_employe_assigne"
       android:text="@string/tache_employe_assigne"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/tv_tache_date"
       android:layout_alignParentStart="true"
-      android:layout_marginTop="10dp"
+      android:layout_alignParentBottom="true"
       style="@android:style/Widget.Material.Button"
       android:background="@color/colorAccent"
       android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Colored"/>
+
   </RelativeLayout>
 
 </RelativeLayout>

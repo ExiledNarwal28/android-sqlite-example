@@ -40,12 +40,13 @@ public class TacheActivity extends Activity {
   private final static String TAG = TacheActivity.class.getName();
 
   // Views pour stocker les données des employés et bouton
-  private TextView tvTacheNom;
-  private CheckBox cbTacheFait;
-  private TextView tvTacheUrgence;
-  private TextView tvTacheDescription;
-  private TextView tvTacheDate;
-  private Button btnTacheEmployeAssigne;
+  private TextView  tvTacheNom;
+  private CheckBox  cbTacheFait;
+  private TextView  tvTacheUrgence;
+  private TextView  tvTacheDescription;
+  private TextView  tvTacheDate;
+  private TextView  tvTacheEmployeAssigne;
+  private Button    btnTacheEmployeAssigne;
 
   private Uri tacheUri;
 
@@ -106,6 +107,7 @@ public class TacheActivity extends Activity {
     tvTacheUrgence          = (TextView)  findViewById(R.id.tv_tache_urgence);
     tvTacheDescription      = (TextView)  findViewById(R.id.tv_tache_description);
     tvTacheDate             = (TextView)  findViewById(R.id.tv_tache_date);
+    tvTacheEmployeAssigne   = (TextView)  findViewById(R.id.tv_tache_employe_assigne);
     btnTacheEmployeAssigne  = (Button)    findViewById(R.id.btn_tache_employe_assigne);
 
     btnTacheEmployeAssigne.setOnClickListener(new View.OnClickListener() {
@@ -170,9 +172,13 @@ public class TacheActivity extends Activity {
       // Données de l'employé
       if (cursor.isNull(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID))) {
         btnTacheEmployeAssigne.setVisibility(View.GONE);
+        tvTacheEmployeAssigne.setText(getString(R.string.tache_aucun_employe));
       } else {
         employeAssigneId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
-        btnTacheEmployeAssigne.setText(EmployeHelper.getEmployeNom(this, employeAssigneId));
+        btnTacheEmployeAssigne.setText( getString(R.string.info_voir) + " " +
+                                        EmployeHelper.getEmployeNom(this, employeAssigneId));
+        tvTacheEmployeAssigne.setText(getString(R.string.tache_employe_assigne) + " : " +
+                                      EmployeHelper.getEmployeNom(this, employeAssigneId));
       }
 
       // On mets les données dans l'UI
@@ -181,7 +187,7 @@ public class TacheActivity extends Activity {
       tvTacheDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
 
       // Conversion en date
-      tvTacheDate.setText(DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
+      tvTacheDate.setText(getString(R.string.tache_due_pour) + " : " + DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
       tvTacheUrgence.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));

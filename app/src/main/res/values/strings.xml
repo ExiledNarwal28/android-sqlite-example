@@ -15,6 +15,7 @@
   <string name="attention_mauvais_format_telephone">Format de numéro de téléphone invalide</string>
   <string name="attention_mauvais_format_email">Format d\'adresse courriel invalide</string>
 
+  <string name="info_voir">Voir</string>
   <string name="info_vous_avez">Vous avez</string>
   <string name="info_vous_avez_pas">Vous n\'avez aucune</string>
   <string name="info_a_faire_aujoudhui">à faire aujourd\'hui</string>
@@ -37,10 +38,11 @@
   <string name="tache_urgence">Niveau d\'urgence</string>
   <string name="tache_employe_assigne">Employé assigné</string>
   <string name="tache_aucun_employe">Aucun employé assigné</string>
+  <string name="tache_due_pour">Due pour</string>
 
-  <string name="tache_urgence_bas">Faible</string>
-  <string name="tache_urgence_moyen">Normal</string>
-  <string name="tache_urgence_haut">Haut</string>
+  <string name="tache_urgence_bas">Urgence basse</string>
+  <string name="tache_urgence_moyen">Urgence moyenne</string>
+  <string name="tache_urgence_haut">Urgence haute</string>
 
   <string name="employe_nom">Nom</string>
   <string name="employe_email">Adresse courriel</string>
@@ -145,9 +147,9 @@
     <item>Tâches complétées</item>
   </string-array>
   <string-array name="tache_filtre_urgences_modifier">
-    <item>Bas</item>
-    <item>Moyen</item>
-    <item>Haut</item>
+    <item>Urgence basse</item>
+    <item>Urgence moyenne</item>
+    <item>Urgency haute</item>
   </string-array>
 
   <string name="titre_tache">Détails d\'une tâche</string>

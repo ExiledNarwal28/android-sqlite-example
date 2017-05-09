@@ -15,6 +15,7 @@
   <string name="attention_mauvais_format_telephone">Envalid telefòn fòma nimewo</string>
   <string name="attention_mauvais_format_email">Valab imel adrès fòma</string>
 
+  <string name="info_voir">Wè</string>
   <string name="info_vous_avez">Ou gen</string>
   <string name="info_vous_avez_pas">Ou pa gen</string>
   <string name="info_a_faire_aujoudhui">fè jodi a</string>
@@ -36,10 +37,12 @@
   <string name="tache_date">Dat fen</string>
   <string name="tache_urgence">Enpòtans</string>
   <string name="tache_employe_assigne">Anplwaye asiyen</string>
+  <string name="tache_aucun_employe">Se pa anplwaye asiyen</string>
+  <string name="tache_due_pour">Pou le</string>
 
-  <string name="tache_urgence_bas">Ba</string>
-  <string name="tache_urgence_moyen">Mwayen</string>
-  <string name="tache_urgence_haut">Segondè</string>
+  <string name="tache_urgence_bas">Enpòtans ba</string>
+  <string name="tache_urgence_moyen">Enpòtans mwayen</string>
+  <string name="tache_urgence_haut">Enpòtans segondè</string>
 
   <string name="employe_nom">Non</string>
   <string name="employe_email">Imel</string>
@@ -144,15 +147,14 @@
     <item>Travay nan pwogrè</item>
   </string-array>
   <string-array name="tache_filtre_urgences_modifier">
-    <item>Ba</item>
-    <item>Mwayen</item>
-    <item>Segondè</item>
+    <item>Enpòtans ba</item>
+    <item>Enpòtans mwayen</item>
+    <item>Enpòtans segondè</item>
   </string-array>
 
   <string name="titre_tache">Ti detay nan yon travay</string>
   <string name="titre_activity_modifier_tache">Koreksyon yon travay</string>
   <string name="titre_activity_ajout_tache">Nouvo travay</string>
-  <string name="tache_aucun_employe">Se pa anplwaye asiyen</string>
 
   <string name="titre_employes_liste">Lis anplwaye</string>
   <string name="aucun_employe">Ou pa gen yon anplwaye (sou aplikasyon an)</string>
