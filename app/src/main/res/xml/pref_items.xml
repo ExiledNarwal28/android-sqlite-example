@@ -6,7 +6,7 @@
   <CheckBoxPreference
     android:id="@+id/cbp_pref_toasts"
     android:key="toasts"
-    android:defaultValue="true"
+    android:defaultValue="false"
     android:singleLine="true"
     android:title="@string/pref_toasts"
     android:summary="@string/pref_toasts_resume"/>

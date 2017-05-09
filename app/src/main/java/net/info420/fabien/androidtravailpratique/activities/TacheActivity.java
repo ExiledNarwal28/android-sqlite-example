@@ -175,6 +175,8 @@ public class TacheActivity extends Activity {
         tvTacheEmployeAssigne.setText(getString(R.string.tache_aucun_employe));
       } else {
         employeAssigneId = cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_employe_assigne_ID));
+
+        btnTacheEmployeAssigne.setVisibility(View.VISIBLE);
         btnTacheEmployeAssigne.setText( getString(R.string.info_voir) + " " +
                                         EmployeHelper.getEmployeNom(this, employeAssigneId));
         tvTacheEmployeAssigne.setText(getString(R.string.tache_employe_assigne) + " : " +

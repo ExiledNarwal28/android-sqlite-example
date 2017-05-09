@@ -130,7 +130,7 @@ public class TempsService extends Service {
   private void getInfoFromPrefs() {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-    toastsActive  = prefs.getBoolean(TodoApplication.PREFS_TOASTS, true);
+    toastsActive  = prefs.getBoolean(TodoApplication.PREFS_TOASTS, false);
     frequence     = Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_FREQUENCE,
                                                       TodoApplication.PREFS_TOASTS_FREQUENCE_DEFAUT));
 
