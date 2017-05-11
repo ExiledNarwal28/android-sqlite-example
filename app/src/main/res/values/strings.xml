@@ -39,6 +39,9 @@
   <string name="tache_employe_assigne">Employé assigné</string>
   <string name="tache_aucun_employe">Aucun employé assigné</string>
   <string name="tache_due_pour">Due pour</string>
+  <string name="tache_ajoutee">Tache ajoutée</string>
+  <string name="tache_modifiee">Tache modifiée</string>
+  <string name="tache_supprimee">Tache supprimée</string>
 
   <string name="tache_urgence_bas">Urgence basse</string>
   <string name="tache_urgence_moyen">Urgence moyenne</string>
@@ -48,6 +51,9 @@
   <string name="employe_email">Adresse courriel</string>
   <string name="employe_telephone">Numéro de téléphone</string>
   <string name="employe_poste">Poste</string>
+  <string name="employe_ajoute">Employé ajouté</string>
+  <string name="employe_modifie">Employé modifié</string>
+  <string name="employe_supprime">Employé supprimé</string>
 
   <string name="pref_toasts">Avertissements Toasts</string>
   <string name="pref_toasts_resume">Activer, ou non, les popups de Toasts en lien le nombre de tâches à faire</string>

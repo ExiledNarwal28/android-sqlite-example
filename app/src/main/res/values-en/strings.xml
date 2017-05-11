@@ -39,6 +39,9 @@
   <string name="tache_employe_assigne">Assigned employee</string>
   <string name="tache_aucun_employe">No assigned employee</string>
   <string name="tache_due_pour">Due for</string>
+  <string name="tache_ajoutee">Task added</string>
+  <string name="tache_modifiee">Task edited</string>
+  <string name="tache_supprimee">Task deleted</string>
 
   <string name="tache_urgence_bas">Low urgency</string>
   <string name="tache_urgence_moyen">Medium urgency</string>
@@ -48,6 +51,9 @@
   <string name="employe_email">E-mail</string>
   <string name="employe_telephone">Phone number</string>
   <string name="employe_poste">Job</string>
+  <string name="employe_ajoute">Employee added</string>
+  <string name="employe_modifie">Employee edited</string>
+  <string name="employe_supprime">Employee deleted</string>
 
   <string name="pref_toasts">Toast notifications</string>
   <string name="pref_toasts_resume">Activate or deactivate Toast notifications concerning the amount of tasks to do</string>

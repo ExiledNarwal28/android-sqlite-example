@@ -1,7 +1,6 @@
 package net.info420.fabien.androidtravailpratique.helpers;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -63,7 +62,6 @@ public class DateHelper {
    */
   public static String getLongueDate(Context context, int unixDate) {
     if (PrefsHelper.getLangue(context).equals(PrefsHelper.PREFS_LANGUE_EN)) {
-      Log.d(TAG, "what");
       return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE, MMM d, yyyy").print(new DateTime().withMillis(unixDate * 10000L)));
     }
 

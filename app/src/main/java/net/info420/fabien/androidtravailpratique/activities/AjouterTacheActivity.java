@@ -137,6 +137,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    *   <li>Vérifie si tous les champs obligatoires sont là</li>
    *   <li>Ajoute les valeurs dans une liste de valeurs</li>
    *   <li>Ajoute la tâche</li>
+   *   <li>Affiche un {@link Toast}</li>
    *   <li>Termine l'activité</li>
    * </ul>
    *
@@ -173,6 +174,8 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
 
     // Nouvelle tâche
     getContentResolver().insert(TodoContentProvider.CONTENT_URI_TACHE, values);
+
+    Toast.makeText(this, getString(R.string.tache_ajoutee), Toast.LENGTH_SHORT).show();
 
     finish();
   }

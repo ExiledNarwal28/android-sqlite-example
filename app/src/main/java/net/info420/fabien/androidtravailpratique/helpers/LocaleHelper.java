@@ -21,7 +21,7 @@ import java.util.Locale;
  *      Source : Changer la {@link Locale} de l'application</a>
  * @see <a href="http://stackoverflow.com/questions/43292013/how-can-i-change-language-of-whole-application-by-only-single-click/43292068"
  *      target="_blank">
- *      Source : Changer la {@link Locale} de l'application, aussi</a>}
+ *      Source : Changer la {@link Locale} de l'application, aussi</a>
  */
 public class LocaleHelper {
   private static final String TAG = LocaleHelper.class.getName();

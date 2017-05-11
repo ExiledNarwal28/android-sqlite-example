@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
@@ -128,6 +129,7 @@ public class TacheActivity extends Activity {
    *
    * <ul>
    *   <li>Supprime la tâche de la base de données</li>
+   *   <li>Affiche un {@link Toast}</li>
    *   <li>Termine l'activité</li>
    * </ul>
    *
@@ -135,6 +137,8 @@ public class TacheActivity extends Activity {
    */
   private void supprimerTache() {
     getContentResolver().delete(tacheUri, null, null);
+
+    Toast.makeText(this, getString(R.string.tache_supprimee), Toast.LENGTH_SHORT).show();
 
     finish();
   }

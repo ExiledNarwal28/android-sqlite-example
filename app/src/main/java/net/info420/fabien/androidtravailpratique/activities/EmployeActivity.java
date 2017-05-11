@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
@@ -134,8 +135,9 @@ public class EmployeActivity extends Activity {
    *  Envoie les données pour supprimer l'Employé
    *
    * <ul>
-   *   <li>ime l'employé de la base de données</li>
-   *   <li>e l'employé des tâches qui lui sont assignées</li>
+   *   <li>Supprime l'employé de la base de données</li>
+   *   <li>Enlève l'employé des tâches qui lui sont assignées</li>
+   *   <li>Affiche un {@link android.widget.Toast}</li>
    *   <li>Termine l'activité</li>
    * </ul>
    *
@@ -167,6 +169,8 @@ public class EmployeActivity extends Activity {
                                 values,
                                 selection,
                                 selectionArgs);
+
+    Toast.makeText(this, getString(R.string.employe_supprime), Toast.LENGTH_SHORT).show();
 
     finish();
   }

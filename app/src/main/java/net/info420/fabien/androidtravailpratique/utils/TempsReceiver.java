@@ -18,7 +18,7 @@ import net.info420.fabien.androidtravailpratique.R;
  *
  * @see <a href="http://www.vogella.com/tutorials/AndroidServices/article.html"
  *      target="_blank">
- *      Source : Services d'Android</a>}
+ *      Source : Services d'Android</a>
  */
 public class TempsReceiver extends BroadcastReceiver {
   private final static String TAG = TempsReceiver.class.getName();

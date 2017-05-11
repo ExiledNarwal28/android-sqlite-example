@@ -70,7 +70,7 @@ public class TachesListeFragment extends ListFragment implements AdapterView.OnI
    *  <li>Ajoute les données d'employés dans le Spinner à cet effet</li>
    * </ul>
    *
-   * @param inflater            @See {@link LayoutInflater}
+   * @param inflater            {@link LayoutInflater}
    * @param container           La {@link View} qui contient le fragment
    * @param savedInstanceState  {@link Bundle} pouvant contenir des données
    * @return                    La {@link View} instanciée

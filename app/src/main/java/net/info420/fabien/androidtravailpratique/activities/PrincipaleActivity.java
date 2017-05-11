@@ -28,9 +28,9 @@ import net.info420.fabien.androidtravailpratique.utils.TempsService;
  *
  * Elle contrôle les trois fragments principaux :
  * <ul>
- *  <li>{@see TachesListeFragment}</li>
- *  <li>{@see EmployesListeFragment}</li>
- *  <li>{@see PrefsFragment}</li>
+ *  <li>{@link TachesListeFragment}</li>
+ *  <li>{@link EmployesListeFragment}</li>
+ *  <li>{@link PrefsFragment}</li>
  * </ul>
  *
  * @author   Fabien Roy

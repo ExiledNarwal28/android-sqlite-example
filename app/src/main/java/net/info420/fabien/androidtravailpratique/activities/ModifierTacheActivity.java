@@ -154,6 +154,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
    *   <li>Vérifie si tous les champs obligatoires sont là</li>
    *   <li>Ajoute les valeurs dans une liste de valeurs</li>
    *   <li>Met à jour la tâche</li>
+   *   <li>Affiche un {@link Toast}</li>
    *   <li>Termine l'activité</li>
    * </ul>
    *
@@ -190,6 +191,8 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
 
     // Modification tâche
     getContentResolver().update(tacheUri, values, null, null);
+
+    Toast.makeText(this, getString(R.string.tache_modifiee), Toast.LENGTH_SHORT).show();
 
     finish();
   }

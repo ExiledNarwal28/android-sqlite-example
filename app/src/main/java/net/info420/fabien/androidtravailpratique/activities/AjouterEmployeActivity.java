@@ -99,9 +99,10 @@ public class AjouterEmployeActivity extends FragmentActivity {
    *
    * <ul>
    *   <li>Va chercher les textes dans les {@link EditText}</li>
-   *   <li>ie si tous les champs obligatoires sont là</li>
-   *   <li>e les valeurs dans une liste de valeurs</li>
-   *   <li>e l'employé, termine l'activité</li>
+   *   <li>Vérifie si tous les champs obligatoires sont là</li>
+   *   <li>Enlève les valeurs dans une liste de valeurs</li>
+   *   <li>Affiche un {@link Toast}</li>
+   *   <li>Enlève l'employé, termine l'activité</li>
    * </ul>
    *
    * @see TodoContentProvider
@@ -147,6 +148,8 @@ public class AjouterEmployeActivity extends FragmentActivity {
 
     // Nouvel employé
     getContentResolver().insert(TodoContentProvider.CONTENT_URI_EMPLOYE, values);
+
+    Toast.makeText(this, getString(R.string.employe_ajoute), Toast.LENGTH_SHORT).show();
 
     finish();
   }

@@ -120,6 +120,7 @@ public class ModifierEmployeActivity extends FragmentActivity {
    *   <li>Vérifie si tous les champs obligatoires sont là</li>
    *   <li>Ajoute les valeurs dans une liste de valeurs</li>
    *   <li>Met à jour l'employé</li>
+   *   <li>Affiche un {@link Toast}</li>
    *   <li>Termine l'activité</li>
    * </ul>
    *
@@ -166,6 +167,8 @@ public class ModifierEmployeActivity extends FragmentActivity {
 
     // Modification employé
     getContentResolver().update(employeUri, values, null, null);
+
+    Toast.makeText(this, getString(R.string.employe_modifie), Toast.LENGTH_SHORT).show();
 
     finish();
   }

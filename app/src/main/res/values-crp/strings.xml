@@ -39,6 +39,9 @@
   <string name="tache_employe_assigne">Anplwaye asiyen</string>
   <string name="tache_aucun_employe">Se pa anplwaye asiyen</string>
   <string name="tache_due_pour">Pou le</string>
+  <string name="tache_ajoutee">Travay ajoute</string>
+  <string name="tache_modifiee">Travay modifye</string>
+  <string name="tache_supprimee">Travay efase</string>
 
   <string name="tache_urgence_bas">Enpòtans ba</string>
   <string name="tache_urgence_moyen">Enpòtans mwayen</string>
@@ -48,6 +51,9 @@
   <string name="employe_email">Imel</string>
   <string name="employe_telephone">Nimewo telefòn</string>
   <string name="employe_poste">Pòs</string>
+  <string name="employe_ajoute">Anplwaye ajoute</string>
+  <string name="employe_modifie">Anplwaye modifye</string>
+  <string name="employe_supprime">Anplwaye efase</string>
 
   <string name="pref_toasts">Avètisman Toasts</string>
   <string name="pref_toasts_resume">Pèmèt oswa ou pa popup ki gen rapò nimewo a nan travay yo fè</string>
