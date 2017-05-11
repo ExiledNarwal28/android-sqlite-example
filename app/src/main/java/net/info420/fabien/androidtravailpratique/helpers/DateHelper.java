@@ -1,5 +1,8 @@
 package net.info420.fabien.androidtravailpratique.helpers;
 
+import android.content.Context;
+import android.util.Log;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeZone;
@@ -21,22 +24,36 @@ public class DateHelper {
   /**
    * Méthode statique pour obtenir une date de petit format (EEEE d MMM)
    *
-   * @param   unixDate Date en millisecondes (UnixTime)
+   * <ul>
+   *   <li>Vérifie la Locale de l'{@link android.app.Application}, et renvoie la date</li>
+   * </ul>
+   *
+   * @param   context   Context pour aller chercher la langue
+   * @param   unixDate  Date en millisecondes (UnixTime)
    * @return  Date de format EEE d MMM
    *
+   * @see PrefsHelper#getLangue(Context)
    * @see DateTimeFormat
    * @see DateTimeFormat#forPattern(String)
    * @see DateTime#withMillis(long)
    * @see StringHelper#capitalize(String)
    */
-  public static String getDate(int unixDate) {
+  public static String getDate(Context context, int unixDate) {
+    if (PrefsHelper.getLangue(context).equals(PrefsHelper.PREFS_LANGUE_EN))
+      return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE, MMM d").print(new DateTime().withMillis(unixDate * 10000L)));
+
     return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE d MMM").print(new DateTime().withMillis(unixDate * 10000L)));
   }
 
   /**
    * Méthode statique pour obtenir une date de long format (EEEE d MMMM yyyy)
    *
-   * @param   unixDate Date en millisecondes (UnixTime)
+   * <ul>
+   *   <li>Vérifie la Locale de l'{@link android.app.Application}, et renvoie la date</li>
+   * </ul>
+   *
+   * @param   context   Context pour aller chercher la langue
+   * @param   unixDate  Date en millisecondes (UnixTime)
    * @return  Date de format EEE d MMMM yyyy
    *
    * @see DateTimeFormat
@@ -44,7 +61,12 @@ public class DateHelper {
    * @see DateTime#withMillis(long)
    * @see StringHelper#capitalize(String)
    */
-  public static String getLongueDate(int unixDate) {
+  public static String getLongueDate(Context context, int unixDate) {
+    if (PrefsHelper.getLangue(context).equals(PrefsHelper.PREFS_LANGUE_EN)) {
+      Log.d(TAG, "what");
+      return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE, MMM d, yyyy").print(new DateTime().withMillis(unixDate * 10000L)));
+    }
+
     return StringHelper.capitalize(DateTimeFormat.forPattern("EEEE d MMMM yyyy").print(new DateTime().withMillis(unixDate * 10000L)));
   }
 

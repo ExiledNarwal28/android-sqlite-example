@@ -211,7 +211,7 @@ public class AjouterTacheActivity extends FragmentActivity implements OnTacheDat
    */
   public void onTacheDateChange() {
     if (tacheDate != 0) {
-      btnTacheDate.setText(DateHelper.getLongueDate((int) tacheDate));
+      btnTacheDate.setText(DateHelper.getLongueDate(this, (int) tacheDate));
     }
   }
 

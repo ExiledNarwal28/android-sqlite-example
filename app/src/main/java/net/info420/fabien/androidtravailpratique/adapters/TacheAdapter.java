@@ -100,7 +100,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
    * @param context   {@link Context} où afficher l'{@link EmployeAdapter}
    * @param cursor    {@link Cursor} de la sélection
    *
-   * @see DateHelper#getDate(int)
+   * @see DateHelper#getDate(Context, int)
    * @see ColorHelper#getUrgencyLevelColor(Context, int)
    * @see EmployeHelper#getEmployeNom(Context, int)
    */
@@ -116,7 +116,7 @@ public class TacheAdapter extends SimpleCursorAdapter {
     viewHolder.cbTacheFait    = (CheckBox) view.findViewById(R.id.cb_tache_fait);
 
     viewHolder.tvTacheNom.setText(cursor.getString(cursor.getColumnIndex(Tache.KEY_nom)));
-    viewHolder.tvTacheDate.setText(DateHelper.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
+    viewHolder.tvTacheDate.setText(DateHelper.getDate(context, cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
     viewHolder.cbTacheFait.setChecked((cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_fait))) == 1); // Conversion en boolean
 
     viewHolder.tvTacheUrgence.setBackgroundColor(ColorHelper.getUrgencyLevelColor(context, cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence))));

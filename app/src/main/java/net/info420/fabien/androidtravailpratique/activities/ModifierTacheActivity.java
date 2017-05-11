@@ -227,7 +227,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
       etTacheDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
 
       // Conversion en date
-      btnTacheDate.setText(DateHelper.getLongueDate((int) tacheDate));
+      btnTacheDate.setText(DateHelper.getLongueDate(this, (int) tacheDate));
 
       // Conversion en niveau d'urgence
       spTacheUrgence.setSelection(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)));
@@ -278,7 +278,7 @@ public class ModifierTacheActivity extends FragmentActivity implements OnTacheDa
   @Override
   public void onTacheDateChange() {
     if (tacheDate != 0) {
-      btnTacheDate.setText(DateHelper.getLongueDate((int) tacheDate));
+      btnTacheDate.setText(DateHelper.getLongueDate(this, (int) tacheDate));
     }
   }
 

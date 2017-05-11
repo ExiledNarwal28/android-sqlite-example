@@ -189,7 +189,7 @@ public class TacheActivity extends Activity {
       tvTacheDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(Tache.KEY_description)));
 
       // Conversion en date
-      tvTacheDate.setText(getString(R.string.tache_due_pour) + " : " + DateHelper.getLongueDate(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
+      tvTacheDate.setText(getString(R.string.tache_due_pour) + " : " + DateHelper.getLongueDate(this, cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_date))));
 
       // Conversion en niveau d'urgence textuel
       tvTacheUrgence.setText(StringHelper.getUrgence(cursor.getInt(cursor.getColumnIndexOrThrow(Tache.KEY_urgence)), this));
