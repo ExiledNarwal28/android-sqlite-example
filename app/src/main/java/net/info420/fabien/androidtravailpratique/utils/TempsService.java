@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import net.info420.fabien.androidtravailpratique.R;
 import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.data.TodoContentProvider;
 import net.info420.fabien.androidtravailpratique.helpers.DateHelper;
+import net.info420.fabien.androidtravailpratique.helpers.PrefsHelper;
 import net.info420.fabien.androidtravailpratique.models.Tache;
 
 import java.util.ArrayList;
@@ -115,6 +115,7 @@ public class TempsService extends Service {
    *  <li>Fréquence des notifications</li>
    * </ul>
    *
+   * @see PrefsHelper
    * @see SharedPreferences
    * @see net.info420.fabien.androidtravailpratique.data.TodoContentProvider
    * @see DateHelper#getAujourdhuiMillis()
@@ -122,28 +123,18 @@ public class TempsService extends Service {
    * @see DateHelper#getDimancheMillis()
    * @see DateHelper#getPremierJourDuMoisMillis()
    * @see DateHelper#getDernierJourDuMoisMillis()
-   *
-   * @see <a href="http://stackoverflow.com/questions/21820031/getting-value-from-edittext-preference-in-preference-screen"
-   *      target="_blank">
-   *      Source : Aller chercher les données des préférences</a>
    */
   private void getInfoFromPrefs() {
-    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    toastsActive  = PrefsHelper.getToasts(this);
+    frequence     = PrefsHelper.getToastsFrequence(this);
 
-    toastsActive  = prefs.getBoolean(TodoApplication.PREFS_TOASTS, false);
-    frequence     = Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_FREQUENCE,
-                                                      TodoApplication.PREFS_TOASTS_FREQUENCE_DEFAUT));
-
-    affichage = (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_AFFICHAGE,
-                                                   TodoApplication.PREFS_TOASTS_AFFICHAGE_DEFAUT)) == 0) ?
-                Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
+    affichage = (PrefsHelper.getToastsAffichage(this) == 0) ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
 
     // On vide les arguments de sélection
     selectionArgs.removeAll(selectionArgs);
 
     // Laps de temps
-    switch (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_LAPS_TEMPS,
-                                              TodoApplication.PREFS_TOATS_LAPS_TEMPS_DEFAUT))) {
+    switch (PrefsHelper.getToastsLapsTemps(this)) {
       case 0:
         // Aujourd'hui
         selection = "(" + Tache.KEY_date + " =?) AND (" + Tache.KEY_urgence + " >=?) AND (" + Tache.KEY_fait + " =?)";
@@ -173,8 +164,7 @@ public class TempsService extends Service {
     }
 
     // On va ensuite chercher le texte qui décrit le niveau d'urgence
-    switch (Integer.parseInt(prefs.getString( TodoApplication.PREFS_TOASTS_URGENCE,
-                                              TodoApplication.PREFS_TOATS_URGENCE_DEFAUT))) {
+    switch (PrefsHelper.getToastsUrgence(this)) {
       case 0:
         urgenceTexte = getString(R.string.info_urgence_bas_et_plus);
 
@@ -190,9 +180,12 @@ public class TempsService extends Service {
     }
 
     // Pour afficher un petit descriptif du genre : (bas et +)
-    selectionArgs.add(prefs.getString(TodoApplication.PREFS_TOASTS_URGENCE,
-                                      TodoApplication.PREFS_TOATS_URGENCE_DEFAUT)); // Ajout du niveau d'urgence minimum pour recevcoir les Toasts
-    selectionArgs.add(Integer.toString(0)); // Ajout du niveau de complétion (tâches non-complétées)
+    selectionArgs.add(PrefsHelper.getToastsUrgence(this).toString()); // Ajout du niveau d'urgence
+                                                                      // minimum pour recevcoir les
+                                                                      // Toasts
+    selectionArgs.add(Integer.toString(0));                           // Ajout du niveau de
+                                                                      // complétion (tâches
+                                                                      // non-complétées)
   }
 
   /**

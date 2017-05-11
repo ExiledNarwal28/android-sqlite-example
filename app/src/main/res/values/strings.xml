@@ -149,7 +149,7 @@
   <string-array name="tache_filtre_urgences_modifier">
     <item>Urgence basse</item>
     <item>Urgence moyenne</item>
-    <item>Urgency haute</item>
+    <item>Urgence haute</item>
   </string-array>
 
   <string name="titre_tache">Détails d\'une tâche</string>

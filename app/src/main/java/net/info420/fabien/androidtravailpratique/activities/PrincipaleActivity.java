@@ -14,12 +14,12 @@ import android.view.MenuItem;
 import android.widget.Toolbar;
 
 import net.info420.fabien.androidtravailpratique.R;
-import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 import net.info420.fabien.androidtravailpratique.fragments.EmployesListeFragment;
 import net.info420.fabien.androidtravailpratique.fragments.PrefsFragment;
 import net.info420.fabien.androidtravailpratique.fragments.TachesListeFragment;
 import net.info420.fabien.androidtravailpratique.helpers.ColorHelper;
 import net.info420.fabien.androidtravailpratique.helpers.LocaleHelper;
+import net.info420.fabien.androidtravailpratique.helpers.PrefsHelper;
 import net.info420.fabien.androidtravailpratique.utils.TempsReceiver;
 import net.info420.fabien.androidtravailpratique.utils.TempsService;
 
@@ -239,11 +239,7 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
   @Override
   public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
     // Si la préférence concerne les toasts...
-    if (key.equals(TodoApplication.PREFS_TOASTS)            ||
-        key.equals(TodoApplication.PREFS_TOASTS_FREQUENCE)  ||
-        key.equals(TodoApplication.PREFS_TOASTS_LAPS_TEMPS) ||
-        key.equals(TodoApplication.PREFS_TOASTS_URGENCE)    ||
-        key.equals(TodoApplication.PREFS_TOASTS_AFFICHAGE)) {
+    if (PrefsHelper.isToasts(key)) {
 
       // Recommence le service
       stopService(tempsServiceIntent);
@@ -251,10 +247,9 @@ public class PrincipaleActivity extends Activity implements SharedPreferences.On
     }
 
     // Si la préférence concerne la langue...
-    if (key.equals(TodoApplication.PREFS_LANGUE)) {
+    if (PrefsHelper.isLangue(key)) {
       // Change la locale
-      LocaleHelper.setLocale(this, PreferenceManager.getDefaultSharedPreferences(this).getString( TodoApplication.PREFS_LANGUE,
-                                                                                                  TodoApplication.PREFS_LANGUE_DEFAUT));
+      LocaleHelper.setLocale(this, PrefsHelper.getLangue(this));
 
       // Redémarre le fragment, afin d'y appliquer les changements
       setFragment(FRAGMENT_PREFS);

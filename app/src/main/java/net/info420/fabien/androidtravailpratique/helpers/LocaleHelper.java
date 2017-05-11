@@ -3,9 +3,6 @@ package net.info420.fabien.androidtravailpratique.helpers;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
-
-import net.info420.fabien.androidtravailpratique.application.TodoApplication;
 
 import java.util.Locale;
 
@@ -41,7 +38,7 @@ public class LocaleHelper {
    * @param context {@link Context} pour appeler la méthode setLocale
    */
   public static void initialize(Context context) {
-    setLocale(context, PreferenceManager.getDefaultSharedPreferences(context).getString(TodoApplication.PREFS_LANGUE, Locale.getDefault().getLanguage()));
+    setLocale(context, PrefsHelper.getLangue(context));
   }
 
   /**
