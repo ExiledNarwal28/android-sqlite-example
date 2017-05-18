@@ -4,7 +4,7 @@
 
 **This program has a lot of inperfections and French. This is because it is a college project. I will translate any file in the repo, all you have to do is ask!**
 
-
+The app features two main lists : tasks and employees. You can add and edit tasks (name, description, due date, ...) and assigned them to employees. It is also possible to send SMS messages and phone employees directly from the app. Toasts popups warns you about the amount of task due for a certain timespan, which is configurable, along with many other features, in the preferences screen.
 
 This is a single-man college project where I had certain requirements : 
 
